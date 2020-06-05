@@ -1,6 +1,6 @@
 # Architecture
 
-## R and R Studio
+## R and RStudio
 
 ## Code Sharing
 

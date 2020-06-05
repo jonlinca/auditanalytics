@@ -1,7 +1,19 @@
 # Introduction {#intro}
 
+Within the accounting and audit profession, analytics has been around for several decades, under the concept of Computer Aided Auditing Techniques (CAATs), where the software of choice was led by ACL Analytics. ACL Analytics was a significant audit enabler at the time, as it allowed direct access to analyze mainframe information that was otherwise inaccessible by mainstream software on the market. It enabled audit teams to obtain transparency in analysis, a rigorous audit trail, and even automation of scripts. 
+
+As computers, data analytic technology and accessiblity of coding in the Accounting practice has become mainstream, there is far more tools that enable auditors to become far more powerful and self sufficient than ever before. Tools that are typically reserved for software engineers have empowered financial auditors to reach out a bit further and expand their breadth and scope.
+
+While most internal auditors have considered data analytics in one way or another, the realm of possibilities has changed over time. A traditional internal audit team would consider themselves to be consumers of information, limited by flat files sent by emails from their stakeholders. The challenge now is for auditors to be fully integrated into the business, and contributing to the management of the financial and IT risks the company faces on a daily basis. The most effective way to get to this new expectation is to apply data analytics, and this is what this book will teach you.
+
 ## Philosophy
 
-- Automate everything
-- Share everything
-- Make the right thing easy to do
+In my work at EY and Ovintiv (formerly Encana), I declared the following values to be the key drivers of the data analytic practice's success.
+
+### Automate everything
+
+There is an agument about opportunity cost
+
+### Share everything
+
+### Make the right thing easy to do
