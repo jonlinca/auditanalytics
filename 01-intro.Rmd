@@ -1,0 +1,7 @@
+# Introduction {#intro}
+
+## Philosophy
+
+- Automate everything
+- Share everything
+- Make the right thing easy to do

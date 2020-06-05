@@ -1,0 +1,21 @@
+# Architecture
+
+## R and R Studio
+
+## Code Sharing
+
+### Git
+
+### Packages
+
+## Data Products
+
+### Galvanize Highbond
+
+### RStudio Connect
+
+## Data sources
+
+### Databases
+
+### External sources

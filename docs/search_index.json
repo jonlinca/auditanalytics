@@ -1,0 +1,10 @@
+[
+["index.html", "Audit Analytics with R Welcome", " Audit Analytics with R Jonathan Lin 2020-06-05 Welcome This is the website for Audit Analytics in R. This audience of this book is for: Leaders who are looking to design their environment to encourage code sharing and data products, Data analytics practitioners, who are looking to leverage R in their data analytics tasks. You will learn what tools and technologies are well suited for a modern audit analytics toolkit, as well as learn skills with R to replicate data analytics tasks. Consider this book to be your roadmap of practical items to implement and follow. If you are brand new to R, it is encouraged you to read https://rstudio-education.github.io/hopr/ and https://r4ds.had.co.nz. While some foundations will be covered in this book, this book is focused on an applied view of R to the financial auditor practice. "],
+["intro.html", "Chapter 1 Introduction 1.1 Philosophy", " Chapter 1 Introduction 1.1 Philosophy Automate everything Share everything Make the right thing easy to do "],
+["architecture.html", "Chapter 2 Architecture 2.1 R and R Studio 2.2 Code Sharing 2.3 Data Products 2.4 Data sources", " Chapter 2 Architecture 2.1 R and R Studio 2.2 Code Sharing 2.2.1 Git 2.2.2 Packages 2.3 Data Products 2.3.1 Galvanize Highbond 2.3.2 RStudio Connect 2.4 Data sources 2.4.1 Databases 2.4.2 External sources "],
+["setup.html", "Chapter 3 Setup 3.1 RStudio 3.2 Github", " Chapter 3 Setup 3.1 RStudio 3.2 Github "],
+["executing-audit-analytics.html", "Chapter 4 Executing audit analytics 4.1 ", " Chapter 4 Executing audit analytics 4.1 "],
+["other-practices-to-follow.html", "Chapter 5 Other practices to follow 5.1 On passwords", " Chapter 5 Other practices to follow 5.1 On passwords "],
+["audit-data-products.html", "Chapter 6 Audit data products", " Chapter 6 Audit data products "],
+["references.html", "References", " References "]
+]

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Setup | Audit Analytics with R</title>
+  <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Setup | Audit Analytics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Setup | Audit Analytics with R" />
+  
+  <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+<meta name="author" content="Jonathan Lin" />
+
+
+<meta name="date" content="2020-06-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="architecture.html"/>
+<link rel="next" href="executing-audit-analytics.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Audit Analytics in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#philosophy"><i class="fa fa-check"></i><b>1.1</b> Philosophy</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture</a><ul>
+<li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#r-and-r-studio"><i class="fa fa-check"></i><b>2.1</b> R and R Studio</a></li>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-sharing"><i class="fa fa-check"></i><b>2.2</b> Code Sharing</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>2.2.1</b> Git</a></li>
+<li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>2.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>2.3</b> Data Products</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>2.3.1</b> Galvanize Highbond</a></li>
+<li class="chapter" data-level="2.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>2.3.2</b> RStudio Connect</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>2.4</b> Data sources</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>2.4.1</b> Databases</a></li>
+<li class="chapter" data-level="2.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>2.4.2</b> External sources</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Setup</a><ul>
+<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#rstudio"><i class="fa fa-check"></i><b>3.1</b> RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#github"><i class="fa fa-check"></i><b>3.2</b> Github</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="executing-audit-analytics.html"><a href="executing-audit-analytics.html"><i class="fa fa-check"></i><b>4</b> Executing audit analytics</a><ul>
+<li class="chapter" data-level="4.1" data-path="executing-audit-analytics.html"><a href="executing-audit-analytics.html#section"><i class="fa fa-check"></i><b>4.1</b> </a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>5</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="5.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#on-passwords"><i class="fa fa-check"></i><b>5.1</b> On passwords</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="audit-data-products.html"><a href="audit-data-products.html"><i class="fa fa-check"></i><b>6</b> Audit data products</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Audit Analytics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="setup" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Setup</h1>
+<div id="rstudio" class="section level2">
+<h2><span class="header-section-number">3.1</span> RStudio</h2>
+</div>
+<div id="github" class="section level2">
+<h2><span class="header-section-number">3.2</span> Github</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="architecture.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="executing-audit-analytics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Audit_Analytics_with-R.pdf", "Audit_Analytics_with-R.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

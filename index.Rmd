@@ -1,0 +1,22 @@
+--- 
+title: "Audit Analytics with R"
+author: "Jonathan Lin"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "A toolkit for Internal Audit and Financial auditors"
+---
+
+# Welcome {-}
+
+This is the website for Audit Analytics in R. This audience of this book is for:
+
+- Leaders who are looking to design their environment to encourage code sharing and data products,
+- Data analytics practitioners, who are looking to leverage R in their data analytics tasks.
+
+You will learn what tools and technologies are well suited for a modern audit analytics toolkit, as well as learn skills with R to replicate data analytics tasks. Consider this book to be your roadmap of practical items to implement and follow.
+
+If you are brand new to R, it is encouraged you to read https://rstudio-education.github.io/hopr/ and https://r4ds.had.co.nz. While some foundations will be covered in this book, this book is focused on an applied view of R to the financial auditor practice.
