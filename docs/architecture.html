@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-06" />
+<meta name="date" content="2020-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 
@@ -82,7 +86,7 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture</a><ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-sharing"><i class="fa fa-check"></i><b>2.2</b> Code Sharing</a><ul>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>2.2</b> Code repositories</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>2.2.1</b> Git</a></li>
 <li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>2.2.2</b> Packages</a></li>
 </ul></li>
@@ -140,25 +144,66 @@
             <section class="normal" id="section-">
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Architecture</h1>
+<div class="figure" style="text-align: center"><span id="fig:architecture"></span>
+<div id="htmlwidget-40e9d2fa5947e6fb0d69" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-40e9d2fa5947e6fb0d69">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.1: Internal Audit Data Analytics Architecture
+</p>
+</div>
+<p>The architecture and tools you select should support and amplify your team, and not be a burden to maintain. Maintenance of databases and applications can also be delegated to application support teams, so you can focus on implementing analytics and delivering data products.</p>
+<p>Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password changes every 90 days will make the job feel like quarterly financial reporting.</p>
 <div id="r-and-rstudio" class="section level2">
 <h2><span class="header-section-number">2.1</span> R and RStudio</h2>
+<p><a href="https://www.r-project.org">R</a> is a programming language with an emphasis on statistics. It is considered free software, free in the perspective that you can run, distribute, and change it as you like.</p>
+<p>What makes R so great is the large suite of packages that are available to use to help analyze information. What doesn’t exist in base R will likely have been developed by someone else: there are hundreds of packages that support data connectivity (<a href="https://cran.r-project.org/web/packages/DBI/">DBI</a>, <a href="https://cran.r-project.org/web/packages/xlsx/">xlsx</a>), day-to-day manipulation and analysis (<a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a>, <a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a>), and even auditing (<a href="https://cran.r-project.org/web/packages/jfa/">jfa</a>, <a href="https://cran.r-project.org/web/packages/MUS/">MUS</a>). CRAN is the central repository for all these packages that meet minimum quality standards.</p>
+<p>As R is a language, you may want to consider an application to code in, similar to how you may write memos in Microsoft Word. <a href="https://rstudio.com">RStudio Desktop</a> is an integrated development environment (IDE) that has an open source version and is free to use. There are also free versions of RStudio Server, as well as commercially supported versions of its Desktop, Server, and two unique products that we will go into more later - Package Manager and Connect.</p>
+<p>With both R and RStudio installed, you can perform the minimum requirements of your audit data analysis career: you can download data, wrangle it, visualize it, and save completed analyses. The potential is limitless though, as it enables all the other technologies to operate with it - machine learning, automation, dashboarding, and code sharing.</p>
 </div>
-<div id="code-sharing" class="section level2">
-<h2><span class="header-section-number">2.2</span> Code Sharing</h2>
+<div id="code-repositories" class="section level2">
+<h2><span class="header-section-number">2.2</span> Code repositories</h2>
+<p>Here is a typical data analytics logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file, but Person B will never see the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
+<p>One of the most effective ways to solve this problem is to leverage a code repository (also known as version control). While version control has several software engineering advantages, the most notable advantages for audit teams are:</p>
+<ul>
+<li>Centralizing domain knowledge and sharing code,</li>
+<li>Tracking and tracing changes to code throughout time (including who, what was changed, and when), and</li>
+<li>Ability to test with an isolated codeset before rolling out to production.</li>
+</ul>
+<p>Code versioning technologies resonate closely with IT General Controls and even the COBIT framework.</p>
 <div id="git" class="section level3">
 <h3><span class="header-section-number">2.2.1</span> Git</h3>
+<p><a href="https://git-scm.com">git</a> is a type of version control. Another free, open source software, and the basic usage of the tool is accessible.</p>
+<p>The basics of git are:</p>
+<ul>
+<li>Pull code from the remote server to the local computer.</li>
+<li>Write and save code on your local computer.</li>
+<li>Commit code on your local computer.</li>
+<li>Push code from your local computer to the remote server.</li>
+</ul>
+<p>While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. The git hole can go very deep, so if things don’t go according to plan, just remember that you can always <a href="https://xkcd.com/1597/">make a new folder and start fresh</a>.</p>
+<p>Several different server technologies support git - <a href="https://github.com">github</a>, <a href="https://azure.microsoft.com/en-us/services/devops/repos/">Azure Repos</a> within Azure DevOps, <a href="https://gitlab.com">gitlab</a> are all willing to host your code. If you’re using these to hold proprietary or sensitive code, it would be wise to get your company’s support and pay for the ability to have a private repository that only your team can see.</p>
 </div>
 <div id="packages" class="section level3">
 <h3><span class="header-section-number">2.2.2</span> Packages</h3>
+<p>As you write more code and templates, you will eventually want to share these new techniques with others on your team. Packages put your best practices together, including templates, functions to solve common problems, and templates for common workflows. In short: packages contain tasks help you do your job, and save you time.</p>
+<p>Packages go beyond the tangible They standardize your team’s workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.</p>
+<p>However, you do not need to force your team to copy-and-paste a folder or even a Word document from a template folder. The most elegant way to distribute your code is via packages.</p>
+<p>If the idea of writing a package for the world to see intimidates you, do not fear - your packages can also be distributed privately just to those in your company too.</p>
+<p>A tip - don’t name your packages something mundane, like ‘internalaudit’, please. You’re an auditor by day, but you are far more creative than you give yourself credit for.</p>
 </div>
 </div>
 <div id="data-products" class="section level2">
 <h2><span class="header-section-number">2.3</span> Data Products</h2>
+<p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vauge, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
+<p>The data analysis you perform follow the same lifecycle. Not only do they need to be accurate, but they also need to be accessible and relevant, at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods for doing things. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
+<p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should eventualy have the goal of being accessible by your team, on-time and on-demand.</p>
 <div id="galvanize-highbond" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Galvanize Highbond</h3>
+<p>Galvanize, the parent company of ACL Analytics and one of the most famous companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. However, their solution for audit exception and remediation however is underrated.</p>
 </div>
 <div id="rstudio-connect" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> RStudio Connect</h3>
+<p>ETL, Dashboard, visualization</p>
 </div>
 </div>
 <div id="data-sources" class="section level2">

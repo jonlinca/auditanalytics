@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-06" />
+<meta name="date" content="2020-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,10 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 
@@ -82,7 +86,7 @@
 </ul></li>
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture</a><ul>
 <li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-sharing"><i class="fa fa-check"></i><b>2.2</b> Code Sharing</a><ul>
+<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>2.2</b> Code repositories</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>2.2.1</b> Git</a></li>
 <li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>2.2.2</b> Packages</a></li>
 </ul></li>
@@ -140,8 +144,8 @@
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
-<p>Within the accounting and audit profession, analytics has been around for several decades, under the concept of Computer Aided Auditing Techniques (CAATs), where the software of choice was led by ACL Analytics. ACL Analytics was a significant audit enabler at the time, as it allowed direct access to analyze mainframe information that was otherwise inaccessible by mainstream software on the market. It enabled audit teams to obtain transparency in analysis, a rigorous audit trail, and even automation of scripts.</p>
-<p>As computers, data analytic technology and accessibility of coding in the Accounting practice has become mainstream, there is far more tools that enable auditors to become far more powerful and self sufficient than ever before. Tools that are typically reserved for software engineers and statisticians have empowered financial auditors to expand their breadth and scope.</p>
+<p>Within the accounting and audit profession, analytics has been around for several decades, under the concept of Computer Aided Auditing Techniques (CAATs), where the software of choice was led by ACL Analytics. ACL Analytics was a significant audit enabler at the time, as it allowed direct access to analyze mainframe data and flat files that were otherwise inaccessible by mainstream software on the market. It enabled audit teams to obtain transparency in analysis, a rigorous audit trail, and even automation of scripts.</p>
+<p>As computers, data analytic technology and accessibility of coding in the Accounting practice has become mainstream, there are far more tools that enable auditors to become far more powerful and self sufficient than ever before. Tools that are typically reserved for software engineers and statisticians have empowered financial auditors to expand their breadth and scope.</p>
 <p>A traditional internal audit team would consider themselves to be consumers of information, limited by flat files sent by emails from their stakeholders. While most internal auditors have considered data analytics in one way or another, the realm of possibilities and challenges have outpaced audit shop capabilities. The expectation now is for auditors to be fully integrated into the business, and contribute directly to the management of the financial and IT risks the company faces on a regular basis.</p>
 <p>The most effective way to meet this new standard is to implement a current data analytics architecture and empower your team to leverage modern data analytics techniques.</p>
 <div id="make-the-right-thing-easy-to-do" class="section level2">
@@ -149,7 +153,7 @@
 <p>The right set of technologies enables your team to propel forward, and should amplify your teams efforts. By thoughtfully choosing your tools and encouraging sustainable processes, your team will create a positive cycle of development, learning and deployment.</p>
 <div id="code-based-development" class="section level3">
 <h3><span class="header-section-number">1.1.1</span> Code-based development</h3>
-<p>Consider the creation and auditing of a spreadsheet, where every row and column has the potential to be manipulated. Following the motto, ‘trust but verify’, an auditor would need to examine the values, the formulas, the relationships, and keep a sharp eye out for manual adjustments. Once you consider that it becomes a manual process to also verify the source of data in the spreadsheet, and there is no built-in tracability to how the spreadsheet is used after it has been created, it contributes to the madness that is the spreadsheet ecosystem.</p>
+<p>Consider the creation and auditing of a spreadsheet, where every row and column has the potential to be manipulated. Following the motto, ‘trust but verify’, an auditor would need to examine each cell value, the formulas, the relationships, and keep a sharp eye out for manual adjustments. The auditor also needs to validate the source of data in the spreadsheet. With no built-in tracability to how the spreadsheet is used after it has been created, it contributes to the madness that is the spreadsheet ecosystem.</p>
 <p>While it is easier to superficially consume information from a spreadsheet, to understand the inner workings is a tedious task into itself.</p>
 <p>Contrast this to a code-based environment. To achieve anything in code, you need to be explicit and specific on the mechanisms taken to reach the end state. Each line will tell the program what inputs it needs, how it is processed, and the collection of lines tells you what is achieved. The beauty of this is that it also tells the reader exactly what was executed to achieve the end result. A code based environment is inherently self documenting.</p>
 <p>Once a baseline code has been established, finding ongoing changes becomes trivial. Similar to black-line functionality in Microsoft Word or Track Changes in Google Docs, its far easier to detect how code (and the process it supports) has changed.</p>
@@ -158,11 +162,10 @@
 <div id="automate-relentlessly" class="section level3">
 <h3><span class="header-section-number">1.1.2</span> Automate relentlessly</h3>
 <p>By writing your routines in code, then the next logical step is to automate. Automation not only frees up your time from performing a task, but it also frees up your mental critical thinking and creative processing power. Every professional has a cognitive load - don’t waste it on routine tasks.</p>
-<p>A common use case for automation in audit is the creation of a data mart that is relevant to auditors. <DEFINE AUDIT MART> Now imagine that instead of needing to email HR for the latest employee list, an always up-to-date database makes research a snap for internal auditors. Instead of asking the vendor management team on how much money was spent per vendor, having this information in an audit mart already available means you can spend more time thinking about how to assess these vendors for risk.</p>
+<p>A common use case for automation in audit is the creation of a data mart that is relevant to auditors. A data mart is a collection of pre-processed data that is suited for the group using it - for example, a data mart may hold a subset of accounts payable information. Imagine that instead of needing to email HR for the latest employee list, the audit team merely needs to check within its internal database, makes research a snap Instead of asking the vendor management team on how much money was spent per vendor, having this information in an audit mart already available means you can spend more time thinking about how to assess these vendors for risk.</p>
 <p>Gone are the days where you only audit a topic once a year. A byproduct of every audit is a monitoring mechanism - how do you know something has gone off the rails? Traditional remediation paths include a follow-up in the future - after that, there are few mechanisms to faithfully maintain confidence that the process is still operating reasonably.</p>
 <p>If you’ve coded your audit, then you have already done the hard work of structuring how to extract your data data, finding exceptions and distributing actionable results for your stakeholders. Automation takes that one step further, and allows you to ensure the steps are done repeatedly. The value you derived initially from your audit can now be done continuously.</p>
-<p>Once you’ve audited the identification of issues and the metrics around them, then you can focus on the automation the handling and resolution of them. With a true audit results database, you can the results of automated monitoring into it, enabling on-demand availability, visibility and transparency… and sets up the next step, where where reporting can now be part of that automation process.</p>
-<p>Its a self reinforcing, positive cycle.</p>
+<p>Once you’ve audited the identification of issues and the metrics around them, then you can focus on the automation the handling and resolution of them. With a true audit results database, you can the results of automated monitoring into it, enabling on-demand availability, visibility, transparency, and even reporting, all which can now be part of that automation process.</p>
 </div>
 <div id="share-everything" class="section level3">
 <h3><span class="header-section-number">1.1.3</span> Share everything</h3>
@@ -170,12 +173,12 @@
 <p>Tribal knowledge is information or knowledge that is known within a tribe but often unknown outside of it. A tribe, in this sense, may be a group or subgroup of people that share such a common knowledge. From a corporate perspective, “Tribal Knowledge or know-how is the collective wisdom of the organization. It is the sum of all the knowledge and capabilities of all the people”. <span class="citation">(<span class="citeproc-not-found" data-reference-id="tribal-knowledge"><strong>???</strong></span>)</span></p>
 </blockquote>
 <p>When you code the procedures, not only are you creating letters to yourself in the future, but you’re also writing letters to everyone else on your team, even those who haven’t joined. These fully contained notebooks serve as a guide to those on your team who are learning what you have developed.</p>
-<p>The only left to do is to put them into a central source where everyone on your team can access them. While you can opt for files and folders on a network drive, more practical technologies exist. <strong>Code repositories</strong>, such as git and subversion, serve a purpose in your data analytics environment to track changes to code and notebooks. You can encourage your team to upload notebooks to these repositories to access the latest and greatest code that your team has developed for problems already solved. New team members can go into a repository to learn how code has solved prior problems, and become inspired to solve problems of their own.</p>
+<p>The next thing to do is to put them in a central location where everyone on your team can access them. While you can opt for files and folders on a network drive, more practical technologies exist. <strong>Code repositories</strong>, such as git and subversion, serve a purpose in your data analytics environment to track changes to code and notebooks. You can encourage your team to upload notebooks to these repositories to access the latest and greatest code that your team has developed for problems already solved. New team members can go into a repository to learn how code has solved prior problems, and become inspired to solve problems of their own.</p>
 <p>As your team gains more experience and consistency, it may be more practical to write repeatable processes and functions instead of copy and pasting code between notebooks. Code <strong>packages</strong> enable you to share your code and functions to solve specific problems, templates to encourage consistency amongst team members, and are easily distributed to your team for quick installation.</p>
 </div>
 <div id="dont-be-a-hero" class="section level3">
 <h3><span class="header-section-number">1.1.4</span> Don’t be a hero</h3>
-<p>Not everything needs to be fixed by you, in code. In a well-functioning organization where hundreds of people are supporting different software, application or databases, sometimes the best way to solve the problems found isn’t directly in the work you do, but how you get others to fix systemic issues in the source itself. Key indicators of this are when you have to start hard-coding compensating controls in your code because the upstream data isn’t standardized.</p>
+<p>Not everything needs to be fixed by you, especially in code. In a well-functioning organization where hundreds of people are supporting different software, application or databases, sometimes the best way to solve the problems found isn’t directly in the work you do, but how you get others to fix systemic issues in the source itself. Key indicators of this are when you have to start hard-coding compensating controls in your code because the upstream data isn’t standardized.</p>
 <p>For example, in a typical company, employees are issued unique ID numbers. This is preferably at the source of truth - the Human Resources department. This identifier is generally considered reliable and stable, especially if is the source of truth. Consider now that you’re now trying to join the data to a credit card system, where employees are issued credit cards based on their first and last name. If you take an assumption to join this dataset using an individuals first and last name, that would be a reasonable first attempt. However, last names can change over time, or individuals may prefer to go with their middle names, or even simple spelling mistakes can occur. Instead of compensating by adding different ways of ‘joining’ information, its more effective to work with the application’s data owner to see if they would be willing to adopt the unique employee ID instead as a field in their system.</p>
 </div>
 <div id="the-opportunity-cost" class="section level3">

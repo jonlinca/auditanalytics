@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.6.5)  6 JUN 2020 17:48
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.6.5)  8 JUN 2020 21:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -768,56 +768,59 @@ Chapter 1.
 [9] [10]
 
 Package natbib Warning: Citation `tribal-knowledge' on page 11 undefined on inp
-ut line 155.
+ut line 153.
 
 [11] [12] [13] [14
 
 ]
 Chapter 2.
-[15] [16
-
-]
+File: Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf Graphic file
+ (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf>
+[15] [16] [17] [18]
 Chapter 3.
-[17] [18
+[19
+
+] [20
 
 ]
 Chapter 4.
-[19] [20
-
-]
-Chapter 5.
 [21] [22
 
 ]
-Chapter 6.
+Chapter 5.
 [23] [24
 
 ]
+Chapter 6.
+[25] [26
+
+]
 Chapter 7.
-(./Audit_Analytics_with-R.bbl [25] [26
+(./Audit_Analytics_with-R.bbl [27] [28
 
 ])
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 271.
-[27]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 271.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 346.
+[29]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 346.
 (./Audit_Analytics_with-R.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 271.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 271.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 346.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 346.
 Package rerunfilecheck Info: File `Audit_Analytics_with-R.out' has not changed.
 
-(rerunfilecheck)             Checksum: A68667B638F3EE6461DA229720E7702F;3260.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 271.
+(rerunfilecheck)             Checksum: A54751360366B7F5FE488AFF78990441;3285.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 346.
  ) 
 Here is how much of TeX's memory you used:
- 16953 strings out of 481276
- 299310 string characters out of 5921299
+ 16964 strings out of 481276
+ 299791 string characters out of 5921299
  724795 words of memory out of 5000000
- 34246 multiletter control sequences out of 15000+600000
+ 34254 multiletter control sequences out of 15000+600000
  538789 words of font info for 77 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  53i,6n,118p,942b,370s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on Audit_Analytics_with-R.pdf (27 pages).
+Output written on Audit_Analytics_with-R.pdf (29 pages).
