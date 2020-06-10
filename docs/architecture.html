@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-08" />
+<meta name="date" content="2020-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,8 +145,8 @@
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-40e9d2fa5947e6fb0d69" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-40e9d2fa5947e6fb0d69">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-01224d87d0506c202fb5" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-01224d87d0506c202fb5">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 2.1: Internal Audit Data Analytics Architecture
 </p>
@@ -162,12 +162,12 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 </div>
 <div id="code-repositories" class="section level2">
 <h2><span class="header-section-number">2.2</span> Code repositories</h2>
-<p>Here is a typical data analytics logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file, but Person B will never see the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
+<p>Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file, but Person B will never see the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
 <p>One of the most effective ways to solve this problem is to leverage a code repository (also known as version control). While version control has several software engineering advantages, the most notable advantages for audit teams are:</p>
 <ul>
 <li>Centralizing domain knowledge and sharing code,</li>
 <li>Tracking and tracing changes to code throughout time (including who, what was changed, and when), and</li>
-<li>Ability to test with an isolated codeset before rolling out to production.</li>
+<li>Ability to test with an isolated code set before rolling out to production.</li>
 </ul>
 <p>Code versioning technologies resonate closely with IT General Controls and even the COBIT framework.</p>
 <div id="git" class="section level3">
@@ -189,17 +189,18 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <p>Packages go beyond the tangible They standardize your team’s workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.</p>
 <p>However, you do not need to force your team to copy-and-paste a folder or even a Word document from a template folder. The most elegant way to distribute your code is via packages.</p>
 <p>If the idea of writing a package for the world to see intimidates you, do not fear - your packages can also be distributed privately just to those in your company too.</p>
-<p>A tip - don’t name your packages something mundane, like ‘internalaudit’, please. You’re an auditor by day, but you are far more creative than you give yourself credit for.</p>
+<p>A tip - don’t name your packages something mundane, like ‘internalaudit’, please. You’re only an auditor by day, and you are far more creative than you give yourself credit for.</p>
 </div>
 </div>
 <div id="data-products" class="section level2">
 <h2><span class="header-section-number">2.3</span> Data Products</h2>
-<p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vauge, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
-<p>The data analysis you perform follow the same lifecycle. Not only do they need to be accurate, but they also need to be accessible and relevant, at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods for doing things. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
-<p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should eventualy have the goal of being accessible by your team, on-time and on-demand.</p>
+<p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
+<p>The data analysis you deliver are exposed to the same requirements. Not only do they need to be accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
+<p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.</p>
 <div id="galvanize-highbond" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Galvanize Highbond</h3>
-<p>Galvanize, the parent company of ACL Analytics and one of the most famous companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. However, their solution for audit exception and remediation however is underrated.</p>
+<p>Galvanize, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is fantastic for audit exception and remediation workflow.</p>
+<p>The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers. If your team does not have the capability to support a large underlying infrastructure, Galvanize’s tool will handle the security, design and coding for hosting and workflowing your analytics to your internal customers.</p>
 </div>
 <div id="rstudio-connect" class="section level3">
 <h3><span class="header-section-number">2.3.2</span> RStudio Connect</h3>
