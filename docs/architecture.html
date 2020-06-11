@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-09" />
+<meta name="date" content="2020-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,15 +146,15 @@
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-8ed1ebfe9a886dd2309b" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-8ed1ebfe9a886dd2309b">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-57cb42ca8afe692a04e5" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-57cb42ca8afe692a04e5">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 2.1: Internal Audit Data Analytics Architecture
 </p>
 </div>
 <p>The architecture and tools you select should support and amplify your team, and not be a burden to maintain. Maintenance of databases and applications can also be delegated to application support teams, so you can focus on implementing analytics and delivering data products.</p>
-<p>Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password changes every 90 days will make the job feel like quarterly financial reporting.</p>
-<p>Any software you consider should be able to talk to your company’s internal applications and capabilities. Be wary of software that locks you in, as it limits your ability to integrate with your company’s tools as you get more sophisticated.</p>
+<p>Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password expiry every 90 days will make updating passwords feel like quarterly financial reporting.</p>
+<p>Any software you consider should be able to talk to your company’s internal and external applications. Be wary of software that locks you in or makes access to data cumbersome, as it limits your ability to integrate with your company’s tools as you gain sophistication.</p>
 <div id="r-and-rstudio" class="section level2">
 <h2><span class="header-section-number">2.1</span> R and RStudio</h2>
 <p><a href="https://www.r-project.org">R</a> is a programming language with an emphasis on statistics. It is considered free software, free in the perspective that you can run, distribute, and change it as you like.</p>
@@ -164,7 +164,7 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 </div>
 <div id="code-repositories" class="section level2">
 <h2><span class="header-section-number">2.2</span> Code repositories</h2>
-<p>Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file, but Person B will never see the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
+<p>Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file (now V2), but Person B will not benefit from the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
 <p>One of the most effective ways to solve this problem is to leverage a code repository (also known as version control). While version control has several software engineering advantages, the most notable advantages for audit teams are:</p>
 <ul>
 <li>Centralizing domain knowledge and sharing code,</li>
@@ -189,7 +189,7 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <h3><span class="header-section-number">2.2.2</span> Packages</h3>
 <p>As you write more code and templates, you will eventually want to share these new techniques with others on your team. Packages put your best practices together, including templates, functions to solve common problems, and templates for common workflows. In short: packages contain tasks help you do your job, and save you time.</p>
 <p>Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team’s workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.</p>
-<p>However, you do not need to force your team to copy-and-paste a folder or even a Word document from a template folder. The most elegant way to distribute your code is via packages. These packages can be hosted on a code repository, enabling your team to download best practices with a simple line of code. The packages can also be hosted privately, so only your company or team can access them.</p>
+<p>However, you do not need to force your team to copy-and-paste a folder or even a Word document from a template folder. The most elegant way to distribute your code is via packages. These packages can be hosted on a private or public code repository, enabling your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive.</p>
 <p>The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don’t call it auditR.</p>
 </div>
 </div>
@@ -200,9 +200,9 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.</p>
 <div id="galvanize-highbond" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Galvanize Highbond</h3>
-<p><a href="https://www.wegalvanize.com">Galvanize</a>, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is fantastic for audit exception and remediation workflow.</p>
+<p><a href="https://www.wegalvanize.com">Galvanize</a>, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is an unrivaled for audit exception and remediation workflow.</p>
 <p>The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.</p>
-<p>While Galvanize is a separate, third-party product that is not R-related, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams ambitious enough to design their workpaper environments effectively.</p>
+<p>While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams ambitious enough to design their workpaper environments effectively.</p>
 <p>Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.</p>
 <p>Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high availability and security maintained by a professional team. Galvanize supports the <a href="https://www.wegalvanize.com/trust/">security</a>, design and coding for hosting a tool online, allowing you to focus on designing workflows for your internal customers.</p>
 </div>
@@ -214,21 +214,48 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <li>These notebooks can also act at Extract, Transform, and Load processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).</li>
 <li>The hosting of <a href="https://shiny.rstudio.com">Shiny</a> apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.</li>
 </ul>
-<p>For audit teams who have expertise in programming, RStudio Connect offers some of the best capabilities for pushing out visualizations and analysis to your teams and internal stakeholders.</p>
-<p>RStudio server software will require talent to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.</p>
+<p>For audit teams who have expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team’s best practices of a code repository.</p>
+<p>RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.</p>
+<p>Lightweight alternatives include the hosting a free <a href="https://rstudio.com/products/shiny/shiny-server/">Shiny Server</a> or low-cost publishing to <a href="https://www.shinyapps.io">Shinyapps.io</a>.</p>
 </div>
 <div id="rstudio-package-manager" class="section level3">
 <h3><span class="header-section-number">2.3.3</span> RStudio Package Manager</h3>
-<p>RStudio Package Manager offers the capability to</p>
+<p>As your team develops more code and functions, there becomes a greater need to distribute these best practices easily. <a href="https://rstudio.com/products/package-manager/">RStudio Package Manager</a> offers the capability to distribute code packages to your coworkers and even the broader organization. By integrating with your code repository, it can bundle new functionality added by your team and distribute it. It offers versioning of packages, for those audit environments where reproducability is paramount.</p>
+<p>An alternative is also <a href="https://cran.r-project.org/web/packages/miniCRAN/index.html">miniCRAN</a>, a reduced feature set yet free and open source version, or even simply hosting packages on a network drive.</p>
 </div>
 </div>
 <div id="data-sources" class="section level2">
 <h2><span class="header-section-number">2.4</span> Data sources</h2>
+<p>The end goal of automation ETLs, and creating and hosting data products for audit customers to consume. To achieve these goals, an audit team needs direct, programmatic access to the data being audited. By programmatic, we mean that code can be used to access data, versus going through a front-end user interface.</p>
 <div id="databases" class="section level3">
 <h3><span class="header-section-number">2.4.1</span> Databases</h3>
+<p>At its core, databases hold transactional information that runs the business. Databases generally can fit two separate use cases: Online Transaction Processing (OLTP), for high speed transaction writing, and Online Analytic Processing (OLAP), for analyzing to support business decisions. Typically OLTP databases act as a source of truth, and send updates to the OLAP database.</p>
+<p>The language of choice to access internal databases is Structured Query Language (SQL). As a defacto standard for accessing databases since 1970’s, all relational databases still leverage SQL. While each brand may have subtle nuances in the way SQL works, this essential language will allow your audit team to access a majority of sources within the company. Non-relational databases and NoSQL are becoming more mainstream, as well as graph databases, so your audit team will need to tool up as necessary.</p>
+<p>Audit teams historically had a bad reputation for ‘bringing down the database’. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. However, great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:</p>
+<ul>
+<li>Perform joins in the database, instead of downloading them individually and joining them on the desktop,</li>
+<li>Filter the data with WHERE clauses,</li>
+<li>Download data in chunks or segments, split by day, week or month, or</li>
+<li>Schedule queries during off-business hours.</li>
+</ul>
 </div>
 <div id="external-sources" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> External sources</h3>
+<p>As more applications move to the cloud, using SQL to access data becomes more difficult. While some of this data can be brought into an internal data warehouse or used as an integration, more often than not transactional data is left online within the tool.</p>
+<p>Certain online cloud software providers will make an Application Programming Interface (API) available for consumers.</p>
+<p>While APIs enable audit teams to retrieve data, it may add a layer of difficulty to obtaining data:</p>
+<ul>
+<li>APIs tend to be specific-use cases and provide a limited amount of data at one time.</li>
+<li>Data may not be in the format that you want - you are at the mercy what the API supplies.</li>
+<li>If an API does allow for a larger data download, it may be limited by pagnation, where multiple results are spread out over multiple pages.</li>
+<li>APIs may be ‘rate-limited’, which means it may restrict the number of queries, whether in parallel or in sequence.</li>
+</ul>
+<p>Tips for audit teams needing to rely on cloud providers:</p>
+<ul>
+<li>An API should be part of the requirements before signing an agreement with a provider.</li>
+<li>Ask for access to the API, as well as any documentation.</li>
+<li>Generate a API key for usage, and treat it like a password.</li>
+</ul>
 
 </div>
 </div>
