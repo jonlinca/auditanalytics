@@ -1,5 +1,18 @@
 # Setup
 
-## RStudio
+There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages deployed on your computer. 
 
-## Github
+## R and RStudio
+
+One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley and Garrett, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
+
+## The <AUDITPACKAGENAME>
+
+
+
+
+## Github (or another git-related brand)
+
+There are many different companies that provide git - Azure, Atlassian, Gitlab, etc. If you're learning, github is a fantastic free source to set up shop at. Within your own company, see what the IT and developers are using, as its far more convenient to jump onto that.
+
+Like the R tutorial, [Happy Git and GitHub for the useR](https://happygitwithr.com) by Jenny Bryan et. al. is a practical guide to installing R, setting up keys and the core fundamentals.
