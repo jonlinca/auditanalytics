@@ -1,0 +1,60 @@
+# Import data
+
+## Delimited files
+
+The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.
+
+The base package (installed with all instances of R) and `read.table()` is quite standard. The package readr includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, otherwise known as the data type each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
+
+Some terms
+
+- Delimiters
+- Qualifiers
+
+```{r}
+library(readr)
+
+# TODO Import example file from package
+```
+
+While CSVs are convenient - someone else needs to set up the data structure and send it to you - these file types are not perfect. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager file:
+
+```{r}
+# TODO Active directory file, with just a username and manager field
+```
+
+For further reading, consider data.table's `fread()` when importing even larger data sets.
+
+## Databases
+
+It is highly likely that the company you are auditing will have their data stored in a database. While having skills in SQL is highly recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
+
+The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. Installing a driver is straight forward
+
+The Database Interface (DBI) is the interaction between R and the driver Practically, it enables R to send queries to the database via the driver that is defined in the ODBC.
+
+The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you'll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.
+
+For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)
+
+```{r}
+# TODO Create data within SQLite, and perform commands dbconnect, show_query, select
+```
+
+## APIs
+
+As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
+
+While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
+
+- match it to the endpoint where the data is available,
+- send a valid request to GET the data, and
+- receive the response.
+
+```{r}
+# TODO Create plumber API locally to enable user to run their own API and perform a GET call against it
+# https://github.com/isteves/plumbplumb
+```
+
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, (CData)[https://www.cdata.com/kb/tech/office365-jdbc-r.rst] supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
+

@@ -1,4 +1,4 @@
-# Applied audit analytics
+# Applied Audit Analytics
 
 ## Package creation
 

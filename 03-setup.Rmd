@@ -1,14 +1,29 @@
 # Setup
 
-There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages deployed on your computer. 
+There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.
 
 ## R and RStudio
 
 One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley and Garrett, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
 
-## The <AUDITPACKAGENAME>
+## The AUDITPACKAGENAME
 
+```{r}
+# TODO publish audit package
+```
 
+## Example Data Files
+
+Throughout each chapter, we may reference databases with example datasets. They aren't included in the audit package, but can be downloaded prior to each exercise as needed.
+
+```{r}
+# TODO Upload data
+
+#dir.create("data", showWarnings = FALSE)
+#download.file(url = "",
+#              destfile = "data/ch_xx.sqlite", mode = "wb")
+
+```
 
 
 ## Github (or another git-related brand)

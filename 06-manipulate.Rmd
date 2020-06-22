@@ -1,0 +1,15 @@
+# Manipulate
+
+## Basic math
+
+## Dates
+
+## Sort
+
+## Summary statistics - Outliers 
+
+## Clean text
+
+## Search text
+
+## Join

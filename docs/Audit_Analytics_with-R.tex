@@ -41,6 +41,46 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -73,7 +113,7 @@
 
 \title{Audit Analytics with R}
 \author{Jonathan Lin}
-\date{2020-06-10}
+\date{2020-06-21}
 
 \begin{document}
 \maketitle
@@ -91,9 +131,9 @@ This is the website for Audit Analytics in R. This audience of this book is for:
 \begin{itemize}
 \tightlist
 \item
-  Leaders who are looking to design their environment to encourage code sharing and data products,
+  Audit leaders who are looking to design their environment to encourage code sharing and data products,
 \item
-  Data analytics practitioners, who are looking to leverage R in their data analytics tasks.
+  Audit data analytics practitioners, who are looking to leverage R in their data analytics tasks.
 \end{itemize}
 
 You will learn what tools and technologies are well suited for a modern audit analytics toolkit, as well as learn skills with R to perform data analytics tasks. Consider this book to be your roadmap of practical items to implement and follow.
@@ -157,7 +197,18 @@ When you code the procedures, not only are you creating letters to yourself in t
 
 The next thing to do is to put them in a central location where everyone on your team can access them. While you can opt for files and folders on a network drive, more practical technologies exist. \textbf{Code repositories}, such as git and subversion, serve a purpose in your data analytics environment to track changes to code and notebooks. You can encourage your team to upload notebooks to these repositories to access the latest and greatest code that your team has developed for problems already solved. New team members can go into a repository to learn how code has solved prior problems, and become inspired to solve problems of their own.
 
-As your team gains more experience and consistency, it may be more practical to write repeatable processes and functions instead of copy and pasting code between notebooks. Code \textbf{packages} enable you to share your code and functions to solve specific problems, templates to encourage consistency amongst team members, and are easily distributed to your team for quick installation.
+As your team gains more experience and consistency, it may be more practical to write repeatable processes and functions instead of copy and pasting code between notebooks. Code \textbf{packages} enable you to share your code and functions to solve specific problems, templates to encourage consistency amongst team members, and are easily distributed to your team for quick deployment.
+
+\hypertarget{always-deliver-useful-product}{%
+\subsection{Always deliver useful product}\label{always-deliver-useful-product}}
+
+The outputs of your work are useless if they are not adopted by the business. This means you need to prioritize your customer and iterate often, to win buy-in, gain momentum and stay on course.
+
+Audit teams are always surprised when I say that they have customers. Audit department interactions are across the entire company and up-and-down the entire chain - from manufacturing to engineering, IT to accounting, analysts to the c-suite. Audit departments handle all these groups, with kid-gloves and diplomacy. Yet we tend to ignore the \#1 customer - ourselves. Audit teams are usually at the mercy of what the business deems most convenient for them - whether in terms of reports, testing controls or even where files are kept.
+
+Historically, this was tolerated. Audit teams were composed of accountants that specialized in Excel, IT auditors in testing general controls, and a focus adhering to evolving accounting standards. With the advance in maturity of code-based tools and even commercial audit software, there has been never a better time to code intuition.
+
+The idea of these data products is that they promote the cognitive ease - this means, repeated experience, clear display, primed idea, and good mood.\citep{cognitive-ease} By helping your team feel at ease, but they should deliver both the most trivial of tasks and the most time-consuming tests of applied knowledge. By removing the need to execute these tasks, then the customer can focus on what they're good at - in the case of auditors, its applying professional judgement. These products can be taken up in the form of data generation, data and trend visualization, or standardize reporting.
 
 \hypertarget{dont-be-a-hero}{%
 \subsection{Don't be a hero}\label{dont-be-a-hero}}
@@ -175,7 +226,7 @@ The idea of opportunity costs presumes the fungibility of human experience: all 
 
 An internal auditors' largest limitation is time. The biggest barrier to the adoption and execution of data analytic talents is the fact there is `more' perceived value in doing something else. A common excuse is that a task will only be performed once (or even worse, at an irregular basis) - auditors may instead opt to perform a manual task in an unsustainable way. Instead of learning a new skill, our opportunity cost is projected against how much time can be used have to perform this task at hand.
 
-If your existence was highly limited by the lifespan of a fruit fly, it would be hard to argue against such a position. However, your career is long (hopefully), fruitful and full of exciting and interesting work. Truly engaging work should challenging and rewarding, and applying coding to audit lends itself to a skill worth mastering. Using these skills, no matter how immature, will continue to pay off dividends in future implementations, no matter how insignificant or incremental. Implementing repeatable processes means not only does the end consumer receive their product quicker, but the data auditor is enabled to continuously refine or tackle another code-related problem. And that is worth the opportunity cost, today.
+If your existence was highly limited by the lifespan of a fly, it would be hard to argue against such a position. However, your career is long (hopefully), fruitful and full of exciting and interesting work. Truly engaging work should challenging and rewarding, and applying coding to audit lends itself to a skill worth mastering. Using these skills, no matter how immature, will continue to pay off dividends in future implementations, no matter how insignificant or incremental. Implementing repeatable processes means not only does the end consumer receive their product quicker, but the data auditor is enabled to continuously refine or tackle another code-related problem. And that is worth the opportunity cost, today.
 
 \hypertarget{architecture}{%
 \chapter{Architecture}\label{architecture}}
@@ -264,7 +315,7 @@ The best part? You can give your package a creative name that represents the cul
 
 All auditors face this problem at one point or another. An audit finding doesn't matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.
 
-The data analysis you deliver are exposed to the same requirements. Not only do they need to be accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?
+The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?
 
 Data products are deliverable that enhance your customer's ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.
 
@@ -275,7 +326,7 @@ Data products are deliverable that enhance your customer's ability to gather, pr
 
 The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.
 
-While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams ambitious enough to design their workpaper environments effectively.
+While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams that design their workpaper environments effectively.
 
 Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.
 
@@ -296,7 +347,7 @@ RStudio PBC, which became a Certified B Corporation in 2020, offers the \href{ht
   The hosting of \href{https://shiny.rstudio.com}{Shiny} apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.
 \end{itemize}
 
-For audit teams who have expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team's best practices of a code repository.
+For audit teams with expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team's best practices of a code repository.
 
 RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.
 
@@ -321,14 +372,14 @@ At its core, databases hold transactional information that runs the business. Da
 
 The language of choice to access internal databases is Structured Query Language (SQL). As a defacto standard for accessing databases since 1970's, all relational databases still leverage SQL. While each brand may have subtle nuances in the way SQL works, this essential language will allow your audit team to access a majority of sources within the company. Non-relational databases and NoSQL are becoming more mainstream, as well as graph databases, so your audit team will need to tool up as necessary.
 
-Audit teams historically had a bad reputation for `bringing down the database'. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. However, great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:
+Audit teams historically had a bad reputation for `bringing down the database'. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. Great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:
 
 \begin{itemize}
 \tightlist
 \item
-  Perform joins in the database, instead of downloading them individually and joining them on the desktop,
-\item
   Filter the data with WHERE clauses,
+\item
+  Perform joins in the database, instead of downloading multiple tables individually and joining them on the desktop,
 \item
   Download data in chunks or segments, split by day, week or month, or
 \item
@@ -340,16 +391,18 @@ Audit teams historically had a bad reputation for `bringing down the database'. 
 
 As more applications move to the cloud, using SQL to access data becomes more difficult. While some of this data can be brought into an internal data warehouse or used as an integration, more often than not transactional data is left online within the tool.
 
-Certain online cloud software providers will make an Application Programming Interface (API) available for consumers.
+Certain online cloud software providers will make an Application Programming Interface (API) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like \href{https://cran.r-project.org/web/packages/httr/index.html}{httr} and digested with \href{https://cran.r-project.org/web/packages/jsonlite/index.html}{jsonlite}.
 
-While APIs enable audit teams to retrieve data, it may add a layer of difficulty to obtaining data:
+While APIs enable audit teams to retrieve data, it adds a layer of difficulty in obtaining data:
 
 \begin{itemize}
 \tightlist
 \item
-  APIs tend to be specific-use cases and provide a limited amount of data at one time.
+  Each API behaves differently - authentication, calls, and the data return all may vary between systems.
 \item
-  Data may not be in the format that you want - you are at the mercy what the API supplies.
+  APIs endpoints, the part that allows a tool to query it, tend to be highly specific-use cases, and may provide a limited scope of data at one time.
+\item
+  Data may not be in the format that you want, or even exist - you are at the mercy what the API supplies.
 \item
   If an API does allow for a larger data download, it may be limited by pagnation, where multiple results are spread out over multiple pages.
 \item
@@ -361,39 +414,214 @@ Tips for audit teams needing to rely on cloud providers:
 \begin{itemize}
 \tightlist
 \item
-  An API should be part of the requirements before signing an agreement with a provider.
+  API access should be part of the requirements before signing an agreement with a provider.
 \item
-  Ask for access to the API, as well as any documentation.
+  Ask for, and generate, an API key for usage, and treat it like a password.
 \item
-  Generate a API key for usage, and treat it like a password.
+  If APIs are out of the skill of your team, consider asking your IT department to schedule a data pull into your audit data mart.
 \end{itemize}
 
 \hypertarget{setup}{%
 \chapter{Setup}\label{setup}}
 
-\hypertarget{rstudio}{%
-\section{RStudio}\label{rstudio}}
+There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.
 
-\hypertarget{github}{%
-\section{Github}\label{github}}
+\hypertarget{r-and-rstudio-1}{%
+\section{R and RStudio}\label{r-and-rstudio-1}}
 
-\hypertarget{audit-analytics}{%
-\chapter{Audit analytics}\label{audit-analytics}}
+One of the most respected introductions to R is \href{https://r4ds.had.co.nz/introduction.html}{R for Data Science} by Hadley and Garrett, and the \href{https://r4ds.had.co.nz/introduction.html\#prerequisites}{Prerequisities} section is set up for installing R.
+
+\hypertarget{the-auditpackagename}{%
+\section{The AUDITPACKAGENAME}\label{the-auditpackagename}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ publish audit package}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{example-data-files}{%
+\section{Example Data Files}\label{example-data-files}}
+
+Throughout each chapter, we may reference databases with example datasets. They aren't included in the audit package, but can be downloaded prior to each exercise as needed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ Upload data}
+
+\CommentTok{#dir.create("data", showWarnings = FALSE)}
+\CommentTok{#download.file(url = "",}
+\CommentTok{#              destfile = "data/ch_xx.sqlite", mode = "wb")}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{github-or-another-git-related-brand}{%
+\section{Github (or another git-related brand)}\label{github-or-another-git-related-brand}}
+
+There are many different companies that provide git - Azure, Atlassian, Gitlab, etc. If you're learning, github is a fantastic free source to set up shop at. Within your own company, see what the IT and developers are using, as its far more convenient to jump onto that.
+
+Like the R tutorial, \href{https://happygitwithr.com}{Happy Git and GitHub for the useR} by Jenny Bryan et. al.~is a practical guide to installing R, setting up keys and the core fundamentals.
 
 \hypertarget{import-data}{%
-\section{Import data}\label{import-data}}
+\chapter{Import data}\label{import-data}}
+
+\hypertarget{delimited-files}{%
+\section{Delimited files}\label{delimited-files}}
+
+The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.
+
+The base package (installed with all instances of R) and \texttt{read.table()} is quite standard. The package readr includes a similar function called \texttt{read\_delim()}, which is faster and allows for easy altering of column specifications, otherwise known as the data type each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
+
+Some terms
+
+\begin{itemize}
+\tightlist
+\item
+  Delimiters
+\item
+  Qualifiers
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ Import example file from package}
+\end{Highlighting}
+\end{Shaded}
+
+While CSVs are convenient - someone else needs to set up the data structure and send it to you - these file types are not perfect. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ Active directory file, with just a username and manager field}
+\end{Highlighting}
+\end{Shaded}
+
+For further reading, consider data.table's \texttt{fread()} when importing even larger data sets.
+
+\hypertarget{databases-1}{%
+\section{Databases}\label{databases-1}}
+
+It is highly likely that the company you are auditing will have their data stored in a database. While having skills in SQL is highly recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
+
+The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. Installing a driver is straight forward
+
+The Database Interface (DBI) is the interaction between R and the driver Practically, it enables R to send queries to the database via the driver that is defined in the ODBC.
+
+The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you'll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.
+
+For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ Create data within SQLite, and perform commands dbconnect, show_query, select}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{apis}{%
+\section{APIs}\label{apis}}
+
+As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
+
+While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
+
+\begin{itemize}
+\tightlist
+\item
+  match it to the endpoint where the data is available,
+\item
+  send a valid request to GET the data, and
+\item
+  receive the response.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# }\AlertTok{TODO}\CommentTok{ Create plumber API locally to enable user to run their own API and perform a GET call against it}
+\CommentTok{# https://github.com/isteves/plumbplumb}
+\end{Highlighting}
+\end{Shaded}
+
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, (CData){[}\url{https://www.cdata.com/kb/tech/office365-jdbc-r.rst}{]} supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
 
 \hypertarget{explore}{%
-\section{Explore}\label{explore}}
+\chapter{Explore}\label{explore}}
+
+\hypertarget{dimensions}{%
+\section{Dimensions}\label{dimensions}}
+
+\hypertarget{convert-between-types}{%
+\section{Convert between types}\label{convert-between-types}}
+
+\hypertarget{break-down-each-column}{%
+\section{Break down each column}\label{break-down-each-column}}
+
+\hypertarget{visualize}{%
+\section{Visualize}\label{visualize}}
 
 \hypertarget{manipulate}{%
-\section{Manipulate}\label{manipulate}}
+\chapter{Manipulate}\label{manipulate}}
+
+\hypertarget{basic-math}{%
+\section{Basic math}\label{basic-math}}
+
+\hypertarget{dates}{%
+\section{Dates}\label{dates}}
+
+\hypertarget{sort}{%
+\section{Sort}\label{sort}}
+
+\hypertarget{summary-statistics---outliers}{%
+\section{Summary statistics - Outliers}\label{summary-statistics---outliers}}
+
+\hypertarget{clean-text}{%
+\section{Clean text}\label{clean-text}}
+
+\hypertarget{search-text}{%
+\section{Search text}\label{search-text}}
+
+\hypertarget{join}{%
+\section{Join}\label{join}}
+
+\hypertarget{test}{%
+\chapter{Test}\label{test}}
+
+\hypertarget{mutate---if-statements}{%
+\section{Mutate - If statements}\label{mutate---if-statements}}
+
+\hypertarget{summarize}{%
+\section{Summarize}\label{summarize}}
+
+\hypertarget{outliers}{%
+\section{Outliers}\label{outliers}}
+
+\hypertarget{duplicates}{%
+\section{Duplicates}\label{duplicates}}
+
+\hypertarget{age}{%
+\section{Age}\label{age}}
+
+\hypertarget{benford-analysis}{%
+\section{Benford Analysis}\label{benford-analysis}}
+
+\hypertarget{relative-size-factor-testing}{%
+\section{Relative size factor testing}\label{relative-size-factor-testing}}
 
 \hypertarget{report}{%
-\section{Report}\label{report}}
+\chapter{Report}\label{report}}
+
+\hypertarget{rmarkdown}{%
+\section{RMarkdown}\label{rmarkdown}}
+
+\hypertarget{graphics}{%
+\section{Graphics}\label{graphics}}
+
+\hypertarget{export}{%
+\section{Export}\label{export}}
 
 \hypertarget{applied-audit-analytics}{%
-\chapter{Applied audit analytics}\label{applied-audit-analytics}}
+\chapter{Applied Audit Analytics}\label{applied-audit-analytics}}
 
 \hypertarget{package-creation}{%
 \section{Package creation}\label{package-creation}}
@@ -413,14 +641,19 @@ Tips for audit teams needing to rely on cloud providers:
 \hypertarget{other-practices-to-follow}{%
 \chapter{Other practices to follow}\label{other-practices-to-follow}}
 
+\hypertarget{documentation}{%
+\section{Documentation}\label{documentation}}
+
+As you start, you should promote basic habits instilled into you. Documenting your basic thought process in .R files is generally expected, and the `why' a certain process outlined with comments (lines starting with a \texttt{\#}). The why is important as it explains to code reviewers (external auditors and your peers) the rationale for your approach, or unusual quirks about the data you are transforming.
+
+RMarkdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily `knit' a document for sharing increases the people you can share your work with.
+
+Whether you are using R or RMarkdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.
+
 \hypertarget{passwords}{%
 \section{Passwords}\label{passwords}}
 
-\hypertarget{section}{%
-\section{}\label{section}}
-
-\hypertarget{audit-data-products}{%
-\chapter{Audit data products}\label{audit-data-products}}
+TODO Storing secrets - .Renviron, config, keyring
 
   \bibliography{book.bib,packages.bib}
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>About the author | Audit Analytics with R</title>
+  <title>Chapter 4 Import data | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="About the author | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 4 Import data | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="About the author | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 4 Import data | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="setup.html"/>
+<link rel="next" href="explore.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -237,17 +237,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="about-the-author" class="section level1 unnumbered">
-<h1>About the author</h1>
+<div id="import-data" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Import data</h1>
+<div id="delimited-files" class="section level2">
+<h2><span class="header-section-number">4.1</span> Delimited files</h2>
+<p>The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.</p>
+<p>The base package (installed with all instances of R) and <code>read.table()</code> is quite standard. The package readr includes a similar function called <code>read_delim()</code>, which is faster and allows for easy altering of column specifications, otherwise known as the data type each column is imported as (for example, overriding an employee’s identification number as a character versus an numeric).</p>
+<p>Some terms</p>
+<ul>
+<li>Delimiters</li>
+<li>Qualifiers</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="import-data.html#cb3-1"></a><span class="kw">library</span>(readr)</span>
+<span id="cb3-2"><a href="import-data.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="import-data.html#cb3-3"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Import example file from package</span></span></code></pre></div>
+<p>While CSVs are convenient - someone else needs to set up the data structure and send it to you - these file types are not perfect. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager file:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="import-data.html#cb4-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Active directory file, with just a username and manager field</span></span></code></pre></div>
+<p>For further reading, consider data.table’s <code>fread()</code> when importing even larger data sets.</p>
+</div>
+<div id="databases-1" class="section level2">
+<h2><span class="header-section-number">4.2</span> Databases</h2>
+<p>It is highly likely that the company you are auditing will have their data stored in a database. While having skills in SQL is highly recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.</p>
+<p>The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you’re using. Installing a driver is straight forward</p>
+<p>The Database Interface (DBI) is the interaction between R and the driver Practically, it enables R to send queries to the database via the driver that is defined in the ODBC.</p>
+<p>The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you’ll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.</p>
+<p>For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="import-data.html#cb5-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create data within SQLite, and perform commands dbconnect, show_query, select</span></span></code></pre></div>
+</div>
+<div id="apis" class="section level2">
+<h2><span class="header-section-number">4.3</span> APIs</h2>
+<p>As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.</p>
+<p>While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:</p>
+<ul>
+<li>match it to the endpoint where the data is available,</li>
+<li>send a valid request to GET the data, and</li>
+<li>receive the response.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="import-data.html#cb6-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create plumber API locally to enable user to run their own API and perform a GET call against it</span></span>
+<span id="cb6-2"><a href="import-data.html#cb6-2"></a><span class="co"># https://github.com/isteves/plumbplumb</span></span></code></pre></div>
+<p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, (CData)[<a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst" class="uri">https://www.cdata.com/kb/tech/office365-jdbc-r.rst</a>] supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="setup.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explore.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-10" />
+<meta name="date" content="2020-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,70 @@
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -80,8 +144,9 @@
 <li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#code-based-development"><i class="fa fa-check"></i><b>1.1.1</b> Code-based development</a></li>
 <li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#automate-relentlessly"><i class="fa fa-check"></i><b>1.1.2</b> Automate relentlessly</a></li>
 <li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#share-everything"><i class="fa fa-check"></i><b>1.1.3</b> Share everything</a></li>
-<li class="chapter" data-level="1.1.4" data-path="intro.html"><a href="intro.html#dont-be-a-hero"><i class="fa fa-check"></i><b>1.1.4</b> Don’t be a hero</a></li>
-<li class="chapter" data-level="1.1.5" data-path="intro.html"><a href="intro.html#the-opportunity-cost"><i class="fa fa-check"></i><b>1.1.5</b> “The opportunity cost”</a></li>
+<li class="chapter" data-level="1.1.4" data-path="intro.html"><a href="intro.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>1.1.4</b> Always deliver useful product</a></li>
+<li class="chapter" data-level="1.1.5" data-path="intro.html"><a href="intro.html#dont-be-a-hero"><i class="fa fa-check"></i><b>1.1.5</b> Don’t be a hero</a></li>
+<li class="chapter" data-level="1.1.6" data-path="intro.html"><a href="intro.html#the-opportunity-cost"><i class="fa fa-check"></i><b>1.1.6</b> “The opportunity cost”</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture</a><ul>
@@ -101,27 +166,56 @@
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Setup</a><ul>
-<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#rstudio"><i class="fa fa-check"></i><b>3.1</b> RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#github"><i class="fa fa-check"></i><b>3.2</b> Github</a></li>
+<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#r-and-rstudio-1"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>3.2</b> The AUDITPACKAGENAME</a></li>
+<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#example-data-files"><i class="fa fa-check"></i><b>3.3</b> Example Data Files</a></li>
+<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>3.4</b> Github (or another git-related brand)</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="audit-analytics.html"><a href="audit-analytics.html"><i class="fa fa-check"></i><b>4</b> Audit analytics</a><ul>
-<li class="chapter" data-level="4.1" data-path="audit-analytics.html"><a href="audit-analytics.html#import-data"><i class="fa fa-check"></i><b>4.1</b> Import data</a></li>
-<li class="chapter" data-level="4.2" data-path="audit-analytics.html"><a href="audit-analytics.html#explore"><i class="fa fa-check"></i><b>4.2</b> Explore</a></li>
-<li class="chapter" data-level="4.3" data-path="audit-analytics.html"><a href="audit-analytics.html#manipulate"><i class="fa fa-check"></i><b>4.3</b> Manipulate</a></li>
-<li class="chapter" data-level="4.4" data-path="audit-analytics.html"><a href="audit-analytics.html#report"><i class="fa fa-check"></i><b>4.4</b> Report</a></li>
+<li class="chapter" data-level="4" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>4</b> Import data</a><ul>
+<li class="chapter" data-level="4.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>4.1</b> Delimited files</a></li>
+<li class="chapter" data-level="4.2" data-path="import-data.html"><a href="import-data.html#databases-1"><i class="fa fa-check"></i><b>4.2</b> Databases</a></li>
+<li class="chapter" data-level="4.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>4.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>5</b> Applied audit analytics</a><ul>
-<li class="chapter" data-level="5.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#package-creation"><i class="fa fa-check"></i><b>5.1</b> Package creation</a></li>
-<li class="chapter" data-level="5.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>5.2</b> Continious Monitoring</a></li>
-<li class="chapter" data-level="5.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>5.3</b> Controls automation</a></li>
-<li class="chapter" data-level="5.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart"><i class="fa fa-check"></i><b>5.4</b> Audit Data Mart</a></li>
-<li class="chapter" data-level="5.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>5.5</b> All-in-one toolkits</a></li>
+<li class="chapter" data-level="5" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>5</b> Explore</a><ul>
+<li class="chapter" data-level="5.1" data-path="explore.html"><a href="explore.html#dimensions"><i class="fa fa-check"></i><b>5.1</b> Dimensions</a></li>
+<li class="chapter" data-level="5.2" data-path="explore.html"><a href="explore.html#convert-between-types"><i class="fa fa-check"></i><b>5.2</b> Convert between types</a></li>
+<li class="chapter" data-level="5.3" data-path="explore.html"><a href="explore.html#break-down-each-column"><i class="fa fa-check"></i><b>5.3</b> Break down each column</a></li>
+<li class="chapter" data-level="5.4" data-path="explore.html"><a href="explore.html#visualize"><i class="fa fa-check"></i><b>5.4</b> Visualize</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>6</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="6.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>6.1</b> Passwords</a></li>
-<li class="chapter" data-level="6.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#section"><i class="fa fa-check"></i><b>6.2</b> </a></li>
+<li class="chapter" data-level="6" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>6</b> Manipulate</a><ul>
+<li class="chapter" data-level="6.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>6.1</b> Basic math</a></li>
+<li class="chapter" data-level="6.2" data-path="manipulate.html"><a href="manipulate.html#dates"><i class="fa fa-check"></i><b>6.2</b> Dates</a></li>
+<li class="chapter" data-level="6.3" data-path="manipulate.html"><a href="manipulate.html#sort"><i class="fa fa-check"></i><b>6.3</b> Sort</a></li>
+<li class="chapter" data-level="6.4" data-path="manipulate.html"><a href="manipulate.html#summary-statistics---outliers"><i class="fa fa-check"></i><b>6.4</b> Summary statistics - Outliers</a></li>
+<li class="chapter" data-level="6.5" data-path="manipulate.html"><a href="manipulate.html#clean-text"><i class="fa fa-check"></i><b>6.5</b> Clean text</a></li>
+<li class="chapter" data-level="6.6" data-path="manipulate.html"><a href="manipulate.html#search-text"><i class="fa fa-check"></i><b>6.6</b> Search text</a></li>
+<li class="chapter" data-level="6.7" data-path="manipulate.html"><a href="manipulate.html#join"><i class="fa fa-check"></i><b>6.7</b> Join</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="audit-data-products.html"><a href="audit-data-products.html"><i class="fa fa-check"></i><b>7</b> Audit data products</a></li>
+<li class="chapter" data-level="7" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>7</b> Test</a><ul>
+<li class="chapter" data-level="7.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>7.1</b> Mutate - If statements</a></li>
+<li class="chapter" data-level="7.2" data-path="test.html"><a href="test.html#summarize"><i class="fa fa-check"></i><b>7.2</b> Summarize</a></li>
+<li class="chapter" data-level="7.3" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>7.3</b> Outliers</a></li>
+<li class="chapter" data-level="7.4" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>7.4</b> Duplicates</a></li>
+<li class="chapter" data-level="7.5" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>7.5</b> Age</a></li>
+<li class="chapter" data-level="7.6" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>7.6</b> Benford Analysis</a></li>
+<li class="chapter" data-level="7.7" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>7.7</b> Relative size factor testing</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>8</b> Report</a><ul>
+<li class="chapter" data-level="8.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>8.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="8.2" data-path="report.html"><a href="report.html#graphics"><i class="fa fa-check"></i><b>8.2</b> Graphics</a></li>
+<li class="chapter" data-level="8.3" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>8.3</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>9</b> Applied Audit Analytics</a><ul>
+<li class="chapter" data-level="9.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#package-creation"><i class="fa fa-check"></i><b>9.1</b> Package creation</a></li>
+<li class="chapter" data-level="9.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>9.2</b> Continious Monitoring</a></li>
+<li class="chapter" data-level="9.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>9.3</b> Controls automation</a></li>
+<li class="chapter" data-level="9.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart"><i class="fa fa-check"></i><b>9.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="9.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>9.5</b> All-in-one toolkits</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>10</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="10.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>10.1</b> Documentation</a></li>
+<li class="chapter" data-level="10.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>10.2</b> Passwords</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -146,8 +240,8 @@
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-57cb42ca8afe692a04e5" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-57cb42ca8afe692a04e5">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b428891f353aa36ffcc9" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b428891f353aa36ffcc9">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 2.1: Internal Audit Data Analytics Architecture
 </p>
@@ -196,13 +290,13 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <div id="data-products" class="section level2">
 <h2><span class="header-section-number">2.3</span> Data Products</h2>
 <p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
-<p>The data analysis you deliver are exposed to the same requirements. Not only do they need to be accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
+<p>The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
 <p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.</p>
 <div id="galvanize-highbond" class="section level3">
 <h3><span class="header-section-number">2.3.1</span> Galvanize Highbond</h3>
 <p><a href="https://www.wegalvanize.com">Galvanize</a>, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is an unrivaled for audit exception and remediation workflow.</p>
 <p>The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.</p>
-<p>While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams ambitious enough to design their workpaper environments effectively.</p>
+<p>While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams that design their workpaper environments effectively.</p>
 <p>Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.</p>
 <p>Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high availability and security maintained by a professional team. Galvanize supports the <a href="https://www.wegalvanize.com/trust/">security</a>, design and coding for hosting a tool online, allowing you to focus on designing workflows for your internal customers.</p>
 </div>
@@ -214,7 +308,7 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <li>These notebooks can also act at Extract, Transform, and Load processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).</li>
 <li>The hosting of <a href="https://shiny.rstudio.com">Shiny</a> apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.</li>
 </ul>
-<p>For audit teams who have expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team’s best practices of a code repository.</p>
+<p>For audit teams with expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team’s best practices of a code repository.</p>
 <p>RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.</p>
 <p>Lightweight alternatives include the hosting a free <a href="https://rstudio.com/products/shiny/shiny-server/">Shiny Server</a> or low-cost publishing to <a href="https://www.shinyapps.io">Shinyapps.io</a>.</p>
 </div>
@@ -231,10 +325,10 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <h3><span class="header-section-number">2.4.1</span> Databases</h3>
 <p>At its core, databases hold transactional information that runs the business. Databases generally can fit two separate use cases: Online Transaction Processing (OLTP), for high speed transaction writing, and Online Analytic Processing (OLAP), for analyzing to support business decisions. Typically OLTP databases act as a source of truth, and send updates to the OLAP database.</p>
 <p>The language of choice to access internal databases is Structured Query Language (SQL). As a defacto standard for accessing databases since 1970’s, all relational databases still leverage SQL. While each brand may have subtle nuances in the way SQL works, this essential language will allow your audit team to access a majority of sources within the company. Non-relational databases and NoSQL are becoming more mainstream, as well as graph databases, so your audit team will need to tool up as necessary.</p>
-<p>Audit teams historically had a bad reputation for ‘bringing down the database’. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. However, great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:</p>
+<p>Audit teams historically had a bad reputation for ‘bringing down the database’. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. Great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:</p>
 <ul>
-<li>Perform joins in the database, instead of downloading them individually and joining them on the desktop,</li>
 <li>Filter the data with WHERE clauses,</li>
+<li>Perform joins in the database, instead of downloading multiple tables individually and joining them on the desktop,</li>
 <li>Download data in chunks or segments, split by day, week or month, or</li>
 <li>Schedule queries during off-business hours.</li>
 </ul>
@@ -242,19 +336,20 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <div id="external-sources" class="section level3">
 <h3><span class="header-section-number">2.4.2</span> External sources</h3>
 <p>As more applications move to the cloud, using SQL to access data becomes more difficult. While some of this data can be brought into an internal data warehouse or used as an integration, more often than not transactional data is left online within the tool.</p>
-<p>Certain online cloud software providers will make an Application Programming Interface (API) available for consumers.</p>
-<p>While APIs enable audit teams to retrieve data, it may add a layer of difficulty to obtaining data:</p>
+<p>Certain online cloud software providers will make an Application Programming Interface (API) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like <a href="https://cran.r-project.org/web/packages/httr/index.html">httr</a> and digested with <a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a>.</p>
+<p>While APIs enable audit teams to retrieve data, it adds a layer of difficulty in obtaining data:</p>
 <ul>
-<li>APIs tend to be specific-use cases and provide a limited amount of data at one time.</li>
-<li>Data may not be in the format that you want - you are at the mercy what the API supplies.</li>
+<li>Each API behaves differently - authentication, calls, and the data return all may vary between systems.</li>
+<li>APIs endpoints, the part that allows a tool to query it, tend to be highly specific-use cases, and may provide a limited scope of data at one time.</li>
+<li>Data may not be in the format that you want, or even exist - you are at the mercy what the API supplies.</li>
 <li>If an API does allow for a larger data download, it may be limited by pagnation, where multiple results are spread out over multiple pages.</li>
 <li>APIs may be ‘rate-limited’, which means it may restrict the number of queries, whether in parallel or in sequence.</li>
 </ul>
 <p>Tips for audit teams needing to rely on cloud providers:</p>
 <ul>
-<li>An API should be part of the requirements before signing an agreement with a provider.</li>
-<li>Ask for access to the API, as well as any documentation.</li>
-<li>Generate a API key for usage, and treat it like a password.</li>
+<li>API access should be part of the requirements before signing an agreement with a provider.</li>
+<li>Ask for, and generate, an API key for usage, and treat it like a password.</li>
+<li>If APIs are out of the skill of your team, consider asking your IT department to schedule a data pull into your audit data mart.</li>
 </ul>
 
 </div>
