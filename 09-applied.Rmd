@@ -4,7 +4,7 @@
 
 ## Continious Monitoring
 
-## Controls automation
+## Controls Automation
 
 ## Audit Data Mart
 

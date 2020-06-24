@@ -4,7 +4,7 @@
 
 The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.
 
-The base package (installed with all instances of R) and `read.table()` is quite standard. The package readr includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, otherwise known as the data type each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
+The base package, installed with all instances of R, and `read.table()` is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
 
 Some terms
 
@@ -56,5 +56,5 @@ While APIs may be generally complicated, the end objective is to obtain data is 
 # https://github.com/isteves/plumbplumb
 ```
 
-Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, (CData)[https://www.cdata.com/kb/tech/office365-jdbc-r.rst] supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
 
