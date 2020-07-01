@@ -155,7 +155,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>2.2.1</b> Git</a></li>
 <li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>2.2.2</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>2.3</b> Data Products</a><ul>
+<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>2.3</b> Data products</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>2.3.1</b> Galvanize Highbond</a></li>
 <li class="chapter" data-level="2.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>2.3.2</b> RStudio Connect</a></li>
 <li class="chapter" data-level="2.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>2.3.3</b> RStudio Package Manager</a></li>
@@ -164,6 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>2.4.1</b> Databases</a></li>
 <li class="chapter" data-level="2.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>2.4.2</b> External sources</a></li>
 </ul></li>
+<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>2.5</b> Audit data mart</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Setup</a><ul>
 <li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#r-and-rstudio-1"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
@@ -209,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#package-creation"><i class="fa fa-check"></i><b>9.1</b> Package creation</a></li>
 <li class="chapter" data-level="9.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>9.2</b> Continious Monitoring</a></li>
 <li class="chapter" data-level="9.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>9.3</b> Controls Automation</a></li>
-<li class="chapter" data-level="9.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart"><i class="fa fa-check"></i><b>9.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="9.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart-1"><i class="fa fa-check"></i><b>9.4</b> Audit Data Mart</a></li>
 <li class="chapter" data-level="9.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>9.5</b> All-in-one toolkits</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>10</b> Other practices to follow</a><ul>
@@ -240,8 +241,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-27b7812aa67bba050464" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-27b7812aa67bba050464">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"git\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-36acb9c253ce05f2c980" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-36acb9c253ce05f2c980">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 2.1: Internal Audit Data Analytics Architecture
 </p>
@@ -288,7 +289,7 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 </div>
 </div>
 <div id="data-products" class="section level2">
-<h2><span class="header-section-number">2.3</span> Data Products</h2>
+<h2><span class="header-section-number">2.3</span> Data products</h2>
 <p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
 <p>The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
 <p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.</p>
@@ -305,7 +306,7 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <p>RStudio PBC, which became a Certified B Corporation in 2020, offers the <a href="https://rstudio.com/products/connect/">RStudio Connect</a> solution that allows R deliverable to be hosted online. These include:</p>
 <ul>
 <li><a href="https://rmarkdown.rstudio.com">RMarkdown</a> notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization.</li>
-<li>These notebooks can also act at Extract, Transform, and Load processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).</li>
+<li>These notebooks can also act at Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).</li>
 <li>The hosting of <a href="https://shiny.rstudio.com">Shiny</a> apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.</li>
 </ul>
 <p>For audit teams with expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team’s best practices of a code repository.</p>
@@ -351,8 +352,14 @@ Figure 2.1: Internal Audit Data Analytics Architecture
 <li>Ask for, and generate, an API key for usage, and treat it like a password.</li>
 <li>If APIs are out of the skill of your team, consider asking your IT department to schedule a data pull into your audit data mart.</li>
 </ul>
-
 </div>
+</div>
+<div id="audit-data-mart" class="section level2">
+<h2><span class="header-section-number">2.5</span> Audit data mart</h2>
+<p>While internal databases are accessible, generally they hold the entirety of the company’s data, which is far too much information. Only a fraction of the data is considered important and significant to the audit team.</p>
+<p>An audit data mart is a key piece of infrastructure that will sit between your data products and data source. This data mart should contain highly specific, refined and cleaned data, which improves the speed and responsiveness of data products and data-on-demand. The audit data mart can also be secured to your audit team members, so confidentiality is not compromised.</p>
+<p>To take full advantage of an audit data mart, an automated ETL process should connect directly to internal databases, and perform transformations to get to a clean end product. ETLs can be created and scheduled within RStudio Connect.</p>
+
 </div>
 </div>
             </section>
