@@ -1,7 +1,7 @@
-"","id","name"
-"1",532,"el-Hassen, Noora"
-"2",380,"Horner, Austin"
-"3",20,"Thompson, Garrett"
-"4",2591,"Leal Company Ltd"
-"5",2608,"Jones Company Ltd"
-"6",2724,"Debus Company Ltd"
+"id","name","date_added","spend_2015","spend_2016","spend_2017","spend_2018"
+532,"el-Hassen, Noora",2019-10-29,NA,NA,NA,NA
+380,"Horner, Austin",2019-09-11,NA,NA,NA,NA
+20,"Thompson, Garrett",2019-03-01,NA,NA,NA,NA
+2591,"Leal Company Ltd",2019-09-29,43689.599733334,66495.31393383,115840.202659173,"63127.2452236042"
+2608,"Jones Company Ltd",2019-06-15,75826.1786750518,76461.5630171852,91794.5696306202,"73751.5709316405"
+2724,"Debus Company Ltd",2019-09-07,48528.9892624132,78638.0197320704,116323.119409432,"38646.6566728829"
