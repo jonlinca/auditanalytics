@@ -10,6 +10,4 @@
 
 ## Clean text
 
-## Search text
-
 ## Join

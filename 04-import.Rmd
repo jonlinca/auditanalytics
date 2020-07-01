@@ -1,33 +1,86 @@
 # Import data
 
+In this chapter, we will download some datasets and import them. You will need the following packages to follow along.
+
+```{r, message = FALSE, warning = FALSE}
+library(dplyr)
+library(readr) # Loads the readr package
+```
+
 ## Delimited files
 
 The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.
 
 The base package, installed with all instances of R, and `read.table()` is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
 
-Some terms
-
-- Delimiters
-- Qualifiers
+When importing delimited files, there will always be a few aspects to consider. The *delimiter* is the character that separates each field - while commas (,) are popular, pipes (|) and tabs (  ) are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, *qualifiers* should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
 
 ```{r}
-library(readr)
+dir.create("data", showWarnings = FALSE) # Creates a directory in your project
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv",
+              destfile = "data/vendor_master.csv", mode = "wb") # Downloads this csv file into the data folder
 
-# TODO Import example file from package
+raw_vendors <- read_delim('data/vendor_master.csv', delim = ",")
 ```
 
-While CSVs are convenient - someone else needs to set up the data structure and send it to you - these file types are not perfect. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager file:
+The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:
 
 ```{r}
-# TODO Active directory file, with just a username and manager field
+cols <- cols(
+  id = col_character(), # Changed from col_double()
+  name = col_character(),
+  date_added = col_date(format = ""),
+  spend_2015 = col_double(),
+  spend_2016 = col_double(),
+  spend_2017 = col_double(),
+  spend_2018 = col_double()
+)
+
+raw_vendors <- read_delim('data/vendor_master.csv', delim = ",", col_types = cols)
+
+glimpse(raw_vendors)
 ```
 
-For further reading, consider data.table's `fread()` when importing even larger data sets.
+While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:
+
+```{r}
+# Active directory file, with just a username and manager field.
+
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/active_directory.csv",
+              destfile = "data/active_directory.csv", mode = "wb") # Downloads this csv file into the data folder
+
+raw_ad <- read_delim('data/active_directory.csv', delim = ";")
+```
+
+These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the csv file in the RStudio interface by clicking on the file on the navigation pane to the right, and select 'View File'. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e. raw):
+
+```{r}
+ad_char <- readChar('data/active_directory.csv', file.info('data/active_directory.csv')$size)
+
+print(ad_char)
+```
+
+These special characters are hidden within the seemingly innocuous delimited file, and are typical of systems where information is extracted from, especially Windows, `\r` represents a carriage return, and `\n` represents a line feed. Together, `\r\n` represents a new line and new record, while `\n` can appear in a file when a new line is made by pressing Shift+Enter.
+
+In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in [Searching Text]{#test-searchtext}.
+
+In this case, the below regular expression only replaces `\n` when there is no `\r` preceding it. The `gsub()` function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.
+
+```{r}
+gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE)
+```
+
+The gsub example shows that the manager's name and location no longer has a `\n` in between them. As a result, it can now be imported cleanly.
+
+```{r}
+ad_raw <- read_delim(gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE), delim = ";")
+
+print(ad_raw)
+```
 
 ## Databases
 
-It is highly likely that the company you are auditing will have their data stored in a database. While having skills in SQL is highly recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
+It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
 
 The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. Installing a driver is straight forward
 
@@ -39,6 +92,9 @@ For this example, we will use an SQLite database, which are self sustained datab
 
 ```{r}
 # TODO Create data within SQLite, and perform commands dbconnect, show_query, select
+
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
 ```
 
 ## APIs

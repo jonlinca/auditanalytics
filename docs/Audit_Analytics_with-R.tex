@@ -113,7 +113,7 @@
 
 \title{Audit Analytics with R}
 \author{Jonathan Lin}
-\date{2020-06-23}
+\date{2020-06-30}
 
 \begin{document}
 \maketitle
@@ -431,27 +431,23 @@ There are countless number of guides to setting up your local R and RStudio envi
 
 One of the most respected introductions to R is \href{https://r4ds.had.co.nz/introduction.html}{R for Data Science} by Hadley and Garrett, and the \href{https://r4ds.had.co.nz/introduction.html\#prerequisites}{Prerequisities} section is set up for installing R.
 
+\hypertarget{common-packages}{%
+\section{Common packages}\label{common-packages}}
+
+We will use several common packages; if you haven't installed the yet, feel free to uncomment the installation line and load them up.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{'dplyr'}\NormalTok{,}\StringTok{'readr'}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{the-auditpackagename}{%
 \section{The AUDITPACKAGENAME}\label{the-auditpackagename}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# }\AlertTok{TODO}\CommentTok{ publish audit package}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{example-data-files}{%
-\section{Example Data Files}\label{example-data-files}}
-
-Throughout each chapter, we may reference databases with example datasets. They aren't included in the audit package, but can be downloaded prior to each exercise as needed.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# }\AlertTok{TODO}\CommentTok{ Upload data}
-
-\CommentTok{#dir.create("data", showWarnings = FALSE)}
-\CommentTok{#download.file(url = "",}
-\CommentTok{#              destfile = "data/ch_xx.sqlite", mode = "wb")}
 \end{Highlighting}
 \end{Shaded}
 
@@ -465,6 +461,15 @@ Like the R tutorial, \href{https://happygitwithr.com}{Happy Git and GitHub for t
 \hypertarget{import-data}{%
 \chapter{Import data}\label{import-data}}
 
+In this chapter, we will download some datasets and import them. You will need the following packages to follow along.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(readr) }\CommentTok{# Loads the readr package}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{delimited-files}{%
 \section{Delimited files}\label{delimited-files}}
 
@@ -472,38 +477,143 @@ The most common method of obtaining data is via flat files, usually in the form 
 
 The base package, installed with all instances of R, and \texttt{read.table()} is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called \texttt{read\_delim()}, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
 
-Some terms
-
-\begin{itemize}
-\tightlist
-\item
-  Delimiters
-\item
-  Qualifiers
-\end{itemize}
+When importing delimited files, there will always be a few aspects to consider. The \emph{delimiter} is the character that separates each field - while commas (,) are popular, pipes (\textbar) and tabs ( ) are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, \emph{qualifiers} should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{) }\CommentTok{# Creates a directory in your project}
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv"}\NormalTok{,}
+              \DataTypeTok{destfile =} \StringTok{"data/vendor_master.csv"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{) }\CommentTok{# Downloads this csv file into the data folder}
 
-\CommentTok{# }\AlertTok{TODO}\CommentTok{ Import example file from package}
+\NormalTok{raw_vendors <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{'data/vendor_master.csv'}\NormalTok{, }\DataTypeTok{delim =} \StringTok{","}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-While CSVs are convenient - someone else needs to set up the data structure and send it to you - these file types are not perfect. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager file:
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   id = col_double(),
+##   name = col_character(),
+##   date_added = col_date(format = ""),
+##   spend_2015 = col_double(),
+##   spend_2016 = col_double(),
+##   spend_2017 = col_double(),
+##   spend_2018 = col_double()
+## )
+\end{verbatim}
+
+The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col\_types argument, copy and pasting the framework in the message and changing the fields as need be:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# }\AlertTok{TODO}\CommentTok{ Active directory file, with just a username and manager field}
+\NormalTok{cols <-}\StringTok{ }\KeywordTok{cols}\NormalTok{(}
+  \DataTypeTok{id =} \KeywordTok{col_character}\NormalTok{(), }\CommentTok{# Changed from col_double()}
+  \DataTypeTok{name =} \KeywordTok{col_character}\NormalTok{(),}
+  \DataTypeTok{date_added =} \KeywordTok{col_date}\NormalTok{(}\DataTypeTok{format =} \StringTok{""}\NormalTok{),}
+  \DataTypeTok{spend_2015 =} \KeywordTok{col_double}\NormalTok{(),}
+  \DataTypeTok{spend_2016 =} \KeywordTok{col_double}\NormalTok{(),}
+  \DataTypeTok{spend_2017 =} \KeywordTok{col_double}\NormalTok{(),}
+  \DataTypeTok{spend_2018 =} \KeywordTok{col_double}\NormalTok{()}
+\NormalTok{)}
+
+\NormalTok{raw_vendors <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{'data/vendor_master.csv'}\NormalTok{, }\DataTypeTok{delim =} \StringTok{","}\NormalTok{, }\DataTypeTok{col_types =}\NormalTok{ cols)}
+
+\KeywordTok{glimpse}\NormalTok{(raw_vendors)}
 \end{Highlighting}
 \end{Shaded}
 
-For further reading, consider data.table's \texttt{fread()} when importing even larger data sets.
+\begin{verbatim}
+## Rows: 6
+## Columns: 7
+## $ id         <chr> "532", "380", "20", "2591", "2608", "2724"
+## $ name       <chr> "el-Hassen, Noora", "Horner, Austin", "Thompson, Garrett...
+## $ date_added <date> 2019-10-29, 2019-09-11, 2019-03-01, 2019-09-29, 2019-06...
+## $ spend_2015 <dbl> NA, NA, NA, 43689.60, 75826.18, 48528.99
+## $ spend_2016 <dbl> NA, NA, NA, 66495.31, 76461.56, 78638.02
+## $ spend_2017 <dbl> NA, NA, NA, 115840.20, 91794.57, 116323.12
+## $ spend_2018 <dbl> NA, NA, NA, 63127.25, 73751.57, 38646.66
+\end{verbatim}
+
+While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Active directory file, with just a username and manager field.}
+
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://github.com/jonlinca/auditanalytics/raw/master/data/active_directory.csv"}\NormalTok{,}
+              \DataTypeTok{destfile =} \StringTok{"data/active_directory.csv"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{) }\CommentTok{# Downloads this csv file into the data folder}
+
+\NormalTok{raw_ad <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{'data/active_directory.csv'}\NormalTok{, }\DataTypeTok{delim =} \StringTok{";"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   uid = col_character(),
+##   manager = col_character()
+## )
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: 2 parsing failures.
+## row col  expected    actual                        file
+##   2  -- 2 columns 1 columns 'data/active_directory.csv'
+##   4  -- 2 columns 1 columns 'data/active_directory.csv'
+\end{verbatim}
+
+These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the csv file in the RStudio interface by clicking on the file on the navigation pane to the right, and select `View File'. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e.~raw):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ad_char <-}\StringTok{ }\KeywordTok{readChar}\NormalTok{(}\StringTok{'data/active_directory.csv'}\NormalTok{, }\KeywordTok{file.info}\NormalTok{(}\StringTok{'data/active_directory.csv'}\NormalTok{)}\OperatorTok{$}\NormalTok{size)}
+
+\KeywordTok{print}\NormalTok{(ad_char)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "uid;manager\r\njonlin; jason durrand\nlocation: calgary\r\nronaldlee; reid turra\nlocation: melbourne"
+\end{verbatim}
+
+These special characters are hidden within the seemingly innocuous delimited file, and are typical of systems where information is extracted from, especially Windows, \texttt{\textbackslash{}r} represents a carriage return, and \texttt{\textbackslash{}n} represents a line feed. Together, \texttt{\textbackslash{}r\textbackslash{}n} represents a new line and new record, while \texttt{\textbackslash{}n} can appear in a file when a new line is made by pressing Shift+Enter.
+
+In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in \protect\hypertarget{test-searchtext}{}{Searching Text}.
+
+In this case, the below regular expression only replaces \texttt{\textbackslash{}n} when there is no \texttt{\textbackslash{}r} preceding it. The \texttt{gsub()} function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{gsub}\NormalTok{(}\StringTok{"(?<!}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{r)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{n"}\NormalTok{,}\StringTok{" "}\NormalTok{, ad_char, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "uid;manager\r\njonlin; jason durrand location: calgary\r\nronaldlee; reid turra location: melbourne"
+\end{verbatim}
+
+The gsub example shows that the manager's name and location no longer has a \texttt{\textbackslash{}n} in between them. As a result, it can now be imported cleanly.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ad_raw <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\KeywordTok{gsub}\NormalTok{(}\StringTok{"(?<!}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{r)}\CharTok{\textbackslash{}\textbackslash{}}\StringTok{n"}\NormalTok{,}\StringTok{" "}\NormalTok{, ad_char, }\DataTypeTok{perl =} \OtherTok{TRUE}\NormalTok{), }\DataTypeTok{delim =} \StringTok{";"}\NormalTok{)}
+
+\KeywordTok{print}\NormalTok{(ad_raw)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 2
+##   uid       manager                           
+##   <chr>     <chr>                             
+## 1 jonlin    " jason durrand location: calgary"
+## 2 ronaldlee " reid turra location: melbourne"
+\end{verbatim}
 
 \hypertarget{databases-1}{%
 \section{Databases}\label{databases-1}}
 
-It is highly likely that the company you are auditing will have their data stored in a database. While having skills in SQL is highly recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
+It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
 
 The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. Installing a driver is straight forward
 
@@ -516,6 +626,9 @@ For this example, we will use an SQLite database, which are self sustained datab
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# }\AlertTok{TODO}\CommentTok{ Create data within SQLite, and perform commands dbconnect, show_query, select}
+
+\KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite"}\NormalTok{,}
+             \DataTypeTok{destfile =} \StringTok{"data/rauditanalytics.sqlite"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -578,9 +691,6 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \hypertarget{clean-text}{%
 \section{Clean text}\label{clean-text}}
 
-\hypertarget{search-text}{%
-\section{Search text}\label{search-text}}
-
 \hypertarget{join}{%
 \section{Join}\label{join}}
 
@@ -608,6 +718,9 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \hypertarget{relative-size-factor-testing}{%
 \section{Relative size factor testing}\label{relative-size-factor-testing}}
 
+\hypertarget{search-text-test-searchtext}{%
+\section{Search text \{test-searchtext\}}\label{search-text-test-searchtext}}
+
 \hypertarget{report}{%
 \chapter{Report}\label{report}}
 
@@ -630,7 +743,7 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \section{Continious Monitoring}\label{continious-monitoring}}
 
 \hypertarget{controls-automation}{%
-\section{Controls automation}\label{controls-automation}}
+\section{Controls Automation}\label{controls-automation}}
 
 \hypertarget{audit-data-mart}{%
 \section{Audit Data Mart}\label{audit-data-mart}}

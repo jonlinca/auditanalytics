@@ -6,25 +6,19 @@ There are countless number of guides to setting up your local R and RStudio envi
 
 One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley and Garrett, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
 
+## Common packages
+
+We will use several common packages; if you haven't installed the yet, feel free to uncomment the installation line and load them up.
+
+```{r, eval = FALSE}
+install.packages(c('dplyr','readr'))
+```
+
 ## The AUDITPACKAGENAME
 
 ```{r}
 # TODO publish audit package
 ```
-
-## Example Data Files
-
-Throughout each chapter, we may reference databases with example datasets. They aren't included in the audit package, but can be downloaded prior to each exercise as needed.
-
-```{r}
-# TODO Upload data
-
-#dir.create("data", showWarnings = FALSE)
-#download.file(url = "",
-#              destfile = "data/ch_xx.sqlite", mode = "wb")
-
-```
-
 
 ## Github (or another git-related brand)
 
