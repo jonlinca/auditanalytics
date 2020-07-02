@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Import data | Audit Analytics with R</title>
+  <title>Chapter 5 Import data | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Import data | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 5 Import data | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Import data | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 5 Import data | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-06-30" />
+<meta name="date" content="2020-07-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -139,83 +139,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
-<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#make-the-right-thing-easy-to-do"><i class="fa fa-check"></i><b>1.1</b> Make the right thing easy to do</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="intro.html"><a href="intro.html#code-based-development"><i class="fa fa-check"></i><b>1.1.1</b> Code-based development</a></li>
-<li class="chapter" data-level="1.1.2" data-path="intro.html"><a href="intro.html#automate-relentlessly"><i class="fa fa-check"></i><b>1.1.2</b> Automate relentlessly</a></li>
-<li class="chapter" data-level="1.1.3" data-path="intro.html"><a href="intro.html#share-everything"><i class="fa fa-check"></i><b>1.1.3</b> Share everything</a></li>
-<li class="chapter" data-level="1.1.4" data-path="intro.html"><a href="intro.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>1.1.4</b> Always deliver useful product</a></li>
-<li class="chapter" data-level="1.1.5" data-path="intro.html"><a href="intro.html#dont-be-a-hero"><i class="fa fa-check"></i><b>1.1.5</b> Don’t be a hero</a></li>
-<li class="chapter" data-level="1.1.6" data-path="intro.html"><a href="intro.html#the-opportunity-cost"><i class="fa fa-check"></i><b>1.1.6</b> “The opportunity cost”</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
+<li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
+<li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
+<li class="chapter" data-level="2.4" data-path="approach.html"><a href="approach.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>2.4</b> Always deliver useful product</a></li>
+<li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
+<li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> Git</a></li>
+<li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>2</b> Architecture</a><ul>
-<li class="chapter" data-level="2.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>2.2</b> Code repositories</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>2.2.1</b> Git</a></li>
-<li class="chapter" data-level="2.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>2.2.2</b> Packages</a></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>2.3</b> Data products</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>2.3.1</b> Galvanize Highbond</a></li>
-<li class="chapter" data-level="2.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>2.3.2</b> RStudio Connect</a></li>
-<li class="chapter" data-level="2.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>2.3.3</b> RStudio Package Manager</a></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>3.4.1</b> Databases</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>2.4</b> Data sources</a><ul>
-<li class="chapter" data-level="2.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>2.4.1</b> Databases</a></li>
-<li class="chapter" data-level="2.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>2.4.2</b> External sources</a></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>2.5</b> Audit data mart</a></li>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#r-and-rstudio-1"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>4.3</b> The AUDITPACKAGENAME</a></li>
+<li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> Github (or another git-related brand)</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>3</b> Setup</a><ul>
-<li class="chapter" data-level="3.1" data-path="setup.html"><a href="setup.html#r-and-rstudio-1"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>3.2</b> Common packages</a></li>
-<li class="chapter" data-level="3.3" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>3.3</b> The AUDITPACKAGENAME</a></li>
-<li class="chapter" data-level="3.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>3.4</b> Github (or another git-related brand)</a></li>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a></li>
+<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#databases-1"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>4</b> Import data</a><ul>
-<li class="chapter" data-level="4.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>4.1</b> Delimited files</a></li>
-<li class="chapter" data-level="4.2" data-path="import-data.html"><a href="import-data.html#databases-1"><i class="fa fa-check"></i><b>4.2</b> Databases</a></li>
-<li class="chapter" data-level="4.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>4.3</b> APIs</a></li>
+<li class="chapter" data-level="6" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>6</b> Explore</a><ul>
+<li class="chapter" data-level="6.1" data-path="explore.html"><a href="explore.html#dimensions"><i class="fa fa-check"></i><b>6.1</b> Dimensions</a></li>
+<li class="chapter" data-level="6.2" data-path="explore.html"><a href="explore.html#convert-between-types"><i class="fa fa-check"></i><b>6.2</b> Convert between types</a></li>
+<li class="chapter" data-level="6.3" data-path="explore.html"><a href="explore.html#break-down-each-column"><i class="fa fa-check"></i><b>6.3</b> Break down each column</a></li>
+<li class="chapter" data-level="6.4" data-path="explore.html"><a href="explore.html#visualize"><i class="fa fa-check"></i><b>6.4</b> Visualize</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>5</b> Explore</a><ul>
-<li class="chapter" data-level="5.1" data-path="explore.html"><a href="explore.html#dimensions"><i class="fa fa-check"></i><b>5.1</b> Dimensions</a></li>
-<li class="chapter" data-level="5.2" data-path="explore.html"><a href="explore.html#convert-between-types"><i class="fa fa-check"></i><b>5.2</b> Convert between types</a></li>
-<li class="chapter" data-level="5.3" data-path="explore.html"><a href="explore.html#break-down-each-column"><i class="fa fa-check"></i><b>5.3</b> Break down each column</a></li>
-<li class="chapter" data-level="5.4" data-path="explore.html"><a href="explore.html#visualize"><i class="fa fa-check"></i><b>5.4</b> Visualize</a></li>
+<li class="chapter" data-level="7" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>7</b> Manipulate</a><ul>
+<li class="chapter" data-level="7.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="manipulate.html"><a href="manipulate.html#dates"><i class="fa fa-check"></i><b>7.2</b> Dates</a></li>
+<li class="chapter" data-level="7.3" data-path="manipulate.html"><a href="manipulate.html#sort"><i class="fa fa-check"></i><b>7.3</b> Sort</a></li>
+<li class="chapter" data-level="7.4" data-path="manipulate.html"><a href="manipulate.html#summary-statistics---outliers"><i class="fa fa-check"></i><b>7.4</b> Summary statistics - Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="manipulate.html"><a href="manipulate.html#clean-text"><i class="fa fa-check"></i><b>7.5</b> Clean text</a></li>
+<li class="chapter" data-level="7.6" data-path="manipulate.html"><a href="manipulate.html#join"><i class="fa fa-check"></i><b>7.6</b> Join</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>6</b> Manipulate</a><ul>
-<li class="chapter" data-level="6.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>6.1</b> Basic math</a></li>
-<li class="chapter" data-level="6.2" data-path="manipulate.html"><a href="manipulate.html#dates"><i class="fa fa-check"></i><b>6.2</b> Dates</a></li>
-<li class="chapter" data-level="6.3" data-path="manipulate.html"><a href="manipulate.html#sort"><i class="fa fa-check"></i><b>6.3</b> Sort</a></li>
-<li class="chapter" data-level="6.4" data-path="manipulate.html"><a href="manipulate.html#summary-statistics---outliers"><i class="fa fa-check"></i><b>6.4</b> Summary statistics - Outliers</a></li>
-<li class="chapter" data-level="6.5" data-path="manipulate.html"><a href="manipulate.html#clean-text"><i class="fa fa-check"></i><b>6.5</b> Clean text</a></li>
-<li class="chapter" data-level="6.6" data-path="manipulate.html"><a href="manipulate.html#join"><i class="fa fa-check"></i><b>6.6</b> Join</a></li>
+<li class="chapter" data-level="8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>8</b> Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>8.1</b> Mutate - If statements</a></li>
+<li class="chapter" data-level="8.2" data-path="test.html"><a href="test.html#summarize"><i class="fa fa-check"></i><b>8.2</b> Summarize</a></li>
+<li class="chapter" data-level="8.3" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>8.3</b> Outliers</a></li>
+<li class="chapter" data-level="8.4" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>8.4</b> Duplicates</a></li>
+<li class="chapter" data-level="8.5" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>8.5</b> Age</a></li>
+<li class="chapter" data-level="8.6" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>8.6</b> Benford Analysis</a></li>
+<li class="chapter" data-level="8.7" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>8.7</b> Relative size factor testing</a></li>
+<li class="chapter" data-level="8.8" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>8.8</b> Search text</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>7</b> Test</a><ul>
-<li class="chapter" data-level="7.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>7.1</b> Mutate - If statements</a></li>
-<li class="chapter" data-level="7.2" data-path="test.html"><a href="test.html#summarize"><i class="fa fa-check"></i><b>7.2</b> Summarize</a></li>
-<li class="chapter" data-level="7.3" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>7.3</b> Outliers</a></li>
-<li class="chapter" data-level="7.4" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>7.4</b> Duplicates</a></li>
-<li class="chapter" data-level="7.5" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>7.5</b> Age</a></li>
-<li class="chapter" data-level="7.6" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>7.6</b> Benford Analysis</a></li>
-<li class="chapter" data-level="7.7" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>7.7</b> Relative size factor testing</a></li>
-<li class="chapter" data-level="7.8" data-path="test.html"><a href="test.html#search-text-test-searchtext"><i class="fa fa-check"></i><b>7.8</b> Search text {test-searchtext}</a></li>
+<li class="chapter" data-level="9" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>9</b> Report</a><ul>
+<li class="chapter" data-level="9.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>9.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="9.2" data-path="report.html"><a href="report.html#graphics"><i class="fa fa-check"></i><b>9.2</b> Graphics</a></li>
+<li class="chapter" data-level="9.3" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>9.3</b> Export</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>8</b> Report</a><ul>
-<li class="chapter" data-level="8.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>8.1</b> RMarkdown</a></li>
-<li class="chapter" data-level="8.2" data-path="report.html"><a href="report.html#graphics"><i class="fa fa-check"></i><b>8.2</b> Graphics</a></li>
-<li class="chapter" data-level="8.3" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>8.3</b> Export</a></li>
+<li class="chapter" data-level="10" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>10</b> Applied Audit Analytics</a><ul>
+<li class="chapter" data-level="10.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>10.1</b> Audit R Package creation</a></li>
+<li class="chapter" data-level="10.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>10.2</b> Continious Monitoring</a></li>
+<li class="chapter" data-level="10.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>10.3</b> Controls Automation</a></li>
+<li class="chapter" data-level="10.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart-1"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="10.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>10.5</b> All-in-one toolkits</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>9</b> Applied Audit Analytics</a><ul>
-<li class="chapter" data-level="9.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#package-creation"><i class="fa fa-check"></i><b>9.1</b> Package creation</a></li>
-<li class="chapter" data-level="9.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>9.2</b> Continious Monitoring</a></li>
-<li class="chapter" data-level="9.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>9.3</b> Controls Automation</a></li>
-<li class="chapter" data-level="9.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart-1"><i class="fa fa-check"></i><b>9.4</b> Audit Data Mart</a></li>
-<li class="chapter" data-level="9.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>9.5</b> All-in-one toolkits</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>10</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="10.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>10.1</b> Documentation</a></li>
-<li class="chapter" data-level="10.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>10.2</b> Passwords</a></li>
+<li class="chapter" data-level="11" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>11</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="11.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>11.1</b> Documentation</a></li>
+<li class="chapter" data-level="11.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>11.2</b> Passwords</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -239,20 +238,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="import-data" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Import data</h1>
+<h1><span class="header-section-number">Chapter 5</span> Import data</h1>
 <p>In this chapter, we will download some datasets and import them. You will need the following packages to follow along.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="import-data.html#cb3-1"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb3-2"><a href="import-data.html#cb3-2"></a><span class="kw">library</span>(readr) <span class="co"># Loads the readr package</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="import-data.html#cb3-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating files</span></span>
+<span id="cb3-2"><a href="import-data.html#cb3-2"></a><span class="kw">library</span>(readr) <span class="co"># For reading flat files</span></span>
+<span id="cb3-3"><a href="import-data.html#cb3-3"></a></span>
+<span id="cb3-4"><a href="import-data.html#cb3-4"></a> <span class="co"># For database connections</span></span>
+<span id="cb3-5"><a href="import-data.html#cb3-5"></a><span class="kw">library</span>(DBI)</span></code></pre></div>
 <div id="delimited-files" class="section level2">
-<h2><span class="header-section-number">4.1</span> Delimited files</h2>
+<h2><span class="header-section-number">5.1</span> Delimited files</h2>
 <p>The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.</p>
 <p>The base package, installed with all instances of R, and <code>read.table()</code> is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called <code>read_delim()</code>, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee’s identification number as a character versus an numeric).</p>
-<p>When importing delimited files, there will always be a few aspects to consider. The <em>delimiter</em> is the character that separates each field - while commas (,) are popular, pipes (|) and tabs ( ) are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, <em>qualifiers</em> should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.</p>
+<p>Before importing the file, lets download the file from the repository that contains the Vendor Master. This dataset contains the vendor system ID number, the date it was added, and other traits.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="import-data.html#cb4-1"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>) <span class="co"># Creates a directory in your project</span></span>
 <span id="cb4-2"><a href="import-data.html#cb4-2"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv&quot;</span>,</span>
-<span id="cb4-3"><a href="import-data.html#cb4-3"></a>              <span class="dt">destfile =</span> <span class="st">&quot;data/vendor_master.csv&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>) <span class="co"># Downloads this csv file into the data folder</span></span>
-<span id="cb4-4"><a href="import-data.html#cb4-4"></a></span>
-<span id="cb4-5"><a href="import-data.html#cb4-5"></a>raw_vendors &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/vendor_master.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
+<span id="cb4-3"><a href="import-data.html#cb4-3"></a>              <span class="dt">destfile =</span> <span class="st">&quot;data/vendor_master.csv&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>) <span class="co"># Downloads this csv file into the data folder</span></span></code></pre></div>
+<p>When importing delimited files, there will always be a few aspects to consider. The <em>delimiter</em> is the character that separates each field - while commas (,) are popular, pipes (|) and tabs are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, <em>qualifiers</em> should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.</p>
+<p>In this case, if you view the file (on the Files panel on the right, go to the data folder, click on vendor_master.csv, and select View File), you will see the data is separated by commas.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="import-data.html#cb5-1"></a>raw_vendors &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/vendor_master.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   id = col_double(),
@@ -263,36 +266,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   spend_2017 = col_double(),
 ##   spend_2018 = col_double()
 ## )</code></pre>
-<p>The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored However, ID numbers, while presented as a number, don’t have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="import-data.html#cb6-1"></a>cols &lt;-<span class="st"> </span><span class="kw">cols</span>(</span>
-<span id="cb6-2"><a href="import-data.html#cb6-2"></a>  <span class="dt">id =</span> <span class="kw">col_character</span>(), <span class="co"># Changed from col_double()</span></span>
-<span id="cb6-3"><a href="import-data.html#cb6-3"></a>  <span class="dt">name =</span> <span class="kw">col_character</span>(),</span>
-<span id="cb6-4"><a href="import-data.html#cb6-4"></a>  <span class="dt">date_added =</span> <span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;&quot;</span>),</span>
-<span id="cb6-5"><a href="import-data.html#cb6-5"></a>  <span class="dt">spend_2015 =</span> <span class="kw">col_double</span>(),</span>
-<span id="cb6-6"><a href="import-data.html#cb6-6"></a>  <span class="dt">spend_2016 =</span> <span class="kw">col_double</span>(),</span>
-<span id="cb6-7"><a href="import-data.html#cb6-7"></a>  <span class="dt">spend_2017 =</span> <span class="kw">col_double</span>(),</span>
-<span id="cb6-8"><a href="import-data.html#cb6-8"></a>  <span class="dt">spend_2018 =</span> <span class="kw">col_double</span>()</span>
-<span id="cb6-9"><a href="import-data.html#cb6-9"></a>)</span>
-<span id="cb6-10"><a href="import-data.html#cb6-10"></a></span>
-<span id="cb6-11"><a href="import-data.html#cb6-11"></a>raw_vendors &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/vendor_master.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">col_types =</span> cols)</span>
-<span id="cb6-12"><a href="import-data.html#cb6-12"></a></span>
-<span id="cb6-13"><a href="import-data.html#cb6-13"></a><span class="kw">glimpse</span>(raw_vendors)</span></code></pre></div>
+<p>The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored.</p>
+<p>However, ID numbers, while presented as a number, don’t have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="import-data.html#cb7-1"></a>cols &lt;-<span class="st"> </span><span class="kw">cols</span>(</span>
+<span id="cb7-2"><a href="import-data.html#cb7-2"></a>  <span class="dt">id =</span> <span class="kw">col_character</span>(), <span class="co"># Changed from col_double()</span></span>
+<span id="cb7-3"><a href="import-data.html#cb7-3"></a>  <span class="dt">name =</span> <span class="kw">col_character</span>(),</span>
+<span id="cb7-4"><a href="import-data.html#cb7-4"></a>  <span class="dt">date_added =</span> <span class="kw">col_date</span>(<span class="dt">format =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb7-5"><a href="import-data.html#cb7-5"></a>  <span class="dt">spend_2015 =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb7-6"><a href="import-data.html#cb7-6"></a>  <span class="dt">spend_2016 =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb7-7"><a href="import-data.html#cb7-7"></a>  <span class="dt">spend_2017 =</span> <span class="kw">col_double</span>(),</span>
+<span id="cb7-8"><a href="import-data.html#cb7-8"></a>  <span class="dt">spend_2018 =</span> <span class="kw">col_double</span>()</span>
+<span id="cb7-9"><a href="import-data.html#cb7-9"></a>)</span>
+<span id="cb7-10"><a href="import-data.html#cb7-10"></a></span>
+<span id="cb7-11"><a href="import-data.html#cb7-11"></a>raw_vendors &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/vendor_master.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">col_types =</span> cols)</span>
+<span id="cb7-12"><a href="import-data.html#cb7-12"></a></span>
+<span id="cb7-13"><a href="import-data.html#cb7-13"></a><span class="kw">glimpse</span>(raw_vendors)</span></code></pre></div>
 <pre><code>## Rows: 6
 ## Columns: 7
-## $ id         &lt;chr&gt; &quot;532&quot;, &quot;380&quot;, &quot;20&quot;, &quot;2591&quot;, &quot;2608&quot;, &quot;2724&quot;
-## $ name       &lt;chr&gt; &quot;el-Hassen, Noora&quot;, &quot;Horner, Austin&quot;, &quot;Thompson, Garrett&quot;,…
-## $ date_added &lt;date&gt; 2019-10-29, 2019-09-11, 2019-03-01, 2019-09-29, 2019-06-1…
-## $ spend_2015 &lt;dbl&gt; NA, NA, NA, 43689.60, 75826.18, 48528.99
-## $ spend_2016 &lt;dbl&gt; NA, NA, NA, 66495.31, 76461.56, 78638.02
-## $ spend_2017 &lt;dbl&gt; NA, NA, NA, 115840.20, 91794.57, 116323.12
-## $ spend_2018 &lt;dbl&gt; NA, NA, NA, 63127.25, 73751.57, 38646.66</code></pre>
+## $ id         &lt;chr&gt; &quot;835&quot;, &quot;76&quot;, &quot;582&quot;, &quot;2691&quot;, &quot;2276&quot;, &quot;2669&quot;
+## $ name       &lt;chr&gt; &quot;Williams, Franklin&quot;, &quot;Le, Jacob&quot;, &quot;Martinez, Amy&quot;, &quot;Gardn…
+## $ date_added &lt;date&gt; 2019-09-05, 2019-05-14, 2019-07-15, 2019-10-08, 2019-09-2…
+## $ spend_2015 &lt;dbl&gt; NA, NA, NA, 82075.98, 18603.04, 74661.33
+## $ spend_2016 &lt;dbl&gt; NA, NA, NA, 100953.15, 26820.08, 132848.95
+## $ spend_2017 &lt;dbl&gt; NA, NA, NA, 178028.85, 43208.78, 182072.08
+## $ spend_2018 &lt;dbl&gt; NA, NA, NA, 95205.89, 25214.04, 148938.38</code></pre>
 <p>While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="import-data.html#cb8-1"></a><span class="co"># Active directory file, with just a username and manager field.</span></span>
-<span id="cb8-2"><a href="import-data.html#cb8-2"></a></span>
-<span id="cb8-3"><a href="import-data.html#cb8-3"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/active_directory.csv&quot;</span>,</span>
-<span id="cb8-4"><a href="import-data.html#cb8-4"></a>              <span class="dt">destfile =</span> <span class="st">&quot;data/active_directory.csv&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>) <span class="co"># Downloads this csv file into the data folder</span></span>
-<span id="cb8-5"><a href="import-data.html#cb8-5"></a></span>
-<span id="cb8-6"><a href="import-data.html#cb8-6"></a>raw_ad &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="import-data.html#cb9-1"></a><span class="co"># Active directory file, with just a username and manager field.</span></span>
+<span id="cb9-2"><a href="import-data.html#cb9-2"></a></span>
+<span id="cb9-3"><a href="import-data.html#cb9-3"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/active_directory.csv&quot;</span>,</span>
+<span id="cb9-4"><a href="import-data.html#cb9-4"></a>              <span class="dt">destfile =</span> <span class="st">&quot;data/active_directory.csv&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>) <span class="co"># Downloads this csv file into the data folder</span></span>
+<span id="cb9-5"><a href="import-data.html#cb9-5"></a></span>
+<span id="cb9-6"><a href="import-data.html#cb9-6"></a>raw_ad &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>, <span class="dt">delim =</span> <span class="st">&quot;;&quot;</span>)</span></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   uid = col_character(),
@@ -303,19 +307,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   2  -- 2 columns 1 columns &#39;data/active_directory.csv&#39;
 ##   4  -- 2 columns 1 columns &#39;data/active_directory.csv&#39;</code></pre>
 <p>These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the csv file in the RStudio interface by clicking on the file on the navigation pane to the right, and select ‘View File’. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e. raw):</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="import-data.html#cb11-1"></a>ad_char &lt;-<span class="st"> </span><span class="kw">readChar</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>, <span class="kw">file.info</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>)<span class="op">$</span>size)</span>
-<span id="cb11-2"><a href="import-data.html#cb11-2"></a></span>
-<span id="cb11-3"><a href="import-data.html#cb11-3"></a><span class="kw">print</span>(ad_char)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="import-data.html#cb12-1"></a>ad_char &lt;-<span class="st"> </span><span class="kw">readChar</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>, <span class="kw">file.info</span>(<span class="st">&#39;data/active_directory.csv&#39;</span>)<span class="op">$</span>size)</span>
+<span id="cb12-2"><a href="import-data.html#cb12-2"></a></span>
+<span id="cb12-3"><a href="import-data.html#cb12-3"></a><span class="kw">print</span>(ad_char)</span></code></pre></div>
 <pre><code>## [1] &quot;uid;manager\r\njonlin; jason durrand\nlocation: calgary\r\nronaldlee; reid turra\nlocation: melbourne&quot;</code></pre>
 <p>These special characters are hidden within the seemingly innocuous delimited file, and are typical of systems where information is extracted from, especially Windows, <code>\r</code> represents a carriage return, and <code>\n</code> represents a line feed. Together, <code>\r\n</code> represents a new line and new record, while <code>\n</code> can appear in a file when a new line is made by pressing Shift+Enter.</p>
-<p>In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in <span id="test-searchtext">Searching Text</span>.</p>
+<p>In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in <a href="test.html#test-searchtext">Searching Text</a>.</p>
 <p>In this case, the below regular expression only replaces <code>\n</code> when there is no <code>\r</code> preceding it. The <code>gsub()</code> function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="import-data.html#cb13-1"></a><span class="kw">gsub</span>(<span class="st">&quot;(?&lt;!</span><span class="ch">\\</span><span class="st">r)</span><span class="ch">\\</span><span class="st">n&quot;</span>,<span class="st">&quot; &quot;</span>, ad_char, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="import-data.html#cb14-1"></a><span class="kw">gsub</span>(<span class="st">&quot;(?&lt;!</span><span class="ch">\\</span><span class="st">r)</span><span class="ch">\\</span><span class="st">n&quot;</span>,<span class="st">&quot; &quot;</span>, ad_char, <span class="dt">perl =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;uid;manager\r\njonlin; jason durrand location: calgary\r\nronaldlee; reid turra location: melbourne&quot;</code></pre>
-<p>The gsub example shows that the manager’s name and location no longer has a <code>\n</code> in between them. As a result, it can now be imported cleanly.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="import-data.html#cb15-1"></a>ad_raw &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="kw">gsub</span>(<span class="st">&quot;(?&lt;!</span><span class="ch">\\</span><span class="st">r)</span><span class="ch">\\</span><span class="st">n&quot;</span>,<span class="st">&quot; &quot;</span>, ad_char, <span class="dt">perl =</span> <span class="ot">TRUE</span>), <span class="dt">delim =</span> <span class="st">&quot;;&quot;</span>)</span>
-<span id="cb15-2"><a href="import-data.html#cb15-2"></a></span>
-<span id="cb15-3"><a href="import-data.html#cb15-3"></a><span class="kw">print</span>(ad_raw)</span></code></pre></div>
+<p>The gsub output shows that the manager’s name and location no longer has a <code>\n</code> in between them. As a result, it can now be imported cleanly.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="import-data.html#cb16-1"></a>ad_raw &lt;-<span class="st"> </span><span class="kw">read_delim</span>(<span class="kw">gsub</span>(<span class="st">&quot;(?&lt;!</span><span class="ch">\\</span><span class="st">r)</span><span class="ch">\\</span><span class="st">n&quot;</span>,<span class="st">&quot; &quot;</span>, ad_char, <span class="dt">perl =</span> <span class="ot">TRUE</span>), <span class="dt">delim =</span> <span class="st">&quot;;&quot;</span>)</span>
+<span id="cb16-2"><a href="import-data.html#cb16-2"></a></span>
+<span id="cb16-3"><a href="import-data.html#cb16-3"></a><span class="kw">print</span>(ad_raw)</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   uid       manager                           
 ##   &lt;chr&gt;     &lt;chr&gt;                             
@@ -323,19 +327,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 ronaldlee &quot; reid turra location: melbourne&quot;</code></pre>
 </div>
 <div id="databases-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> Databases</h2>
+<h2><span class="header-section-number">5.2</span> Databases</h2>
 <p>It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.</p>
 <p>The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you’re using. Installing a driver is straight forward</p>
 <p>The Database Interface (DBI) is the interaction between R and the driver Practically, it enables R to send queries to the database via the driver that is defined in the ODBC.</p>
 <p>The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you’ll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.</p>
-<p>For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="import-data.html#cb17-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create data within SQLite, and perform commands dbconnect, show_query, select</span></span>
-<span id="cb17-2"><a href="import-data.html#cb17-2"></a></span>
-<span id="cb17-3"><a href="import-data.html#cb17-3"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb17-4"><a href="import-data.html#cb17-4"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span></code></pre></div>
+<p>For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!) Again, lets start by downloading the file, or in this case, a database:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="import-data.html#cb18-1"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb18-2"><a href="import-data.html#cb18-2"></a></span>
+<span id="cb18-3"><a href="import-data.html#cb18-3"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb18-4"><a href="import-data.html#cb18-4"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span></code></pre></div>
+<p>One thing that is different about connecting to databases is that you need to set up a database connection within R. This will usually consist of a driver (in this case, <code>RSQLite::SQLite()</code>), a DSN or a file location (<code>data/rauditanalytics.sqlite</code>). In the help file, it asks for other needed fields as well; user, password, host etc. At your company, having that information along with ports, schema names, and whether or not its a trusted connection (authenticating automatically with your own active directory credentials). If you haven’t yet already at your company, request a read-only account that can get this information.</p>
+<p>We’re going to establish a connection with the database, creating the <code>con</code> connection object:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="import-data.html#cb19-1"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span></code></pre></div>
+<p>You can confirm it works by listing the tables in the database. One important thing to remember is that you’ll be passing this connection object each time as you perform your commands:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="import-data.html#cb20-1"></a><span class="kw">dbListTables</span>(con)</span></code></pre></div>
+<pre><code>## [1] &quot;gl&quot;      &quot;vendors&quot;</code></pre>
+<p>As this is a database, you’ll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-data.html#cb22-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl&#39;</span>)</span></code></pre></div>
+<pre><code>##   je_num   amount gl_date gl_date_char vendor_id                   account
+## 1      1  8346.79   18024   2019-05-08      2691        exp_materials_6000
+## 2      1 -8346.79   18024   2019-05-08        NA liab_accountspayable_2000
+##                        description
+## 1 Quality control testing supplies
+## 2 Quality control testing supplies
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1998 rows ]</code></pre>
+<p>While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="import-data.html#cb24-1"></a>db_gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>)</span>
+<span id="cb24-2"><a href="import-data.html#cb24-2"></a></span>
+<span id="cb24-3"><a href="import-data.html#cb24-3"></a>db_gl</span></code></pre></div>
+<pre><code>## # Source:   table&lt;gl&gt; [?? x 7]
+## # Database: sqlite 3.30.1
+## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
+##    je_num  amount gl_date gl_date_char vendor_id account       description      
+##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;            
+##  1      1   8347.   18024 2019-05-08        2691 exp_material… Quality control …
+##  2      1  -8347.   18024 2019-05-08          NA liab_account… Quality control …
+##  3      2  12272.   18096 2019-07-19        2669 exp_material… Packaging and bo…
+##  4      2 -12272.   18096 2019-07-19          NA liab_account… Packaging and bo…
+##  5      3   2883.   18110 2019-08-02        2276 exp_material… Paper            
+##  6      3  -2883.   18110 2019-08-02          NA liab_account… Paper            
+##  7      4  15971.   17907 2019-01-11        2276 exp_material… Paper            
+##  8      4 -15971.   17907 2019-01-11          NA liab_account… Paper            
+##  9      5   7945.   18039 2019-05-23        2691 exp_material… Quality control …
+## 10      5  -7945.   18039 2019-05-23          NA liab_account… Quality control …
+## # … with more rows</code></pre>
+<p>Not only is it pointing to the same table, but its also performing the same query:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="import-data.html#cb26-1"></a>db_gl <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb26-2"><a href="import-data.html#cb26-2"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
+<pre><code>## &lt;SQL&gt;
+## SELECT *
+## FROM `gl`</code></pre>
+<p>There are a few differences though between using these approaches.</p>
+<ul>
+<li><p><code>dbGetQuery()</code> will return a data.frame that is immediately usable, while creating the table connection via <code>tbl()</code> results in a preview of the query but hasn’t been formally downloaded in the database. In order to use the data within R with <code>tbl()</code>, a further <code>collect()</code> is needed. Instead of performing a data download every time, it is advantageous to preview the results first before collecting it.</p></li>
+<li><p><code>dbGetQuery</code> requires the entire SQL query to be pre-written, and can not be further leveraged within the database. However, the <code>tbl</code> object can still be further manipulated. This is especially useful when creating new fields or performing joins in same database.</p></li>
+</ul>
+<p>Lets say that you wanted to filter amounts greater than $75,000 in the database. In the SQL method, you would need to type a whole new SQL query:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="import-data.html#cb28-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl where amount &gt; 75000&#39;</span>)</span></code></pre></div>
+<pre><code>##   je_num   amount gl_date gl_date_char vendor_id            account
+## 1     97 76842.18   18237   2019-12-07      2276 exp_materials_6000
+## 2    527 97230.25   18002   2019-04-16      2691 exp_materials_6000
+##                        description
+## 1                            Paper
+## 2 Quality control testing supplies</code></pre>
+<p>Where in the dplyr method, you would only need to build on the same connection object already established. Identical queries, and results</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="import-data.html#cb30-1"></a>db_gl_threshold &lt;-<span class="st"> </span>db_gl <span class="op">%&gt;%</span></span>
+<span id="cb30-2"><a href="import-data.html#cb30-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span><span class="dv">75000</span>)</span>
+<span id="cb30-3"><a href="import-data.html#cb30-3"></a></span>
+<span id="cb30-4"><a href="import-data.html#cb30-4"></a>db_gl_threshold</span></code></pre></div>
+<pre><code>## # Source:   lazy query [?? x 7]
+## # Database: sqlite 3.30.1
+## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
+##   je_num amount gl_date gl_date_char vendor_id account      description         
+##    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;               
+## 1     97 76842.   18237 2019-12-07        2276 exp_materia… Paper               
+## 2    527 97230.   18002 2019-04-16        2691 exp_materia… Quality control tes…</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="import-data.html#cb32-1"></a><span class="kw">show_query</span>(db_gl_threshold)</span></code></pre></div>
+<pre><code>## &lt;SQL&gt;
+## SELECT *
+## FROM `gl`
+## WHERE (`amount` &gt; 75000.0)</code></pre>
+<p>And when you’re happy with this, simply <code>collect()</code> to save the query results as a data frame. To be nice to your database administrators, you should also disconnect from the database to free up a connection.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="import-data.html#cb34-1"></a>gl_threshold &lt;-<span class="st"> </span>db_gl_threshold <span class="op">%&gt;%</span></span>
+<span id="cb34-2"><a href="import-data.html#cb34-2"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb34-3"><a href="import-data.html#cb34-3"></a></span>
+<span id="cb34-4"><a href="import-data.html#cb34-4"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
+<p>We will go through an advanced application of setting up database queries in <a href="applied-audit-analytics.html#auditpackage">Audit Package Creation</a>, which builds upon leveraging dplyr to create the pieces that enable powerful queries.</p>
 </div>
 <div id="apis" class="section level2">
-<h2><span class="header-section-number">4.3</span> APIs</h2>
+<h2><span class="header-section-number">5.3</span> APIs</h2>
 <p>As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.</p>
 <p>While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:</p>
 <ul>
@@ -343,9 +424,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>send a valid request to GET the data, and</li>
 <li>receive the response.</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="import-data.html#cb18-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create plumber API locally to enable user to run their own API and perform a GET call against it</span></span>
-<span id="cb18-2"><a href="import-data.html#cb18-2"></a><span class="co"># https://github.com/isteves/plumbplumb</span></span></code></pre></div>
-<p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, <a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst">CData</a> supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="import-data.html#cb35-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create plumber API locally to enable user to run their own API and perform a GET call against it</span></span>
+<span id="cb35-2"><a href="import-data.html#cb35-2"></a><span class="co"># https://github.com/isteves/plumbplumb</span></span></code></pre></div>
+<p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, <a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst">CData</a> supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.</p>
 
 </div>
 </div>

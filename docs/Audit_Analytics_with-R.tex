@@ -113,7 +113,7 @@
 
 \title{Audit Analytics with R}
 \author{Jonathan Lin}
-\date{2020-06-30}
+\date{2020-07-02}
 
 \begin{document}
 \maketitle
@@ -155,17 +155,23 @@ A traditional internal audit team would consider themselves to be consumers of i
 
 The most effective way to meet this new standard is to implement a current data analytics architecture and empower your team to leverage modern data analytics techniques.
 
-\hypertarget{make-the-right-thing-easy-to-do}{%
-\section{Make the right thing easy to do}\label{make-the-right-thing-easy-to-do}}
+\hypertarget{approach}{%
+\chapter{Approach}\label{approach}}
 
-The right set of technologies enables your team to propel forward, and should amplify your teams efforts. By thoughtfully choosing your tools and encouraging sustainable processes, your team will create a positive cycle of development, learning and deployment.
+For many audit teams, having data analytics employed in your audit team is generally a given. The advantages are well articulated - 100\% population coverage, timely response, and targeted high risk identification and results are true and real.
+
+Unfortunately, any short-burst of investment in data analytics training tends to not last more than a few months. This is due to lack of applied skills, sustained management interest, and consistency of values. While regulations for adherence to SEC and Sox requirements exist and are necessary, the means to approaching and achieving compliance has been largely static in nature since the introduction of Sox.
+
+The root cause is that audit teams culturally view analytics as a skill, and not as a cultural shift. On a micro level, while not every individual on your audit team needs to be a `coder', everyone needs to share the same values and philosophy for any audit analytics program to have success. Your core analytics team will set the foundation for the rest of the team to play on, but if they don't show up, the analytics program is limited at best.
+
+Having a combination of the right values and technologies will enable your team to propel forward, and should amplify your teams efforts. By thoughtfully choosing your tools and encouraging sustainable processes, your team will create a positive cycle of development, learning and deployment.
 
 \hypertarget{code-based-development}{%
-\subsection{Code-based development}\label{code-based-development}}
+\section{Code-based development}\label{code-based-development}}
 
 Consider the creation and auditing of a spreadsheet, where every row and column has the potential to be manipulated. Following the motto, `trust but verify', an auditor would need to examine each cell value, the formulas, the relationships, and keep a sharp eye out for manual adjustments. The auditor also needs to validate the source of data in the spreadsheet. With no built-in tracability to how the spreadsheet is used after it has been created, it contributes to the madness that is the spreadsheet ecosystem.
 
-While it is easier to superficially consume information from a spreadsheet, to understand the inner workings is a tedious task into itself.
+While it is easier to superficially consume information from a spreadsheet, to understand the inner workings is a tedious task into itself. And unfortunately, both controls and audits are conducted without a second thought within spreadsheets, as it is easier to tackle the task without fundamentally changing the approach itself.
 
 Contrast this to a code-based environment. To achieve anything in code, you need to be explicit and specific on the mechanisms taken to reach the end state. Each line will tell the program what inputs it needs, how it is processed, and the collection of lines tells you what is achieved. The beauty of this is that it also tells the reader exactly what was executed to achieve the end result. A code based environment is inherently self documenting.
 
@@ -174,7 +180,7 @@ Once a baseline code has been established, finding ongoing changes becomes trivi
 Perhaps with some merit, code can be difficult to read at times, as it is still a completely different language. \textbf{Notebooks} address this problem. Notebooks are interactive renderings of code, containing not only the code, but can also include sections of commentary as to why something was done, and can include data visualizations and interactivity. It is the ultimate form of auditability.
 
 \hypertarget{automate-relentlessly}{%
-\subsection{Automate relentlessly}\label{automate-relentlessly}}
+\section{Automate relentlessly}\label{automate-relentlessly}}
 
 By writing your routines in code, then the next logical step is to automate. Automation not only frees up your time from performing a task, but it also frees up your mental critical thinking and creative processing power. Every professional has a cognitive load - don't waste it on routine tasks.
 
@@ -187,7 +193,7 @@ If you've coded your audit, then you have already done the hard work of structur
 Once you've audited the identification of issues and the metrics around them, then you can focus on the automation the handling and resolution of them. With a true audit results database, you can the results of automated monitoring into it, enabling on-demand availability, visibility, transparency, and even reporting, all which can now be part of that automation process.
 
 \hypertarget{share-everything}{%
-\subsection{Share everything}\label{share-everything}}
+\section{Share everything}\label{share-everything}}
 
 \begin{quote}
 Tribal knowledge is information or knowledge that is known within a tribe but often unknown outside of it. A tribe, in this sense, may be a group or subgroup of people that share such a common knowledge. From a corporate perspective, ``Tribal Knowledge or know-how is the collective wisdom of the organization. It is the sum of all the knowledge and capabilities of all the people''. \citep{tribal-knowledge}
@@ -200,7 +206,7 @@ The next thing to do is to put them in a central location where everyone on your
 As your team gains more experience and consistency, it may be more practical to write repeatable processes and functions instead of copy and pasting code between notebooks. Code \textbf{packages} enable you to share your code and functions to solve specific problems, templates to encourage consistency amongst team members, and are easily distributed to your team for quick deployment.
 
 \hypertarget{always-deliver-useful-product}{%
-\subsection{Always deliver useful product}\label{always-deliver-useful-product}}
+\section{Always deliver useful product}\label{always-deliver-useful-product}}
 
 The outputs of your work are useless if they are not adopted by the business. This means you need to prioritize your customer and iterate often, to win buy-in, gain momentum and stay on course.
 
@@ -211,14 +217,14 @@ Historically, this was tolerated. Audit teams were composed of accountants that 
 The idea of these data products is that they promote the cognitive ease - this means, repeated experience, clear display, primed idea, and good mood.\citep{cognitive-ease} By helping your team feel at ease, but they should deliver both the most trivial of tasks and the most time-consuming tests of applied knowledge. By removing the need to execute these tasks, then the customer can focus on what they're good at - in the case of auditors, its applying professional judgement. These products can be taken up in the form of data generation, data and trend visualization, or standardize reporting.
 
 \hypertarget{dont-be-a-hero}{%
-\subsection{Don't be a hero}\label{dont-be-a-hero}}
+\section{Don't be a hero}\label{dont-be-a-hero}}
 
 Not everything needs to be fixed by you, especially in code. In a well-functioning organization where hundreds of people are supporting different software, application or databases, sometimes the best way to solve the problems found isn't directly in the work you do, but how you get others to fix systemic issues in the source itself. Key indicators of this are when you have to start hard-coding compensating controls in your code because the upstream data isn't standardized.
 
 For example, in a typical company, employees are issued unique ID numbers. This is preferably at the source of truth - the Human Resources department. This identifier is generally considered reliable and stable, especially if is the source of truth. Consider now that you're now trying to join the data to a credit card system, where employees are issued credit cards based on their first and last name. If you take an assumption to join this dataset using an individuals first and last name, that would be a reasonable first attempt. However, last names can change over time, or individuals may prefer to go with their middle names, or even simple spelling mistakes can occur. Instead of compensating by adding different ways of `joining' information, its more effective to work with the application's data owner to see if they would be willing to adopt the unique employee ID instead as a field in their system.
 
 \hypertarget{the-opportunity-cost}{%
-\subsection{``The opportunity cost''}\label{the-opportunity-cost}}
+\section{``The opportunity cost''}\label{the-opportunity-cost}}
 
 \begin{quote}
 The idea of opportunity costs presumes the fungibility of human experience: all our activities are equivalent or interchangeable once they are reduced to the abstract currency of clock time, and its wage correlate. \citep{shop-class}
@@ -226,7 +232,9 @@ The idea of opportunity costs presumes the fungibility of human experience: all 
 
 An internal auditors' largest limitation is time. The biggest barrier to the adoption and execution of data analytic talents is the fact there is `more' perceived value in doing something else. A common excuse is that a task will only be performed once (or even worse, at an irregular basis) - auditors may instead opt to perform a manual task in an unsustainable way. Instead of learning a new skill, our opportunity cost is projected against how much time can be used have to perform this task at hand.
 
-If your existence was highly limited by the lifespan of a fly, it would be hard to argue against such a position. However, your career is long (hopefully), fruitful and full of exciting and interesting work. Truly engaging work should challenging and rewarding, and applying coding to audit lends itself to a skill worth mastering. Using these skills, no matter how immature, will continue to pay off dividends in future implementations, no matter how insignificant or incremental. Implementing repeatable processes means not only does the end consumer receive their product quicker, but the data auditor is enabled to continuously refine or tackle another code-related problem. And that is worth the opportunity cost, today.
+If your existence was highly limited by the lifespan of a fly, it would be hard to argue against such a position. However, your career is long (hopefully), fruitful and full of exciting and interesting work.
+
+Truly engaging work should challenging and rewarding, and applying coding to audit lends itself to a skill worth mastering. Using these skills, no matter how immature, will continue to pay off dividends in future implementations, no matter how insignificant or incremental. Implementing repeatable processes means not only does the end consumer receive their product quicker, but the data auditor is enabled to continuously refine or tackle another code-related problem. And that is worth the opportunity cost, today.
 
 \hypertarget{architecture}{%
 \chapter{Architecture}\label{architecture}}
@@ -474,8 +482,11 @@ In this chapter, we will download some datasets and import them. You will need t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(readr) }\CommentTok{# Loads the readr package}
+\KeywordTok{library}\NormalTok{(dplyr) }\CommentTok{# For manipulating files}
+\KeywordTok{library}\NormalTok{(readr) }\CommentTok{# For reading flat files}
+
+ \CommentTok{# For database connections}
+\KeywordTok{library}\NormalTok{(DBI)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -486,14 +497,22 @@ The most common method of obtaining data is via flat files, usually in the form 
 
 The base package, installed with all instances of R, and \texttt{read.table()} is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called \texttt{read\_delim()}, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
 
-When importing delimited files, there will always be a few aspects to consider. The \emph{delimiter} is the character that separates each field - while commas (,) are popular, pipes (\textbar) and tabs ( ) are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, \emph{qualifiers} should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
+Before importing the file, lets download the file from the repository that contains the Vendor Master. This dataset contains the vendor system ID number, the date it was added, and other traits.
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{dir.create}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{) }\CommentTok{# Creates a directory in your project}
 \KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv"}\NormalTok{,}
               \DataTypeTok{destfile =} \StringTok{"data/vendor_master.csv"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{) }\CommentTok{# Downloads this csv file into the data folder}
+\end{Highlighting}
+\end{Shaded}
 
+When importing delimited files, there will always be a few aspects to consider. The \emph{delimiter} is the character that separates each field - while commas (,) are popular, pipes (\textbar) and tabs are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, \emph{qualifiers} should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
+
+In this case, if you view the file (on the Files panel on the right, go to the data folder, click on vendor\_master.csv, and select View File), you will see the data is separated by commas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{raw_vendors <-}\StringTok{ }\KeywordTok{read_delim}\NormalTok{(}\StringTok{'data/vendor_master.csv'}\NormalTok{, }\DataTypeTok{delim =} \StringTok{","}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -511,7 +530,9 @@ When importing delimited files, there will always be a few aspects to consider. 
 ## )
 \end{verbatim}
 
-The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col\_types argument, copy and pasting the framework in the message and changing the fields as need be:
+The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored.
+
+However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col\_types argument, copy and pasting the framework in the message and changing the fields as need be:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -534,13 +555,13 @@ The message indicates that default column types were assigned to each field impo
 \begin{verbatim}
 ## Rows: 6
 ## Columns: 7
-## $ id         <chr> "532", "380", "20", "2591", "2608", "2724"
-## $ name       <chr> "el-Hassen, Noora", "Horner, Austin", "Thompson, Garrett...
-## $ date_added <date> 2019-10-29, 2019-09-11, 2019-03-01, 2019-09-29, 2019-06...
-## $ spend_2015 <dbl> NA, NA, NA, 43689.60, 75826.18, 48528.99
-## $ spend_2016 <dbl> NA, NA, NA, 66495.31, 76461.56, 78638.02
-## $ spend_2017 <dbl> NA, NA, NA, 115840.20, 91794.57, 116323.12
-## $ spend_2018 <dbl> NA, NA, NA, 63127.25, 73751.57, 38646.66
+## $ id         <chr> "835", "76", "582", "2691", "2276", "2669"
+## $ name       <chr> "Williams, Franklin", "Le, Jacob", "Martinez, Amy", "Gar...
+## $ date_added <date> 2019-09-05, 2019-05-14, 2019-07-15, 2019-10-08, 2019-09...
+## $ spend_2015 <dbl> NA, NA, NA, 82075.98, 18603.04, 74661.33
+## $ spend_2016 <dbl> NA, NA, NA, 100953.15, 26820.08, 132848.95
+## $ spend_2017 <dbl> NA, NA, NA, 178028.85, 43208.78, 182072.08
+## $ spend_2018 <dbl> NA, NA, NA, 95205.89, 25214.04, 148938.38
 \end{verbatim}
 
 While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:
@@ -587,7 +608,7 @@ These warnings indicate that there were columns expected (as dictated by the fir
 
 These special characters are hidden within the seemingly innocuous delimited file, and are typical of systems where information is extracted from, especially Windows, \texttt{\textbackslash{}r} represents a carriage return, and \texttt{\textbackslash{}n} represents a line feed. Together, \texttt{\textbackslash{}r\textbackslash{}n} represents a new line and new record, while \texttt{\textbackslash{}n} can appear in a file when a new line is made by pressing Shift+Enter.
 
-In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in \protect\hypertarget{test-searchtext}{}{Searching Text}.
+In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in \protect\hyperlink{test-searchtext}{Searching Text}.
 
 In this case, the below regular expression only replaces \texttt{\textbackslash{}n} when there is no \texttt{\textbackslash{}r} preceding it. The \texttt{gsub()} function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.
 
@@ -601,7 +622,7 @@ In this case, the below regular expression only replaces \texttt{\textbackslash{
 ## [1] "uid;manager\r\njonlin; jason durrand location: calgary\r\nronaldlee; reid turra location: melbourne"
 \end{verbatim}
 
-The gsub example shows that the manager's name and location no longer has a \texttt{\textbackslash{}n} in between them. As a result, it can now be imported cleanly.
+The gsub output shows that the manager's name and location no longer has a \texttt{\textbackslash{}n} in between them. As a result, it can now be imported cleanly.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -630,16 +651,173 @@ The Database Interface (DBI) is the interaction between R and the driver Practic
 
 The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you'll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.
 
-For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)
+For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!) Again, lets start by downloading the file, or in this case, a database:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# }\AlertTok{TODO}\CommentTok{ Create data within SQLite, and perform commands dbconnect, show_query, select}
+\KeywordTok{dir.create}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\DataTypeTok{showWarnings =} \OtherTok{FALSE}\NormalTok{)}
 
 \KeywordTok{download.file}\NormalTok{(}\DataTypeTok{url =} \StringTok{"https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite"}\NormalTok{,}
              \DataTypeTok{destfile =} \StringTok{"data/rauditanalytics.sqlite"}\NormalTok{, }\DataTypeTok{mode =} \StringTok{"wb"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+One thing that is different about connecting to databases is that you need to set up a database connection within R. This will usually consist of a driver (in this case, \texttt{RSQLite::SQLite()}), a DSN or a file location (\texttt{data/rauditanalytics.sqlite}). In the help file, it asks for other needed fields as well; user, password, host etc. At your company, having that information along with ports, schema names, and whether or not its a trusted connection (authenticating automatically with your own active directory credentials). If you haven't yet already at your company, request a read-only account that can get this information.
+
+We're going to establish a connection with the database, creating the \texttt{con} connection object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{con <-}\StringTok{ }\KeywordTok{dbConnect}\NormalTok{(RSQLite}\OperatorTok{::}\KeywordTok{SQLite}\NormalTok{(), }\StringTok{"data/rauditanalytics.sqlite"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbListTables}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "gl"      "vendors"
+\end{verbatim}
+
+As this is a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbGetQuery}\NormalTok{(con, }\StringTok{'select * from gl'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   je_num   amount gl_date gl_date_char vendor_id                   account
+## 1      1  8346.79   18024   2019-05-08      2691        exp_materials_6000
+## 2      1 -8346.79   18024   2019-05-08        NA liab_accountspayable_2000
+##                        description
+## 1 Quality control testing supplies
+## 2 Quality control testing supplies
+##  [ reached 'max' / getOption("max.print") -- omitted 1998 rows ]
+\end{verbatim}
+
+While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the \texttt{con} connection object contains the \texttt{gl} table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{db_gl <-}\StringTok{ }\KeywordTok{tbl}\NormalTok{(con, }\StringTok{'gl'}\NormalTok{)}
+
+\NormalTok{db_gl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Source:   table<gl> [?? x 7]
+## # Database: sqlite 3.30.1
+## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
+##    je_num  amount gl_date gl_date_char vendor_id account       description      
+##     <int>   <dbl>   <dbl> <chr>            <int> <chr>         <chr>            
+##  1      1   8347.   18024 2019-05-08        2691 exp_material~ Quality control ~
+##  2      1  -8347.   18024 2019-05-08          NA liab_account~ Quality control ~
+##  3      2  12272.   18096 2019-07-19        2669 exp_material~ Packaging and bo~
+##  4      2 -12272.   18096 2019-07-19          NA liab_account~ Packaging and bo~
+##  5      3   2883.   18110 2019-08-02        2276 exp_material~ Paper            
+##  6      3  -2883.   18110 2019-08-02          NA liab_account~ Paper            
+##  7      4  15971.   17907 2019-01-11        2276 exp_material~ Paper            
+##  8      4 -15971.   17907 2019-01-11          NA liab_account~ Paper            
+##  9      5   7945.   18039 2019-05-23        2691 exp_material~ Quality control ~
+## 10      5  -7945.   18039 2019-05-23          NA liab_account~ Quality control ~
+## # ... with more rows
+\end{verbatim}
+
+Not only is it pointing to the same table, but its also performing the same query:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{db_gl }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{show_query}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <SQL>
+## SELECT *
+## FROM `gl`
+\end{verbatim}
+
+There are a few differences though between using these approaches.
+
+\begin{itemize}
+\item
+  \texttt{dbGetQuery()} will return a data.frame that is immediately usable, while creating the table connection via \texttt{tbl()} results in a preview of the query but hasn't been formally downloaded in the database. In order to use the data within R with \texttt{tbl()}, a further \texttt{collect()} is needed. Instead of performing a data download every time, it is advantageous to preview the results first before collecting it.
+\item
+  \texttt{dbGetQuery} requires the entire SQL query to be pre-written, and can not be further leveraged within the database. However, the \texttt{tbl} object can still be further manipulated. This is especially useful when creating new fields or performing joins in same database.
+\end{itemize}
+
+Lets say that you wanted to filter amounts greater than \$75,000 in the database. In the SQL method, you would need to type a whole new SQL query:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dbGetQuery}\NormalTok{(con, }\StringTok{'select * from gl where amount > 75000'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   je_num   amount gl_date gl_date_char vendor_id            account
+## 1     97 76842.18   18237   2019-12-07      2276 exp_materials_6000
+## 2    527 97230.25   18002   2019-04-16      2691 exp_materials_6000
+##                        description
+## 1                            Paper
+## 2 Quality control testing supplies
+\end{verbatim}
+
+Where in the dplyr method, you would only need to build on the same connection object already established. Identical queries, and results
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{db_gl_threshold <-}\StringTok{ }\NormalTok{db_gl }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(amount }\OperatorTok{>}\StringTok{ }\DecValTok{75000}\NormalTok{)}
+
+\NormalTok{db_gl_threshold}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # Source:   lazy query [?? x 7]
+## # Database: sqlite 3.30.1
+## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
+##   je_num amount gl_date gl_date_char vendor_id account      description         
+##    <int>  <dbl>   <dbl> <chr>            <int> <chr>        <chr>               
+## 1     97 76842.   18237 2019-12-07        2276 exp_materia~ Paper               
+## 2    527 97230.   18002 2019-04-16        2691 exp_materia~ Quality control tes~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{show_query}\NormalTok{(db_gl_threshold)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <SQL>
+## SELECT *
+## FROM `gl`
+## WHERE (`amount` > 75000.0)
+\end{verbatim}
+
+And when you're happy with this, simply \texttt{collect()} to save the query results as a data frame. To be nice to your database administrators, you should also disconnect from the database to free up a connection.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gl_threshold <-}\StringTok{ }\NormalTok{db_gl_threshold }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{collect}\NormalTok{()}
+
+\KeywordTok{dbDisconnect}\NormalTok{(con)}
+\end{Highlighting}
+\end{Shaded}
+
+We will go through an advanced application of setting up database queries in \protect\hyperlink{auditpackage}{Audit Package Creation}, which builds upon leveraging dplyr to create the pieces that enable powerful queries.
 
 \hypertarget{apis}{%
 \section{APIs}\label{apis}}
@@ -665,7 +843,7 @@ While APIs may be generally complicated, the end objective is to obtain data is 
 \end{Highlighting}
 \end{Shaded}
 
-Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, \href{https://www.cdata.com/kb/tech/office365-jdbc-r.rst}{CData} supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, \href{https://www.cdata.com/kb/tech/office365-jdbc-r.rst}{CData} supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.
 
 \hypertarget{explore}{%
 \chapter{Explore}\label{explore}}
@@ -727,8 +905,8 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \hypertarget{relative-size-factor-testing}{%
 \section{Relative size factor testing}\label{relative-size-factor-testing}}
 
-\hypertarget{search-text-test-searchtext}{%
-\section{Search text \{test-searchtext\}}\label{search-text-test-searchtext}}
+\hypertarget{test-searchtext}{%
+\section{Search text}\label{test-searchtext}}
 
 \hypertarget{report}{%
 \chapter{Report}\label{report}}
@@ -745,8 +923,8 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \hypertarget{applied-audit-analytics}{%
 \chapter{Applied Audit Analytics}\label{applied-audit-analytics}}
 
-\hypertarget{package-creation}{%
-\section{Package creation}\label{package-creation}}
+\hypertarget{auditpackage}{%
+\section{Audit R Package creation}\label{auditpackage}}
 
 \hypertarget{continious-monitoring}{%
 \section{Continious Monitoring}\label{continious-monitoring}}

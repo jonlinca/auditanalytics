@@ -2,9 +2,16 @@
 
 In this chapter, we will download some datasets and import them. You will need the following packages to follow along.
 
+```{r, echo = FALSE}
+options(max.print=15)
+```
+
 ```{r, message = FALSE, warning = FALSE}
-library(dplyr)
-library(readr) # Loads the readr package
+library(dplyr) # For manipulating files
+library(readr) # For reading flat files
+
+ # For database connections
+library(DBI)
 ```
 
 ## Delimited files
@@ -13,17 +20,25 @@ The most common method of obtaining data is via flat files, usually in the form 
 
 The base package, installed with all instances of R, and `read.table()` is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
 
-When importing delimited files, there will always be a few aspects to consider. The *delimiter* is the character that separates each field - while commas (,) are popular, pipes (|) and tabs (  ) are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, *qualifiers* should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
+Before importing the file, lets download the file from the repository that contains the Vendor Master. This dataset contains the vendor system ID number, the date it was added, and other traits.
 
 ```{r}
 dir.create("data", showWarnings = FALSE) # Creates a directory in your project
 download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv",
               destfile = "data/vendor_master.csv", mode = "wb") # Downloads this csv file into the data folder
+```
 
+When importing delimited files, there will always be a few aspects to consider. The *delimiter* is the character that separates each field - while commas (,) are popular, pipes (|) and tabs are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, *qualifiers* should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
+
+In this case, if you view the file (on the Files panel on the right, go to the data folder, click on vendor_master.csv, and select View File), you will see the data is separated by commas.
+
+```{r}
 raw_vendors <- read_delim('data/vendor_master.csv', delim = ",")
 ```
 
-The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:
+The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored. 
+
+However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:
 
 ```{r}
 cols <- cols(
@@ -62,7 +77,7 @@ print(ad_char)
 
 These special characters are hidden within the seemingly innocuous delimited file, and are typical of systems where information is extracted from, especially Windows, `\r` represents a carriage return, and `\n` represents a line feed. Together, `\r\n` represents a new line and new record, while `\n` can appear in a file when a new line is made by pressing Shift+Enter.
 
-In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in [Searching Text]{#test-searchtext}.
+In this common yet inconvenient case, these can be substituted out with regular expressions. Regular expressions are a standard, cryptic yet powerful way to match text in strings. We will cover specific use cases of these in [Searching Text](#test-searchtext).
 
 In this case, the below regular expression only replaces `\n` when there is no `\r` preceding it. The `gsub()` function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.
 
@@ -70,7 +85,7 @@ In this case, the below regular expression only replaces `\n` when there is no `
 gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE)
 ```
 
-The gsub example shows that the manager's name and location no longer has a `\n` in between them. As a result, it can now be imported cleanly.
+The gsub output shows that the manager's name and location no longer has a `\n` in between them. As a result, it can now be imported cleanly.
 
 ```{r}
 ad_raw <- read_delim(gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE), delim = ";")
@@ -88,14 +103,83 @@ The Database Interface (DBI) is the interaction between R and the driver Practic
 
 The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you'll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.
 
-For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!)
+For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!) Again, lets start by downloading the file, or in this case, a database:
 
 ```{r}
-# TODO Create data within SQLite, and perform commands dbconnect, show_query, select
+dir.create("data", showWarnings = FALSE)
 
 download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
              destfile = "data/rauditanalytics.sqlite", mode = "wb")
 ```
+
+One thing that is different about connecting to databases is that you need to set up a database connection within R. This will usually consist of a driver (in this case, `RSQLite::SQLite()`), a DSN or a file location (`data/rauditanalytics.sqlite`). In the help file, it asks for other needed fields as well; user, password, host etc. At your company, having that information along with ports, schema names, and whether or not its a trusted connection (authenticating automatically with your own active directory credentials). If you haven't yet already at your company, request a read-only account that can get this information.
+
+We're going to establish a connection with the database, creating the `con` connection object:
+
+```{r}
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
+```
+
+You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands:
+
+```{r}
+dbListTables(con)
+```
+
+As this is a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
+
+```{r}
+dbGetQuery(con, 'select * from gl')
+```
+
+While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
+
+```{r}
+db_gl <- tbl(con, 'gl')
+
+db_gl
+```
+
+Not only is it pointing to the same table, but its also performing the same query:
+
+```{r}
+db_gl %>% 
+  show_query()
+```
+
+There are a few differences though between using these approaches. 
+
+* `dbGetQuery()` will return a data.frame that is immediately usable, while creating the table connection via `tbl()` results in a preview of the query but hasn't been formally downloaded in the database. In order to use the data within R with `tbl()`, a further `collect()` is needed. Instead of performing a data download every time, it is advantageous to preview the results first before collecting it.
+
+* `dbGetQuery` requires the entire SQL query to be pre-written, and can not be further leveraged within the database. However, the `tbl` object can still be further manipulated. This is especially useful when creating new fields or performing joins in same database.
+
+Lets say that you wanted to filter amounts greater than $75,000 in the database. In the SQL method, you would need to type a whole new SQL query:
+
+```{r}
+dbGetQuery(con, 'select * from gl where amount > 75000')
+```
+
+Where in the dplyr method, you would only need to build on the same connection object already established. Identical queries, and results
+
+```{r}
+db_gl_threshold <- db_gl %>%
+  dplyr::filter(amount > 75000)
+
+db_gl_threshold
+
+show_query(db_gl_threshold)
+```
+
+And when you're happy with this, simply `collect()` to save the query results as a data frame. To be nice to your database administrators, you should also disconnect from the database to free up a connection.
+
+```{r}
+gl_threshold <- db_gl_threshold %>%
+  collect()
+
+dbDisconnect(con)
+```
+
+We will go through an advanced application of setting up database queries in [Audit Package Creation](#auditpackage), which builds upon leveraging dplyr to create the pieces that enable powerful queries.
 
 ## APIs
 
@@ -112,5 +196,5 @@ While APIs may be generally complicated, the end objective is to obtain data is 
 # https://github.com/isteves/plumbplumb
 ```
 
-Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and files) directly.
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.
 
