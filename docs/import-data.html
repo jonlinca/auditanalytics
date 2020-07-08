@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Import data | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
-  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Import data | Audit Analytics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-02" />
+<meta name="date" content="2020-07-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,6 +50,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -166,14 +167,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
-<li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#r-and-rstudio-1"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="4.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
 <li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>4.3</b> The AUDITPACKAGENAME</a></li>
 <li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> Github (or another git-related brand)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
 <li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a></li>
-<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#databases-1"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.2" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>6</b> Explore</a><ul>
@@ -209,7 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>10.1</b> Audit R Package creation</a></li>
 <li class="chapter" data-level="10.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>10.2</b> Continious Monitoring</a></li>
 <li class="chapter" data-level="10.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>10.3</b> Controls Automation</a></li>
-<li class="chapter" data-level="10.4" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#audit-data-mart-1"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="10.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
 <li class="chapter" data-level="10.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>10.5</b> All-in-one toolkits</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>11</b> Other practices to follow</a><ul>
@@ -240,11 +241,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="import-data" class="section level1">
 <h1><span class="header-section-number">Chapter 5</span> Import data</h1>
 <p>In this chapter, we will download some datasets and import them. You will need the following packages to follow along.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="import-data.html#cb3-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating files</span></span>
-<span id="cb3-2"><a href="import-data.html#cb3-2"></a><span class="kw">library</span>(readr) <span class="co"># For reading flat files</span></span>
-<span id="cb3-3"><a href="import-data.html#cb3-3"></a></span>
-<span id="cb3-4"><a href="import-data.html#cb3-4"></a> <span class="co"># For database connections</span></span>
-<span id="cb3-5"><a href="import-data.html#cb3-5"></a><span class="kw">library</span>(DBI)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="import-data.html#cb3-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
+<span id="cb3-2"><a href="import-data.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="import-data.html#cb3-3"></a><span class="kw">library</span>(readr) <span class="co"># For reading flat files</span></span>
+<span id="cb3-4"><a href="import-data.html#cb3-4"></a></span>
+<span id="cb3-5"><a href="import-data.html#cb3-5"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb3-6"><a href="import-data.html#cb3-6"></a></span>
+<span id="cb3-7"><a href="import-data.html#cb3-7"></a><span class="co"># For API connections</span></span>
+<span id="cb3-8"><a href="import-data.html#cb3-8"></a><span class="kw">library</span>(httr)</span>
+<span id="cb3-9"><a href="import-data.html#cb3-9"></a><span class="kw">library</span>(jsonlite)</span></code></pre></div>
 <div id="delimited-files" class="section level2">
 <h2><span class="header-section-number">5.1</span> Delimited files</h2>
 <p>The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.</p>
@@ -326,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 jonlin    &quot; jason durrand location: calgary&quot;
 ## 2 ronaldlee &quot; reid turra location: melbourne&quot;</code></pre>
 </div>
-<div id="databases-1" class="section level2">
+<div id="databases" class="section level2">
 <h2><span class="header-section-number">5.2</span> Databases</h2>
 <p>It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.</p>
 <p>The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you’re using. Installing a driver is straight forward</p>
@@ -340,10 +345,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>One thing that is different about connecting to databases is that you need to set up a database connection within R. This will usually consist of a driver (in this case, <code>RSQLite::SQLite()</code>), a DSN or a file location (<code>data/rauditanalytics.sqlite</code>). In the help file, it asks for other needed fields as well; user, password, host etc. At your company, having that information along with ports, schema names, and whether or not its a trusted connection (authenticating automatically with your own active directory credentials). If you haven’t yet already at your company, request a read-only account that can get this information.</p>
 <p>We’re going to establish a connection with the database, creating the <code>con</code> connection object:</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="import-data.html#cb19-1"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span></code></pre></div>
-<p>You can confirm it works by listing the tables in the database. One important thing to remember is that you’ll be passing this connection object each time as you perform your commands:</p>
+<p>You can confirm it works by listing the tables in the database. One important thing to remember is that you’ll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="import-data.html#cb20-1"></a><span class="kw">dbListTables</span>(con)</span></code></pre></div>
 <pre><code>## [1] &quot;gl&quot;      &quot;vendors&quot;</code></pre>
-<p>As this is a database, you’ll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:</p>
+<p>Typically to get data out of a database, you’ll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-data.html#cb22-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl&#39;</span>)</span></code></pre></div>
 <pre><code>##   je_num   amount gl_date gl_date_char vendor_id                   account
 ## 1      1  8346.79   18024   2019-05-08      2691        exp_materials_6000
@@ -352,7 +357,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 Quality control testing supplies
 ## 2 Quality control testing supplies
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1998 rows ]</code></pre>
-<p>While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
+<p>While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="import-data.html#cb24-1"></a>db_gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>)</span>
 <span id="cb24-2"><a href="import-data.html#cb24-2"></a></span>
 <span id="cb24-3"><a href="import-data.html#cb24-3"></a>db_gl</span></code></pre></div>
@@ -418,14 +423,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="apis" class="section level2">
 <h2><span class="header-section-number">5.3</span> APIs</h2>
 <p>As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.</p>
-<p>While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:</p>
+<p>While APIs may be more complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:</p>
 <ul>
-<li>match it to the endpoint where the data is available,</li>
-<li>send a valid request to GET the data, and</li>
+<li>match what is desired to the ‘endpoint’, a pre-defined url or path where the data resides,</li>
+<li>send a valid request to <code>GET</code> the data, and</li>
 <li>receive the response.</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="import-data.html#cb35-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> Create plumber API locally to enable user to run their own API and perform a GET call against it</span></span>
-<span id="cb35-2"><a href="import-data.html#cb35-2"></a><span class="co"># https://github.com/isteves/plumbplumb</span></span></code></pre></div>
+<p>Here is an oversimplistic example. Lets say you want to see what repositories I have available to the public. You can list the repositories I have through the <a href="https://developer.github.com/v3/repos/#list-repositories-for-a-user">github api</a> via the httr package and the <code>GET</code> command. For anything sensitive, it will likely be protected and require authentication as well.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="import-data.html#cb35-1"></a><span class="kw">library</span>(httr)</span>
+<span id="cb35-2"><a href="import-data.html#cb35-2"></a><span class="kw">library</span>(jsonlite)</span>
+<span id="cb35-3"><a href="import-data.html#cb35-3"></a></span>
+<span id="cb35-4"><a href="import-data.html#cb35-4"></a>response &lt;-<span class="st"> </span><span class="kw">GET</span>(<span class="st">&#39;https://api.github.com/users/jonlinca/repos&#39;</span>)</span>
+<span id="cb35-5"><a href="import-data.html#cb35-5"></a></span>
+<span id="cb35-6"><a href="import-data.html#cb35-6"></a>response</span></code></pre></div>
+<pre><code>## Response [https://api.github.com/users/jonlinca/repos]
+##   Date: 2020-07-08 01:45
+##   Status: 200
+##   Content-Type: application/json; charset=utf-8
+##   Size: 28.7 kB
+## [
+##   {
+##     &quot;id&quot;: 129155075,
+##     &quot;node_id&quot;: &quot;MDEwOlJlcG9zaXRvcnkxMjkxNTUwNzU=&quot;,
+##     &quot;name&quot;: &quot;ACLandR_DeployingModels&quot;,
+##     &quot;full_name&quot;: &quot;jonlinca/ACLandR_DeployingModels&quot;,
+##     &quot;private&quot;: false,
+##     &quot;owner&quot;: {
+##       &quot;login&quot;: &quot;jonlinca&quot;,
+##       &quot;id&quot;: 29468012,
+## ...</code></pre>
+<p>The structure of the data in an API looks different than a data frame. Typically there is an overall response (indicating success or the nature of the failure), the type of content (in this case, ‘application/json’), and the data itself. The entire download is usually stored as a list with multiple references:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="import-data.html#cb37-1"></a><span class="kw">names</span>(response)</span></code></pre></div>
+<pre><code>##  [1] &quot;url&quot;         &quot;status_code&quot; &quot;headers&quot;     &quot;all_headers&quot; &quot;cookies&quot;    
+##  [6] &quot;content&quot;     &quot;date&quot;        &quot;times&quot;       &quot;request&quot;     &quot;handle&quot;</code></pre>
+<p>And the data you want will be in <code>list$content</code>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="import-data.html#cb39-1"></a><span class="kw">head</span>(response<span class="op">$</span>content)</span></code></pre></div>
+<pre><code>## [1] 5b 0a 20 20 7b 0a</code></pre>
+<p>This raw data is generally uninterpretable, and it is because the file is in a different format - in this case, the Content-Type indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr <code>content()</code> and jsonlite <code>fromJSON()</code> and <code>toJSON()</code> functions:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="import-data.html#cb41-1"></a>content &lt;-<span class="st"> </span><span class="kw">content</span>(response)</span>
+<span id="cb41-2"><a href="import-data.html#cb41-2"></a></span>
+<span id="cb41-3"><a href="import-data.html#cb41-3"></a>cleancontent &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(jsonlite<span class="op">::</span><span class="kw">toJSON</span>(content), <span class="dt">flatten =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb41-4"><a href="import-data.html#cb41-4"></a></span>
+<span id="cb41-5"><a href="import-data.html#cb41-5"></a><span class="co"># Print it out</span></span>
+<span id="cb41-6"><a href="import-data.html#cb41-6"></a>cleancontent[,<span class="kw">c</span>(<span class="st">&#39;id&#39;</span>,<span class="st">&#39;name&#39;</span>)]</span></code></pre></div>
+<pre><code>##          id                    name
+## 1 129155075 ACLandR_DeployingModels
+## 2 164948874          ACLandR_KMeans
+## 3 269707027          auditanalytics
+## 4 183726578                calgaryr
+## 5 277917653              galvanizer</code></pre>
 <p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, <a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst">CData</a> supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.</p>
 
 </div>

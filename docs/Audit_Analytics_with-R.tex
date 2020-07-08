@@ -113,7 +113,7 @@
 
 \title{Audit Analytics with R}
 \author{Jonathan Lin}
-\date{2020-07-02}
+\date{2020-07-07}
 
 \begin{document}
 \maketitle
@@ -443,15 +443,15 @@ To take full advantage of an audit data mart, an automated ETL process should co
 
 There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.
 
-\hypertarget{r-and-rstudio-1}{%
-\section{R and RStudio}\label{r-and-rstudio-1}}
+\hypertarget{r-and-rstudio}{%
+\section{R and RStudio}\label{r-and-rstudio}}
 
 One of the most respected introductions to R is \href{https://r4ds.had.co.nz/introduction.html}{R for Data Science} by Hadley and Garrett, and the \href{https://r4ds.had.co.nz/introduction.html\#prerequisites}{Prerequisities} section is set up for installing R.
 
 \hypertarget{common-packages}{%
 \section{Common packages}\label{common-packages}}
 
-We will use several common packages; if you haven't installed the yet, feel free to uncomment the installation line and load them up.
+We will use several common packages; if you haven't installed the yet, feel free to install the packages:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -482,11 +482,15 @@ In this chapter, we will download some datasets and import them. You will need t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr) }\CommentTok{# For manipulating files}
+\KeywordTok{library}\NormalTok{(dplyr) }\CommentTok{# For manipulating data}
+
 \KeywordTok{library}\NormalTok{(readr) }\CommentTok{# For reading flat files}
 
- \CommentTok{# For database connections}
-\KeywordTok{library}\NormalTok{(DBI)}
+\KeywordTok{library}\NormalTok{(DBI) }\CommentTok{# For database connections}
+
+\CommentTok{# For API connections}
+\KeywordTok{library}\NormalTok{(httr)}
+\KeywordTok{library}\NormalTok{(jsonlite)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -640,8 +644,8 @@ The gsub output shows that the manager's name and location no longer has a \text
 ## 2 ronaldlee " reid turra location: melbourne"
 \end{verbatim}
 
-\hypertarget{databases-1}{%
-\section{Databases}\label{databases-1}}
+\hypertarget{databases}{%
+\section{Databases}\label{databases}}
 
 It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
 
@@ -672,7 +676,7 @@ We're going to establish a connection with the database, creating the \texttt{co
 \end{Highlighting}
 \end{Shaded}
 
-You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands:
+You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -684,7 +688,7 @@ You can confirm it works by listing the tables in the database. One important th
 ## [1] "gl"      "vendors"
 \end{verbatim}
 
-As this is a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
+Typically to get data out of a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -702,7 +706,7 @@ As this is a database, you'll need to communicate to it in its own language to o
 ##  [ reached 'max' / getOption("max.print") -- omitted 1998 rows ]
 \end{verbatim}
 
-While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the \texttt{con} connection object contains the \texttt{gl} table:
+While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the \texttt{con} connection object contains the \texttt{gl} table:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -824,24 +828,96 @@ We will go through an advanced application of setting up database queries in \pr
 
 As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
 
-While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
+While APIs may be more complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
 
 \begin{itemize}
 \tightlist
 \item
-  match it to the endpoint where the data is available,
+  match what is desired to the `endpoint', a pre-defined url or path where the data resides,
 \item
-  send a valid request to GET the data, and
+  send a valid request to \texttt{GET} the data, and
 \item
   receive the response.
 \end{itemize}
 
+Here is an oversimplistic example. Lets say you want to see what repositories I have available to the public. You can list the repositories I have through the \href{https://developer.github.com/v3/repos/\#list-repositories-for-a-user}{github api} via the httr package and the \texttt{GET} command. For anything sensitive, it will likely be protected and require authentication as well.
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# }\AlertTok{TODO}\CommentTok{ Create plumber API locally to enable user to run their own API and perform a GET call against it}
-\CommentTok{# https://github.com/isteves/plumbplumb}
+\KeywordTok{library}\NormalTok{(httr)}
+\KeywordTok{library}\NormalTok{(jsonlite)}
+
+\NormalTok{response <-}\StringTok{ }\KeywordTok{GET}\NormalTok{(}\StringTok{'https://api.github.com/users/jonlinca/repos'}\NormalTok{)}
+
+\NormalTok{response}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Response [https://api.github.com/users/jonlinca/repos]
+##   Date: 2020-07-08 01:43
+##   Status: 200
+##   Content-Type: application/json; charset=utf-8
+##   Size: 28.7 kB
+## [
+##   {
+##     "id": 129155075,
+##     "node_id": "MDEwOlJlcG9zaXRvcnkxMjkxNTUwNzU=",
+##     "name": "ACLandR_DeployingModels",
+##     "full_name": "jonlinca/ACLandR_DeployingModels",
+##     "private": false,
+##     "owner": {
+##       "login": "jonlinca",
+##       "id": 29468012,
+## ...
+\end{verbatim}
+
+The structure of the data in an API looks different than a data frame. Typically there is an overall response (indicating success or the nature of the failure), the type of content (in this case, `application/json'), and the data itself. The entire download is usually stored as a list with multiple references:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(response)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "url"         "status_code" "headers"     "all_headers" "cookies"    
+##  [6] "content"     "date"        "times"       "request"     "handle"
+\end{verbatim}
+
+And the data you want will be in \texttt{list\$content}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(response}\OperatorTok{$}\NormalTok{content)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5b 0a 20 20 7b 0a
+\end{verbatim}
+
+This raw data is generally uninterpretable, and it is because the file is in a different format - in this case, the Content-Type indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr \texttt{content()} and jsonlite \texttt{fromJSON()} and \texttt{toJSON()} functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{content <-}\StringTok{ }\KeywordTok{content}\NormalTok{(response)}
+
+\NormalTok{cleancontent <-}\StringTok{ }\NormalTok{jsonlite}\OperatorTok{::}\KeywordTok{fromJSON}\NormalTok{(jsonlite}\OperatorTok{::}\KeywordTok{toJSON}\NormalTok{(content), }\DataTypeTok{flatten =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# Print it out}
+\NormalTok{cleancontent[,}\KeywordTok{c}\NormalTok{(}\StringTok{'id'}\NormalTok{,}\StringTok{'name'}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          id                    name
+## 1 129155075 ACLandR_DeployingModels
+## 2 164948874          ACLandR_KMeans
+## 3 269707027          auditanalytics
+## 4 183726578                calgaryr
+## 5 277917653              galvanizer
+\end{verbatim}
 
 Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, \href{https://www.cdata.com/kb/tech/office365-jdbc-r.rst}{CData} supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.
 
@@ -932,8 +1008,8 @@ Some data sources may be difficult to obtain data from, or perhaps you're not qu
 \hypertarget{controls-automation}{%
 \section{Controls Automation}\label{controls-automation}}
 
-\hypertarget{audit-data-mart-1}{%
-\section{Audit Data Mart}\label{audit-data-mart-1}}
+\hypertarget{audit-data-mart}{%
+\section{Audit Data Mart}\label{audit-data-mart}}
 
 \hypertarget{all-in-one-toolkits}{%
 \section{All-in-one toolkits}\label{all-in-one-toolkits}}

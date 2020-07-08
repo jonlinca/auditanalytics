@@ -7,11 +7,15 @@ options(max.print=15)
 ```
 
 ```{r, message = FALSE, warning = FALSE}
-library(dplyr) # For manipulating files
+library(dplyr) # For manipulating data
+
 library(readr) # For reading flat files
 
- # For database connections
-library(DBI)
+library(DBI) # For database connections
+
+# For API connections
+library(httr)
+library(jsonlite)
 ```
 
 ## Delimited files
@@ -120,19 +124,19 @@ We're going to establish a connection with the database, creating the `con` conn
 con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
 ```
 
-You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands:
+You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.
 
 ```{r}
 dbListTables(con)
 ```
 
-As this is a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
+Typically to get data out of a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
 
 ```{r}
 dbGetQuery(con, 'select * from gl')
 ```
 
-While knowing SQL is advantageous, sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
+While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
 
 ```{r}
 db_gl <- tbl(con, 'gl')
@@ -185,15 +189,44 @@ We will go through an advanced application of setting up database queries in [Au
 
 As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
 
-While APIs may be generally complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
+While APIs may be more complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
 
-- match it to the endpoint where the data is available,
-- send a valid request to GET the data, and
+- match what is desired to the 'endpoint', a pre-defined url or path where the data resides,
+- send a valid request to `GET` the data, and
 - receive the response.
 
+Here is an oversimplistic example. Lets say you want to see what repositories I have available to the public. You can list the repositories I have through the [github api](https://developer.github.com/v3/repos/#list-repositories-for-a-user) via the httr package and the `GET` command. For anything sensitive, it will likely be protected and require authentication as well.
+
 ```{r}
-# TODO Create plumber API locally to enable user to run their own API and perform a GET call against it
-# https://github.com/isteves/plumbplumb
+library(httr)
+library(jsonlite)
+
+response <- GET('https://api.github.com/users/jonlinca/repos')
+
+response
+```
+
+The structure of the data in an API looks different than a data frame. Typically there is an overall response (indicating success or the nature of the failure), the type of content (in this case, 'application/json'), and the data itself. The entire download is usually stored as a list with multiple references:
+
+```{r}
+names(response)
+```
+
+And the data you want will be in `list$content`:
+
+```{r}
+head(response$content)
+```
+
+This raw data is generally uninterpretable, and it is because the file is in a different format - in this case, the Content-Type indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr `content()` and jsonlite `fromJSON()` and `toJSON()` functions:
+
+```{r}
+content <- content(response)
+
+cleancontent <- jsonlite::fromJSON(jsonlite::toJSON(content), flatten = TRUE)
+
+# Print it out
+cleancontent[,c('id','name')]
 ```
 
 Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.
