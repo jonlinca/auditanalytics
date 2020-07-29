@@ -51,6 +51,10 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -157,7 +161,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>3.4.1</b> Databases</a></li>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#arch-db"><i class="fa fa-check"></i><b>3.4.1</b> Databases</a></li>
 <li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
@@ -172,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>6</b> Validation</a><ul>
@@ -250,42 +254,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 6</span> Validation</h1>
 <p>The first thing you should do when you get a new piece of data, before you do any analysis, is to explore the data for potential data errors and to perform completeness testing. Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.</p>
 <p>For this section we will use the accounting database validate our Journal Entry file prior to testing:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="validation.html#cb3-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
-<span id="cb3-2"><a href="validation.html#cb3-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
-<span id="cb3-3"><a href="validation.html#cb3-3"></a></span>
-<span id="cb3-4"><a href="validation.html#cb3-4"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
-<span id="cb3-5"><a href="validation.html#cb3-5"></a></span>
-<span id="cb3-6"><a href="validation.html#cb3-6"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb3-7"><a href="validation.html#cb3-7"></a></span>
-<span id="cb3-8"><a href="validation.html#cb3-8"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb3-9"><a href="validation.html#cb3-9"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb3-10"><a href="validation.html#cb3-10"></a></span>
-<span id="cb3-11"><a href="validation.html#cb3-11"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb3-12"><a href="validation.html#cb3-12"></a></span>
-<span id="cb3-13"><a href="validation.html#cb3-13"></a><span class="co"># Creates a table reference and collects the table, saving it as a gl object</span></span>
-<span id="cb3-14"><a href="validation.html#cb3-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb3-15"><a href="validation.html#cb3-15"></a><span class="st">  </span><span class="kw">collect</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="validation.html#cb43-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
+<span id="cb43-2"><a href="validation.html#cb43-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
+<span id="cb43-3"><a href="validation.html#cb43-3"></a></span>
+<span id="cb43-4"><a href="validation.html#cb43-4"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb43-5"><a href="validation.html#cb43-5"></a></span>
+<span id="cb43-6"><a href="validation.html#cb43-6"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb43-7"><a href="validation.html#cb43-7"></a></span>
+<span id="cb43-8"><a href="validation.html#cb43-8"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb43-9"><a href="validation.html#cb43-9"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb43-10"><a href="validation.html#cb43-10"></a></span>
+<span id="cb43-11"><a href="validation.html#cb43-11"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb43-12"><a href="validation.html#cb43-12"></a></span>
+<span id="cb43-13"><a href="validation.html#cb43-13"></a><span class="co"># Creates a table reference and collects the table, saving it as a gl object</span></span>
+<span id="cb43-14"><a href="validation.html#cb43-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb43-15"><a href="validation.html#cb43-15"></a><span class="st">  </span><span class="kw">collect</span>()</span></code></pre></div>
 <div id="exploration-of-general-ledger-data" class="section level2">
 <h2><span class="header-section-number">6.1</span> Exploration of General Ledger data</h2>
 <p>General Ledger (GL) data is where all the detailed transactions against the accounting system take place. Sub-ledgers may exist for specific systems (Accounts Payable, Accounts Receivable, Inventory), and these systems will also post to the General Ledger, occasionally in a more summarized form.</p>
 <p>A rapid preview of all your columns can be done quickly with <code>summary()</code>. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="validation.html#cb4-1"></a><span class="kw">summary</span>(gl)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="validation.html#cb44-1"></a><span class="kw">summary</span>(gl)</span></code></pre></div>
 <pre><code>##      je_num           amount          gl_date      gl_date_char      
 ##  Min.   :   1.0   Min.   :-92284   Min.   :17897   Length:2000       
 ##  1st Qu.: 250.8   1st Qu.: -7160   1st Qu.:17998   Class :character  
-##  Median : 500.5   Median :     0   Median :18080   Mode  :character  
-##  Mean   : 500.5   Mean   :     0   Mean   :18084                     
-##  3rd Qu.: 750.2   3rd Qu.:  7160   3rd Qu.:18173                     
-##  Max.   :1000.0   Max.   : 92284   Max.   :18261                     
-##                                                                      
 ##    vendor_id      account          description       
 ##  Min.   : 387   Length:2000        Length:2000       
 ##  1st Qu.:2531   Class :character   Class :character  
-##  Median :2695   Mode  :character   Mode  :character  
-##  Mean   :2676                                        
-##  3rd Qu.:2894                                        
-##  Max.   :2894                                        
-##  NA&#39;s   :1000</code></pre>
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
 <p>Some initial scanning is already useful:</p>
 <ul>
 <li><code>je_num</code> is a number value, although it has no meaning as a number, as it is a reference.</li>
@@ -294,7 +289,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>gl_date</code> is numeric while <code>gl_date_char</code> is a character.</li>
 </ul>
 <p>It may be useful to look at a few data samples more closely to understand patterns. <code>head()</code> is useful in seeing the first few columns</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="validation.html#cb6-1"></a><span class="kw">head</span>(gl)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="validation.html#cb46-1"></a><span class="kw">head</span>(gl)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 7
 ##   je_num  amount gl_date gl_date_char vendor_id account       description       
 ##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;             
@@ -322,17 +317,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Data was not recorded… at the time - A data source is always evolving, and new columns may be introduced as new features are rolled out or data structure changes. For example, a relatively new requirement indicating companies must identify government companies within their databases, and only applicable for new companies in the database. Historically entered vendors may have NAs.</p></li>
 <li><p>Inappropriate coercion - the column type was converted from one to another, indicating loss of values. For example, converting the letter ‘a’ using <code>as.numeric()</code> will give the following:</p></li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="validation.html#cb8-1"></a><span class="kw">as.numeric</span>(<span class="st">&#39;a&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="validation.html#cb48-1"></a><span class="kw">as.numeric</span>(<span class="st">&#39;a&#39;</span>)</span></code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>Its not that this value never existed, it is that it did not have a valid value when converted from a letter to a number, and therefore shows as NA.</p>
 <p>In our data set, the <code>vendor_id</code> has NA values. We can inspect these by isolating them to determine the nature of the pattern:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="validation.html#cb11-1"></a><span class="co"># Base R equivalent: </span></span>
-<span id="cb11-2"><a href="validation.html#cb11-2"></a><span class="co">#  gl[is.na(gl$vendor_id), ]</span></span>
-<span id="cb11-3"><a href="validation.html#cb11-3"></a></span>
-<span id="cb11-4"><a href="validation.html#cb11-4"></a><span class="co"># Tidyverse / dplyr</span></span>
-<span id="cb11-5"><a href="validation.html#cb11-5"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb11-6"><a href="validation.html#cb11-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id))</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="validation.html#cb51-1"></a><span class="co"># Base R equivalent: </span></span>
+<span id="cb51-2"><a href="validation.html#cb51-2"></a><span class="co">#  gl[is.na(gl$vendor_id), ]</span></span>
+<span id="cb51-3"><a href="validation.html#cb51-3"></a></span>
+<span id="cb51-4"><a href="validation.html#cb51-4"></a><span class="co"># Tidyverse / dplyr</span></span>
+<span id="cb51-5"><a href="validation.html#cb51-5"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb51-6"><a href="validation.html#cb51-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id))</span></code></pre></div>
 <pre><code>## # A tibble: 1,000 x 7
 ##    je_num  amount gl_date gl_date_char vendor_id account       description      
 ##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;            
@@ -348,11 +343,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10     10 -17685.   18039 2019-05-23          NA liab_account… Medical grade fi…
 ## # … with 990 more rows</code></pre>
 <p>This indicates that several values are NA. This enables us to ask the proper questions - specifically, we should seek to understand and corroborate with the business if there is a certain pattern associated to these NAs. dplyr’s <code>group_by()</code> and <code>summarize()</code> are useful for identifying these patterns further:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="validation.html#cb13-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb13-2"><a href="validation.html#cb13-2"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id)) <span class="op">%&gt;%</span></span>
-<span id="cb13-3"><a href="validation.html#cb13-3"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
-<span id="cb13-4"><a href="validation.html#cb13-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</span>
-<span id="cb13-5"><a href="validation.html#cb13-5"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="validation.html#cb53-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb53-2"><a href="validation.html#cb53-2"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id)) <span class="op">%&gt;%</span></span>
+<span id="cb53-3"><a href="validation.html#cb53-3"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb53-4"><a href="validation.html#cb53-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</span>
+<span id="cb53-5"><a href="validation.html#cb53-5"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   account                         n
 ##   &lt;chr&gt;                       &lt;int&gt;
@@ -362,11 +357,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="journal-entries-balance-to-zero" class="section level3">
 <h3><span class="header-section-number">6.2.2</span> Journal Entries balance to zero</h3>
 <p>A quick sanity check for the analysis of GL accounts is to do a quick summarization. In this case, you will want to <code>group_by()</code> and <code>summarize()</code> again - in this case, by the <code>je_num</code> will test whether all journal entries will net to zero.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="validation.html#cb15-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb15-2"><a href="validation.html#cb15-2"></a><span class="st">  </span><span class="kw">group_by</span>(je_num) <span class="op">%&gt;%</span></span>
-<span id="cb15-3"><a href="validation.html#cb15-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">amount =</span> <span class="kw">sum</span>(amount),</span>
-<span id="cb15-4"><a href="validation.html#cb15-4"></a>             <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb15-5"><a href="validation.html#cb15-5"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="validation.html#cb55-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb55-2"><a href="validation.html#cb55-2"></a><span class="st">  </span><span class="kw">group_by</span>(je_num) <span class="op">%&gt;%</span></span>
+<span id="cb55-3"><a href="validation.html#cb55-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">amount =</span> <span class="kw">sum</span>(amount),</span>
+<span id="cb55-4"><a href="validation.html#cb55-4"></a>             <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb55-5"><a href="validation.html#cb55-5"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 0 x 2
 ## # … with 2 variables: je_num &lt;int&gt;, amount &lt;dbl&gt;</code></pre>
 </div>
@@ -375,10 +370,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.3</span> Exploration of Trial Balance data</h2>
 <p>The Trial Balance (TB) is intended to track and record higher level movements of the General Ledger. It does so by maintaining an accurate balance of debits and credits made to the General Ledger, usually against accounts.</p>
 <p>Lets look at our trial balance:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="validation.html#cb17-1"></a>tb &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;tb&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb17-2"><a href="validation.html#cb17-2"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb17-3"><a href="validation.html#cb17-3"></a></span>
-<span id="cb17-4"><a href="validation.html#cb17-4"></a><span class="kw">head</span>(tb)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="validation.html#cb57-1"></a>tb &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;tb&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb57-2"><a href="validation.html#cb57-2"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb57-3"><a href="validation.html#cb57-3"></a></span>
+<span id="cb57-4"><a href="validation.html#cb57-4"></a><span class="kw">head</span>(tb)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 13
 ##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
@@ -395,9 +390,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sum-by-absolute-references" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> Sum by absolute references</h3>
 <p>In traditional “Excel-esque” form, you would summing up each column for each row - simply taking the values of each column and adding them together.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="validation.html#cb19-1"></a>tb <span class="op">%&gt;%</span></span>
-<span id="cb19-2"><a href="validation.html#cb19-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> activity_<span class="dv">2019</span>_<span class="dv">01</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">02</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">03</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">04</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">05</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">06</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">07</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">08</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">09</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">11</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">12</span>) <span class="op">%&gt;%</span></span>
-<span id="cb19-3"><a href="validation.html#cb19-3"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="validation.html#cb59-1"></a>tb <span class="op">%&gt;%</span></span>
+<span id="cb59-2"><a href="validation.html#cb59-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> activity_<span class="dv">2019</span>_<span class="dv">01</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">02</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">03</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">04</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">05</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">06</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">07</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">08</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">09</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">11</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">12</span>) <span class="op">%&gt;%</span></span>
+<span id="cb59-3"><a href="validation.html#cb59-3"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
@@ -411,18 +406,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sum-by-numeric-position" class="section level3">
 <h3><span class="header-section-number">6.3.2</span> Sum by numeric position</h3>
 <p>To make this code more reusable, we could make some changes. Lets take the logical assumption that the position of the columns will never change, and therefore we can reference the position number in our script:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="validation.html#cb21-1"></a><span class="kw">names</span>(tb) <span class="co"># This tells us the position number of each column header</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="validation.html#cb61-1"></a><span class="kw">names</span>(tb) <span class="co"># This tells us the position number of each column header</span></span></code></pre></div>
 <pre><code>##  [1] &quot;account&quot;          &quot;activity_2019_01&quot; &quot;activity_2019_02&quot; &quot;activity_2019_03&quot;
 ##  [5] &quot;activity_2019_04&quot; &quot;activity_2019_05&quot; &quot;activity_2019_06&quot; &quot;activity_2019_07&quot;
 ##  [9] &quot;activity_2019_08&quot; &quot;activity_2019_09&quot; &quot;activity_2019_10&quot; &quot;activity_2019_11&quot;
 ## [13] &quot;activity_2019_12&quot;</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="validation.html#cb23-1"></a>tb_activity &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
-<span id="cb23-2"><a href="validation.html#cb23-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">13</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Selects just the numeric columns that we assume, by position number</span></span>
-<span id="cb23-3"><a href="validation.html#cb23-3"></a><span class="st">  </span><span class="kw">rowSums</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># And sums up the row</span></span>
-<span id="cb23-4"><a href="validation.html#cb23-4"></a></span>
-<span id="cb23-5"><a href="validation.html#cb23-5"></a><span class="kw">print</span>(tb_activity) <span class="co"># This is saved as a numeric vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="validation.html#cb63-1"></a>tb_activity &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb63-2"><a href="validation.html#cb63-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">13</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Selects just the numeric columns that we assume, by position number</span></span>
+<span id="cb63-3"><a href="validation.html#cb63-3"></a><span class="st">  </span><span class="kw">rowSums</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># And sums up the row</span></span>
+<span id="cb63-4"><a href="validation.html#cb63-4"></a></span>
+<span id="cb63-5"><a href="validation.html#cb63-5"></a><span class="kw">print</span>(tb_activity) <span class="co"># This is saved as a numeric vector</span></span></code></pre></div>
 <pre><code>## [1]    447751.60   9798845.29      1530.63 -10186325.19    -61802.33</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="validation.html#cb25-1"></a><span class="kw">data.frame</span>(<span class="dt">account =</span> tb<span class="op">$</span>account, <span class="dt">tb_activity =</span> tb_activity) <span class="co"># We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity</span></span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="validation.html#cb65-1"></a><span class="kw">data.frame</span>(<span class="dt">account =</span> tb<span class="op">$</span>account, <span class="dt">tb_activity =</span> tb_activity) <span class="co"># We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity</span></span></code></pre></div>
 <pre><code>##                       account  tb_activity
 ## 1         exp_consulting_6500    447751.60
 ## 2          exp_materials_6000   9798845.29
@@ -434,11 +429,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sum-by-named-references" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> Sum by named references</h3>
 <p>In addition of referencing by position number, we can also reference by column name. We want to sum up all columns that start with “activity_”. The selecting by position and selecting by variable name are similar, so we’ll also introduce the ‘dot’ in this select statement.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="validation.html#cb27-1"></a>tb <span class="op">%&gt;%</span></span>
-<span id="cb27-2"><a href="validation.html#cb27-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
-<span id="cb27-3"><a href="validation.html#cb27-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
-<span id="cb27-4"><a href="validation.html#cb27-4"></a>    )) <span class="op">%&gt;%</span></span>
-<span id="cb27-5"><a href="validation.html#cb27-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="validation.html#cb67-1"></a>tb <span class="op">%&gt;%</span></span>
+<span id="cb67-2"><a href="validation.html#cb67-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
+<span id="cb67-3"><a href="validation.html#cb67-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
+<span id="cb67-4"><a href="validation.html#cb67-4"></a>    )) <span class="op">%&gt;%</span></span>
+<span id="cb67-5"><a href="validation.html#cb67-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
@@ -466,7 +461,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>and the dollar value itself for each month.</li>
 </ul>
 <p>When we deconstruct our data, it becomes much easier to delve into the <strong>tidyr</strong> package and the functions <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="validation.html#cb29-1"></a><span class="kw">head</span>(tb) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="validation.html#cb69-1"></a><span class="kw">head</span>(tb) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
 <pre><code>## # A tibble: 5 x 13
 ##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
@@ -478,12 +473,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="validation.html#cb31-1"></a>tb_long &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
-<span id="cb31-2"><a href="validation.html#cb31-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;activity_&quot;</span>), <span class="co"># We want to aggregate the values in these columns</span></span>
-<span id="cb31-3"><a href="validation.html#cb31-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;period&quot;</span>, <span class="co"># What we want to call this new column</span></span>
-<span id="cb31-4"><a href="validation.html#cb31-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;activity&quot;</span>) <span class="co"># And the values we want to take from it</span></span>
-<span id="cb31-5"><a href="validation.html#cb31-5"></a></span>
-<span id="cb31-6"><a href="validation.html#cb31-6"></a>tb_long</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="validation.html#cb71-1"></a>tb_long &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb71-2"><a href="validation.html#cb71-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;activity_&quot;</span>), <span class="co"># We want to aggregate the values in these columns</span></span>
+<span id="cb71-3"><a href="validation.html#cb71-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;period&quot;</span>, <span class="co"># What we want to call this new column</span></span>
+<span id="cb71-4"><a href="validation.html#cb71-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;activity&quot;</span>) <span class="co"># And the values we want to take from it</span></span>
+<span id="cb71-5"><a href="validation.html#cb71-5"></a></span>
+<span id="cb71-6"><a href="validation.html#cb71-6"></a>tb_long</span></code></pre></div>
 <pre><code>## # A tibble: 60 x 3
 ##    account             period           activity
 ##    &lt;chr&gt;               &lt;chr&gt;               &lt;dbl&gt;
@@ -499,9 +494,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 exp_consulting_6500 activity_2019_10   64969.
 ## # … with 50 more rows</code></pre>
 <p>This data is now represented longer - there is now one unique value (activity) for each account and month. From here, we can now <code>summarize()</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="validation.html#cb33-1"></a>tb_long <span class="op">%&gt;%</span></span>
-<span id="cb33-2"><a href="validation.html#cb33-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
-<span id="cb33-3"><a href="validation.html#cb33-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">tb_activity =</span> <span class="kw">sum</span>(activity))</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="validation.html#cb73-1"></a>tb_long <span class="op">%&gt;%</span></span>
+<span id="cb73-2"><a href="validation.html#cb73-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb73-3"><a href="validation.html#cb73-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">tb_activity =</span> <span class="kw">sum</span>(activity))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
@@ -518,12 +513,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.4</span> Assertion: Completeness</h2>
 <p>The practical goal before we do any further testing is to ensure we’re not wasting time with a data set that is missing information. This completeness test will help validate that we received data for twelve months of GL activity. In Journal Entry testing, this means we will compare the summarized Trial Balance file against the General Ledger entries to obtain reasonableness that our data set we received is complete.</p>
 <p>To compare both the GL and TB, we will want to aggregate the data in both datasets before joining them together. First, we will aggregate the GL:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="validation.html#cb36-1"></a>gl_summarized &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb36-2"><a href="validation.html#cb36-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
-<span id="cb36-3"><a href="validation.html#cb36-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">gl_total =</span> <span class="kw">sum</span>(amount),</span>
-<span id="cb36-4"><a href="validation.html#cb36-4"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span>
-<span id="cb36-5"><a href="validation.html#cb36-5"></a></span>
-<span id="cb36-6"><a href="validation.html#cb36-6"></a>gl_summarized</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="validation.html#cb76-1"></a>gl_summarized &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb76-2"><a href="validation.html#cb76-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb76-3"><a href="validation.html#cb76-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">gl_total =</span> <span class="kw">sum</span>(amount),</span>
+<span id="cb76-4"><a href="validation.html#cb76-4"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span>
+<span id="cb76-5"><a href="validation.html#cb76-5"></a></span>
+<span id="cb76-6"><a href="validation.html#cb76-6"></a>gl_summarized</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                       gl_total
 ##   &lt;chr&gt;                            &lt;dbl&gt;
@@ -533,13 +528,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 liab_accountspayable_2000   -10186325.
 ## 5 liab_creditcardpayable_2100    -61802.</code></pre>
 <p>And also aggregate the TB:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="validation.html#cb38-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
-<span id="cb38-2"><a href="validation.html#cb38-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
-<span id="cb38-3"><a href="validation.html#cb38-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
-<span id="cb38-4"><a href="validation.html#cb38-4"></a>    )) <span class="op">%&gt;%</span></span>
-<span id="cb38-5"><a href="validation.html#cb38-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span>
-<span id="cb38-6"><a href="validation.html#cb38-6"></a></span>
-<span id="cb38-7"><a href="validation.html#cb38-7"></a>tb_summarized</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="validation.html#cb78-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb78-2"><a href="validation.html#cb78-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
+<span id="cb78-3"><a href="validation.html#cb78-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
+<span id="cb78-4"><a href="validation.html#cb78-4"></a>    )) <span class="op">%&gt;%</span></span>
+<span id="cb78-5"><a href="validation.html#cb78-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span>
+<span id="cb78-6"><a href="validation.html#cb78-6"></a></span>
+<span id="cb78-7"><a href="validation.html#cb78-7"></a>tb_summarized</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
@@ -550,8 +545,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 liab_creditcardpayable_2100     -61802.</code></pre>
 <p>To perform a proper test of completeness, we should join both tables together. <em>dplyr</em> and the <code>*_join()</code> family of functions can be used to join tables, and also used as diagnosis tools to help debug information as well.</p>
 <p>Our GL and TB summarized datasets could be joined by the <code>account</code> column, prior to performing the calculation to identify differences:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="validation.html#cb40-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb40-2"><a href="validation.html#cb40-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="validation.html#cb80-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb80-2"><a href="validation.html#cb80-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##   account                       gl_total tb_activity
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;
@@ -561,9 +556,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 liab_accountspayable_2000   -10186325.  -10186325.
 ## 5 liab_creditcardpayable_2100    -61802.     -61802.</code></pre>
 <p>Once you have joined the columns together, a simple difference calculation will let you know what the differences are (if any):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="validation.html#cb42-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb42-2"><a href="validation.html#cb42-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb42-3"><a href="validation.html#cb42-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="validation.html#cb82-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb82-2"><a href="validation.html#cb82-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb82-3"><a href="validation.html#cb82-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##   account                       gl_total tb_activity tb_diff
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
@@ -573,10 +568,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 liab_accountspayable_2000   -10186325.  -10186325.       0
 ## 5 liab_creditcardpayable_2100    -61802.     -61802.       0</code></pre>
 <p>And if you like clean working papers, simply filter to identify where the reconciliation did not work out:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="validation.html#cb44-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb44-2"><a href="validation.html#cb44-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb44-3"><a href="validation.html#cb44-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity) <span class="op">%&gt;%</span></span>
-<span id="cb44-4"><a href="validation.html#cb44-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(tb_diff <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="validation.html#cb84-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb84-2"><a href="validation.html#cb84-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb84-3"><a href="validation.html#cb84-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity) <span class="op">%&gt;%</span></span>
+<span id="cb84-4"><a href="validation.html#cb84-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(tb_diff <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 0 x 4
 ## # … with 4 variables: account &lt;chr&gt;, gl_total &lt;dbl&gt;, tb_activity &lt;dbl&gt;,
 ## #   tb_diff &lt;dbl&gt;</code></pre>
