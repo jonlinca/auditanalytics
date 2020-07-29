@@ -127,7 +127,7 @@ An alternative is also [miniCRAN](https://cran.r-project.org/web/packages/miniCR
 
 The end goal of automation ETLs, and creating and hosting data products for audit customers to consume. To achieve these goals, an audit team needs direct, programmatic access to the data being audited. By programmatic, we mean that code can be used to access data, versus going through a front-end user interface. 
 
-### Databases {#arch-db}
+### Internal databases
 
 At its core, databases hold transactional information that runs the business. Databases generally can fit two separate use cases: Online Transaction Processing (OLTP), for high speed transaction writing, and Online Analytic Processing (OLAP), for analyzing to support business decisions. Typically OLTP databases act as a source of truth, and send updates to the OLAP database.
 
