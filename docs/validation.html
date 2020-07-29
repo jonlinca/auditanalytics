@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Validation | Audit Analytics with R</title>
+  <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Validation | Audit Analytics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Validation | Audit Analytics with R" />
+  
+  <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+<meta name="author" content="Jonathan Lin" />
+
+
+<meta name="date" content="2020-07-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="import-data.html"/>
+<link rel="next" href="manipulate.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Audit Analytics in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
+<li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
+<li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
+<li class="chapter" data-level="2.4" data-path="approach.html"><a href="approach.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>2.4</b> Always deliver useful product</a></li>
+<li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
+<li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> Git</a></li>
+<li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>3.4.1</b> Databases</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers---galvanizer"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers - galvanizer</a></li>
+<li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> Github (or another git-related brand)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>6</b> Validation</a><ul>
+<li class="chapter" data-level="6.1" data-path="validation.html"><a href="validation.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
+<li class="chapter" data-level="6.2" data-path="validation.html"><a href="validation.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="validation.html"><a href="validation.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.2" data-path="validation.html"><a href="validation.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="validation.html"><a href="validation.html#exploration-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Exploration of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="validation.html"><a href="validation.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
+<li class="chapter" data-level="6.3.2" data-path="validation.html"><a href="validation.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
+<li class="chapter" data-level="6.3.3" data-path="validation.html"><a href="validation.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
+<li class="chapter" data-level="6.3.4" data-path="validation.html"><a href="validation.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="validation.html"><a href="validation.html#assertion-completeness"><i class="fa fa-check"></i><b>6.4</b> Assertion: Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="validation.html"><a href="validation.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.4.1</b> Cautionary notes for Completeness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>7</b> Manipulate</a><ul>
+<li class="chapter" data-level="7.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="manipulate.html"><a href="manipulate.html#dates"><i class="fa fa-check"></i><b>7.2</b> Dates</a></li>
+<li class="chapter" data-level="7.3" data-path="manipulate.html"><a href="manipulate.html#sort"><i class="fa fa-check"></i><b>7.3</b> Sort</a></li>
+<li class="chapter" data-level="7.4" data-path="manipulate.html"><a href="manipulate.html#summary-statistics---outliers"><i class="fa fa-check"></i><b>7.4</b> Summary statistics - Outliers</a></li>
+<li class="chapter" data-level="7.5" data-path="manipulate.html"><a href="manipulate.html#clean-text"><i class="fa fa-check"></i><b>7.5</b> Clean text</a></li>
+<li class="chapter" data-level="7.6" data-path="manipulate.html"><a href="manipulate.html#join"><i class="fa fa-check"></i><b>7.6</b> Join</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>8</b> Test</a><ul>
+<li class="chapter" data-level="8.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>8.1</b> Mutate - If statements</a></li>
+<li class="chapter" data-level="8.2" data-path="test.html"><a href="test.html#summarize"><i class="fa fa-check"></i><b>8.2</b> Summarize</a></li>
+<li class="chapter" data-level="8.3" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>8.3</b> Outliers</a></li>
+<li class="chapter" data-level="8.4" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>8.4</b> Duplicates</a></li>
+<li class="chapter" data-level="8.5" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>8.5</b> Age</a></li>
+<li class="chapter" data-level="8.6" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>8.6</b> Benford Analysis</a></li>
+<li class="chapter" data-level="8.7" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>8.7</b> Relative size factor testing</a></li>
+<li class="chapter" data-level="8.8" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>8.8</b> Search text</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>9</b> Report</a><ul>
+<li class="chapter" data-level="9.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>9.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="9.2" data-path="report.html"><a href="report.html#graphics"><i class="fa fa-check"></i><b>9.2</b> Graphics</a></li>
+<li class="chapter" data-level="9.3" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>9.3</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>10</b> Applied Audit Analytics</a><ul>
+<li class="chapter" data-level="10.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>10.1</b> Audit R Package creation</a></li>
+<li class="chapter" data-level="10.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>10.2</b> Continious Monitoring</a></li>
+<li class="chapter" data-level="10.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-automation"><i class="fa fa-check"></i><b>10.3</b> Controls Automation</a></li>
+<li class="chapter" data-level="10.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="10.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>10.5</b> All-in-one toolkits</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>11</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="11.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>11.1</b> Documentation</a></li>
+<li class="chapter" data-level="11.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>11.2</b> Passwords</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Audit Analytics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="validation" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Validation</h1>
+<p>The first thing you should do when you get a new piece of data, before you do any analysis, is to explore the data for potential data errors and to perform completeness testing. Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.</p>
+<p>For this section we will use the accounting database validate our Journal Entry file prior to testing:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="validation.html#cb3-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
+<span id="cb3-2"><a href="validation.html#cb3-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
+<span id="cb3-3"><a href="validation.html#cb3-3"></a></span>
+<span id="cb3-4"><a href="validation.html#cb3-4"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb3-5"><a href="validation.html#cb3-5"></a></span>
+<span id="cb3-6"><a href="validation.html#cb3-6"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb3-7"><a href="validation.html#cb3-7"></a></span>
+<span id="cb3-8"><a href="validation.html#cb3-8"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb3-9"><a href="validation.html#cb3-9"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb3-10"><a href="validation.html#cb3-10"></a></span>
+<span id="cb3-11"><a href="validation.html#cb3-11"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb3-12"><a href="validation.html#cb3-12"></a></span>
+<span id="cb3-13"><a href="validation.html#cb3-13"></a><span class="co"># Creates a table reference and collects the table, saving it as a gl object</span></span>
+<span id="cb3-14"><a href="validation.html#cb3-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-15"><a href="validation.html#cb3-15"></a><span class="st">  </span><span class="kw">collect</span>()</span></code></pre></div>
+<div id="exploration-of-general-ledger-data" class="section level2">
+<h2><span class="header-section-number">6.1</span> Exploration of General Ledger data</h2>
+<p>General Ledger (GL) data is where all the detailed transactions against the accounting system take place. Sub-ledgers may exist for specific systems (Accounts Payable, Accounts Receivable, Inventory), and these systems will also post to the General Ledger, occasionally in a more summarized form.</p>
+<p>A rapid preview of all your columns can be done quickly with <code>summary()</code>. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="validation.html#cb4-1"></a><span class="kw">summary</span>(gl)</span></code></pre></div>
+<pre><code>##      je_num           amount          gl_date      gl_date_char      
+##  Min.   :   1.0   Min.   :-92284   Min.   :17897   Length:2000       
+##  1st Qu.: 250.8   1st Qu.: -7160   1st Qu.:17998   Class :character  
+##  Median : 500.5   Median :     0   Median :18080   Mode  :character  
+##  Mean   : 500.5   Mean   :     0   Mean   :18084                     
+##  3rd Qu.: 750.2   3rd Qu.:  7160   3rd Qu.:18173                     
+##  Max.   :1000.0   Max.   : 92284   Max.   :18261                     
+##                                                                      
+##    vendor_id      account          description       
+##  Min.   : 387   Length:2000        Length:2000       
+##  1st Qu.:2531   Class :character   Class :character  
+##  Median :2695   Mode  :character   Mode  :character  
+##  Mean   :2676                                        
+##  3rd Qu.:2894                                        
+##  Max.   :2894                                        
+##  NA&#39;s   :1000</code></pre>
+<p>Some initial scanning is already useful:</p>
+<ul>
+<li><code>je_num</code> is a number value, although it has no meaning as a number, as it is a reference.</li>
+<li><code>vendor_id</code> is a number as well, but it contains NA’s. NA’s are R’s way of indicating that data does not exist.</li>
+<li><code>amount</code> is both positive and negative - indicating this column has indicators of both credits and debits</li>
+<li><code>gl_date</code> is numeric while <code>gl_date_char</code> is a character.</li>
+</ul>
+<p>It may be useful to look at a few data samples more closely to understand patterns. <code>head()</code> is useful in seeing the first few columns</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="validation.html#cb6-1"></a><span class="kw">head</span>(gl)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 7
+##   je_num  amount gl_date gl_date_char vendor_id account       description       
+##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;             
+## 1      1  30487.   17984 2019-03-29        2894 exp_material… Quality control t…
+## 2      1 -30487.   17984 2019-03-29          NA liab_account… Quality control t…
+## 3      2   5019.   18194 2019-10-25        2695 exp_material… Packaging and box…
+## 4      2  -5019.   18194 2019-10-25          NA liab_account… Packaging and box…
+## 5      3    264.   18051 2019-06-04        2894 exp_material… Quality control t…
+## 6      3   -264.   18051 2019-06-04          NA liab_account… Quality control t…</code></pre>
+<p>We get more understanding understanding the details of our dataset:</p>
+<ul>
+<li><code>je_num</code> indicates a set of lines within a journal entry.</li>
+<li><code>vendor_id</code> is usually associated to an expense account.</li>
+<li><code>amount</code> is both positive and negative for the same journal entry - this means theoretically, it should balance to zero.</li>
+<li><code>gl_date</code> is numeric while <code>gl_date_char</code> appears as a date (but is still a character).</li>
+</ul>
+</div>
+<div id="examination-of-potential-errors" class="section level2">
+<h2><span class="header-section-number">6.2</span> Examination of potential errors</h2>
+<div id="na-values" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> NA values</h3>
+<p>NAs are “Not available” or Missing Values. As an auditor, its important for to understand why NA values exist in your dataset. Reasons I have heard in my career include:</p>
+<ul>
+<li><p>Data was not recorded - A field may be blank because it was intentionally or accidentally omitted. A “void date” is quite commonly NA in a GL database as most entries have not been voided. Or perhaps a journal entry is NA because it has not yet been approved. There may be business rules that indicate why a row’s value may be NA.</p></li>
+<li><p>Data was not recorded… at the time - A data source is always evolving, and new columns may be introduced as new features are rolled out or data structure changes. For example, a relatively new requirement indicating companies must identify government companies within their databases, and only applicable for new companies in the database. Historically entered vendors may have NAs.</p></li>
+<li><p>Inappropriate coercion - the column type was converted from one to another, indicating loss of values. For example, converting the letter ‘a’ using <code>as.numeric()</code> will give the following:</p></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="validation.html#cb8-1"></a><span class="kw">as.numeric</span>(<span class="st">&#39;a&#39;</span>)</span></code></pre></div>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>Its not that this value never existed, it is that it did not have a valid value when converted from a letter to a number, and therefore shows as NA.</p>
+<p>In our data set, the <code>vendor_id</code> has NA values. We can inspect these by isolating them to determine the nature of the pattern:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="validation.html#cb11-1"></a><span class="co"># Base R equivalent: </span></span>
+<span id="cb11-2"><a href="validation.html#cb11-2"></a><span class="co">#  gl[is.na(gl$vendor_id), ]</span></span>
+<span id="cb11-3"><a href="validation.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="validation.html#cb11-4"></a><span class="co"># Tidyverse / dplyr</span></span>
+<span id="cb11-5"><a href="validation.html#cb11-5"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb11-6"><a href="validation.html#cb11-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id))</span></code></pre></div>
+<pre><code>## # A tibble: 1,000 x 7
+##    je_num  amount gl_date gl_date_char vendor_id account       description      
+##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;            
+##  1      1 -30487.   17984 2019-03-29          NA liab_account… Quality control …
+##  2      2  -5019.   18194 2019-10-25          NA liab_account… Packaging and bo…
+##  3      3   -264.   18051 2019-06-04          NA liab_account… Quality control …
+##  4      4   -567.   17903 2019-01-07          NA liab_account… Medical grade fi…
+##  5      5 -13623.   18261 2019-12-31          NA liab_account… Quality control …
+##  6      6 -10702.   17959 2019-03-04          NA liab_account… Sewing machines  
+##  7      7 -16680.   18248 2019-12-18          NA liab_account… Quality control …
+##  8      8 -14623    18166 2019-09-27          NA liab_account… Medical grade fi…
+##  9      9  -2654.   17926 2019-01-30          NA liab_account… Face mask elasti…
+## 10     10 -17685.   18039 2019-05-23          NA liab_account… Medical grade fi…
+## # … with 990 more rows</code></pre>
+<p>This indicates that several values are NA. This enables us to ask the proper questions - specifically, we should seek to understand and corroborate with the business if there is a certain pattern associated to these NAs. dplyr’s <code>group_by()</code> and <code>summarize()</code> are useful for identifying these patterns further:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="validation.html#cb13-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb13-2"><a href="validation.html#cb13-2"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id)) <span class="op">%&gt;%</span></span>
+<span id="cb13-3"><a href="validation.html#cb13-3"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb13-4"><a href="validation.html#cb13-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</span>
+<span id="cb13-5"><a href="validation.html#cb13-5"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   account                         n
+##   &lt;chr&gt;                       &lt;int&gt;
+## 1 liab_accountspayable_2000     990
+## 2 liab_creditcardpayable_2100    10</code></pre>
+</div>
+<div id="journal-entries-balance-to-zero" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Journal Entries balance to zero</h3>
+<p>A quick sanity check for the analysis of GL accounts is to do a quick summarization. In this case, you will want to <code>group_by()</code> and <code>summarize()</code> again - in this case, by the <code>je_num</code> will test whether all journal entries will net to zero.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="validation.html#cb15-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb15-2"><a href="validation.html#cb15-2"></a><span class="st">  </span><span class="kw">group_by</span>(je_num) <span class="op">%&gt;%</span></span>
+<span id="cb15-3"><a href="validation.html#cb15-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">amount =</span> <span class="kw">sum</span>(amount),</span>
+<span id="cb15-4"><a href="validation.html#cb15-4"></a>             <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb15-5"><a href="validation.html#cb15-5"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 0 x 2
+## # … with 2 variables: je_num &lt;int&gt;, amount &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div id="exploration-of-trial-balance-data" class="section level2">
+<h2><span class="header-section-number">6.3</span> Exploration of Trial Balance data</h2>
+<p>The Trial Balance (TB) is intended to track and record higher level movements of the General Ledger. It does so by maintaining an accurate balance of debits and credits made to the General Ledger, usually against accounts.</p>
+<p>Lets look at our trial balance:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="validation.html#cb17-1"></a>tb &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;tb&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb17-2"><a href="validation.html#cb17-2"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb17-3"><a href="validation.html#cb17-3"></a></span>
+<span id="cb17-4"><a href="validation.html#cb17-4"></a><span class="kw">head</span>(tb)</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 13
+##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
+##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 exp_co…           37907.           18618.               0            58208.
+## 2 exp_ma…          970382.          503354.          699039.          989992.
+## 3 exp_me…               0              126.             285.             153.
+## 4 liab_a…        -1008289.         -514495.         -699323.        -1023042.
+## 5 liab_c…               0            -7603.               0           -25311.
+## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
+## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
+## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
+<p>Our TB has activity levels by month. In your day-to-day work, you may also receive a TB that has an Opening and Closing balance - to obtain the activity level for the audit period, simply deduct the Close from the Open to calculate the Change for the year.</p>
+<p>In our case, we would like to perform completeness testing by account for the entire year, which means we compare the total activity of the account in the TB to the GL. As each column is its own month, we can approach this in several ways. Watching the problem solved in multiple ways is always beneficial.</p>
+<div id="sum-by-absolute-references" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> Sum by absolute references</h3>
+<p>In traditional “Excel-esque” form, you would summing up each column for each row - simply taking the values of each column and adding them together.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="validation.html#cb19-1"></a>tb <span class="op">%&gt;%</span></span>
+<span id="cb19-2"><a href="validation.html#cb19-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> activity_<span class="dv">2019</span>_<span class="dv">01</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">02</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">03</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">04</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">05</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">06</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">07</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">08</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">09</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">10</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">11</span> <span class="op">+</span><span class="st"> </span>activity_<span class="dv">2019</span>_<span class="dv">12</span>) <span class="op">%&gt;%</span></span>
+<span id="cb19-3"><a href="validation.html#cb19-3"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   account                     tb_activity
+##   &lt;chr&gt;                             &lt;dbl&gt;
+## 1 exp_consulting_6500             447752.
+## 2 exp_materials_6000             9798845.
+## 3 exp_meals_7000                    1531.
+## 4 liab_accountspayable_2000    -10186325.
+## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+<p>While the above works, it is difficult to read, is prone to errors, and also means this approach could only be used once this year, as we expect the year numbers to change as time passes.</p>
+</div>
+<div id="sum-by-numeric-position" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> Sum by numeric position</h3>
+<p>To make this code more reusable, we could make some changes. Lets take the logical assumption that the position of the columns will never change, and therefore we can reference the position number in our script:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="validation.html#cb21-1"></a><span class="kw">names</span>(tb) <span class="co"># This tells us the position number of each column header</span></span></code></pre></div>
+<pre><code>##  [1] &quot;account&quot;          &quot;activity_2019_01&quot; &quot;activity_2019_02&quot; &quot;activity_2019_03&quot;
+##  [5] &quot;activity_2019_04&quot; &quot;activity_2019_05&quot; &quot;activity_2019_06&quot; &quot;activity_2019_07&quot;
+##  [9] &quot;activity_2019_08&quot; &quot;activity_2019_09&quot; &quot;activity_2019_10&quot; &quot;activity_2019_11&quot;
+## [13] &quot;activity_2019_12&quot;</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="validation.html#cb23-1"></a>tb_activity &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb23-2"><a href="validation.html#cb23-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">13</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Selects just the numeric columns that we assume, by position number</span></span>
+<span id="cb23-3"><a href="validation.html#cb23-3"></a><span class="st">  </span><span class="kw">rowSums</span>(<span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># And sums up the row</span></span>
+<span id="cb23-4"><a href="validation.html#cb23-4"></a></span>
+<span id="cb23-5"><a href="validation.html#cb23-5"></a><span class="kw">print</span>(tb_activity) <span class="co"># This is saved as a numeric vector</span></span></code></pre></div>
+<pre><code>## [1]    447751.60   9798845.29      1530.63 -10186325.19    -61802.33</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="validation.html#cb25-1"></a><span class="kw">data.frame</span>(<span class="dt">account =</span> tb<span class="op">$</span>account, <span class="dt">tb_activity =</span> tb_activity) <span class="co"># We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity</span></span></code></pre></div>
+<pre><code>##                       account  tb_activity
+## 1         exp_consulting_6500    447751.60
+## 2          exp_materials_6000   9798845.29
+## 3              exp_meals_7000      1530.63
+## 4   liab_accountspayable_2000 -10186325.19
+## 5 liab_creditcardpayable_2100    -61802.33</code></pre>
+<p>This technique allows us to use numeric positions to summarize each row, and then create a new data frame with the account name and trial balance activity we calculated.</p>
+</div>
+<div id="sum-by-named-references" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> Sum by named references</h3>
+<p>In addition of referencing by position number, we can also reference by column name. We want to sum up all columns that start with “activity_”. The selecting by position and selecting by variable name are similar, so we’ll also introduce the ‘dot’ in this select statement.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="validation.html#cb27-1"></a>tb <span class="op">%&gt;%</span></span>
+<span id="cb27-2"><a href="validation.html#cb27-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
+<span id="cb27-3"><a href="validation.html#cb27-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
+<span id="cb27-4"><a href="validation.html#cb27-4"></a>    )) <span class="op">%&gt;%</span></span>
+<span id="cb27-5"><a href="validation.html#cb27-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   account                     tb_activity
+##   &lt;chr&gt;                             &lt;dbl&gt;
+## 1 exp_consulting_6500             447752.
+## 2 exp_materials_6000             9798845.
+## 3 exp_meals_7000                    1531.
+## 4 liab_accountspayable_2000    -10186325.
+## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+<p>What occurs here is that the dot will take the preceding command (technically known as the ‘left hand side’ or LHS) and feed it directly into the function. So in this case, the command can be narrated as:</p>
+<blockquote>
+<p>Using the TB table, create a column named “tb_activity”, calculated as…</p>
+</blockquote>
+<blockquote>
+<p>Identify all column names starting with the word “activity_” from the <em>TB table</em> (aka dot). Using these columns, add them together with rowSums.</p>
+</blockquote>
+<p>By introducing and referencing our columns by names, we’ve introduced a more specific and robust way to aggregate our information by account.</p>
+</div>
+<div id="pivot-then-summarize" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> Pivot then summarize</h3>
+<p>While the prior methods focused on summing up multiple columns, you could also approach this problem as if it was a wide data set that needed to become long. The ability to pivot data longer and wider is incredibly useful - not only for cleaning, but also for reshaping data into other formats for plotting and preparing for databases.</p>
+<p>If we look at our original TB data again, we notice there is:</p>
+<ul>
+<li>one unique identifier (the account name),</li>
+<li>multiple values for each month (example, <code>activity_2019_01</code> represents the period with a value January 2019),</li>
+<li>and the dollar value itself for each month.</li>
+</ul>
+<p>When we deconstruct our data, it becomes much easier to delve into the <strong>tidyr</strong> package and the functions <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="validation.html#cb29-1"></a><span class="kw">head</span>(tb) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 x 13
+##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
+##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+## 1 exp_co…           37907.           18618.               0            58208.
+## 2 exp_ma…          970382.          503354.          699039.          989992.
+## 3 exp_me…               0              126.             285.             153.
+## 4 liab_a…        -1008289.         -514495.         -699323.        -1023042.
+## 5 liab_c…               0            -7603.               0           -25311.
+## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
+## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
+## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="validation.html#cb31-1"></a>tb_long &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb31-2"><a href="validation.html#cb31-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;activity_&quot;</span>), <span class="co"># We want to aggregate the values in these columns</span></span>
+<span id="cb31-3"><a href="validation.html#cb31-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;period&quot;</span>, <span class="co"># What we want to call this new column</span></span>
+<span id="cb31-4"><a href="validation.html#cb31-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;activity&quot;</span>) <span class="co"># And the values we want to take from it</span></span>
+<span id="cb31-5"><a href="validation.html#cb31-5"></a></span>
+<span id="cb31-6"><a href="validation.html#cb31-6"></a>tb_long</span></code></pre></div>
+<pre><code>## # A tibble: 60 x 3
+##    account             period           activity
+##    &lt;chr&gt;               &lt;chr&gt;               &lt;dbl&gt;
+##  1 exp_consulting_6500 activity_2019_01   37907.
+##  2 exp_consulting_6500 activity_2019_02   18618.
+##  3 exp_consulting_6500 activity_2019_03       0 
+##  4 exp_consulting_6500 activity_2019_04   58208.
+##  5 exp_consulting_6500 activity_2019_05   58177.
+##  6 exp_consulting_6500 activity_2019_06   19160.
+##  7 exp_consulting_6500 activity_2019_07    9919.
+##  8 exp_consulting_6500 activity_2019_08   28261 
+##  9 exp_consulting_6500 activity_2019_09   28871.
+## 10 exp_consulting_6500 activity_2019_10   64969.
+## # … with 50 more rows</code></pre>
+<p>This data is now represented longer - there is now one unique value (activity) for each account and month. From here, we can now <code>summarize()</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="validation.html#cb33-1"></a>tb_long <span class="op">%&gt;%</span></span>
+<span id="cb33-2"><a href="validation.html#cb33-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb33-3"><a href="validation.html#cb33-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">tb_activity =</span> <span class="kw">sum</span>(activity))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   account                     tb_activity
+##   &lt;chr&gt;                             &lt;dbl&gt;
+## 1 exp_consulting_6500             447752.
+## 2 exp_materials_6000             9798845.
+## 3 exp_meals_7000                    1531.
+## 4 liab_accountspayable_2000    -10186325.
+## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+<p>While any of these approaches will work to calculate the trial balance of activity, there are sustainability advantages where the columns are not verbatim and explicitly mentioned - what matters is how you believe your dataset can change over time, or how easily readable you can communicate your work to a new individual.</p>
+</div>
+</div>
+<div id="assertion-completeness" class="section level2">
+<h2><span class="header-section-number">6.4</span> Assertion: Completeness</h2>
+<p>The practical goal before we do any further testing is to ensure we’re not wasting time with a data set that is missing information. This completeness test will help validate that we received data for twelve months of GL activity. In Journal Entry testing, this means we will compare the summarized Trial Balance file against the General Ledger entries to obtain reasonableness that our data set we received is complete.</p>
+<p>To compare both the GL and TB, we will want to aggregate the data in both datasets before joining them together. First, we will aggregate the GL:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="validation.html#cb36-1"></a>gl_summarized &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb36-2"><a href="validation.html#cb36-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb36-3"><a href="validation.html#cb36-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">gl_total =</span> <span class="kw">sum</span>(amount),</span>
+<span id="cb36-4"><a href="validation.html#cb36-4"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span>
+<span id="cb36-5"><a href="validation.html#cb36-5"></a></span>
+<span id="cb36-6"><a href="validation.html#cb36-6"></a>gl_summarized</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   account                       gl_total
+##   &lt;chr&gt;                            &lt;dbl&gt;
+## 1 exp_consulting_6500            447752.
+## 2 exp_materials_6000            9798845.
+## 3 exp_meals_7000                   1531.
+## 4 liab_accountspayable_2000   -10186325.
+## 5 liab_creditcardpayable_2100    -61802.</code></pre>
+<p>And also aggregate the TB:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="validation.html#cb38-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb38-2"><a href="validation.html#cb38-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
+<span id="cb38-3"><a href="validation.html#cb38-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
+<span id="cb38-4"><a href="validation.html#cb38-4"></a>    )) <span class="op">%&gt;%</span></span>
+<span id="cb38-5"><a href="validation.html#cb38-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span>
+<span id="cb38-6"><a href="validation.html#cb38-6"></a></span>
+<span id="cb38-7"><a href="validation.html#cb38-7"></a>tb_summarized</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   account                     tb_activity
+##   &lt;chr&gt;                             &lt;dbl&gt;
+## 1 exp_consulting_6500             447752.
+## 2 exp_materials_6000             9798845.
+## 3 exp_meals_7000                    1531.
+## 4 liab_accountspayable_2000    -10186325.
+## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+<p>To perform a proper test of completeness, we should join both tables together. <em>dplyr</em> and the <code>*_join()</code> family of functions can be used to join tables, and also used as diagnosis tools to help debug information as well.</p>
+<p>Our GL and TB summarized datasets could be joined by the <code>account</code> column, prior to performing the calculation to identify differences:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="validation.html#cb40-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb40-2"><a href="validation.html#cb40-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 3
+##   account                       gl_total tb_activity
+##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;
+## 1 exp_consulting_6500            447752.     447752.
+## 2 exp_materials_6000            9798845.    9798845.
+## 3 exp_meals_7000                   1531.       1531.
+## 4 liab_accountspayable_2000   -10186325.  -10186325.
+## 5 liab_creditcardpayable_2100    -61802.     -61802.</code></pre>
+<p>Once you have joined the columns together, a simple difference calculation will let you know what the differences are (if any):</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="validation.html#cb42-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb42-2"><a href="validation.html#cb42-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb42-3"><a href="validation.html#cb42-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity)</span></code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##   account                       gl_total tb_activity tb_diff
+##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
+## 1 exp_consulting_6500            447752.     447752.       0
+## 2 exp_materials_6000            9798845.    9798845.       0
+## 3 exp_meals_7000                   1531.       1531.       0
+## 4 liab_accountspayable_2000   -10186325.  -10186325.       0
+## 5 liab_creditcardpayable_2100    -61802.     -61802.       0</code></pre>
+<p>And if you like clean working papers, simply filter to identify where the reconciliation did not work out:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="validation.html#cb44-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb44-2"><a href="validation.html#cb44-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb44-3"><a href="validation.html#cb44-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity) <span class="op">%&gt;%</span></span>
+<span id="cb44-4"><a href="validation.html#cb44-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(tb_diff <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 0 x 4
+## # … with 4 variables: account &lt;chr&gt;, gl_total &lt;dbl&gt;, tb_activity &lt;dbl&gt;,
+## #   tb_diff &lt;dbl&gt;</code></pre>
+<div id="cautionary-notes-for-completeness" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Cautionary notes for Completeness</h3>
+<p>While performing completeness, you are proving you have a complete set of data. Exercise caution and ensure you are aware of the following:</p>
+<ul>
+<li><p>A completeness check is only as good as the data provided. In the above case, if November was completely excluded in both GL and TB, you would not be able to detect it at this stage if you did not look through the TB data to see that all twelve months were included.</p></li>
+<li><p>Using <code>*_join()</code> functions will generally return all combinations of matches. This is a strong motivation to ensure you have summarized rows by the join columns, prior to joining. Once you have summarized your data, the <code>*_join()</code> functions are far more predictable.</p></li>
+<li><p><code>full_join()</code> will indicate if there are any accounts missing from either table. In our example, if the <code>tb_summarized</code> data had missing accounts that did exist in the <code>gl_summarized</code> table, the resulting <code>tb_activity</code> column values would show up as NA.</p></li>
+<li><p><code>anti_join()</code> will show what columns are included on the left, but missing on the right. In our example, if the <code>tb_summarized</code> data had missing accounts that existed in the <code>gl_summarized</code> table, only this account would show up in the results.</p></li>
+</ul>
+<p>You may want to consider testing for invalid values or missing dates up front. While the primary goal is to ensure the datasets received are appropriate, you may want to consider validating this information earlier. The next chapter will show you how to further manipulate and test these columns.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manipulate.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Audit_Analytics_with-R.pdf", "Audit_Analytics_with-R.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

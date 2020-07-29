@@ -21,6 +21,7 @@ digraph boxes_and_circles {
   R -> G
   G -> R
   R -> D
+  D -> G
   G -> D
   R -> DB
   DB -> R
@@ -70,7 +71,7 @@ The basics of git are:
 
 While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. The git hole can go very deep, so if things don't go according to plan, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
 
-Several different server technologies support git - [github](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
+Several different server technologies support git - [GitHub](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
 
 ### Packages
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-07" />
+<meta name="date" content="2020-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -169,19 +169,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
 <li class="chapter" data-level="4.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
-<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>4.3</b> The AUDITPACKAGENAME</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers---galvanizer"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers - galvanizer</a></li>
 <li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> Github (or another git-related brand)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
-<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a></li>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
+</ul></li>
 <li class="chapter" data-level="5.2" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>6</b> Explore</a><ul>
-<li class="chapter" data-level="6.1" data-path="explore.html"><a href="explore.html#dimensions"><i class="fa fa-check"></i><b>6.1</b> Dimensions</a></li>
-<li class="chapter" data-level="6.2" data-path="explore.html"><a href="explore.html#convert-between-types"><i class="fa fa-check"></i><b>6.2</b> Convert between types</a></li>
-<li class="chapter" data-level="6.3" data-path="explore.html"><a href="explore.html#break-down-each-column"><i class="fa fa-check"></i><b>6.3</b> Break down each column</a></li>
-<li class="chapter" data-level="6.4" data-path="explore.html"><a href="explore.html#visualize"><i class="fa fa-check"></i><b>6.4</b> Visualize</a></li>
+<li class="chapter" data-level="6" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>6</b> Validation</a><ul>
+<li class="chapter" data-level="6.1" data-path="validation.html"><a href="validation.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
+<li class="chapter" data-level="6.2" data-path="validation.html"><a href="validation.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="validation.html"><a href="validation.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.2" data-path="validation.html"><a href="validation.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="validation.html"><a href="validation.html#exploration-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Exploration of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="validation.html"><a href="validation.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
+<li class="chapter" data-level="6.3.2" data-path="validation.html"><a href="validation.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
+<li class="chapter" data-level="6.3.3" data-path="validation.html"><a href="validation.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
+<li class="chapter" data-level="6.3.4" data-path="validation.html"><a href="validation.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="validation.html"><a href="validation.html#assertion-completeness"><i class="fa fa-check"></i><b>6.4</b> Assertion: Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="validation.html"><a href="validation.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.4.1</b> Cautionary notes for Completeness</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>7</b> Manipulate</a><ul>
 <li class="chapter" data-level="7.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
@@ -241,8 +253,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-d171632e230eace53efa" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d171632e230eace53efa">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-af42b06149acdbda62f4" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-af42b06149acdbda62f4">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  D -> G\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 3.1: Internal Audit Data Analytics Architecture
 </p>
@@ -278,7 +290,7 @@ Figure 3.1: Internal Audit Data Analytics Architecture
 <li>Push code from your local computer to the remote server.</li>
 </ul>
 <p>While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. The git hole can go very deep, so if things don’t go according to plan, just remember that you can always <a href="https://xkcd.com/1597/">make a new folder and start fresh</a>.</p>
-<p>Several different server technologies support git - <a href="https://github.com">github</a>, <a href="https://azure.microsoft.com/en-us/services/devops/repos/">Azure Repos</a> within Azure DevOps, <a href="https://gitlab.com">gitlab</a> are all willing to host your code. If you’re using these to hold proprietary or sensitive code, it would be wise to get your company’s support and pay for the ability to have a private repository that only your team can see.</p>
+<p>Several different server technologies support git - <a href="https://github.com">GitHub</a>, <a href="https://azure.microsoft.com/en-us/services/devops/repos/">Azure Repos</a> within Azure DevOps, <a href="https://gitlab.com">gitlab</a> are all willing to host your code. If you’re using these to hold proprietary or sensitive code, it would be wise to get your company’s support and pay for the ability to have a private repository that only your team can see.</p>
 </div>
 <div id="packages" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Packages</h3>

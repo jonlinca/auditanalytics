@@ -14,10 +14,12 @@ We will use several common packages; if you haven't installed the yet, feel free
 install.packages(c('tidyverse'))
 ```
 
-## The AUDITPACKAGENAME
+## Audit Package helpers - galvanizer
 
-```{r}
-# TODO publish audit package
+For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package [galvanizer](https://github.com/jonlinca/galvanizer) to use Results information in the applied analytics components.
+
+```{r, eval = FALSE}
+remotes::install_github('jonlinca/galvanizer')
 ```
 
 ## Github (or another git-related brand)

@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-07" />
+<meta name="date" content="2020-07-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="setup.html"/>
-<link rel="next" href="explore.html"/>
+<link rel="next" href="validation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -169,19 +169,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
 <li class="chapter" data-level="4.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
-<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#the-auditpackagename"><i class="fa fa-check"></i><b>4.3</b> The AUDITPACKAGENAME</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers---galvanizer"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers - galvanizer</a></li>
 <li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> Github (or another git-related brand)</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
-<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a></li>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
+</ul></li>
 <li class="chapter" data-level="5.2" data-path="architecture.html"><a href="architecture.html#databases"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="explore.html"><a href="explore.html"><i class="fa fa-check"></i><b>6</b> Explore</a><ul>
-<li class="chapter" data-level="6.1" data-path="explore.html"><a href="explore.html#dimensions"><i class="fa fa-check"></i><b>6.1</b> Dimensions</a></li>
-<li class="chapter" data-level="6.2" data-path="explore.html"><a href="explore.html#convert-between-types"><i class="fa fa-check"></i><b>6.2</b> Convert between types</a></li>
-<li class="chapter" data-level="6.3" data-path="explore.html"><a href="explore.html#break-down-each-column"><i class="fa fa-check"></i><b>6.3</b> Break down each column</a></li>
-<li class="chapter" data-level="6.4" data-path="explore.html"><a href="explore.html#visualize"><i class="fa fa-check"></i><b>6.4</b> Visualize</a></li>
+<li class="chapter" data-level="6" data-path="validation.html"><a href="validation.html"><i class="fa fa-check"></i><b>6</b> Validation</a><ul>
+<li class="chapter" data-level="6.1" data-path="validation.html"><a href="validation.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
+<li class="chapter" data-level="6.2" data-path="validation.html"><a href="validation.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="validation.html"><a href="validation.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.2" data-path="validation.html"><a href="validation.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="validation.html"><a href="validation.html#exploration-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Exploration of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="validation.html"><a href="validation.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
+<li class="chapter" data-level="6.3.2" data-path="validation.html"><a href="validation.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
+<li class="chapter" data-level="6.3.3" data-path="validation.html"><a href="validation.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
+<li class="chapter" data-level="6.3.4" data-path="validation.html"><a href="validation.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="validation.html"><a href="validation.html#assertion-completeness"><i class="fa fa-check"></i><b>6.4</b> Assertion: Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="validation.html"><a href="validation.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.4.1</b> Cautionary notes for Completeness</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="manipulate.html"><a href="manipulate.html"><i class="fa fa-check"></i><b>7</b> Manipulate</a><ul>
 <li class="chapter" data-level="7.1" data-path="manipulate.html"><a href="manipulate.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
@@ -288,13 +300,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-13"><a href="import-data.html#cb7-13"></a><span class="kw">glimpse</span>(raw_vendors)</span></code></pre></div>
 <pre><code>## Rows: 6
 ## Columns: 7
-## $ id         &lt;chr&gt; &quot;835&quot;, &quot;76&quot;, &quot;582&quot;, &quot;2691&quot;, &quot;2276&quot;, &quot;2669&quot;
-## $ name       &lt;chr&gt; &quot;Williams, Franklin&quot;, &quot;Le, Jacob&quot;, &quot;Martinez, Amy&quot;, &quot;Gardn…
-## $ date_added &lt;date&gt; 2019-09-05, 2019-05-14, 2019-07-15, 2019-10-08, 2019-09-2…
-## $ spend_2015 &lt;dbl&gt; NA, NA, NA, 82075.98, 18603.04, 74661.33
-## $ spend_2016 &lt;dbl&gt; NA, NA, NA, 100953.15, 26820.08, 132848.95
-## $ spend_2017 &lt;dbl&gt; NA, NA, NA, 178028.85, 43208.78, 182072.08
-## $ spend_2018 &lt;dbl&gt; NA, NA, NA, 95205.89, 25214.04, 148938.38</code></pre>
+## $ id         &lt;chr&gt; &quot;656&quot;, &quot;387&quot;, &quot;805&quot;, &quot;2894&quot;, &quot;2531&quot;, &quot;2695&quot;
+## $ name       &lt;chr&gt; &quot;Henkels, Jaylene&quot;, &quot;Kirchner, Jasmine&quot;, &quot;Ro, Kiet&quot;, &quot;el-D…
+## $ date_added &lt;date&gt; 2019-05-31, 2019-11-25, 2019-03-24, 2019-04-03, 2019-09-1…
+## $ spend_2015 &lt;dbl&gt; NA, NA, NA, 25818.04, 93406.11, 90002.42
+## $ spend_2016 &lt;dbl&gt; NA, NA, NA, 29988.47, 155650.27, 111821.93
+## $ spend_2017 &lt;dbl&gt; NA, NA, NA, 52853.61, 196058.76, 177148.54
+## $ spend_2018 &lt;dbl&gt; NA, NA, NA, 35027.7, 111956.2, 112272.5</code></pre>
+<div id="handling-problematic-delimited-files" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Handling problematic delimited files</h3>
 <p>While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="import-data.html#cb9-1"></a><span class="co"># Active directory file, with just a username and manager field.</span></span>
 <span id="cb9-2"><a href="import-data.html#cb9-2"></a></span>
@@ -331,11 +345,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1 jonlin    &quot; jason durrand location: calgary&quot;
 ## 2 ronaldlee &quot; reid turra location: melbourne&quot;</code></pre>
 </div>
+</div>
 <div id="databases" class="section level2">
 <h2><span class="header-section-number">5.2</span> Databases</h2>
 <p>It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.</p>
 <p>The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you’re using. Installing a driver is straight forward</p>
-<p>The Database Interface (DBI) is the interaction between R and the driver Practically, it enables R to send queries to the database via the driver that is defined in the ODBC.</p>
+<p>The Database Interface (DBI) is the interaction between R and the driver. Practically speaking, it enables R to send queries to the database via the driver that is defined in the ODBC.</p>
 <p>The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you’ll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.</p>
 <p>For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!) Again, lets start by downloading the file, or in this case, a database:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="import-data.html#cb18-1"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
@@ -347,17 +362,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="import-data.html#cb19-1"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span></code></pre></div>
 <p>You can confirm it works by listing the tables in the database. One important thing to remember is that you’ll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="import-data.html#cb20-1"></a><span class="kw">dbListTables</span>(con)</span></code></pre></div>
-<pre><code>## [1] &quot;gl&quot;      &quot;vendors&quot;</code></pre>
+<pre><code>## [1] &quot;gl&quot;      &quot;tb&quot;      &quot;vendors&quot;</code></pre>
 <p>Typically to get data out of a database, you’ll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-data.html#cb22-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl&#39;</span>)</span></code></pre></div>
-<pre><code>##   je_num   amount gl_date gl_date_char vendor_id                   account
-## 1      1  8346.79   18024   2019-05-08      2691        exp_materials_6000
-## 2      1 -8346.79   18024   2019-05-08        NA liab_accountspayable_2000
+<pre><code>##   je_num    amount gl_date gl_date_char vendor_id                   account
+## 1      1  30487.47   17984   2019-03-29      2894        exp_materials_6000
+## 2      1 -30487.47   17984   2019-03-29        NA liab_accountspayable_2000
 ##                        description
 ## 1 Quality control testing supplies
 ## 2 Quality control testing supplies
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1998 rows ]</code></pre>
-<p>While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the dplyr package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
+<p>While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the <strong>dplyr</strong> package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="import-data.html#cb24-1"></a>db_gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>)</span>
 <span id="cb24-2"><a href="import-data.html#cb24-2"></a></span>
 <span id="cb24-3"><a href="import-data.html#cb24-3"></a>db_gl</span></code></pre></div>
@@ -366,16 +381,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
 ##    je_num  amount gl_date gl_date_char vendor_id account       description      
 ##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;            
-##  1      1   8347.   18024 2019-05-08        2691 exp_material… Quality control …
-##  2      1  -8347.   18024 2019-05-08          NA liab_account… Quality control …
-##  3      2  12272.   18096 2019-07-19        2669 exp_material… Packaging and bo…
-##  4      2 -12272.   18096 2019-07-19          NA liab_account… Packaging and bo…
-##  5      3   2883.   18110 2019-08-02        2276 exp_material… Paper            
-##  6      3  -2883.   18110 2019-08-02          NA liab_account… Paper            
-##  7      4  15971.   17907 2019-01-11        2276 exp_material… Paper            
-##  8      4 -15971.   17907 2019-01-11          NA liab_account… Paper            
-##  9      5   7945.   18039 2019-05-23        2691 exp_material… Quality control …
-## 10      5  -7945.   18039 2019-05-23          NA liab_account… Quality control …
+##  1      1  30487.   17984 2019-03-29        2894 exp_material… Quality control …
+##  2      1 -30487.   17984 2019-03-29          NA liab_account… Quality control …
+##  3      2   5019.   18194 2019-10-25        2695 exp_material… Packaging and bo…
+##  4      2  -5019.   18194 2019-10-25          NA liab_account… Packaging and bo…
+##  5      3    264.   18051 2019-06-04        2894 exp_material… Quality control …
+##  6      3   -264.   18051 2019-06-04          NA liab_account… Quality control …
+##  7      4    567.   17903 2019-01-07        2894 exp_material… Medical grade fi…
+##  8      4   -567.   17903 2019-01-07          NA liab_account… Medical grade fi…
+##  9      5  13623.   18261 2019-12-31        2894 exp_material… Quality control …
+## 10      5 -13623.   18261 2019-12-31          NA liab_account… Quality control …
 ## # … with more rows</code></pre>
 <p>Not only is it pointing to the same table, but its also performing the same query:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="import-data.html#cb26-1"></a>db_gl <span class="op">%&gt;%</span><span class="st"> </span></span>
@@ -391,11 +406,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lets say that you wanted to filter amounts greater than $75,000 in the database. In the SQL method, you would need to type a whole new SQL query:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="import-data.html#cb28-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl where amount &gt; 75000&#39;</span>)</span></code></pre></div>
 <pre><code>##   je_num   amount gl_date gl_date_char vendor_id            account
-## 1     97 76842.18   18237   2019-12-07      2276 exp_materials_6000
-## 2    527 97230.25   18002   2019-04-16      2691 exp_materials_6000
+## 1    991 92284.43   17912   2019-01-16      2894 exp_materials_6000
 ##                        description
-## 1                            Paper
-## 2 Quality control testing supplies</code></pre>
+## 1 Quality control testing supplies</code></pre>
 <p>Where in the dplyr method, you would only need to build on the same connection object already established. Identical queries, and results</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="import-data.html#cb30-1"></a>db_gl_threshold &lt;-<span class="st"> </span>db_gl <span class="op">%&gt;%</span></span>
 <span id="cb30-2"><a href="import-data.html#cb30-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span><span class="dv">75000</span>)</span>
@@ -406,8 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
 ##   je_num amount gl_date gl_date_char vendor_id account      description         
 ##    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;               
-## 1     97 76842.   18237 2019-12-07        2276 exp_materia… Paper               
-## 2    527 97230.   18002 2019-04-16        2691 exp_materia… Quality control tes…</code></pre>
+## 1    991 92284.   17912 2019-01-16        2894 exp_materia… Quality control tes…</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="import-data.html#cb32-1"></a><span class="kw">show_query</span>(db_gl_threshold)</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT *
@@ -437,10 +449,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-5"><a href="import-data.html#cb35-5"></a></span>
 <span id="cb35-6"><a href="import-data.html#cb35-6"></a>response</span></code></pre></div>
 <pre><code>## Response [https://api.github.com/users/jonlinca/repos]
-##   Date: 2020-07-08 01:45
+##   Date: 2020-07-29 21:42
 ##   Status: 200
 ##   Content-Type: application/json; charset=utf-8
-##   Size: 28.7 kB
+##   Size: 28.6 kB
 ## [
 ##   {
 ##     &quot;id&quot;: 129155075,
@@ -465,7 +477,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb41-3"><a href="import-data.html#cb41-3"></a>cleancontent &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(jsonlite<span class="op">::</span><span class="kw">toJSON</span>(content), <span class="dt">flatten =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb41-4"><a href="import-data.html#cb41-4"></a></span>
 <span id="cb41-5"><a href="import-data.html#cb41-5"></a><span class="co"># Print it out</span></span>
-<span id="cb41-6"><a href="import-data.html#cb41-6"></a>cleancontent[,<span class="kw">c</span>(<span class="st">&#39;id&#39;</span>,<span class="st">&#39;name&#39;</span>)]</span></code></pre></div>
+<span id="cb41-6"><a href="import-data.html#cb41-6"></a>cleancontent[,<span class="kw">c</span>(<span class="st">&#39;id&#39;</span>, <span class="st">&#39;name&#39;</span>)]</span></code></pre></div>
 <pre><code>##          id                    name
 ## 1 129155075 ACLandR_DeployingModels
 ## 2 164948874          ACLandR_KMeans
@@ -482,7 +494,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="setup.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="explore.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="validation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
