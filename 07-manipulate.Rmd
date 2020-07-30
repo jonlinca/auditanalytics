@@ -6,8 +6,6 @@
 
 ## Sort
 
-## Summary statistics - Outliers 
-
 ## Clean text
 
 ## Join

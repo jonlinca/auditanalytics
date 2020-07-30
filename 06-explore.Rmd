@@ -2,7 +2,7 @@
 
 The first thing you should do when you get a new piece of data, before you do any analysis, is to explore the data for potential data errors and to perform completeness testing. Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.
 
-For this section we will use the accounting database validate our Journal Entry file prior to testing:
+For this section we will use the accounting database and validate our Journal Entry file prior to testing. We cover the importing of data in the prior chapter from a database:
 
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr) # For manipulating data
@@ -24,7 +24,9 @@ gl <- tbl(con, 'gl') %>%
 
 ## Exploration of General Ledger data
 
-General Ledger (GL) data is where all the detailed transactions against the accounting system take place. Sub-ledgers may exist for specific systems (Accounts Payable, Accounts Receivable, Inventory), and these systems will also post to the General Ledger, occasionally in a more summarized form.
+General Ledger (GL) data is where all the transactions against the accounting system are stored. Sub-ledgers may exist for specific systems (Accounts Payable, Accounts Receivable, Inventory) in a more detailed form, and these systems will also post to the General Ledger.
+
+For the data set in our example, we've requested and received a full year's worth of transactions.
 
 A rapid preview of all your columns can be done quickly with `summary()`. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):
 
@@ -32,12 +34,12 @@ A rapid preview of all your columns can be done quickly with `summary()`. Not on
 summary(gl)
 ```
 
-Some initial scanning is already useful:
+A high level summary scan is useful for us:
 
 - `je_num` is a number value, although it has no meaning as a number, as it is a reference.
 - `vendor_id` is a number as well, but it contains NA's. NA's are R's way of indicating that data does not exist.
 - `amount` is both positive and negative - indicating this column has indicators of both credits and debits
-- `gl_date` is numeric while `gl_date_char` is a character.
+- `gl_date` is numeric while `gl_date_char` is a character. We will talk about converting these dates to something interpretable in the next chapter.
 
 It may be useful to look at a few data samples more closely to understand patterns. `head()` is useful in seeing the first few columns
 
@@ -45,7 +47,7 @@ It may be useful to look at a few data samples more closely to understand patter
 head(gl)
 ```
 
-We get more understanding understanding the details of our dataset:
+We get a more detailed understanding of the fields:
 
 - `je_num` indicates a set of lines within a journal entry.
 - `vendor_id` is usually associated to an expense account. 
@@ -56,19 +58,19 @@ We get more understanding understanding the details of our dataset:
 
 ### NA values
 
-NAs are "Not available" or Missing Values. As an auditor, its important for to understand why NA values exist in your dataset. Reasons I have heard in my career include:
+NAs are "Not available" or Missing Values. As an auditor, its important for to understand why NA values exist in your data set. Reasons I have heard in my career include:
 
 - Data was not recorded - A field may be blank because it was intentionally or accidentally omitted. A "void date" is quite commonly NA in a GL database as most entries have not been voided. Or perhaps a journal entry is NA because it has not yet been approved. There may be business rules that indicate why a row's value may be NA.
 
-- Data was not recorded... at the time - A data source is always evolving, and new columns may be introduced as new features are rolled out or data structure changes. For example, a relatively new requirement indicating companies must identify government companies within their databases, and only applicable for new companies in the database. Historically entered vendors may have NAs.
+- Data was not recorded at the time - A data source is always evolving, and new columns may be introduced as new features are rolled out or data structure changes. For example, a relatively new requirement indicating companies must identify government companies within their databases, and only applicable for new companies in the database. Vendors entered prior to this change may be left as NA.
 
-- Inappropriate coercion - the column type was converted from one to another, indicating loss of values. For example, converting the letter 'a' using `as.numeric()` will give the following:
+- Inappropriate coercion - the column type was converted from one to another and a loss of value occured. For example, converting the letter 'a' using `as.numeric()` will give the following:
 
 ```{r}
 as.numeric('a')
 ```
 
-Its not that this value never existed, it is that it did not have a valid value when converted from a letter to a number, and therefore shows as NA.
+Its not that this value never existed. The letter 'a' did exist in the original format, but it doesn't have a numerical representation within R. As it did not have a valid value when converted to a numeric type, it shows as NA.
 
 In our data set, the `vendor_id` has NA values. We can inspect these by isolating them to determine the nature of the pattern:
 
@@ -103,11 +105,11 @@ gl %>%
   filter(amount != 0)
 ```
 
-## Exploration of Trial Balance data
+## Transforming of Trial Balance data
 
-The Trial Balance (TB) is intended to track and record higher level movements of the General Ledger. It does so by maintaining an accurate balance of debits and credits made to the General Ledger, usually against accounts.
+The Trial Balance (TB) is intended to track and record higher level movements of the General Ledger. It does so by maintaining an accurate balance of debits and credits made to the accounts.
 
-Lets look at our trial balance:
+Lets look at our TB:
 
 ```{r}
 tb <- tbl(con, 'tb') %>%
@@ -116,13 +118,13 @@ tb <- tbl(con, 'tb') %>%
 head(tb)
 ```
 
-Our TB has activity levels by month. In your day-to-day work, you may also receive a TB that has an Opening and Closing balance - to obtain the activity level for the audit period, simply deduct the Close from the Open to calculate the Change for the year.
+The TB provided has the net change or net activity level by month. In your day-to-day work, you may also receive a TB that has an Opening and Closing balance - to obtain the net change for the audit period, simply deduct the Close from the Open to calculate the Change for the year, zeroing out the 'Open' component for income statement accounts.
 
-In our case, we would like to perform completeness testing by account for the entire year, which means we compare the total activity of the account in the TB to the GL. As each column is its own month, we can approach this in several ways. Watching the problem solved in multiple ways is always beneficial.
+In our case, we would like to perform completeness testing by account for the entire year, which means we compare the total activity of the account in the TB to the GL. As each column is its own month, we can approach this in several ways - each of the below methods demonstrates how to solve the problem.
 
 ### Sum by absolute references
 
-In traditional "Excel-esque" form, you would summing up each column for each row - simply taking the values of each column and adding them together.
+In traditional "Excel-esque" form, you would add up each column for each row - simply taking the values of each column and adding them together.
 
 ```{r}
 tb %>%
@@ -130,25 +132,39 @@ tb %>%
   select(account, tb_activity)
 ```
 
-While the above works, it is difficult to read, is prone to errors, and also means this approach could only be used once this year, as we expect the year numbers to change as time passes. 
+While the above works, there are some risks to this code:
+
+- the code is difficult to read, as it is a long string variable names,
+- is prone to errors as you have to type out each variable,
+- this approach could only be used once this year, as when the next audit year rolls around, you would have to manually change the references.
 
 ### Sum by numeric position
 
-To make this code more reusable, we could make some changes. Lets take the logical assumption that the position of the columns will never change, and therefore we can reference the position number in our script:
+To make this code more reusable, we could make some changes. We notice that the activity columns are in the second column through the thirteenth position - we can assume that the 'position' of the columns will never change - second column will always be January, and the thirteenth will be December.
 
 ```{r}
 names(tb) # This tells us the position number of each column header
 
+names(tb)[2] # Returns January
+
+names(tb)[13] # Returns December
+```
+
+Therefore, we can reference a range of column numbers in our script:
+
+```{r}
 tb_activity <- tb %>%
-  select(2:13) %>% # Selects just the numeric columns that we assume, by position number
+  select(2:13) %>% # Selects just the numeric columns that we assume, by column number
   rowSums(na.rm = TRUE) # And sums up the row
 
 print(tb_activity) # This is saved as a numeric vector
-
-data.frame(account = tb$account, tb_activity = tb_activity) # We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity
 ```
 
-This technique allows us to use numeric positions to summarize each row, and then create a new data frame with the account name and trial balance activity we calculated.
+The newly calculated row summarization will return the total activity, and each item in each vector represents which row it belonged to. We can use the same TB account names and match it to the `tb_activty` object we made, and then create a new data frame with the account name and trial balance activity we calculated.
+
+```{r}
+data.frame(account = tb$account, tb_activity = tb_activity) # We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity
+```
 
 ### Sum by named references
 
@@ -165,7 +181,7 @@ tb %>%
 
 What occurs here is that the dot will take the preceding command (technically known as the 'left hand side' or LHS) and feed it directly into the function. So in this case, the command can be narrated as:
 
-> Using the TB table, create a column named "tb_activity", calculated as...
+> Using the TB table (this becomes our LHS), create a column named "tb_activity", calculated as...
 
 > Identify all column names starting with the word "activity_" from the *TB table* (aka dot). Using these columns, add them together with rowSums.
 
