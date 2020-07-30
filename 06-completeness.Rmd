@@ -2,7 +2,7 @@
 
 The first thing you should do when you get a new piece of data, before you do any analysis, is to validate the data for obvious data errors and to perform completeness testing. The intent of Completeness testing is to evaluate whether you have received a full set of data - data anomalies can be explored further after the preliminary testing (for example, malformed dates, NA information, etc.).
 
-Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.
+Ideally, completeness on a data set should be performed by comparing to another data set - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.
 
 For this section we will use the accounting database and validate our Journal Entry file prior to doing further work. We covered the importing of data in the prior chapter, so we'll do that again along with some packages:
 

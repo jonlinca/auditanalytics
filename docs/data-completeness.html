@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-29" />
+<meta name="date" content="2020-07-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -196,10 +196,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="clean-and-explore.html"><a href="clean-and-explore.html"><i class="fa fa-check"></i><b>7</b> Clean and Explore</a><ul>
 <li class="chapter" data-level="7.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#dates"><i class="fa fa-check"></i><b>7.2</b> Dates</a></li>
-<li class="chapter" data-level="7.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#graphics"><i class="fa fa-check"></i><b>7.3</b> Graphics</a></li>
-<li class="chapter" data-level="7.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summarize"><i class="fa fa-check"></i><b>7.4</b> Summarize</a></li>
-<li class="chapter" data-level="7.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#join"><i class="fa fa-check"></i><b>7.5</b> Join</a></li>
+<li class="chapter" data-level="7.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
+<li class="chapter" data-level="7.2.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
+<li class="chapter" data-level="7.2.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
+<li class="chapter" data-level="7.2.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-wider"><i class="fa fa-check"></i><b>7.3</b> Pivot Wider</a></li>
+<li class="chapter" data-level="7.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-longer"><i class="fa fa-check"></i><b>7.4</b> Pivot Longer</a></li>
+<li class="chapter" data-level="7.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate"><i class="fa fa-check"></i><b>7.5</b> Separate</a></li>
+<li class="chapter" data-level="7.6" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate_rows"><i class="fa fa-check"></i><b>7.6</b> Separate_rows</a></li>
+<li class="chapter" data-level="7.7" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summary-statistics"><i class="fa fa-check"></i><b>7.7</b> Summary Statistics</a></li>
+<li class="chapter" data-level="7.8" data-path="clean-and-explore.html"><a href="clean-and-explore.html#anscombes-quartet"><i class="fa fa-check"></i><b>7.8</b> Anscombe’s Quartet</a></li>
+<li class="chapter" data-level="7.9" data-path="clean-and-explore.html"><a href="clean-and-explore.html#graphics"><i class="fa fa-check"></i><b>7.9</b> Graphics</a></li>
+<li class="chapter" data-level="7.10" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summarize"><i class="fa fa-check"></i><b>7.10</b> Summarize</a></li>
+<li class="chapter" data-level="7.11" data-path="clean-and-explore.html"><a href="clean-and-explore.html#join"><i class="fa fa-check"></i><b>7.11</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>8</b> Test</a><ul>
 <li class="chapter" data-level="8.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>8.1</b> Mutate - If statements</a></li>
@@ -252,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="data-completeness" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Data Completeness</h1>
 <p>The first thing you should do when you get a new piece of data, before you do any analysis, is to validate the data for obvious data errors and to perform completeness testing. The intent of Completeness testing is to evaluate whether you have received a full set of data - data anomalies can be explored further after the preliminary testing (for example, malformed dates, NA information, etc.).</p>
-<p>Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.</p>
+<p>Ideally, completeness on a data set should be performed by comparing to another data set - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.</p>
 <p>For this section we will use the accounting database and validate our Journal Entry file prior to doing further work. We covered the importing of data in the prior chapter, so we’ll do that again along with some packages:</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="data-completeness.html#cb43-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
 <span id="cb43-2"><a href="data-completeness.html#cb43-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
