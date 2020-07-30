@@ -1,0 +1,39 @@
+# Clean and Explore
+
+For this section we will still use the same accounting database, along with some more packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(dplyr) # For manipulating data
+library(tidyr) # For making data long and wide
+library(ggplot2) # For making visualizations
+
+library(DBI) # For database connections
+
+dir.create("data", showWarnings = FALSE)
+
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
+
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
+
+gl <- tbl(con, 'gl') %>%
+  collect()
+```
+
+## Basic math
+
+sum
+mean
+
+## Dates
+
+Clean dates
+
+## Graphics
+
+Summary statistics
+
+## Summarize
+
+## Join
+- to vendor master to explore longer term trends

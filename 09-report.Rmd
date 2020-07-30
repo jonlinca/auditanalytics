@@ -2,6 +2,4 @@
 
 ## RMarkdown
 
-## Graphics
-
 ## Export

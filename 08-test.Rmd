@@ -2,13 +2,21 @@
 
 ## Mutate - If statements
 
-## Summarize
+- Weekend date
+
+## Round zero
+
+## Rare Accounts
+
+## Sequential
 
 ## Outliers
 
 ## Duplicates
 
-## Age
+## Age 
+
+TODO (need to insert invoice date and paid date)
 
 ## Benford Analysis
 
@@ -16,6 +24,9 @@
 
 ## Search text {#test-searchtext}
 
-```{r}
+- Facilitation
+- Quebec
+
+```{r include=FALSE}
 #Page 44 https://www.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/sas-142.pdf
 ```

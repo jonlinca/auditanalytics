@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>About the author | Audit Analytics with R</title>
+  <title>Chapter 7 Clean and Explore | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="About the author | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 7 Clean and Explore | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="About the author | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 7 Clean and Explore | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="data-completeness.html"/>
+<link rel="next" href="test.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -249,17 +249,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="about-the-author" class="section level1 unnumbered">
-<h1>About the author</h1>
+<div id="clean-and-explore" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Clean and Explore</h1>
+<p>For this section we will still use the same accounting database, along with some more packages.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="clean-and-explore.html#cb94-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
+<span id="cb94-2"><a href="clean-and-explore.html#cb94-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
+<span id="cb94-3"><a href="clean-and-explore.html#cb94-3"></a><span class="kw">library</span>(ggplot2) <span class="co"># For making visualizations</span></span>
+<span id="cb94-4"><a href="clean-and-explore.html#cb94-4"></a></span>
+<span id="cb94-5"><a href="clean-and-explore.html#cb94-5"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb94-6"><a href="clean-and-explore.html#cb94-6"></a></span>
+<span id="cb94-7"><a href="clean-and-explore.html#cb94-7"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb94-8"><a href="clean-and-explore.html#cb94-8"></a></span>
+<span id="cb94-9"><a href="clean-and-explore.html#cb94-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb94-10"><a href="clean-and-explore.html#cb94-10"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb94-11"><a href="clean-and-explore.html#cb94-11"></a></span>
+<span id="cb94-12"><a href="clean-and-explore.html#cb94-12"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb94-13"><a href="clean-and-explore.html#cb94-13"></a></span>
+<span id="cb94-14"><a href="clean-and-explore.html#cb94-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb94-15"><a href="clean-and-explore.html#cb94-15"></a><span class="st">  </span><span class="kw">collect</span>()</span></code></pre></div>
+<div id="basic-math" class="section level2">
+<h2><span class="header-section-number">7.1</span> Basic math</h2>
+<p>sum
+mean</p>
+</div>
+<div id="dates" class="section level2">
+<h2><span class="header-section-number">7.2</span> Dates</h2>
+<p>Clean dates</p>
+</div>
+<div id="graphics" class="section level2">
+<h2><span class="header-section-number">7.3</span> Graphics</h2>
+<p>Summary statistics</p>
+</div>
+<div id="summarize" class="section level2">
+<h2><span class="header-section-number">7.4</span> Summarize</h2>
+</div>
+<div id="join" class="section level2">
+<h2><span class="header-section-number">7.5</span> Join</h2>
+<ul>
+<li>to vendor master to explore longer term trends</li>
+</ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-completeness.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,8 +1,10 @@
-# Validation
+# Data Completeness
 
-The first thing you should do when you get a new piece of data, before you do any analysis, is to explore the data for potential data errors and to perform completeness testing. Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.
+The first thing you should do when you get a new piece of data, before you do any analysis, is to validate the data for obvious data errors and to perform completeness testing. The intent of Completeness testing is to evaluate whether you have received a full set of data - data anomalies can be explored further after the preliminary testing (for example, malformed dates, NA information, etc.).
 
-For this section we will use the accounting database and validate our Journal Entry file prior to testing. We cover the importing of data in the prior chapter from a database:
+Ideally, completeness on a data set should be performed by comparing to another dataset - for example, a detailed ledger can roll up into account balances. Other ways of performing completeness is to compare data against a third party, independently managed source of information.
+
+For this section we will use the accounting database and validate our Journal Entry file prior to doing further work. We covered the importing of data in the prior chapter, so we'll do that again along with some packages:
 
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr) # For manipulating data
@@ -58,6 +60,8 @@ We get a more detailed understanding of the fields:
 
 ### NA values
 
+At this stage, you could explore obvious potential issues - in this case, NA values have surfaced themselves early through the `summary()` command, so we should explore it a bit.
+
 NAs are "Not available" or Missing Values. As an auditor, its important for to understand why NA values exist in your data set. Reasons I have heard in my career include:
 
 - Data was not recorded - A field may be blank because it was intentionally or accidentally omitted. A "void date" is quite commonly NA in a GL database as most entries have not been voided. Or perhaps a journal entry is NA because it has not yet been approved. There may be business rules that indicate why a row's value may be NA.
@@ -95,7 +99,9 @@ gl %>%
 
 ### Journal Entries balance to zero
 
-A quick sanity check for the analysis of GL accounts is to do a quick summarization. In this case, you will want to `group_by()` and `summarize()` again - in this case, by the `je_num` will test whether all journal entries will net to zero.
+A quick sanity check for the analysis of GL accounts is to do a quick summarization. 
+
+In this case, you will want to `group_by()` and `summarize()` again - in this case, by the `je_num` will test whether all journal entries will net to zero.
 
 ```{r}
 gl %>%
@@ -134,16 +140,16 @@ tb %>%
 
 While the above works, there are some risks to this code:
 
-- the code is difficult to read, as it is a long string variable names,
-- is prone to errors as you have to type out each variable,
-- this approach could only be used once this year, as when the next audit year rolls around, you would have to manually change the references.
+- the code is difficult to read, as it is a long string of column names,
+- is prone to errors as you have to type out each column, and
+- this approach could only be used once, this year, as when the next audit year rolls around, you would have to manually change the references.
 
 ### Sum by numeric position
 
-To make this code more reusable, we could make some changes. We notice that the activity columns are in the second column through the thirteenth position - we can assume that the 'position' of the columns will never change - second column will always be January, and the thirteenth will be December.
+To make this code more reusable, we could make some changes. We notice that the activity columns are in the second column through the thirteenth position, so we can assume that the 'position' of the columns will never change - second column will always be January, and the thirteenth will be December.
 
 ```{r}
-names(tb) # This tells us the position number of each column header
+names(tb) # This tells us the position number of each column names
 
 names(tb)[2] # Returns January
 
@@ -153,14 +159,27 @@ names(tb)[13] # Returns December
 Therefore, we can reference a range of column numbers in our script:
 
 ```{r}
+tb %>%
+  select(2:13) # Selects just the numeric columns that we assume, by column number
+```
+
+And now we can summarize by row
+
+```{r}
 tb_activity <- tb %>%
-  select(2:13) %>% # Selects just the numeric columns that we assume, by column number
-  rowSums(na.rm = TRUE) # And sums up the row
+  select(2:13) %>%
+  rowSums() # And sums up the row
 
 print(tb_activity) # This is saved as a numeric vector
 ```
 
-The newly calculated row summarization will return the total activity, and each item in each vector represents which row it belonged to. We can use the same TB account names and match it to the `tb_activty` object we made, and then create a new data frame with the account name and trial balance activity we calculated.
+The newly calculated row summarization will return the total activity as a numeric vector; each item in the vector represents which row it belonged to. As this is a vector of numbers, we can a vector of the same TB account names and join them together. 
+
+```{r}
+print(tb$account) # Vector of account names as a character
+```
+
+With these two vectors, we can create a new data frame with the account name and TB activity we calculated.
 
 ```{r}
 data.frame(account = tb$account, tb_activity = tb_activity) # We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity
@@ -174,16 +193,16 @@ In addition of referencing by position number, we can also reference by column n
 ```{r}
 tb %>%
   mutate(tb_activity = rowSums(
-    select(., contains('activity_'))
+    select(., contains('activity_')) # Only keep the column names with the word 'activity_'
     )) %>%
   select(account, tb_activity)
 ```
 
 What occurs here is that the dot will take the preceding command (technically known as the 'left hand side' or LHS) and feed it directly into the function. So in this case, the command can be narrated as:
 
-> Using the TB table (this becomes our LHS), create a column named "tb_activity", calculated as...
+> Using the *TB table* (this becomes our LHS), create a column named "tb_activity"...
 
-> Identify all column names starting with the word "activity_" from the *TB table* (aka dot). Using these columns, add them together with rowSums.
+> Calculate "tb_activity" by identifying all column names containing the word "activity_" from the *TB table* (referenced by the dot). Using these columns, add them together with rowSums.
 
 By introducing and referencing our columns by names, we've introduced a more specific and robust way to aggregate our information by account.
 
@@ -221,7 +240,7 @@ tb_long %>%
 
 While any of these approaches will work to calculate the trial balance of activity, there are sustainability advantages where the columns are not verbatim and explicitly mentioned - what matters is how you believe your dataset can change over time, or how easily readable you can communicate your work to a new individual.
 
-## Assertion: Completeness
+## Asserting Completeness
 
 The practical goal before we do any further testing is to ensure we're not wasting time with a data set that is missing information. This completeness test will help validate that we received data for twelve months of GL activity. In Journal Entry testing, this means we will compare the summarized Trial Balance file against the General Ledger entries to obtain reasonableness that our data set we received is complete.
 
@@ -237,6 +256,7 @@ gl_summarized
 ```
 
 And also aggregate the TB:
+
 ```{r}
 tb_summarized <- tb %>%
   mutate(tb_activity = rowSums(
@@ -273,7 +293,7 @@ gl_summarized %>%
   dplyr::filter(tb_diff != 0)
 ```
 
-### Cautionary notes for Completeness
+## Cautionary notes for Completeness
 
 While performing completeness, you are proving you have a complete set of data. Exercise caution and ensure you are aware of the following:
 
