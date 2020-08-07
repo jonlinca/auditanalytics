@@ -1,8 +1,10 @@
-"id","name","date_added","spend_2015","spend_2016","spend_2017","spend_2018"
-84,"Anderson, Gabrielle",2015-10-20,NA,NA,NA,NA
-459,"Marquez-Ibarra, Isabel",2015-06-06,NA,NA,NA,NA
-771,"Morquecho, Cynthia",2015-02-07,NA,NA,NA,NA
-2215,"Taylor Company Ltd - Contact: Beck, Jordan",2015-11-13,65639.7276907228,83050.0971758096,149920.547414918,"83168.2570365064"
-2103,"Wilson Company Ltd - Contact: Jenkins, Candice",2015-06-19,87237.2398991138,98308.3683608712,180169.208018707,"109765.696471134"
-2436,"al-Habib Company Ltd - Contact: Alvarez, Kimberly",2015-12-12,0,0,170705.611490097,"96629.1422682084"
-2436,"al-Habib Company Ltd - Contact: Alvarez, Kimberly",2015-12-12,56191.2359739654,94466.4116885629,0,"0"
+"id","type","name","date_added","summary","2015","2016","2017","2018"
+550,"E","al-Salim, Humaira",2015-07-01,NA,NA,NA,NA,NA
+766,"E","Graham, Alexa",2015-12-16,NA,NA,NA,NA,NA
+234,"E","Cabello-Silva, Crystal",2015-02-03,NA,NA,NA,NA,NA
+2776,"V","Olivas Company Ltd - Contact: Pavone, Ryan",2015-11-07,"spend",79990.1802209206,113894.18176723,114911.274568141,74798.0185964524
+2653,"V","Barron Company Ltd - Contact: Lucero, Rodrigo",2015-12-08,"spend",49070.8079724573,79714.9719700577,127931.37237028,43158.9451578505
+2857,"V","Chiapuzio Company Ltd - Contact: Gettman, Joshua",2015-10-25,"spend",53114.4740758464,77107.2221455063,115493.094505719,42943.6264911689
+2776,"V","Olivas Company Ltd - Contact: Pavone, Ryan",2015-11-07,"credits",412.708029383793,554.067182728512,602.647274055163,161.754675822466
+2653,"V","Barron Company Ltd - Contact: Lucero, Rodrigo",2015-12-08,"credits",705.853975610808,894.642541850446,1116.79271056334,977.185143401542
+2857,"V","Chiapuzio Company Ltd - Contact: Gettman, Joshua",2015-10-25,"credits",629.032128956169,730.637906393727,1261.76435125751,908.311123509943
