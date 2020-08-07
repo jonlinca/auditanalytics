@@ -58,7 +58,7 @@ One of the most effective ways to solve this problem is to leverage a code repos
 
 Code versioning technologies resonate closely with IT General Controls and even the COBIT framework.
 
-### Git
+### git
 
 [git](https://git-scm.com) is a type of version control. Another free, open source software, and the basic usage of the tool is  accessible. 
 
@@ -79,7 +79,7 @@ As you write more code and templates, you will eventually want to share these ne
 
 Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team's workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.
 
-However, you do not need to force your team to copy-and-paste a folder or even a Word document from a template folder. The most elegant way to distribute your code is via packages. These packages can be hosted on a private or public code repository, enabling your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive. 
+How do you share packages? You certainly don't not need to force your team to copy-and-paste code or even a templates from a central folder! The most elegant way to distribute your code is via hosting packages on a code or package repository. These repositories (hosted internally or externally) enable your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive. 
 
 The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don't call it auditR.
 

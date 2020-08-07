@@ -1,0 +1,406 @@
+# Cleaning data
+
+Cleaning a data set, including fields and reshaping of the data, is a fundamental skill in order to get the data into an analyzable format. Real world data is messy, and will not typically be immediately analyzable immediately after downloading. 
+
+For this section we will still use the company database, along with some more packages.
+
+```{r, message = FALSE, warning = FALSE}
+library(dplyr) # For manipulating data
+library(tidyr) # For making data long and wide
+
+library(lubridate) # For date handling
+library(ggplot2) # For making visualizations
+
+library(DBI) # For database connections
+
+dir.create("data", showWarnings = FALSE)
+
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
+
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
+
+gl <- tbl(con, 'gl') %>%
+  collect()
+
+vendors <- tbl(con, 'vendors') %>%
+  collect()
+
+industry <- dbReadTable(con, 'industry') %>%
+  collect()
+
+dbDisconnect(con)
+```
+
+## Basic math
+
+We covered some of the basic operators in R in the Completeness chapter, so we'll cover some more calculations and transformations.
+
+```{r}
+x <- c(1, 2, 3)
+y <- c(4, 5, 6)
+```
+
+The basic mathematical symbols will calculate a vector with a position element against a different vector with the same position. In this case, the first number in `x` is added to the first number in `y` resulting in the first calculation, the second number in `x` is added to the second number in `y` resulting in the second calculation, and so on.
+
+```{r}
+y + x
+```
+
+This distinction is important - vectorization allows R to be fast, but it changes how the user needs to understand objects.
+
+`sum()` is fairly straight forward - it will add all the elements given, together:
+
+```{r}
+sum(x)
+```
+
+If you specify multiple vectors - it will merely combine them all together, equivalent to `sum(c(1, 2, 3), c(4, 5, 6))`:
+
+```{r}
+sum(x, y)
+```
+
+We mentioned in the prior chapter about NA values, which were 'Not Available' or Missing Values. It becomes important to understand the implication of them in your calculations. For example, when a NA value exists in a vector, you will get an NA by default:
+
+```{r}
+z <- c(1, 2, NA)
+sum(z)
+```
+
+While `sum()`, and several other functions like `mean()`, `min()` and `max()` all generally behave in predictable manners, they all have an argument of `na.rm = FALSE` by default (enter `?sum` to see this argument in the help file. The reason why `FALSE` is by default is that it brings attention to the vector missing values. If you want to perform the calculation on this, you either need to substitute the `NA` out for a value (imputation), or simply ignore them. Both these decisions require professional judgment before substitution or ignoring. To substitute `NA` for a value (for example, 10):
+
+```{r}
+is.na(z) # Shows which positions in the vector have an NA value
+z[is.na(z)] <- 10 # Where the z value is is.na, assign 10
+sum(z)
+```
+
+Or alternatively, set the argument `na.rm = TRUE` to throw away these values completely:
+
+```{r}
+z <- c(1, 2, NA)
+sum(z, na.rm = TRUE)
+```
+
+## Dates and Times
+
+Unlike numbers, date and times are inherently more complex. They require many additional considerations to properly wrangle:
+
+- What format is the date and time in?
+- Are the timezones as expected? This also applies for dates.
+- Do you want the the month the transaction took place in? The year? The day-of-week?
+- Do you care about daylight savings time?
+
+Starting with a basic example, lets understand the basic characteristics of dates. When you define a new date, the `lubridate::as_date()` function (or base `as.Date()`) works to convert character strings to dates.
+
+```{r}
+startString <- '2020-07-30' # ISO 8601 standards, follow them
+
+# base::as.Date(startString) # Same thing as as_date, for now...
+start <- lubridate::as_date(startString)
+
+class(start)
+```
+
+You can convert any date to a date, as long as you specify the mask or format. A mask specifies where the date, month, year exist (as well as for time, hours, minutes, seconds). If you check the help file for `?strptime`, you will see several different formats for both specifying dates and times. For example, `%Y` is a four digit year while `%y%` is a two digit year. Here are a few examples with the same date (some are more unreasonable than others, but all can be captured):
+
+```{r, eval = FALSE}
+lubridate::as_date('2020-07-30', format = "%Y-%m-%d")
+lubridate::as_date('30/07/2020', format = "%d/%m/%Y") # Not ISO 8601
+lubridate::as_date('July 30, 20', format = "%B %d, %y") # Really not ISO 8601
+lubridate::as_date('Jul3020', format = "%b%d%y") # Definitely not ISO 8601
+```
+
+The same concept also applies to datetimes, where you can convert a given time to a 'POSIXct' or 'POSIXlt' format (the differences between 'POSIXct' and 'POSIXlt' are found in `?DateTimeClasses`, under details):
+
+```{r}
+starttime_base <- as.POSIXct('2020-07-30 12:00:00')
+starttime_lub <- lubridate::as_datetime('2020-07-30 12:00:00')
+
+class(starttime_base); class(starttime_lub)
+```
+
+And format masks apply as well to date time, just in case you get something unconventional:
+
+```{r}
+lubridate::as_datetime('2020-07-30 12:00:00 PM -0600', 
+                       format = "%Y-%m-%d %I:%M:%S %p %z")
+```
+
+### Understanding Default Time Zones
+
+Did you consider the time zone that the times were created in? This is system-specific and base `POSIXct` and lubridate `as_datetime` behave differently, so you have to be careful!
+
+```{r}
+print(starttime_base); attr(starttime_base,"tzone")
+```
+
+Notice that base treats the creation of the current timezone based off your local R machine, although its not extractable (and you will eventually find, hard to change).
+
+```{r}
+print(starttime_lub); tz(starttime_lub)
+```
+
+The lubridate version will assign the date-time automatically to UTC, unless you specify it. It is for this reason you will generally want to avoid using base R to convert to date times, and stick with lubridate for better predictability.
+
+Having an automatic conversion to UTC isn't bad per se - having a universal ground truth to UTC is good, as it removes Daylight Saving component, and is an easy way to standardize multiple data sets together. Unfortunately, many systems will not tell you what time zone their data is in, so you will have to figure it out and ensure R is aligned accordingly.
+
+### Override or display timezones
+
+Hopefully you have been convinced to stick with lubridate for your date transformations. Now, lets get some confidence on these timezone transformations.
+
+The first method is `force_tz()`, which forces the current time to become that same hour in a new timezone. When we assigned July 30th to the date, we would have assumed this date would have been in the current timezone we exist in (generally, the system time-zone you are in). To do this, specify the date, but also the time zone you want the date or time to be harmonized in:
+
+```{r}
+starttime_lub # Starts as UTC
+force_tz(starttime_lub, tz = 'Canada/Mountain') # Force the saved time to be Mountain
+```
+
+Alternatively, you may wish to only convert the time so its displayed in the correct timezone, but leave the base truth as is. `with_tz()` will allow you to change the timezone that is displayed, while honoring the original time in the data.
+
+```{r}
+starttime_lub
+with_tz(starttime_lub, tz = 'Canada/Mountain') # Display the current time as Mountain
+```
+
+### Daylight Saving Implications
+
+There are also timezone implications when it comes to daylight saving time. This is especially important when making audit decisions based on duration, or expected local norms for time-of-day.
+
+In several locales across the world, daylight saving time will alter the clock for half a year locally, but has no impact on UTC. For example, your staff may start their day at 8:00 AM locally. When daylight saving kicks in, the local time stays at 8:00 AM and the UTC time shifts from 15:00 to 14:00.
+
+```{r}
+pre <- as_datetime('2020-03-07 8:00:00', tz = 'Canada/Mountain') # The day before DST starts
+post <- as_datetime('2020-03-08 8:00:00', tz = 'Canada/Mountain') # The day DST started
+
+dst(pre); with_tz(pre, tz = 'UTC') # Was DST active before? ; What is the UTC time before? 
+dst(post); with_tz(post, tz = 'UTC') # Was DST active after? ; What is the UTC time after?
+```
+
+### Differences between time
+
+Another common calculation is to calculate the time differences between two points of time. This seemingly simple action has several interpretations behind it. Do you want relative dates? Do you want exact elapsed time?
+
+> People are not always consistent in how they expect time to behave. Sometimes the passage of time is a monotone progression of instants that should be as mathematically reliable as the number line. On other occasions time must follow complex conventions and rules so that the clock times we see reflect what we expect to observe in terms of daylight, season, and congruence with the atomic clock. [@lubridate-help]
+
+Adding time is easy - you simply need to decide if you're adding a period (i.e. human construct of days) or if you are following physical time (i.e. seconds). The main difference is choosing lubridate's functions that honor periods or durations
+
+```{r}
+pre <- as_datetime('2020-03-07 8:00:00', tz = 'Canada/Mountain') # The day before DST starts
+post <- as_datetime('2020-03-08 8:00:00', tz = 'Canada/Mountain') # The day DST started, skipped ahead 1 hour
+
+# Periods: Human construct of days
+pre + days(1) ; pre + hours(24) # Equal to post, the human construct
+
+# Duration: Physical construct of time
+pre + ddays(1) ; pre + dhours(24) # NOT to post, but actually 1 hour after
+```
+
+Calculating intervals and periods is a bit different. If we go back up to our example of pre-and-post daylight saving time, we can either expect this answer to be 1 day or 23 hours. Again, depending on your use case, it is up to you.^[Division is the intended mechanism - see https://github.com/tidyverse/lubridate/issues/105 and https://stackoverflow.com/questions/8765621/length-of-lubridate-interval]
+
+```{r}
+span <- interval(pre, post)
+
+# Period: To find the number of days, in human constructs
+span / days(1) # Period calculation by days. 
+
+# Duration - To find the hours between, in physical constructs
+as.duration(span)
+```
+
+### Derived date information
+
+A common task for auditors is to find out the month a transaction took place in. With lubridate, its quite straight forward - for example, to extract the month, you don't need to have any messy substrings (or to extract other useful times, for that matter):
+
+```{r}
+thedate <- as_datetime('2020-07-01 12:00:00', tz = 'Canada/Mountain') 
+
+month(thedate)
+year(thedate)
+quarter(thedate) # Canada Day starts on the first day of the third quarter. Does your company Financial Year not start on January 1? Just change the fiscal_start argument.
+wday(thedate, label = TRUE)
+```
+
+### Cleaning numerical dates
+
+With dates, sometimes they may represented as a number - it is important to understand your source system date before you convert it.
+
+Some systems may calculate a date from an 'origin' using the number. While our concept of time may start with 0 AD (as the origin), several computer systems and applications do not behave in that manner. Excel, for example, starts from 1900-01-01, whereas Unix operating systems have their origin as 1970-01-01. If converting a date from a number, you need to research and then specify an origin, otherwise you will have challenges in specifying dates.
+
+In our vendors table, we have a numeric date but also a date in a character form for reference
+
+```{r}
+vendors %>%
+  select(date_added, date_added_char)
+```
+By specifying the origin a few different origins, we can see what the origin should have been in this case:
+
+```{r}
+vendors %>%
+  select(date_added, date_added_char) %>%
+  mutate(date_added_unix = as_date(date_added, origin = '1970-01-01'),
+         date_added_excel = as_date(date_added, origin = '1900-01-01'))
+```
+Dates can also appear in a completely different format. Julian (also known as mainframe or ordinal) dates are an example, where the year is specified but the date is relative to January 1. So 212 days is either July 30 or 31, depending if it is a leap year or not.
+
+```{r}
+lubridate::as_date('19212', format = "%y%j")
+lubridate::as_date('20212', format = "%y%j")
+```
+
+JDE E1's dates also add an extra digit in front of it, to symbolize the century. While there is no R way to translate 0 to 19xx and 1 to 20xx, practically speaking we are safe with assuming the century as we are at least 20 years past that point (as of this writing). Amending the mask to ignore the 1 can be done in the format:
+
+```{r}
+lubridate::as_date('119212', format = "1%y%j")
+lubridate::as_date('120212', format = "1%y%j")
+```
+
+## Separate
+
+Occasionally, distinct data will be combined in the same cell. This can be due to data entry or an unusual method of storing information. There will generally a separator within the field (similar to a delimiter), but the data is still contained within one field.
+
+For example, if we look at our vendor table and `name` column, we can see the company names appear to also have a Contact person.
+
+```{r}
+vendors %>%
+  select(type, name)
+```
+While the name is accurate, the contact name shouldn't be in there. We can isolate the contact name by using `separate()`, allowing us to split a column by defining a separator and also new column names. In this case, the '-' (dash) character could work:
+
+```{r}
+vendors %>%
+  select(type, name) %>%
+  separate(name, c('name', 'company_contact'), sep = '-')
+```
+
+Sometimes a character isn't specific enough. We can actually customize the separator even further by changing its argument to be more specific. In this case, perhaps we want both the dash and the word "Contact:":
+
+```{r}
+vendors %>%
+  select(id, type, name) %>%
+  separate(name, c('name', 'company_contact'), sep = '- Contact:')
+```
+
+What is nice about this functionality is that if the separator isn't found, the missing values are NA. The warning is good to see (as the employees don't have a company contact), and can be safely ignored in this case.
+
+## Separate_rows
+
+Similarly grouped data can also be combined in the same cell. This is typically representing a one-to-many (or many-to-one) relationship. This can be due to data entry or unusual output formats. Consider our industry table, which is an industry-to-company mapping table, telling us which companies and the respective industry they work in:
+
+```{r}
+industry
+```
+
+As of now, there would be no way to join the industry, and specifically the value Commercial Supplies, into our vendor table. The unique key is id number of the company, which gets joined to the vendor table.
+
+When we run into a situation where a value may belong to the same key multiple times (multiple IDs are associated with one industry), we can use `separate_rows()` to break up that row into several rows. For this function, we need to specify the columns that need to be separated - in this case, `id` needs to be broken apart.
+
+```{r}
+clean_industry <- industry %>%
+  separate_rows(id, convert = TRUE) # Convert will try to guess the data type for each field, based on the content that was separated
+
+print(clean_industry)
+```
+
+`separate_rows()` will automatically expand the column that needs to be separated, while replicating the content for that same value into subsequent rows.
+
+## Tidy data
+
+The three key concepts in 'tidy data'[@rfordatasci] is that:
+
+- Each variable must have its own column.
+- Each observation must have its own row.
+- Each value must have its own cell.
+
+While you can get away with performing basic analysis and checks, having the ability to move data between formats increases competency for cleaning, flexibility for plotting, and legibility for outputting tables in a readable format.
+
+Lets start by cleaning the vendor table
+
+```{r}
+clean_vendors <- vendors %>%
+  separate(name, c('name', 'company_contact'), sep = '- Contact: ') %>% # From the separate() section
+  select(-date_added_char) %>% # Remove one of the date fields 
+  mutate(date_added = as_date(date_added, origin = '1970-01-01')) %>% # From the cleaning dates section
+  filter(type == 'V')
+
+print(clean_vendors)
+```
+
+This vendor data set is a combination of both long and wide, and needs to be standardized to fit the tidy data model. Specifically: 
+
+- *Each variable must have its own column* - The vendor's spend and credits each year is separated over multiple columns. That is, the values of the variable (the year) is in the column name. In the end output, every combination of vendor-year should be a row.
+- *Each observation must have its own row.* - Each vendor has both a spend and credits value, within the `summary` column. Even though these are one observation for each vendor-year, they are separated by two rows.
+- *Each value must have its own cell.* - Thankfully, this seems to be valid (although you know how to clean it with `separate()` and `separate_rows()`).
+
+Why would you want to subscribe to this tidy data philosophy? When you have a tidy data set, you are more empowered to explore your data (especially with tidyverse related commands), but you can also have the power to reshape data as necessary to fit the visualizing output you are imagining.
+
+## Pivots, wide and longer {#clean-pivot}
+
+Effectively pivoting your data into more suitable columns and rows requires you to consider the following:
+
+- What columns contains the values you want to aggregate?
+- What do you want the new name of these columns to be? Consider both the name and aggregated value.
+
+In the `clean_vendors` data, we see each year represented as columns, and those columns represent dollar amounts.
+
+```{r}
+clean_vendors
+```
+We can pivot this data by specifying the years, and then aggregating the amount. In this case, we want to take the columns and assign them to rows, and making the data longer. `pivot_longer()` will allow us to make this transformation:
+
+```{r}
+clean_vendors %>%
+  pivot_longer(cols = c(`2015`, `2016`, `2017`, `2018`), # The columns we want to pivot, in this case, the years. 
+               names_to = 'year', # We want this collected column to be called the year
+               values_to = 'amount') # the values of the aggregation
+```
+
+This data is more readable - each year is on its own row. However, we still have the issue where the same company will have two rows for each year - for the `summary` field, both a spend and credits exist for a vendor:
+
+```{r}
+clean_vendors %>%
+    pivot_longer(cols = c(`2015`, `2016`, `2017`, `2018`), # The columns we want to pivot, in this case, the years. 
+               names_to = 'year', # We want this collected column to be called the year
+               values_to = 'amount')  %>% # the values of the aggregation 
+  arrange(id) %>%
+  head(10)
+```
+
+Since spend and credits belong to a single vendor-year pairing, it may be worthwhile to to put both `summary` classifications into their own column. In this case, we want to make the table wider by adding columns, so lets use `pivot_wider()`. This function is similar to `pivot_longer` in the same approach:
+
+- What columns contains the values you want to ~~aggregate~~ spread out? These values becomes the new column name.
+- Where is the value located? These will get moved under the new column.
+
+Building from our last example, lets make this data  bit wider
+
+```{r}
+clean_vendors %>%
+  pivot_longer(cols = c(`2015`, `2016`, `2017`, `2018`), # The columns we want to pivot, in this case, the years. 
+               names_to = 'year', # We want this collected column to be called the year
+               values_to = 'amount')  %>% # the values of the aggregation 
+  pivot_wider(names_from = 'summary',
+              values_from = 'amount')
+```
+Each company now has its spend and credits in separate columns, but is now digestible by year.
+
+## Joining data
+
+Often our data will come from different data sets or different tables. Having the ability to combine data from different systems is a powerful way to add more analyzable information from your dataset. In the [Completeness chapter](#completeness-join), we joined accounts from both the GL and TB to calculate whether there were any differences.
+
+The [Relational Data chapter in R for Data Science](https://r4ds.had.co.nz/relational-data.html) goes into depth how the different join operations work.
+
+### How joining is different in ACL Analytics
+
+For those with experience with the ACL Analytics (AN) tool, the [join command](https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm) is similar, but there are some syntax and behaviours differences you need to be aware of:
+
+| ACL AN            | R (tidyverse)                              | Difference         |
+| --- | --- | --- |
+| `JOIN` with no keywords   | `inner_join(...,)`                         | R will return all matches with all columns in Secondary table, if found in Primary table. <br>*Can effectively return more rows than exist in Primary table.*<br> AN will return the first match found in the Primary table per row. |
+| `PKEY <pkey1>` <br> `SKEY <skey1>`           | `*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))`     | Join key goes into the `by` command. Additional join keys can be added.
+| `FIELDS ALL` | `semi_join(...)` | Filters the Primary table, only keeping matches that existed in the Secondary table | 
+| `FIELDS <names>` <br> `WITH <names>` | | All columns from both tables are kept by design. <br> `<names>` of columns can not be specified, and need to be pre-selected beforehand |
+| `PRIMARY`         | `left_join(...)`                           | Unmatched keys will have secondary column values written as `NA` |
+| `SECONDARY`       | `right_join(...)`                          | Unmatched keys will have primary column values be written as `NA` |
+| `PRIMARY SECONDARY` | `full_join(...)` | Unmatched keys will have primary or secondary column values written as `NA` | 
+| `UNMATCHED`       | `anti_join(...)`                           |  |

@@ -216,7 +216,7 @@ If we look at our original TB data again, we notice there is:
 * multiple values for each month (example, `activity_2019_01` represents the period with a value January 2019), 
 * and the dollar value itself for each month. 
 
-When we deconstruct our data, it becomes much easier to delve into the **tidyr** package and the functions `pivot_longer()` and `pivot_wider()`. 
+When we deconstruct our data, it becomes much easier to delve into the **tidyr** package and the functions `pivot_longer()` and `pivot_wider()`. We will discuss the details of pivoting in [cleaning data](#clean-pivot).
 
 
 ```{r}
@@ -266,6 +266,8 @@ tb_summarized <- tb %>%
 
 tb_summarized
 ```
+
+### Joining the GL to the TB {#completeness-join}
 
 To perform a proper test of completeness, we should join both tables together. *dplyr* and the `*_join()` family of functions can be used to join tables, and also used as diagnosis tools to help debug information as well.
 

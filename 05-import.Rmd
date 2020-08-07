@@ -49,16 +49,18 @@ cols <- cols(
   id = col_character(), # Changed from col_double()
   name = col_character(),
   date_added = col_date(format = ""),
-  spend_2015 = col_double(),
-  spend_2016 = col_double(),
-  spend_2017 = col_double(),
-  spend_2018 = col_double()
+  `2015` = col_double(),
+  `2016` = col_double(),
+  `2017` = col_double(),
+  `2018` = col_double()
 )
 
 raw_vendors <- read_delim('data/vendor_master.csv', delim = ",", col_types = cols)
 
 glimpse(raw_vendors)
 ```
+
+You may have noticed that while our normal columns are specified as-is, we had to wrap our years with backticks (`), because while a column can technically be a number, asking R to reference a number will interpret it as a value, and not a field name.
 
 ### Handling problematic delimited files
 

@@ -1,0 +1,14 @@
+# Exploring data
+
+As for exploring data, there is no quick, one-click method to explore your data, whether at a high level or in more granular detail. Realistically, you will oscillate between cleaning and exploration before will generally be needed before you get the data into a final, testable state. 
+
+## Summary Statistics
+
+## Anscombe's Quartet
+
+## Graphics
+
+## Summarize
+
+## Join
+- to vendor master to explore longer term trends

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Other practices to follow | Audit Analytics with R</title>
+  <title>Chapter 12 Other practices to follow | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Other practices to follow | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 12 Other practices to follow | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Other practices to follow | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 12 Other practices to follow | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-30" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> Git</a></li>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
@@ -191,54 +191,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
 <li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a></li>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="clean-and-explore.html"><a href="clean-and-explore.html"><i class="fa fa-check"></i><b>7</b> Clean and Explore</a><ul>
-<li class="chapter" data-level="7.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
-<li class="chapter" data-level="7.2.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
-<li class="chapter" data-level="7.2.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
-<li class="chapter" data-level="7.2.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
-<li class="chapter" data-level="7.2.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
+<li class="chapter" data-level="7.2.4" data-path="cleaning-data.html"><a href="cleaning-data.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
+<li class="chapter" data-level="7.2.5" data-path="cleaning-data.html"><a href="cleaning-data.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7.2.6" data-path="cleaning-data.html"><a href="cleaning-data.html#cleaning-numerical-dates"><i class="fa fa-check"></i><b>7.2.6</b> Cleaning numerical dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-wider"><i class="fa fa-check"></i><b>7.3</b> Pivot Wider</a></li>
-<li class="chapter" data-level="7.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-longer"><i class="fa fa-check"></i><b>7.4</b> Pivot Longer</a></li>
-<li class="chapter" data-level="7.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate"><i class="fa fa-check"></i><b>7.5</b> Separate</a></li>
-<li class="chapter" data-level="7.6" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate_rows"><i class="fa fa-check"></i><b>7.6</b> Separate_rows</a></li>
-<li class="chapter" data-level="7.7" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summary-statistics"><i class="fa fa-check"></i><b>7.7</b> Summary Statistics</a></li>
-<li class="chapter" data-level="7.8" data-path="clean-and-explore.html"><a href="clean-and-explore.html#anscombes-quartet"><i class="fa fa-check"></i><b>7.8</b> Anscombe’s Quartet</a></li>
-<li class="chapter" data-level="7.9" data-path="clean-and-explore.html"><a href="clean-and-explore.html#graphics"><i class="fa fa-check"></i><b>7.9</b> Graphics</a></li>
-<li class="chapter" data-level="7.10" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summarize"><i class="fa fa-check"></i><b>7.10</b> Summarize</a></li>
-<li class="chapter" data-level="7.11" data-path="clean-and-explore.html"><a href="clean-and-explore.html#join"><i class="fa fa-check"></i><b>7.11</b> Join</a></li>
+<li class="chapter" data-level="7.3" data-path="cleaning-data.html"><a href="cleaning-data.html#separate"><i class="fa fa-check"></i><b>7.3</b> Separate</a></li>
+<li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
+<li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
+<li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#how-joining-is-different-in-acl-analytics"><i class="fa fa-check"></i><b>7.7.1</b> How joining is different in ACL Analytics</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>8</b> Test</a><ul>
-<li class="chapter" data-level="8.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>8.1</b> Mutate - If statements</a></li>
-<li class="chapter" data-level="8.2" data-path="test.html"><a href="test.html#round-zero"><i class="fa fa-check"></i><b>8.2</b> Round zero</a></li>
-<li class="chapter" data-level="8.3" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>8.3</b> Rare Accounts</a></li>
-<li class="chapter" data-level="8.4" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>8.4</b> Sequential</a></li>
-<li class="chapter" data-level="8.5" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>8.5</b> Outliers</a></li>
-<li class="chapter" data-level="8.6" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>8.6</b> Duplicates</a></li>
-<li class="chapter" data-level="8.7" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>8.7</b> Age</a></li>
-<li class="chapter" data-level="8.8" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>8.8</b> Benford Analysis</a></li>
-<li class="chapter" data-level="8.9" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>8.9</b> Relative size factor testing</a></li>
-<li class="chapter" data-level="8.10" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>8.10</b> Search text</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>9</b> Report</a><ul>
-<li class="chapter" data-level="9.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>9.1</b> RMarkdown</a></li>
-<li class="chapter" data-level="9.2" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>9.2</b> Export</a></li>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#summary-statistics"><i class="fa fa-check"></i><b>8.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#anscombes-quartet"><i class="fa fa-check"></i><b>8.2</b> Anscombe’s Quartet</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#graphics"><i class="fa fa-check"></i><b>8.3</b> Graphics</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#summarize"><i class="fa fa-check"></i><b>8.4</b> Summarize</a></li>
+<li class="chapter" data-level="8.5" data-path="exploring-data.html"><a href="exploring-data.html#join"><i class="fa fa-check"></i><b>8.5</b> Join</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>10</b> Applied Audit Analytics</a><ul>
-<li class="chapter" data-level="10.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>10.1</b> Audit R Package creation</a></li>
-<li class="chapter" data-level="10.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>10.2</b> Continious Monitoring</a></li>
-<li class="chapter" data-level="10.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-testing-automation"><i class="fa fa-check"></i><b>10.3</b> Controls Testing Automation</a></li>
-<li class="chapter" data-level="10.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
-<li class="chapter" data-level="10.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>10.5</b> All-in-one toolkits</a></li>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>9.1</b> Mutate - If statements</a></li>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#round-zero"><i class="fa fa-check"></i><b>9.2</b> Round zero</a></li>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.3</b> Rare Accounts</a></li>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4</b> Sequential</a></li>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>9.5</b> Outliers</a></li>
+<li class="chapter" data-level="9.6" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>9.6</b> Duplicates</a></li>
+<li class="chapter" data-level="9.7" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.7</b> Age</a></li>
+<li class="chapter" data-level="9.8" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>9.8</b> Benford Analysis</a></li>
+<li class="chapter" data-level="9.9" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>9.9</b> Relative size factor testing</a></li>
+<li class="chapter" data-level="9.10" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.10</b> Search text</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>11</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="11.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>11.1</b> Documentation</a></li>
-<li class="chapter" data-level="11.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>11.2</b> Passwords</a></li>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>10.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>10.2</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a><ul>
+<li class="chapter" data-level="11.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>11.1</b> Audit R Package creation</a></li>
+<li class="chapter" data-level="11.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>11.2</b> Continious Monitoring</a></li>
+<li class="chapter" data-level="11.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-testing-automation"><i class="fa fa-check"></i><b>11.3</b> Controls Testing Automation</a></li>
+<li class="chapter" data-level="11.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>11.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="11.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>11.5</b> All-in-one toolkits</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>12</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="12.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>12.1</b> Documentation</a></li>
+<li class="chapter" data-level="12.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>12.2</b> Passwords</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -262,15 +270,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="other-practices-to-follow" class="section level1">
-<h1><span class="header-section-number">Chapter 11</span> Other practices to follow</h1>
+<h1><span class="header-section-number">Chapter 12</span> Other practices to follow</h1>
 <div id="documentation" class="section level2">
-<h2><span class="header-section-number">11.1</span> Documentation</h2>
+<h2><span class="header-section-number">12.1</span> Documentation</h2>
 <p>As you start, you should promote basic habits instilled into you. Documenting your basic thought process in .R files is generally expected, and the ‘why’ a certain process outlined with comments (lines starting with a <code>#</code>). The why is important as it explains to code reviewers (external auditors and your peers) the rationale for your approach, or unusual quirks about the data you are transforming.</p>
 <p>RMarkdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily ‘knit’ a document for sharing increases the people you can share your work with.</p>
 <p>Whether you are using R or RMarkdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.</p>
 </div>
 <div id="passwords" class="section level2">
-<h2><span class="header-section-number">11.2</span> Passwords</h2>
+<h2><span class="header-section-number">12.2</span> Passwords</h2>
 <p>TODO Storing secrets - .Renviron, config, keyring</p>
 
 </div>

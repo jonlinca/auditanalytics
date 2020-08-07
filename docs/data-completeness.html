@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-07-30" />
+<meta name="date" content="2020-08-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="import-data.html"/>
-<link rel="next" href="clean-and-explore.html"/>
+<link rel="next" href="cleaning-data.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -152,7 +152,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> Git</a></li>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
@@ -191,54 +191,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
 <li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a></li>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
+</ul></li>
 <li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="clean-and-explore.html"><a href="clean-and-explore.html"><i class="fa fa-check"></i><b>7</b> Clean and Explore</a><ul>
-<li class="chapter" data-level="7.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="clean-and-explore.html"><a href="clean-and-explore.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
-<li class="chapter" data-level="7.2.2" data-path="clean-and-explore.html"><a href="clean-and-explore.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
-<li class="chapter" data-level="7.2.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
-<li class="chapter" data-level="7.2.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
-<li class="chapter" data-level="7.2.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
+<li class="chapter" data-level="7.2.4" data-path="cleaning-data.html"><a href="cleaning-data.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
+<li class="chapter" data-level="7.2.5" data-path="cleaning-data.html"><a href="cleaning-data.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7.2.6" data-path="cleaning-data.html"><a href="cleaning-data.html#cleaning-numerical-dates"><i class="fa fa-check"></i><b>7.2.6</b> Cleaning numerical dates</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-wider"><i class="fa fa-check"></i><b>7.3</b> Pivot Wider</a></li>
-<li class="chapter" data-level="7.4" data-path="clean-and-explore.html"><a href="clean-and-explore.html#pivot-longer"><i class="fa fa-check"></i><b>7.4</b> Pivot Longer</a></li>
-<li class="chapter" data-level="7.5" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate"><i class="fa fa-check"></i><b>7.5</b> Separate</a></li>
-<li class="chapter" data-level="7.6" data-path="clean-and-explore.html"><a href="clean-and-explore.html#separate_rows"><i class="fa fa-check"></i><b>7.6</b> Separate_rows</a></li>
-<li class="chapter" data-level="7.7" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summary-statistics"><i class="fa fa-check"></i><b>7.7</b> Summary Statistics</a></li>
-<li class="chapter" data-level="7.8" data-path="clean-and-explore.html"><a href="clean-and-explore.html#anscombes-quartet"><i class="fa fa-check"></i><b>7.8</b> Anscombe’s Quartet</a></li>
-<li class="chapter" data-level="7.9" data-path="clean-and-explore.html"><a href="clean-and-explore.html#graphics"><i class="fa fa-check"></i><b>7.9</b> Graphics</a></li>
-<li class="chapter" data-level="7.10" data-path="clean-and-explore.html"><a href="clean-and-explore.html#summarize"><i class="fa fa-check"></i><b>7.10</b> Summarize</a></li>
-<li class="chapter" data-level="7.11" data-path="clean-and-explore.html"><a href="clean-and-explore.html#join"><i class="fa fa-check"></i><b>7.11</b> Join</a></li>
+<li class="chapter" data-level="7.3" data-path="cleaning-data.html"><a href="cleaning-data.html#separate"><i class="fa fa-check"></i><b>7.3</b> Separate</a></li>
+<li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
+<li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
+<li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#how-joining-is-different-in-acl-analytics"><i class="fa fa-check"></i><b>7.7.1</b> How joining is different in ACL Analytics</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>8</b> Test</a><ul>
-<li class="chapter" data-level="8.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>8.1</b> Mutate - If statements</a></li>
-<li class="chapter" data-level="8.2" data-path="test.html"><a href="test.html#round-zero"><i class="fa fa-check"></i><b>8.2</b> Round zero</a></li>
-<li class="chapter" data-level="8.3" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>8.3</b> Rare Accounts</a></li>
-<li class="chapter" data-level="8.4" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>8.4</b> Sequential</a></li>
-<li class="chapter" data-level="8.5" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>8.5</b> Outliers</a></li>
-<li class="chapter" data-level="8.6" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>8.6</b> Duplicates</a></li>
-<li class="chapter" data-level="8.7" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>8.7</b> Age</a></li>
-<li class="chapter" data-level="8.8" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>8.8</b> Benford Analysis</a></li>
-<li class="chapter" data-level="8.9" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>8.9</b> Relative size factor testing</a></li>
-<li class="chapter" data-level="8.10" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>8.10</b> Search text</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>9</b> Report</a><ul>
-<li class="chapter" data-level="9.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>9.1</b> RMarkdown</a></li>
-<li class="chapter" data-level="9.2" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>9.2</b> Export</a></li>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#summary-statistics"><i class="fa fa-check"></i><b>8.1</b> Summary Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#anscombes-quartet"><i class="fa fa-check"></i><b>8.2</b> Anscombe’s Quartet</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#graphics"><i class="fa fa-check"></i><b>8.3</b> Graphics</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#summarize"><i class="fa fa-check"></i><b>8.4</b> Summarize</a></li>
+<li class="chapter" data-level="8.5" data-path="exploring-data.html"><a href="exploring-data.html#join"><i class="fa fa-check"></i><b>8.5</b> Join</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>10</b> Applied Audit Analytics</a><ul>
-<li class="chapter" data-level="10.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>10.1</b> Audit R Package creation</a></li>
-<li class="chapter" data-level="10.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>10.2</b> Continious Monitoring</a></li>
-<li class="chapter" data-level="10.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-testing-automation"><i class="fa fa-check"></i><b>10.3</b> Controls Testing Automation</a></li>
-<li class="chapter" data-level="10.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>10.4</b> Audit Data Mart</a></li>
-<li class="chapter" data-level="10.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>10.5</b> All-in-one toolkits</a></li>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>9.1</b> Mutate - If statements</a></li>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#round-zero"><i class="fa fa-check"></i><b>9.2</b> Round zero</a></li>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.3</b> Rare Accounts</a></li>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4</b> Sequential</a></li>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>9.5</b> Outliers</a></li>
+<li class="chapter" data-level="9.6" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>9.6</b> Duplicates</a></li>
+<li class="chapter" data-level="9.7" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.7</b> Age</a></li>
+<li class="chapter" data-level="9.8" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>9.8</b> Benford Analysis</a></li>
+<li class="chapter" data-level="9.9" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>9.9</b> Relative size factor testing</a></li>
+<li class="chapter" data-level="9.10" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.10</b> Search text</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>11</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="11.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>11.1</b> Documentation</a></li>
-<li class="chapter" data-level="11.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>11.2</b> Passwords</a></li>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>10.1</b> RMarkdown</a></li>
+<li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>10.2</b> Export</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a><ul>
+<li class="chapter" data-level="11.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>11.1</b> Audit R Package creation</a></li>
+<li class="chapter" data-level="11.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>11.2</b> Continious Monitoring</a></li>
+<li class="chapter" data-level="11.3" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#controls-testing-automation"><i class="fa fa-check"></i><b>11.3</b> Controls Testing Automation</a></li>
+<li class="chapter" data-level="11.4" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>11.4</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="11.5" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#all-in-one-toolkits"><i class="fa fa-check"></i><b>11.5</b> All-in-one toolkits</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>12</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="12.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>12.1</b> Documentation</a></li>
+<li class="chapter" data-level="12.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>12.2</b> Passwords</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -288,11 +296,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A rapid preview of all your columns can be done quickly with <code>summary()</code>. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-completeness.html#cb44-1"></a><span class="kw">summary</span>(gl)</span></code></pre></div>
 <pre><code>##      je_num           amount          gl_date      gl_date_char      
-##  Min.   :   1.0   Min.   :-92284   Min.   :17897   Length:2000       
-##  1st Qu.: 250.8   1st Qu.: -7160   1st Qu.:17998   Class :character  
+##  Min.   :   1.0   Min.   :-91975   Min.   :17897   Length:2000       
+##  1st Qu.: 250.8   1st Qu.: -6848   1st Qu.:17987   Class :character  
 ##    vendor_id      account          description       
-##  Min.   : 387   Length:2000        Length:2000       
-##  1st Qu.:2531   Class :character   Class :character  
+##  Min.   : 624   Length:2000        Length:2000       
+##  1st Qu.:2323   Class :character   Class :character  
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
 <p>A high level summary scan is useful for us:</p>
 <ul>
@@ -304,14 +312,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>It may be useful to look at a few data samples more closely to understand patterns. <code>head()</code> is useful in seeing the first few columns</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-completeness.html#cb46-1"></a><span class="kw">head</span>(gl)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 7
-##   je_num  amount gl_date gl_date_char vendor_id account       description       
-##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;             
-## 1      1  30487.   17984 2019-03-29        2894 exp_material… Quality control t…
-## 2      1 -30487.   17984 2019-03-29          NA liab_account… Quality control t…
-## 3      2   5019.   18194 2019-10-25        2695 exp_material… Packaging and box…
-## 4      2  -5019.   18194 2019-10-25          NA liab_account… Packaging and box…
-## 5      3    264.   18051 2019-06-04        2894 exp_material… Quality control t…
-## 6      3   -264.   18051 2019-06-04          NA liab_account… Quality control t…</code></pre>
+##   je_num  amount gl_date gl_date_char vendor_id account      description        
+##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;              
+## 1      1    608.   18257 2019-12-27        2843 exp_materia… Packaging and boxes
+## 2      1   -608.   18257 2019-12-27          NA liab_accoun… Packaging and boxes
+## 3      2  27822.   18052 2019-06-05        2843 exp_materia… Packaging and boxes
+## 4      2 -27822.   18052 2019-06-05          NA liab_accoun… Packaging and boxes
+## 5      3   9943.   18218 2019-11-18        2843 exp_consult… Advisory fee for f…
+## 6      3  -9943.   18218 2019-11-18          NA liab_accoun… Advisory fee for f…</code></pre>
 <p>We get a more detailed understanding of the fields:</p>
 <ul>
 <li><code>je_num</code> indicates a set of lines within a journal entry.</li>
@@ -343,18 +351,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-5"><a href="data-completeness.html#cb51-5"></a>gl <span class="op">%&gt;%</span></span>
 <span id="cb51-6"><a href="data-completeness.html#cb51-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id))</span></code></pre></div>
 <pre><code>## # A tibble: 1,000 x 7
-##    je_num  amount gl_date gl_date_char vendor_id account       description      
-##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;            
-##  1      1 -30487.   17984 2019-03-29          NA liab_account… Quality control …
-##  2      2  -5019.   18194 2019-10-25          NA liab_account… Packaging and bo…
-##  3      3   -264.   18051 2019-06-04          NA liab_account… Quality control …
-##  4      4   -567.   17903 2019-01-07          NA liab_account… Medical grade fi…
-##  5      5 -13623.   18261 2019-12-31          NA liab_account… Quality control …
-##  6      6 -10702.   17959 2019-03-04          NA liab_account… Sewing machines  
-##  7      7 -16680.   18248 2019-12-18          NA liab_account… Quality control …
-##  8      8 -14623    18166 2019-09-27          NA liab_account… Medical grade fi…
-##  9      9  -2654.   17926 2019-01-30          NA liab_account… Face mask elasti…
-## 10     10 -17685.   18039 2019-05-23          NA liab_account… Medical grade fi…
+##    je_num  amount gl_date gl_date_char vendor_id account      description       
+##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;             
+##  1      1   -608.   18257 2019-12-27          NA liab_accoun… Packaging and box…
+##  2      2 -27822.   18052 2019-06-05          NA liab_accoun… Packaging and box…
+##  3      3  -9943.   18218 2019-11-18          NA liab_accoun… Advisory fee for …
+##  4      4 -23434.   18106 2019-07-29          NA liab_accoun… Paper             
+##  5      5 -21457.   17900 2019-01-04          NA liab_accoun… Quality control t…
+##  6      6  -2006.   17940 2019-02-13          NA liab_accoun… Sewing machines   
+##  7      7  -4557.   18233 2019-12-03          NA liab_accoun… Quality control t…
+##  8      8 -27459.   18242 2019-12-12          NA liab_accoun… Fancy cloth prints
+##  9      9 -11684.   18260 2019-12-30          NA liab_accoun… Packaging and box…
+## 10     10 -25949.   18164 2019-09-25          NA liab_accoun… Packaging and box…
 ## # … with 990 more rows</code></pre>
 <p>This indicates that several values are NA. This enables us to ask the proper questions - specifically, we should seek to understand and corroborate with the business if there is a certain pattern associated to these NAs. dplyr’s <code>group_by()</code> and <code>summarize()</code> are useful for identifying these patterns further:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="data-completeness.html#cb53-1"></a>gl <span class="op">%&gt;%</span></span>
@@ -392,11 +400,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 13
 ##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 exp_co…           37907.           18618.               0            58208.
-## 2 exp_ma…          970382.          503354.          699039.          989992.
-## 3 exp_me…               0              126.             285.             153.
-## 4 liab_a…        -1008289.         -514495.         -699323.        -1023042.
-## 5 liab_c…               0            -7603.               0           -25311.
+## 1 exp_co…           19041.            9865.          19401.           56772. 
+## 2 exp_ma…          904219.          679636.         919778.          844252. 
+## 3 exp_me…               0              180.             93.8             91.7
+## 4 liab_a…         -923259.         -689532.        -939273.         -900122. 
+## 5 liab_c…               0             -150.              0             -993. 
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
@@ -411,11 +419,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             447752.
-## 2 exp_materials_6000             9798845.
-## 3 exp_meals_7000                    1531.
-## 4 liab_accountspayable_2000    -10186325.
-## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+## 1 exp_consulting_6500             407814.
+## 2 exp_materials_6000             9705440.
+## 3 exp_meals_7000                    2072.
+## 4 liab_accountspayable_2000    -10107652.
+## 5 liab_creditcardpayable_2100      -7674.</code></pre>
 <p>While the above works, there are some risks to this code:</p>
 <ul>
 <li>the code is difficult to read, as it is a long string of column names,</li>
@@ -441,11 +449,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 12
 ##   activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1           37907.           18618.               0            58208.
-## 2          970382.          503354.          699039.          989992.
-## 3               0              126.             285.             153.
-## 4        -1008289.         -514495.         -699323.        -1023042.
-## 5               0            -7603.               0           -25311.
+## 1           19041.            9865.          19401.           56772. 
+## 2          904219.          679636.         919778.          844252. 
+## 3               0              180.             93.8             91.7
+## 4         -923259.         -689532.        -939273.         -900122. 
+## 5               0             -150.              0             -993. 
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
@@ -455,7 +463,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-3"><a href="data-completeness.html#cb69-3"></a><span class="st">  </span><span class="kw">rowSums</span>() <span class="co"># And sums up the row</span></span>
 <span id="cb69-4"><a href="data-completeness.html#cb69-4"></a></span>
 <span id="cb69-5"><a href="data-completeness.html#cb69-5"></a><span class="kw">print</span>(tb_activity) <span class="co"># This is saved as a numeric vector</span></span></code></pre></div>
-<pre><code>## [1]    447751.60   9798845.29      1530.63 -10186325.19    -61802.33</code></pre>
+<pre><code>## [1]    407814.03   9705439.92      2072.24 -10107652.35     -7673.84</code></pre>
 <p>The newly calculated row summarization will return the total activity as a numeric vector; each item in the vector represents which row it belonged to. As this is a vector of numbers, we can a vector of the same TB account names and join them together.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="data-completeness.html#cb71-1"></a><span class="kw">print</span>(tb<span class="op">$</span>account) <span class="co"># Vector of account names as a character</span></span></code></pre></div>
 <pre><code>## [1] &quot;exp_consulting_6500&quot;         &quot;exp_materials_6000&quot;         
@@ -464,11 +472,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With these two vectors, we can create a new data frame with the account name and TB activity we calculated.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-completeness.html#cb73-1"></a><span class="kw">data.frame</span>(<span class="dt">account =</span> tb<span class="op">$</span>account, <span class="dt">tb_activity =</span> tb_activity) <span class="co"># We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity</span></span></code></pre></div>
 <pre><code>##                       account  tb_activity
-## 1         exp_consulting_6500    447751.60
-## 2          exp_materials_6000   9798845.29
-## 3              exp_meals_7000      1530.63
-## 4   liab_accountspayable_2000 -10186325.19
-## 5 liab_creditcardpayable_2100    -61802.33</code></pre>
+## 1         exp_consulting_6500    407814.03
+## 2          exp_materials_6000   9705439.92
+## 3              exp_meals_7000      2072.24
+## 4   liab_accountspayable_2000 -10107652.35
+## 5 liab_creditcardpayable_2100     -7673.84</code></pre>
 </div>
 <div id="sum-by-named-references" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> Sum by named references</h3>
@@ -481,11 +489,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             447752.
-## 2 exp_materials_6000             9798845.
-## 3 exp_meals_7000                    1531.
-## 4 liab_accountspayable_2000    -10186325.
-## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+## 1 exp_consulting_6500             407814.
+## 2 exp_materials_6000             9705440.
+## 3 exp_meals_7000                    2072.
+## 4 liab_accountspayable_2000    -10107652.
+## 5 liab_creditcardpayable_2100      -7674.</code></pre>
 <p>What occurs here is that the dot will take the preceding command (technically known as the ‘left hand side’ or LHS) and feed it directly into the function. So in this case, the command can be narrated as:</p>
 <blockquote>
 <p>Using the <em>TB table</em> (this becomes our LHS), create a column named “tb_activity”…</p>
@@ -504,16 +512,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>multiple values for each month (example, <code>activity_2019_01</code> represents the period with a value January 2019),</li>
 <li>and the dollar value itself for each month.</li>
 </ul>
-<p>When we deconstruct our data, it becomes much easier to delve into the <strong>tidyr</strong> package and the functions <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<p>When we deconstruct our data, it becomes much easier to delve into the <strong>tidyr</strong> package and the functions <code>pivot_longer()</code> and <code>pivot_wider()</code>. We will discuss the details of pivoting in <a href="cleaning-data.html#clean-pivot">cleaning data</a>.</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="data-completeness.html#cb77-1"></a><span class="kw">head</span>(tb) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
 <pre><code>## # A tibble: 5 x 13
 ##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 exp_co…           37907.           18618.               0            58208.
-## 2 exp_ma…          970382.          503354.          699039.          989992.
-## 3 exp_me…               0              126.             285.             153.
-## 4 liab_a…        -1008289.         -514495.         -699323.        -1023042.
-## 5 liab_c…               0            -7603.               0           -25311.
+## 1 exp_co…           19041.            9865.          19401.           56772. 
+## 2 exp_ma…          904219.          679636.         919778.          844252. 
+## 3 exp_me…               0              180.             93.8             91.7
+## 4 liab_a…         -923259.         -689532.        -939273.         -900122. 
+## 5 liab_c…               0             -150.              0             -993. 
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
@@ -526,16 +534,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 60 x 3
 ##    account             period           activity
 ##    &lt;chr&gt;               &lt;chr&gt;               &lt;dbl&gt;
-##  1 exp_consulting_6500 activity_2019_01   37907.
-##  2 exp_consulting_6500 activity_2019_02   18618.
-##  3 exp_consulting_6500 activity_2019_03       0 
-##  4 exp_consulting_6500 activity_2019_04   58208.
-##  5 exp_consulting_6500 activity_2019_05   58177.
-##  6 exp_consulting_6500 activity_2019_06   19160.
-##  7 exp_consulting_6500 activity_2019_07    9919.
-##  8 exp_consulting_6500 activity_2019_08   28261 
-##  9 exp_consulting_6500 activity_2019_09   28871.
-## 10 exp_consulting_6500 activity_2019_10   64969.
+##  1 exp_consulting_6500 activity_2019_01   19041.
+##  2 exp_consulting_6500 activity_2019_02    9865.
+##  3 exp_consulting_6500 activity_2019_03   19401.
+##  4 exp_consulting_6500 activity_2019_04   56772.
+##  5 exp_consulting_6500 activity_2019_05    9513.
+##  6 exp_consulting_6500 activity_2019_06   56026.
+##  7 exp_consulting_6500 activity_2019_07   48153.
+##  8 exp_consulting_6500 activity_2019_08   29067.
+##  9 exp_consulting_6500 activity_2019_09   65773.
+## 10 exp_consulting_6500 activity_2019_10   28085.
 ## # … with 50 more rows</code></pre>
 <p>This data is now represented longer - there is now one unique value (activity) for each account and month. From here, we can now <code>summarize()</code>:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="data-completeness.html#cb81-1"></a>tb_long <span class="op">%&gt;%</span></span>
@@ -545,11 +553,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             447752.
-## 2 exp_materials_6000             9798845.
-## 3 exp_meals_7000                    1531.
-## 4 liab_accountspayable_2000    -10186325.
-## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+## 1 exp_consulting_6500             407814.
+## 2 exp_materials_6000             9705440.
+## 3 exp_meals_7000                    2072.
+## 4 liab_accountspayable_2000    -10107652.
+## 5 liab_creditcardpayable_2100      -7674.</code></pre>
 <p>While any of these approaches will work to calculate the trial balance of activity, there are sustainability advantages where the columns are not verbatim and explicitly mentioned - what matters is how you believe your dataset can change over time, or how easily readable you can communicate your work to a new individual.</p>
 </div>
 </div>
@@ -566,11 +574,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                       gl_total
 ##   &lt;chr&gt;                            &lt;dbl&gt;
-## 1 exp_consulting_6500            447752.
-## 2 exp_materials_6000            9798845.
-## 3 exp_meals_7000                   1531.
-## 4 liab_accountspayable_2000   -10186325.
-## 5 liab_creditcardpayable_2100    -61802.</code></pre>
+## 1 exp_consulting_6500            407814.
+## 2 exp_materials_6000            9705440.
+## 3 exp_meals_7000                   2072.
+## 4 liab_accountspayable_2000   -10107652.
+## 5 liab_creditcardpayable_2100     -7674.</code></pre>
 <p>And also aggregate the TB:</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-completeness.html#cb86-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
 <span id="cb86-2"><a href="data-completeness.html#cb86-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
@@ -582,11 +590,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             447752.
-## 2 exp_materials_6000             9798845.
-## 3 exp_meals_7000                    1531.
-## 4 liab_accountspayable_2000    -10186325.
-## 5 liab_creditcardpayable_2100     -61802.</code></pre>
+## 1 exp_consulting_6500             407814.
+## 2 exp_materials_6000             9705440.
+## 3 exp_meals_7000                    2072.
+## 4 liab_accountspayable_2000    -10107652.
+## 5 liab_creditcardpayable_2100      -7674.</code></pre>
+<div id="completeness-join" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Joining the GL to the TB</h3>
 <p>To perform a proper test of completeness, we should join both tables together. <em>dplyr</em> and the <code>*_join()</code> family of functions can be used to join tables, and also used as diagnosis tools to help debug information as well.</p>
 <p>Our GL and TB summarized datasets could be joined by the <code>account</code> column, prior to performing the calculation to identify differences:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-completeness.html#cb88-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
@@ -594,11 +604,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 3
 ##   account                       gl_total tb_activity
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;
-## 1 exp_consulting_6500            447752.     447752.
-## 2 exp_materials_6000            9798845.    9798845.
-## 3 exp_meals_7000                   1531.       1531.
-## 4 liab_accountspayable_2000   -10186325.  -10186325.
-## 5 liab_creditcardpayable_2100    -61802.     -61802.</code></pre>
+## 1 exp_consulting_6500            407814.     407814.
+## 2 exp_materials_6000            9705440.    9705440.
+## 3 exp_meals_7000                   2072.       2072.
+## 4 liab_accountspayable_2000   -10107652.  -10107652.
+## 5 liab_creditcardpayable_2100     -7674.      -7674.</code></pre>
 <p>Once you have joined the columns together, a simple difference calculation will let you know what the differences are (if any):</p>
 <div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="data-completeness.html#cb90-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
 <span id="cb90-2"><a href="data-completeness.html#cb90-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
@@ -606,11 +616,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 4
 ##   account                       gl_total tb_activity tb_diff
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
-## 1 exp_consulting_6500            447752.     447752.       0
-## 2 exp_materials_6000            9798845.    9798845.       0
-## 3 exp_meals_7000                   1531.       1531.       0
-## 4 liab_accountspayable_2000   -10186325.  -10186325.       0
-## 5 liab_creditcardpayable_2100    -61802.     -61802.       0</code></pre>
+## 1 exp_consulting_6500            407814.     407814.       0
+## 2 exp_materials_6000            9705440.    9705440.       0
+## 3 exp_meals_7000                   2072.       2072.       0
+## 4 liab_accountspayable_2000   -10107652.  -10107652.       0
+## 5 liab_creditcardpayable_2100     -7674.      -7674.       0</code></pre>
 <p>And if you like clean working papers, simply filter to identify where the reconciliation did not work out:</p>
 <div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="data-completeness.html#cb92-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
 <span id="cb92-2"><a href="data-completeness.html#cb92-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
@@ -619,6 +629,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 0 x 4
 ## # … with 4 variables: account &lt;chr&gt;, gl_total &lt;dbl&gt;, tb_activity &lt;dbl&gt;,
 ## #   tb_diff &lt;dbl&gt;</code></pre>
+</div>
 </div>
 <div id="cautionary-notes-for-completeness" class="section level2">
 <h2><span class="header-section-number">6.5</span> Cautionary notes for Completeness</h2>
@@ -639,7 +650,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="import-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="clean-and-explore.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="cleaning-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
