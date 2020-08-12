@@ -2,14 +2,13 @@
 
 Cleaning a data set, including fields and reshaping of the data, is a fundamental skill in order to get the data into an analyzable format. Real world data is messy, and will not typically be immediately analyzable immediately after downloading. 
 
-For this section we will still use the company database, along with some more packages.
+For this section we will still use the company database, along with some more packages. New packages in this chapter include lubridate and tidyr.
 
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr) # For manipulating data
 library(tidyr) # For making data long and wide
 
 library(lubridate) # For date handling
-library(ggplot2) # For making visualizations
 
 library(DBI) # For database connections
 
@@ -396,8 +395,8 @@ For those with experience with the ACL Analytics (AN) tool, the [join command](h
 
 | ACL AN            | R (tidyverse)                              | Difference         |
 | --- | --- | --- |
-| `JOIN` with no keywords   | `inner_join(...,)`                         | R will return all matches with all columns in Secondary table, if found in Primary table. <br>*Can effectively return more rows than exist in Primary table.*<br> AN will return the first match found in the Primary table per row. |
-| `PKEY <pkey1>` <br> `SKEY <skey1>`           | `*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))`     | Join key goes into the `by` command. Additional join keys can be added.
+| `JOIN` with no keywords   | `inner_join(...,)`  | R will return all matches with all columns in Secondary table, if found in Primary table. <br>*Can effectively return more rows than exist in Primary table.*<br> AN will return the first match found in the Primary table per row. |
+| `PKEY <pkey1>` <br> `SKEY <skey1>` | `*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))` | Join key goes into the `by` command. Additional join keys can be added.
 | `FIELDS ALL` | `semi_join(...)` | Filters the Primary table, only keeping matches that existed in the Secondary table | 
 | `FIELDS <names>` <br> `WITH <names>` | | All columns from both tables are kept by design. <br> `<names>` of columns can not be specified, and need to be pre-selected beforehand |
 | `PRIMARY`         | `left_join(...)`                           | Unmatched keys will have secondary column values written as `NA` |

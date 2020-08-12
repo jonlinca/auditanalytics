@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-07" />
+<meta name="date" content="2020-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
 <li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
@@ -215,11 +215,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
-<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#summary-statistics"><i class="fa fa-check"></i><b>8.1</b> Summary Statistics</a></li>
-<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#anscombes-quartet"><i class="fa fa-check"></i><b>8.2</b> Anscombe’s Quartet</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#graphics"><i class="fa fa-check"></i><b>8.3</b> Graphics</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#summarize"><i class="fa fa-check"></i><b>8.4</b> Summarize</a></li>
-<li class="chapter" data-level="8.5" data-path="exploring-data.html"><a href="exploring-data.html#join"><i class="fa fa-check"></i><b>8.5</b> Join</a></li>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#why-bother-visualizing"><i class="fa fa-check"></i><b>8.3</b> Why bother visualizing?</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization-how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization (How)</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.1</b> Facets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
 <li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>9.1</b> Mutate - If statements</a></li>
@@ -272,8 +273,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="architecture" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Architecture</h1>
 <div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-86c84b5ee59f46bc1e9f" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-86c84b5ee59f46bc1e9f">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  D -> G\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-69937d00275042673ee3" style="width:100%;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-69937d00275042673ee3">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  D -> G\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p class="caption">
 Figure 3.1: Internal Audit Data Analytics Architecture
 </p>

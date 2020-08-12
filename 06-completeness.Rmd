@@ -58,7 +58,7 @@ We get a more detailed understanding of the fields:
 
 ## Examination of potential errors
 
-### NA values
+### NA values {#completeness-na}
 
 At this stage, you could explore obvious potential issues - in this case, NA values have surfaced themselves early through the `summary()` command, so we should explore it a bit.
 

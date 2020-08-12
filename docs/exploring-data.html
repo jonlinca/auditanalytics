@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-07" />
+<meta name="date" content="2020-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
 <li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
@@ -215,11 +215,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
-<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#summary-statistics"><i class="fa fa-check"></i><b>8.1</b> Summary Statistics</a></li>
-<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#anscombes-quartet"><i class="fa fa-check"></i><b>8.2</b> Anscombe’s Quartet</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#graphics"><i class="fa fa-check"></i><b>8.3</b> Graphics</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#summarize"><i class="fa fa-check"></i><b>8.4</b> Summarize</a></li>
-<li class="chapter" data-level="8.5" data-path="exploring-data.html"><a href="exploring-data.html#join"><i class="fa fa-check"></i><b>8.5</b> Join</a></li>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#why-bother-visualizing"><i class="fa fa-check"></i><b>8.3</b> Why bother visualizing?</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization-how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization (How)</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.1</b> Facets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
 <li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>9.1</b> Mutate - If statements</a></li>
@@ -271,25 +272,213 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="exploring-data" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Exploring data</h1>
-<p>As for exploring data, there is no quick, one-click method to explore your data, whether at a high level or in more granular detail. Realistically, you will oscillate between cleaning and exploration before will generally be needed before you get the data into a final, testable state.</p>
-<div id="summary-statistics" class="section level2">
-<h2><span class="header-section-number">8.1</span> Summary Statistics</h2>
+<p>As for exploring data, there is no quick, one-click method to explore your data, whether at a high level or in more granular detail. Realistically, you will oscillate between cleaning and exploration before you get the data into a final, testable state, and understand better what you are looking at.</p>
+<p>For this section we will still use the company database, a unique dataset, along with some more packages - mainly, ggplot2.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="exploring-data.html#cb193-1"></a><span class="kw">library</span>(dplyr) </span>
+<span id="cb193-2"><a href="exploring-data.html#cb193-2"></a><span class="kw">library</span>(tidyr) </span>
+<span id="cb193-3"><a href="exploring-data.html#cb193-3"></a><span class="kw">library</span>(lubridate) </span>
+<span id="cb193-4"><a href="exploring-data.html#cb193-4"></a><span class="kw">library</span>(DBI) </span>
+<span id="cb193-5"><a href="exploring-data.html#cb193-5"></a></span>
+<span id="cb193-6"><a href="exploring-data.html#cb193-6"></a><span class="kw">library</span>(ggplot2) <span class="co"># For graphics</span></span>
+<span id="cb193-7"><a href="exploring-data.html#cb193-7"></a></span>
+<span id="cb193-8"><a href="exploring-data.html#cb193-8"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb193-9"><a href="exploring-data.html#cb193-9"></a></span>
+<span id="cb193-10"><a href="exploring-data.html#cb193-10"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb193-11"><a href="exploring-data.html#cb193-11"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb193-12"><a href="exploring-data.html#cb193-12"></a></span>
+<span id="cb193-13"><a href="exploring-data.html#cb193-13"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb193-14"><a href="exploring-data.html#cb193-14"></a></span>
+<span id="cb193-15"><a href="exploring-data.html#cb193-15"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb193-16"><a href="exploring-data.html#cb193-16"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb193-17"><a href="exploring-data.html#cb193-17"></a></span>
+<span id="cb193-18"><a href="exploring-data.html#cb193-18"></a>vendors &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;vendors&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb193-19"><a href="exploring-data.html#cb193-19"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb193-20"><a href="exploring-data.html#cb193-20"></a></span>
+<span id="cb193-21"><a href="exploring-data.html#cb193-21"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
+<div id="basic-statistics" class="section level2">
+<h2><span class="header-section-number">8.1</span> Basic Statistics</h2>
+<p>Performing summaries, or profiling the data, is a great way to begin analyzing data. It allows you to understand general numeric performance of a group. In our GL account, we have a materials category - lets isolate by that and begin our analysis:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="exploring-data.html#cb194-1"></a>materials &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb194-2"><a href="exploring-data.html#cb194-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb194-3"><a href="exploring-data.html#cb194-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date_char)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># We demonstrated how to handle dates in the Cleaning chapter</span></span>
+<span id="cb194-4"><a href="exploring-data.html#cb194-4"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span></code></pre></div>
+<p><code>summary()</code> gives a high level preview of each field, including the type and the statistical profile of the data table:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="exploring-data.html#cb195-1"></a><span class="kw">summary</span>(materials)</span></code></pre></div>
+<pre><code>##      je_num           amount           gl_date             vendor_id   
+##  Min.   :   1.0   Min.   :  214.3   Min.   :2019-01-01   Min.   :2323  
+##  1st Qu.: 248.0   1st Qu.: 3097.4   1st Qu.:2019-03-28   1st Qu.:2323  
+##    account          description       
+##  Length:937         Length:937        
+##  Class :character   Class :character  
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 4 rows ]</code></pre>
+<p>If we focus on amount, we can reproduce the same summaries as well, useful if we want to extract items relative to the criteria:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="exploring-data.html#cb197-1"></a><span class="kw">min</span>(materials<span class="op">$</span>amount)</span></code></pre></div>
+<pre><code>## [1] 214.35</code></pre>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="exploring-data.html#cb199-1"></a><span class="kw">max</span>(materials<span class="op">$</span>amount)</span></code></pre></div>
+<pre><code>## [1] 91974.59</code></pre>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="exploring-data.html#cb201-1"></a><span class="kw">mean</span>(materials<span class="op">$</span>amount) <span class="co"># The average</span></span></code></pre></div>
+<pre><code>## [1] 10357.99</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="exploring-data.html#cb203-1"></a><span class="kw">median</span>(materials<span class="op">$</span>amount) <span class="co"># The value in the middle between upper half and lower half. If these are different than the average, then you may expect some skew in the data set.</span></span></code></pre></div>
+<pre><code>## [1] 6683.74</code></pre>
+<p>Quartiles are useful because they help you generally understand where the majority of the data lies. These also also known as quantiles (or percentiles), but they cover the same area of a normal curve.</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="exploring-data.html#cb205-1"></a><span class="kw">quantile</span>(materials<span class="op">$</span>amount) <span class="co"># Look familiar?</span></span></code></pre></div>
+<pre><code>##       0%      25%      50%      75%     100% 
+##   214.35  3097.36  6683.74 14495.68 91974.59</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="exploring-data.html#cb207-1"></a><span class="kw">quantile</span>(materials<span class="op">$</span>amount)[<span class="dv">2</span>] <span class="co"># This is the 1st quartile, or the 25% quantile</span></span></code></pre></div>
+<pre><code>##     25% 
+## 3097.36</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="exploring-data.html#cb209-1"></a><span class="kw">quantile</span>(materials<span class="op">$</span>amount)[<span class="dv">4</span>] <span class="co"># This is the 3st quartile, or the 75% quantile</span></span></code></pre></div>
+<pre><code>##      75% 
+## 14495.68</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="exploring-data.html#cb211-1"></a><span class="kw">IQR</span>(materials<span class="op">$</span>amount) <span class="co"># The difference between 3rd and 1st quartile</span></span></code></pre></div>
+<pre><code>## [1] 11398.32</code></pre>
+<p>You may have missing values in your data set that show up as NA. Its important to recognize how you will <a href="data-completeness.html#completeness-na">diagnose and treat NAs</a>. If a column has NAs, you may choose to remove them by using the argument <code>na.rm = TRUE</code>, which simply ignores these values when performing the calculation.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="exploring-data.html#cb213-1"></a>some_nums &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb213-2"><a href="exploring-data.html#cb213-2"></a><span class="kw">mean</span>(some_nums) <span class="co"># Returns NA</span></span></code></pre></div>
+<pre><code>## [1] NA</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="exploring-data.html#cb215-1"></a><span class="kw">mean</span>(some_nums, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="co"># Removes the NA value prior to caluclating the mean</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>In accounting, it may be important to know the absolute value of a number. They’re useful in audit situations as they help express total activity of the subject, as positive and negative values may either zero out the total or mask credit activity and reversals. They’re also useful for calculating errors, as you may be not concerned about the direction of the error (debit or credit) but the total magnitude instead.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="exploring-data.html#cb217-1"></a><span class="kw">sum</span>(materials<span class="op">$</span>amount)</span></code></pre></div>
+<pre><code>## [1] 9705440</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="exploring-data.html#cb219-1"></a><span class="kw">abs</span>(<span class="kw">sum</span>(materials<span class="op">$</span>amount))</span></code></pre></div>
+<pre><code>## [1] 9705440</code></pre>
+<p>We can even do basic correlation plots in R of two numerical data sets:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="exploring-data.html#cb221-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb221-2"><a href="exploring-data.html#cb221-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)</span>
+<span id="cb221-3"><a href="exploring-data.html#cb221-3"></a></span>
+<span id="cb221-4"><a href="exploring-data.html#cb221-4"></a><span class="kw">cor</span>(x, y) <span class="co"># The correlation of X and Y. 1 means positively highly correlated, -1 means negatively highly coorelated, and 0 means no discerable pattern.</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
 </div>
-<div id="anscombes-quartet" class="section level2">
-<h2><span class="header-section-number">8.2</span> Anscombe’s Quartet</h2>
+<div id="summarizations" class="section level2">
+<h2><span class="header-section-number">8.2</span> Summarizations</h2>
+<p>TODO - Group by and Summarize
+Tables</p>
 </div>
-<div id="graphics" class="section level2">
-<h2><span class="header-section-number">8.3</span> Graphics</h2>
+<div id="why-bother-visualizing" class="section level2">
+<h2><span class="header-section-number">8.3</span> Why bother visualizing?</h2>
+<p>With such useful statistical and summary functions, you may wonder why you ever need to delve into graphics. While summary statistics are fun (and perhaps, highly accurate and even authoritative’), they don’t help bring to light full patterns of your data. The power of visual deduction can not be understated, especially in situations where superficially summary statistics have no issues.</p>
+<p>Consider this data set, which are merely 4 pairs of x-y values (i.e. x1 goes with y1 etc):</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="exploring-data.html#cb223-1"></a>anscombe</span></code></pre></div>
+<pre><code>##   x1 x2 x3 x4   y1   y2   y3   y4
+## 1 10 10 10  8 8.04 9.14 7.46 6.58
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 10 rows ]</code></pre>
+<p>If we did statistical testing on these pairs, we will notice they have nearly identical summary statistics:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="exploring-data.html#cb225-1"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>x1); <span class="kw">mean</span>(anscombe<span class="op">$</span>x2); <span class="kw">mean</span>(anscombe<span class="op">$</span>x3); <span class="kw">mean</span>(anscombe<span class="op">$</span>x4)</span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 9</code></pre>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="exploring-data.html#cb230-1"></a><span class="kw">mean</span>(anscombe<span class="op">$</span>y1); <span class="kw">mean</span>(anscombe<span class="op">$</span>y2); <span class="kw">mean</span>(anscombe<span class="op">$</span>y3); <span class="kw">mean</span>(anscombe<span class="op">$</span>y4)</span></code></pre></div>
+<pre><code>## [1] 7.500909</code></pre>
+<pre><code>## [1] 7.500909</code></pre>
+<pre><code>## [1] 7.5</code></pre>
+<pre><code>## [1] 7.500909</code></pre>
+<p>And even their correlatons are similar:</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="exploring-data.html#cb235-1"></a><span class="kw">cor</span>(anscombe<span class="op">$</span>x1, anscombe<span class="op">$</span>y1); <span class="kw">cor</span>(anscombe<span class="op">$</span>x2, anscombe<span class="op">$</span>y2); <span class="kw">cor</span>(anscombe<span class="op">$</span>x3, anscombe<span class="op">$</span>y3); <span class="kw">cor</span>(anscombe<span class="op">$</span>x4, anscombe<span class="op">$</span>y4)</span></code></pre></div>
+<pre><code>## [1] 0.8164205</code></pre>
+<pre><code>## [1] 0.8162365</code></pre>
+<pre><code>## [1] 0.8162867</code></pre>
+<pre><code>## [1] 0.8165214</code></pre>
+<p>With the mean and correlation statistics, you may jump to the conclusion that these datasets may be shaped identically. However, we should seriously consider plotting the data to validate our initial assumption that the data is similar.</p>
+<p>We will use the <em>ggplot2</em> to chart these x-y pairs and try to understand the data we are looking at. We’ll explain ggplot2 syntax later, so for now, focus on the graph produced.</p>
+<p>If we produce the four graphs together, what do you notice?</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="exploring-data.html#cb240-1"></a><span class="kw">ggplot</span>(anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x1, <span class="dt">y =</span> y1)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb240-2"><a href="exploring-data.html#cb240-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb240-3"><a href="exploring-data.html#cb240-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb240-4"><a href="exploring-data.html#cb240-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Pair 1: Y1 over X1&quot;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="exploring-data.html#cb241-1"></a><span class="kw">ggplot</span>(anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x2, <span class="dt">y =</span> y2)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb241-2"><a href="exploring-data.html#cb241-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb241-3"><a href="exploring-data.html#cb241-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb241-4"><a href="exploring-data.html#cb241-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Pair 2: Y2 over X2&quot;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-92-2.png" width="672" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="exploring-data.html#cb242-1"></a><span class="kw">ggplot</span>(anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x3, <span class="dt">y =</span> y3)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb242-2"><a href="exploring-data.html#cb242-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb242-3"><a href="exploring-data.html#cb242-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb242-4"><a href="exploring-data.html#cb242-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Pair 3: Y3 over X3&quot;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-92-3.png" width="672" /></p>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="exploring-data.html#cb243-1"></a><span class="kw">ggplot</span>(anscombe, <span class="kw">aes</span>(<span class="dt">x =</span> x4, <span class="dt">y =</span> y4)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb243-2"><a href="exploring-data.html#cb243-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb243-3"><a href="exploring-data.html#cb243-3"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb243-4"><a href="exploring-data.html#cb243-4"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Pair 4: Y4 over Y4&quot;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-92-4.png" width="672" /></p>
+<p>These four charts and scatterplots themselves are quite different! While the blue correlation line and the prior summary statistics are similar, the points all follow a different general path. Independently looking at the graphics for each one will give you different insight, and may influence your audit approach. Graphics matter a lot!</p>
 </div>
-<div id="summarize" class="section level2">
-<h2><span class="header-section-number">8.4</span> Summarize</h2>
-</div>
-<div id="join" class="section level2">
-<h2><span class="header-section-number">8.5</span> Join</h2>
+<div id="data-visualization-how" class="section level2">
+<h2><span class="header-section-number">8.4</span> Data Visualization (How)</h2>
+<p><em>ggplot2</em> is the package that many consider to be one of the differentiating strengths of the R universe. It is one of the most elegant methods of visualizing data, and will help you understand your audit subject.</p>
+<p>Back to our materials analysis.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="exploring-data.html#cb244-1"></a><span class="kw">head</span>(materials)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   je_num amount gl_date    vendor_id account          description               
+##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;                     
+## 1      1   608. 2019-12-27      2843 exp_materials_6… Packaging and boxes       
+## 2      2 27822. 2019-06-05      2843 exp_materials_6… Packaging and boxes       
+## 3      4 23434. 2019-07-29      2323 exp_materials_6… Paper                     
+## 4      5 21457. 2019-01-04      2737 exp_materials_6… Quality control testing s…
+## 5      6  2006. 2019-02-13      2323 exp_materials_6… Sewing machines           
+## 6      7  4557. 2019-12-03      2737 exp_materials_6… Quality control testing s…</code></pre>
+<p>One of the most common charts is a time-series plot. We’ll use this example to build up the assembly of a ggplot.</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="exploring-data.html#cb246-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> gl_date, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
+<span id="cb246-2"><a href="exploring-data.html#cb246-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
+<p>The foundations of any ggplot are essentially:</p>
 <ul>
-<li>to vendor master to explore longer term trends</li>
+<li><code>data</code> - The data frame you want to visualize,</li>
+<li><code>mapping</code> - The aesthetics, which dictate the x and y (generally for the rest of the ggplot), and</li>
+<li><code>geom_*</code> - The visualization mechanism you want to apply</li>
 </ul>
+<p>When you specify a single <code>mapping</code> up front, it will be used for all the subsequent geoms called. You can also specify a mapping for each geom as well, which is useful for isolating points.</p>
+<p>This foundations layer of <code>data</code>, <code>mapping</code> and <code>geom_*</code> allows us to call different geoms and perspectives of looking at the data.</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="exploring-data.html#cb247-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> gl_date, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
+<span id="cb247-2"><a href="exploring-data.html#cb247-2"></a><span class="st">  </span><span class="kw">geom_col</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>Some geoms don’t even need an x. For example, understanding distributions of a single variable:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="exploring-data.html#cb248-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> amount)) <span class="op">+</span></span>
+<span id="cb248-2"><a href="exploring-data.html#cb248-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="exploring-data.html#cb249-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> amount)) <span class="op">+</span></span>
+<span id="cb249-2"><a href="exploring-data.html#cb249-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p>Sometimes you may want an aggregated version of a chart. For example, you may want to see transactions aggregated by month or even day of week. It is a good habit to transform the data you want prior to putting it into ggplot. For example, a line chart may simply be too messy:</p>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="exploring-data.html#cb250-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> gl_date, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
+<span id="cb250-2"><a href="exploring-data.html#cb250-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>Aggregating this same information by month may be more illustrative:</p>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="exploring-data.html#cb251-1"></a>monthly_mats &lt;-<span class="st"> </span>materials <span class="op">%&gt;%</span></span>
+<span id="cb251-2"><a href="exploring-data.html#cb251-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_month =</span> <span class="kw">floor_date</span>(gl_date, <span class="st">&#39;month&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Rounds the date down to the first of the month</span></span>
+<span id="cb251-3"><a href="exploring-data.html#cb251-3"></a><span class="st">  </span><span class="kw">group_by</span>(gl_month) <span class="op">%&gt;%</span></span>
+<span id="cb251-4"><a href="exploring-data.html#cb251-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">amount =</span> <span class="kw">sum</span>(amount))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="exploring-data.html#cb253-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> monthly_mats, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
+<span id="cb253-2"><a href="exploring-data.html#cb253-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<div id="facets" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> Facets</h3>
+<p>Another powerful feature of ggplot2 is facets - that is, the ability to show how different categories of the same data may look in the same dataset. In our GL dataset, we actually had multiple types of expenses:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="exploring-data.html#cb254-1"></a><span class="kw">unique</span>(gl<span class="op">$</span>account)</span></code></pre></div>
+<pre><code>## [1] &quot;exp_materials_6000&quot;          &quot;liab_accountspayable_2000&quot;  
+## [3] &quot;exp_consulting_6500&quot;         &quot;exp_meals_7000&quot;             
+## [5] &quot;liab_creditcardpayable_2100&quot;</code></pre>
+<p>We can pull these specific expense accounts (starting with ‘exp_’), and can choose how we want to plot them:</p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="exploring-data.html#cb256-1"></a>expense &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb256-2"><a href="exploring-data.html#cb256-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;exp_materials_6000&#39;</span>, <span class="st">&#39;exp_consulting_6500&#39;</span>, <span class="st">&#39;exp_meals_7000&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb256-3"><a href="exploring-data.html#cb256-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date_char),</span>
+<span id="cb256-4"><a href="exploring-data.html#cb256-4"></a>         <span class="dt">gl_month =</span> <span class="kw">floor_date</span>(gl_date, <span class="st">&#39;month&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb256-5"><a href="exploring-data.html#cb256-5"></a><span class="st">  </span><span class="kw">group_by</span>(account, gl_month) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Need to add a new layer of grouping to preserve the account</span></span>
+<span id="cb256-6"><a href="exploring-data.html#cb256-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">amount =</span> <span class="kw">sum</span>(amount))</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;account&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="exploring-data.html#cb258-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> expense, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount, <span class="dt">colour =</span> account)) <span class="op">+</span><span class="st"> </span><span class="co"># We can specify the colour now too, depending on the geom_*</span></span>
+<span id="cb258-2"><a href="exploring-data.html#cb258-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>Instead of plotting them onto the same chart, we can <code>facet_*</code> them:</p>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="exploring-data.html#cb259-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> expense, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount)) <span class="op">+</span><span class="st"> </span><span class="co"># We can specify the colour now too!</span></span>
+<span id="cb259-2"><a href="exploring-data.html#cb259-2"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb259-3"><a href="exploring-data.html#cb259-3"></a><span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>account) <span class="co"># Syntax for variable, either in the (row ~ column)... or both!</span></span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
             </section>

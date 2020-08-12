@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-07" />
+<meta name="date" content="2020-08-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -182,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
 <li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#na-values"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
@@ -215,11 +215,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
-<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#summary-statistics"><i class="fa fa-check"></i><b>8.1</b> Summary Statistics</a></li>
-<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#anscombes-quartet"><i class="fa fa-check"></i><b>8.2</b> Anscombe’s Quartet</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#graphics"><i class="fa fa-check"></i><b>8.3</b> Graphics</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#summarize"><i class="fa fa-check"></i><b>8.4</b> Summarize</a></li>
-<li class="chapter" data-level="8.5" data-path="exploring-data.html"><a href="exploring-data.html#join"><i class="fa fa-check"></i><b>8.5</b> Join</a></li>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#why-bother-visualizing"><i class="fa fa-check"></i><b>8.3</b> Why bother visualizing?</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization-how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization (How)</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.1</b> Facets</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
 <li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#mutate---if-statements"><i class="fa fa-check"></i><b>9.1</b> Mutate - If statements</a></li>
@@ -272,32 +273,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="cleaning-data" class="section level1">
 <h1><span class="header-section-number">Chapter 7</span> Cleaning data</h1>
 <p>Cleaning a data set, including fields and reshaping of the data, is a fundamental skill in order to get the data into an analyzable format. Real world data is messy, and will not typically be immediately analyzable immediately after downloading.</p>
-<p>For this section we will still use the company database, along with some more packages.</p>
+<p>For this section we will still use the company database, along with some more packages. New packages in this chapter include lubridate and tidyr.</p>
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="cleaning-data.html#cb94-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
 <span id="cb94-2"><a href="cleaning-data.html#cb94-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
 <span id="cb94-3"><a href="cleaning-data.html#cb94-3"></a></span>
 <span id="cb94-4"><a href="cleaning-data.html#cb94-4"></a><span class="kw">library</span>(lubridate) <span class="co"># For date handling</span></span>
-<span id="cb94-5"><a href="cleaning-data.html#cb94-5"></a><span class="kw">library</span>(ggplot2) <span class="co"># For making visualizations</span></span>
-<span id="cb94-6"><a href="cleaning-data.html#cb94-6"></a></span>
-<span id="cb94-7"><a href="cleaning-data.html#cb94-7"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
-<span id="cb94-8"><a href="cleaning-data.html#cb94-8"></a></span>
-<span id="cb94-9"><a href="cleaning-data.html#cb94-9"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb94-10"><a href="cleaning-data.html#cb94-10"></a></span>
-<span id="cb94-11"><a href="cleaning-data.html#cb94-11"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb94-12"><a href="cleaning-data.html#cb94-12"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb94-13"><a href="cleaning-data.html#cb94-13"></a></span>
-<span id="cb94-14"><a href="cleaning-data.html#cb94-14"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb94-15"><a href="cleaning-data.html#cb94-15"></a></span>
-<span id="cb94-16"><a href="cleaning-data.html#cb94-16"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb94-17"><a href="cleaning-data.html#cb94-17"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb94-18"><a href="cleaning-data.html#cb94-18"></a></span>
-<span id="cb94-19"><a href="cleaning-data.html#cb94-19"></a>vendors &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;vendors&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb94-20"><a href="cleaning-data.html#cb94-20"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb94-21"><a href="cleaning-data.html#cb94-21"></a></span>
-<span id="cb94-22"><a href="cleaning-data.html#cb94-22"></a>industry &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&#39;industry&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb94-23"><a href="cleaning-data.html#cb94-23"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb94-24"><a href="cleaning-data.html#cb94-24"></a></span>
-<span id="cb94-25"><a href="cleaning-data.html#cb94-25"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
+<span id="cb94-5"><a href="cleaning-data.html#cb94-5"></a></span>
+<span id="cb94-6"><a href="cleaning-data.html#cb94-6"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb94-7"><a href="cleaning-data.html#cb94-7"></a></span>
+<span id="cb94-8"><a href="cleaning-data.html#cb94-8"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb94-9"><a href="cleaning-data.html#cb94-9"></a></span>
+<span id="cb94-10"><a href="cleaning-data.html#cb94-10"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb94-11"><a href="cleaning-data.html#cb94-11"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb94-12"><a href="cleaning-data.html#cb94-12"></a></span>
+<span id="cb94-13"><a href="cleaning-data.html#cb94-13"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb94-14"><a href="cleaning-data.html#cb94-14"></a></span>
+<span id="cb94-15"><a href="cleaning-data.html#cb94-15"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb94-16"><a href="cleaning-data.html#cb94-16"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb94-17"><a href="cleaning-data.html#cb94-17"></a></span>
+<span id="cb94-18"><a href="cleaning-data.html#cb94-18"></a>vendors &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;vendors&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb94-19"><a href="cleaning-data.html#cb94-19"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb94-20"><a href="cleaning-data.html#cb94-20"></a></span>
+<span id="cb94-21"><a href="cleaning-data.html#cb94-21"></a>industry &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&#39;industry&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb94-22"><a href="cleaning-data.html#cb94-22"></a><span class="st">  </span><span class="kw">collect</span>()</span>
+<span id="cb94-23"><a href="cleaning-data.html#cb94-23"></a></span>
+<span id="cb94-24"><a href="cleaning-data.html#cb94-24"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
 <div id="basic-math" class="section level2">
 <h2><span class="header-section-number">7.1</span> Basic math</h2>
 <p>We covered some of the basic operators in R in the Completeness chapter, so we’ll cover some more calculations and transformations.</p>
