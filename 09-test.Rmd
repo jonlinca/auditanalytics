@@ -22,6 +22,14 @@ TODO (need to insert invoice date and paid date)
 
 ## Relative size factor testing
 
+A common request is to understand which vendor had the highest category of a charge (in this case, the `description`). Recall the `group_by()` will perform the calculation at the level requested. In this case, `slice_max()` will select the highest row of values by a variable.
+
+```{r}
+materials %>%
+  group_by(vendor_id) %>%
+  slice_max(amount, n = 2)
+```
+
 ## Search text {#test-searchtext}
 
 - Facilitation

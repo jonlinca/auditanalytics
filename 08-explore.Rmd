@@ -1,6 +1,8 @@
 # Exploring data
 
-As for exploring data, there is no quick, one-click method to explore your data, whether at a high level or in more granular detail. Realistically, you will oscillate between cleaning and exploration before you get the data into a final, testable state, and understand better what you are looking at.
+As for exploring data, there is no quick, one-click method to explore your data, whether at a high level or in more granular detail. Realistically, you will oscillate between cleaning and exploration before you are able to better understand the data you are looking testing.
+
+There are many primarily two methods in exploring data, both quantitatively and visually. Both are necessary methods for understanding data, at a quantitative and also a human level.
 
 For this section we will still use the company database, a unique dataset, along with some more packages - mainly, ggplot2.
 
@@ -22,9 +24,6 @@ con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
 gl <- tbl(con, 'gl') %>%
   collect()
 
-vendors <- tbl(con, 'vendors') %>%
-  collect()
-
 dbDisconnect(con)
 ```
 
@@ -41,7 +40,7 @@ materials <- gl %>%
 
 `summary()` gives a high level preview of each field, including the type and the statistical profile of the data table:
 
-```{r}
+```{r, rows.print = 5}
 summary(materials)
 ```
 
@@ -89,12 +88,38 @@ cor(x, y) # The correlation of X and Y. 1 means positively highly correlated, -1
 
 ## Summarizations
 
-TODO - Group by and Summarize
-Tables
+While calculating one-off summary statistics is useful, you may want to perform summation or summary statistics, whether by an entity (a vendor) or by time frame (month, year). R provides methods for summarizing this information, with a combination of two verbs.
 
-## Why bother visualizing?
+- `group_by()` enables you to indicate the levels you want to aggregate (for example, by vendor or by month),
+- `summarize()` requires you to create new columns to contain the calculation or aggregation you want to occur (for example, `sum` or `mean`). 
 
-With such useful statistical and summary functions, you may wonder why you ever need to delve into graphics. While summary statistics are fun (and perhaps, highly accurate and even authoritative'), they don't help bring to light full patterns of your data. The power of visual deduction can not be understated, especially in situations where superficially summary statistics have no issues.
+The materials table has a `vendor_id` number. We can try to perform a `group_by()`...
+
+```{r}
+materials %>%
+  group_by(vendor_id)
+```
+But it will return nothing. The `group_by()` will tell R what to group by, but not perform any additional calculations. Hence, the `summarize()`:
+
+```{r}
+materials %>%
+  group_by(vendor_id) %>%
+  summarize(total_amount = sum(amount))
+```
+
+Summarize will isolate the data set first by the groups specified, and then perform the calculation and put the results into a new field. This works for all summary statistics as well. For example, if you want to find the number of transactions, and the highest and lowest amount charged per description:
+
+```{r}
+materials %>%
+  group_by(description) %>%
+  summarize(number_of_trans = n(),
+            lowest_amount = min(amount),
+            highest_amount = max(amount))
+```
+
+## Data Visualizing - Why
+
+With such useful statistical and summary functions, you may wonder why you ever need to delve into graphics. While summary statistics are fun (and perhaps, highly accurate and even 'authoritative'), they don't help bring to light full patterns of your data. The power of visual deduction can not be understated, especially in situations where superficially summary statistics have no issues.
 
 Consider this data set, which are merely 4 pairs of x-y values (i.e. x1 goes with y1 etc):
 
@@ -146,17 +171,21 @@ ggplot(anscombe, aes(x = x4, y = y4)) +
 
 These four charts and scatterplots themselves are quite different! While the blue correlation line and the prior summary statistics are similar, the points all follow a different general path. Independently looking at the graphics for each one will give you different insight, and may influence your audit approach. Graphics matter a lot!
 
-## Data Visualization (How)
+## Data Visualization - How
 
 *ggplot2* is the package that many consider to be one of the differentiating strengths of the R universe. It is one of the most elegant methods of visualizing data, and will help you understand your audit subject.
 
 Back to our materials analysis.
 
 ```{r}
-head(materials)
+materials %>%
+  arrange(gl_date) %>%
+  head()
 ```
 
-One of the most common charts is a time-series plot. We'll use this example to build up the assembly of a ggplot.
+Perhaps we want to start analyzing the change over time for the amount spent. The `gl_date` is useful here, although there are many transactions that occur on the same date. We also have a `vendor_id` as well, identifying the vendor that the transaction the invoice belongs to.
+
+Generally we will want our time to be the x variable (the dependent variable), and the amount spent to be the y variable (the independent variable). We can insert the x and y into a ggplot function and generate the visualization we think may reveal useful infromation.
 
 ```{r}
 ggplot(data = materials, aes(x = gl_date, y = amount)) +
@@ -167,37 +196,36 @@ The foundations of any ggplot are essentially:
 
 - `data` - The data frame you want to visualize,
 - `mapping` - The aesthetics, which dictate the x and y (generally for the rest of the ggplot), and
-- `geom_*` - The visualization mechanism you want to apply
+- `geom_*` - The visualization mechanism you want to apply to represent the data points.
 
 When you specify a single `mapping` up front, it will be used for all the subsequent geoms called. You can also specify a mapping for each geom as well, which is useful for isolating points.
 
 This foundations layer of `data`, `mapping` and `geom_*` allows us to call different geoms and perspectives of looking at the data.
 
-```{r}
-ggplot(data = materials, aes(x = gl_date, y = amount)) +
-  geom_col()
-```
-
-Some geoms don't even need an x. For example, understanding distributions of a single variable:
+For example, histograms are useful to understand the shape of a dataset:
 
 ```{r, message = FALSE}
 ggplot(data = materials, aes(x = amount)) +
   geom_histogram()
 ```
 
+And boxplots are useful to understand the distribution of the data:
+
 ```{r}
-ggplot(data = materials, aes(x = amount)) +
+ggplot(data = materials, aes(x = as.factor(vendor_id), y = amount)) +
   geom_boxplot()
 ```
 
-Sometimes you may want an aggregated version of a chart. For example, you may want to see transactions aggregated by month or even day of week. It is a good habit to transform the data you want prior to putting it into ggplot. For example, a line chart may simply be too messy:
+### Time-series
+
+As the gl table (and materials subset) is a time-series data, containing both the transaction date and amount, we may want to try plotting a line chart to see the movement of data over time.
 
 ```{r}
 ggplot(data = materials, aes(x = gl_date, y = amount)) +
   geom_line()
 ```
 
-Aggregating this same information by month may be more illustrative:
+Since our time-series data has a relatively high resolution with detailed data, we may sometimes gain insight by aggregating data (by week, month, or even year). As of now, the data needs to be aggregated into a higher level time period. 
 
 ```{r}
 monthly_mats <- materials %>%
@@ -205,6 +233,12 @@ monthly_mats <- materials %>%
   group_by(gl_month) %>%
   summarize(amount = sum(amount))
 
+head(monthly_mats)
+```
+
+Aggregating this same information by month may be more illustrative:
+
+```{r}
 ggplot(data = monthly_mats, aes(x = gl_month, y = amount)) +
   geom_line()
 ```
@@ -234,7 +268,7 @@ ggplot(data = expense, aes(x = gl_month, y = amount, colour = account)) + # We c
 Instead of plotting them onto the same chart, we can `facet_*` them:
 
 ```{r}
-ggplot(data = expense, aes(x = gl_month, y = amount)) + # We can specify the colour now too!
+ggplot(data = expense, aes(x = gl_month, y = amount, colour = account)) +
   geom_line() +
   facet_grid(. ~ account) # Syntax for variable, either in the (row ~ column)... or both!
 ```

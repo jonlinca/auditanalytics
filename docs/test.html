@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-11" />
+<meta name="date" content="2020-08-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -217,9 +217,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#why-bother-visualizing"><i class="fa fa-check"></i><b>8.3</b> Why bother visualizing?</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization-how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization (How)</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.1</b> Facets</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualizing---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualizing - Why</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
+<li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
@@ -302,6 +303,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="relative-size-factor-testing" class="section level2">
 <h2><span class="header-section-number">9.9</span> Relative size factor testing</h2>
+<p>A common request is to understand which vendor had the highest category of a charge (in this case, the <code>description</code>). Recall the <code>group_by()</code> will perform the calculation at the level requested. In this case, <code>slice_max()</code> will select the highest row of values by a variable.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="test.html#cb269-1"></a>materials <span class="op">%&gt;%</span></span>
+<span id="cb269-2"><a href="test.html#cb269-2"></a><span class="st">  </span><span class="kw">group_by</span>(vendor_id) <span class="op">%&gt;%</span></span>
+<span id="cb269-3"><a href="test.html#cb269-3"></a><span class="st">  </span><span class="kw">slice_max</span>(amount, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+## # Groups:   vendor_id [3]
+##   je_num amount gl_date    vendor_id account          description               
+##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;                     
+## 1     12 75608. 2019-04-01      2323 exp_materials_6… Sewing machines           
+## 2    838 68077. 2019-09-23      2323 exp_materials_6… Paper                     
+## 3    955 91975. 2019-07-25      2737 exp_materials_6… Quality control testing s…
+## 4    746 67436. 2019-09-17      2737 exp_materials_6… Medical grade filters     
+## 5    278 70979. 2019-11-09      2843 exp_materials_6… Packaging and boxes       
+## 6    475 64631. 2019-12-05      2843 exp_materials_6… Packaging and boxes</code></pre>
 </div>
 <div id="test-searchtext" class="section level2">
 <h2><span class="header-section-number">9.10</span> Search text</h2>
