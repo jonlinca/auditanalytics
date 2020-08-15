@@ -1,0 +1,27 @@
+#  Appendix A - ACL Analytics to R
+
+ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams no to very little expertise in analytics, which strongly tied into the Galvanize Highbond cloud software. R is useful as your team reaches a higher level of maturity due to its ability to incorporate version control, markdown reports and code packages.
+
+There are several similarities and differences to help bridge the gap when transferring between the tools.
+
+## Import
+
+## Data
+
+### Joins
+
+For those with experience with the ACL Analytics (AN) tool, the [join command](https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm) is similar, but there are some syntax and behaviours differences you need to be aware of:
+
+| ACL AN | R (tidyverse) | Difference |
+| --- | --- | --- |
+| `JOIN` with no keywords   | `inner_join(...)`  | R will return all matches with all columns in Secondary table, if found in Primary table. <br>**Can effectively return more rows than exist in Primary table.**<br> AN will return the first match found in the Primary table per row. |
+| `PKEY <pkey1>` <br> `SKEY <skey1>` | `*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))` | Join key goes into the `by` command. Additional join keys can be added.
+| `FIELDS ALL` | `semi_join(...)` | Filters the Primary table, only keeping matches that existed in the Secondary table | 
+| `FIELDS <names>` <br> `WITH <names>` | | All columns from both tables are kept by design. <br> `<names>` of columns can not be specified, and need to be pre-selected beforehand |
+| `PRIMARY`         | `left_join(...)`                           | Unmatched keys will have secondary column values written as `NA` |
+| `SECONDARY`       | `right_join(...)`                          | Unmatched keys will have primary column values be written as `NA` |
+| `PRIMARY SECONDARY` | `full_join(...)` | Unmatched keys will have primary or secondary column values written as `NA` | 
+| `UNMATCHED`       | `anti_join(...)`                           |  |
+
+## Analyze
+

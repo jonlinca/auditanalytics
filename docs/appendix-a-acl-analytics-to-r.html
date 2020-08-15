@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Architecture | Audit Analytics with R</title>
+  <title>Chapter 13 Appendix A - ACL Analytics to R | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Architecture | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 13 Appendix A - ACL Analytics to R | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Architecture | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 13 Appendix A - ACL Analytics to R | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="approach.html"/>
-<link rel="next" href="setup.html"/>
+<link rel="prev" href="other-practices-to-follow.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -283,127 +283,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="architecture" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Architecture</h1>
-<div class="figure" style="text-align: center"><span id="fig:architecture"></span>
-<div id="htmlwidget-b2932b71632540e2ff05" style="width:100%;height:576px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b2932b71632540e2ff05">{"x":{"diagram":"\ndigraph boxes_and_circles {\n\n  # a \"graph\" statement\n  graph [overlap = true, fontsize = 10]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n  R [label = \"R and RStudio\"]\n  G [label = \"Code repositories\"]\n  D [label = \"Data products\"]\n  S [label = \"Data sources\"]\n  DB [label = \"Audit Data Mart\"]\n\n  # several \"edge\" statements\n  S -> R\n  R -> G\n  G -> R\n  R -> D\n  D -> G\n  G -> D\n  R -> DB\n  DB -> R\n  DB -> D\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-<p class="caption">
-Figure 3.1: Internal Audit Data Analytics Architecture
-</p>
+<div id="appendix-a---acl-analytics-to-r" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Appendix A - ACL Analytics to R</h1>
+<p>ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams no to very little expertise in analytics, which strongly tied into the Galvanize Highbond cloud software. R is useful as your team reaches a higher level of maturity due to its ability to incorporate version control, markdown reports and code packages.</p>
+<p>There are several similarities and differences to help bridge the gap when transferring between the tools.</p>
+<div id="import" class="section level2">
+<h2><span class="header-section-number">13.1</span> Import</h2>
 </div>
-<p>The architecture and tools you select should support and amplify your team, and not be a burden to maintain. Maintenance of databases and applications can also be delegated to application support teams, so you can focus on implementing analytics and delivering data products.</p>
-<p>Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password expiry every 90 days will make updating passwords feel like quarterly financial reporting.</p>
-<p>Any software you consider should be able to talk to your company’s internal and external applications. Be wary of software that locks you in or makes access to data cumbersome, as it limits your ability to integrate with your company’s tools as you gain sophistication.</p>
-<div id="r-and-rstudio" class="section level2">
-<h2><span class="header-section-number">3.1</span> R and RStudio</h2>
-<p><a href="https://www.r-project.org">R</a> is a programming language with an emphasis on statistics. It is considered free software, free in the perspective that you can run, distribute, and change it as you like.</p>
-<p>What makes R so great is the large suite of packages that are available to use to help analyze information. What doesn’t exist in base R will likely have been developed by someone else: there are hundreds of packages that support data connectivity (<a href="https://cran.r-project.org/web/packages/DBI/">DBI</a>, <a href="https://cran.r-project.org/web/packages/xlsx/">xlsx</a>), day-to-day manipulation and analysis (<a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a>, <a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a>), and even auditing (<a href="https://cran.r-project.org/web/packages/jfa/">jfa</a>, <a href="https://cran.r-project.org/web/packages/MUS/">MUS</a>). CRAN is the central repository for all these packages that meet minimum quality standards.</p>
-<p>As R is a language, you may want to consider an application to code in, similar to how you may write memos in Microsoft Word. <a href="https://rstudio.com">RStudio Desktop</a> is an integrated development environment (IDE) that has an open source version and is free to use. There are also free versions of RStudio Server, as well as commercially supported versions of its Desktop, Server, and two unique products that we will go into more later - Package Manager and Connect.</p>
-<p>With both R and RStudio installed, you can perform the minimum requirements of your audit data analysis career: you can download data, wrangle it, visualize it, and save completed analyses. The potential is limitless though, as it enables all the other technologies to operate with it - machine learning, automation, dashboarding, and code sharing.</p>
-</div>
-<div id="code-repositories" class="section level2">
-<h2><span class="header-section-number">3.2</span> Code repositories</h2>
-<p>Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file (now V2), but Person B will not benefit from the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.</p>
-<p>One of the most effective ways to solve this problem is to leverage a code repository (also known as version control). While version control has several software engineering advantages, the most notable advantages for audit teams are:</p>
-<ul>
-<li>Centralizing domain knowledge and sharing code,</li>
-<li>Tracking and tracing changes to code throughout time (including who, what was changed, and when), and</li>
-<li>Ability to test with an isolated code set before rolling out to production.</li>
-</ul>
-<p>Code versioning technologies resonate closely with IT General Controls and even the COBIT framework.</p>
-<div id="git" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> git</h3>
-<p><a href="https://git-scm.com">git</a> is a type of version control. Another free, open source software, and the basic usage of the tool is accessible.</p>
-<p>The basics of git are:</p>
-<ul>
-<li>Pull code from the remote server to the local computer.</li>
-<li>Write and save code on your local computer.</li>
-<li>Commit code on your local computer.</li>
-<li>Push code from your local computer to the remote server.</li>
-</ul>
-<p>While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. The git hole can go very deep, so if things don’t go according to plan, just remember that you can always <a href="https://xkcd.com/1597/">make a new folder and start fresh</a>.</p>
-<p>Several different server technologies support git - <a href="https://github.com">GitHub</a>, <a href="https://azure.microsoft.com/en-us/services/devops/repos/">Azure Repos</a> within Azure DevOps, <a href="https://gitlab.com">gitlab</a> are all willing to host your code. If you’re using these to hold proprietary or sensitive code, it would be wise to get your company’s support and pay for the ability to have a private repository that only your team can see.</p>
-</div>
-<div id="packages" class="section level3">
-<h3><span class="header-section-number">3.2.2</span> Packages</h3>
-<p>As you write more code and templates, you will eventually want to share these new techniques with others on your team. Packages put your best practices together, including templates, functions to solve common problems, and templates for common workflows. In short: packages contain tasks help you do your job, and save you time.</p>
-<p>Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team’s workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.</p>
-<p>How do you share packages? You certainly don’t not need to force your team to copy-and-paste code or even a templates from a central folder! The most elegant way to distribute your code is via hosting packages on a code or package repository. These repositories (hosted internally or externally) enable your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive.</p>
-<p>The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don’t call it auditR.</p>
-</div>
-</div>
-<div id="data-products" class="section level2">
-<h2><span class="header-section-number">3.3</span> Data products</h2>
-<p>All auditors face this problem at one point or another. An audit finding doesn’t matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.</p>
-<p>The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?</p>
-<p>Data products are deliverable that enhance your customer’s ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand.</p>
-<div id="galvanize-highbond" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Galvanize Highbond</h3>
-<p><a href="https://www.wegalvanize.com">Galvanize</a>, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is an unrivaled for audit exception and remediation workflow.</p>
-<p>The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.</p>
-<p>While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams that design their workpaper environments effectively.</p>
-<p>Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.</p>
-<p>Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high availability and security maintained by a professional team. Galvanize supports the <a href="https://www.wegalvanize.com/trust/">security</a>, design and coding for hosting a tool online, allowing you to focus on designing workflows for your internal customers.</p>
-</div>
-<div id="rstudio-connect" class="section level3">
-<h3><span class="header-section-number">3.3.2</span> RStudio Connect</h3>
-<p>RStudio PBC, which became a Certified B Corporation in 2020, offers the <a href="https://rstudio.com/products/connect/">RStudio Connect</a> solution that allows R deliverable to be hosted online. These include:</p>
-<ul>
-<li><a href="https://rmarkdown.rstudio.com">RMarkdown</a> notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization.</li>
-<li>These notebooks can also act at Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).</li>
-<li>The hosting of <a href="https://shiny.rstudio.com">Shiny</a> apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.</li>
-</ul>
-<p>For audit teams with expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team’s best practices of a code repository.</p>
-<p>RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.</p>
-<p>Lightweight alternatives include the hosting a free <a href="https://rstudio.com/products/shiny/shiny-server/">Shiny Server</a> or low-cost publishing to <a href="https://www.shinyapps.io">Shinyapps.io</a>.</p>
-</div>
-<div id="rstudio-package-manager" class="section level3">
-<h3><span class="header-section-number">3.3.3</span> RStudio Package Manager</h3>
-<p>As your team develops more code and functions, there becomes a greater need to distribute these best practices easily. <a href="https://rstudio.com/products/package-manager/">RStudio Package Manager</a> offers the capability to distribute code packages to your coworkers and even the broader organization. By integrating with your code repository, it can bundle new functionality added by your team and distribute it. It offers versioning of packages, for those audit environments where reproducability is paramount.</p>
-<p>An alternative is also <a href="https://cran.r-project.org/web/packages/miniCRAN/index.html">miniCRAN</a>, a reduced feature set yet free and open source version, or even simply hosting packages on a network drive.</p>
+<div id="data" class="section level2">
+<h2><span class="header-section-number">13.2</span> Data</h2>
+<div id="joins" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> Joins</h3>
+<p>For those with experience with the ACL Analytics (AN) tool, the <a href="https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm">join command</a> is similar, but there are some syntax and behaviours differences you need to be aware of:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ACL AN</th>
+<th>R (tidyverse)</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>JOIN</code> with no keywords</td>
+<td><code>inner_join(...)</code></td>
+<td>R will return all matches with all columns in Secondary table, if found in Primary table. <br><strong>Can effectively return more rows than exist in Primary table.</strong><br> AN will return the first match found in the Primary table per row.</td>
+</tr>
+<tr class="even">
+<td><code>PKEY &lt;pkey1&gt;</code> <br> <code>SKEY &lt;skey1&gt;</code></td>
+<td><code>*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))</code></td>
+<td>Join key goes into the <code>by</code> command. Additional join keys can be added.</td>
+</tr>
+<tr class="odd">
+<td><code>FIELDS ALL</code></td>
+<td><code>semi_join(...)</code></td>
+<td>Filters the Primary table, only keeping matches that existed in the Secondary table</td>
+</tr>
+<tr class="even">
+<td><code>FIELDS &lt;names&gt;</code> <br> <code>WITH &lt;names&gt;</code></td>
+<td></td>
+<td>All columns from both tables are kept by design. <br> <code>&lt;names&gt;</code> of columns can not be specified, and need to be pre-selected beforehand</td>
+</tr>
+<tr class="odd">
+<td><code>PRIMARY</code></td>
+<td><code>left_join(...)</code></td>
+<td>Unmatched keys will have secondary column values written as <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>SECONDARY</code></td>
+<td><code>right_join(...)</code></td>
+<td>Unmatched keys will have primary column values be written as <code>NA</code></td>
+</tr>
+<tr class="odd">
+<td><code>PRIMARY SECONDARY</code></td>
+<td><code>full_join(...)</code></td>
+<td>Unmatched keys will have primary or secondary column values written as <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>UNMATCHED</code></td>
+<td><code>anti_join(...)</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<div id="data-sources" class="section level2">
-<h2><span class="header-section-number">3.4</span> Data sources</h2>
-<p>The end goal of automation ETLs, and creating and hosting data products for audit customers to consume. To achieve these goals, an audit team needs direct, programmatic access to the data being audited. By programmatic, we mean that code can be used to access data, versus going through a front-end user interface.</p>
-<div id="internal-databases" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Internal databases</h3>
-<p>At its core, databases hold transactional information that runs the business. Databases generally can fit two separate use cases: Online Transaction Processing (OLTP), for high speed transaction writing, and Online Analytic Processing (OLAP), for analyzing to support business decisions. Typically OLTP databases act as a source of truth, and send updates to the OLAP database.</p>
-<p>The language of choice to access internal databases is Structured Query Language (SQL). As a defacto standard for accessing databases since 1970’s, all relational databases still leverage SQL. While each brand may have subtle nuances in the way SQL works, this essential language will allow your audit team to access a majority of sources within the company. Non-relational databases and NoSQL are becoming more mainstream, as well as graph databases, so your audit team will need to tool up as necessary.</p>
-<p>Audit teams historically had a bad reputation for ‘bringing down the database’. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. Great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:</p>
-<ul>
-<li>Filter the data with WHERE clauses,</li>
-<li>Perform joins in the database, instead of downloading multiple tables individually and joining them on the desktop,</li>
-<li>Download data in chunks or segments, split by day, week or month, or</li>
-<li>Schedule queries during off-business hours.</li>
-</ul>
-</div>
-<div id="external-sources" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> External sources</h3>
-<p>As more applications move to the cloud, using SQL to access data becomes more difficult. While some of this data can be brought into an internal data warehouse or used as an integration, more often than not transactional data is left online within the tool.</p>
-<p>Certain online cloud software providers will make an Application Programming Interface (API) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like <a href="https://cran.r-project.org/web/packages/httr/index.html">httr</a> and digested with <a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a>.</p>
-<p>While APIs enable audit teams to retrieve data, it adds a layer of difficulty in obtaining data:</p>
-<ul>
-<li>Each API behaves differently - authentication, calls, and the data return all may vary between systems.</li>
-<li>APIs endpoints, the part that allows a tool to query it, tend to be highly specific-use cases, and may provide a limited scope of data at one time.</li>
-<li>Data may not be in the format that you want, or even exist - you are at the mercy what the API supplies.</li>
-<li>If an API does allow for a larger data download, it may be limited by pagnation, where multiple results are spread out over multiple pages.</li>
-<li>APIs may be ‘rate-limited’, which means it may restrict the number of queries, whether in parallel or in sequence.</li>
-</ul>
-<p>Tips for audit teams needing to rely on cloud providers:</p>
-<ul>
-<li>API access should be part of the requirements before signing an agreement with a provider.</li>
-<li>Ask for, and generate, an API key for usage, and treat it like a password.</li>
-<li>If APIs are out of the skill of your team, consider asking your IT department to schedule a data pull into your audit data mart.</li>
-</ul>
-</div>
-</div>
-<div id="audit-data-mart" class="section level2">
-<h2><span class="header-section-number">3.5</span> Audit data mart</h2>
-<p>While internal databases are accessible, generally they hold the entirety of the company’s data, which is far too much information. Only a fraction of the data is considered important and significant to the audit team.</p>
-<p>An audit data mart is a key piece of infrastructure that will sit between your data products and data source. This data mart should contain highly specific, refined and cleaned data, which improves the speed and responsiveness of data products and data-on-demand. The audit data mart can also be secured to your audit team members, so confidentiality is not compromised.</p>
-<p>To take full advantage of an audit data mart, an automated ETL process should connect directly to internal databases, and perform transformations to get to a clean end product. ETLs can be created and scheduled within RStudio Connect.</p>
+<div id="analyze" class="section level2">
+<h2><span class="header-section-number">13.3</span> Analyze</h2>
 
 </div>
 </div>
@@ -412,8 +363,8 @@ Figure 3.1: Internal Audit Data Analytics Architecture
           </div>
         </div>
       </div>
-<a href="approach.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="setup.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="other-practices-to-follow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

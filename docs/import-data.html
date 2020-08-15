@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-12" />
+<meta name="date" content="2020-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,13 @@
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.14/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -210,14 +217,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
 <li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
 <li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
-<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#how-joining-is-different-in-acl-analytics"><i class="fa fa-check"></i><b>7.7.1</b> How joining is different in ACL Analytics</a></li>
-</ul></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualizing---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualizing - Why</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
 <li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
 <li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
@@ -249,6 +254,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>12</b> Other practices to follow</a><ul>
 <li class="chapter" data-level="12.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>12.1</b> Documentation</a></li>
 <li class="chapter" data-level="12.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>12.2</b> Passwords</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html"><i class="fa fa-check"></i><b>13</b> Appendix A - ACL Analytics to R</a><ul>
+<li class="chapter" data-level="13.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>13.1</b> Import</a></li>
+<li class="chapter" data-level="13.2" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>13.2</b> Data</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>13.2.1</b> Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>13.3</b> Analyze</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -323,15 +335,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-13"><a href="import-data.html#cb7-13"></a><span class="kw">glimpse</span>(raw_vendors)</span></code></pre></div>
 <pre><code>## Rows: 9
 ## Columns: 9
-## $ id         &lt;chr&gt; &quot;842&quot;, &quot;624&quot;, &quot;963&quot;, &quot;2737&quot;, &quot;2323&quot;, &quot;2843&quot;, &quot;2737&quot;, &quot;2323…
+## $ id         &lt;chr&gt; &quot;793&quot;, &quot;666&quot;, &quot;77&quot;, &quot;2726&quot;, &quot;2612&quot;, &quot;2211&quot;, &quot;2726&quot;, &quot;2612&quot;…
 ## $ type       &lt;chr&gt; &quot;E&quot;, &quot;E&quot;, &quot;E&quot;, &quot;V&quot;, &quot;V&quot;, &quot;V&quot;, &quot;V&quot;, &quot;V&quot;, &quot;V&quot;
-## $ name       &lt;chr&gt; &quot;al-Ghanem, Tareefa&quot;, &quot;Murphy, Everett&quot;, &quot;Trujillo, Anthon…
-## $ date_added &lt;date&gt; 2015-03-21, 2015-11-01, 2015-05-08, 2015-09-29, 2015-09-0…
+## $ name       &lt;chr&gt; &quot;al-Bangura, Habeeba&quot;, &quot;Akina, Duncan&quot;, &quot;el-Kazmi, Muneefa…
+## $ date_added &lt;date&gt; 2015-07-15, 2015-07-28, 2015-05-26, 2015-05-23, 2015-07-0…
 ## $ summary    &lt;chr&gt; NA, NA, NA, &quot;spend&quot;, &quot;spend&quot;, &quot;spend&quot;, &quot;credits&quot;, &quot;credits…
-## $ `2015`     &lt;dbl&gt; NA, NA, NA, 59434.0105, 84345.3026, 84565.0288, 960.6279, …
-## $ `2016`     &lt;dbl&gt; NA, NA, NA, 67419.9719, 142930.4511, 116591.7874, 1726.927…
-## $ `2017`     &lt;dbl&gt; NA, NA, NA, 103935.4139, 187100.5610, 219136.6560, 2231.37…
-## $ `2018`     &lt;dbl&gt; NA, NA, NA, 46548.4650, 153181.1219, 91131.0930, 1867.1983…</code></pre>
+## $ `2015`     &lt;dbl&gt; NA, NA, NA, 65325.5287, 88270.0937, 51847.2728, 509.4308, …
+## $ `2016`     &lt;dbl&gt; NA, NA, NA, 83413.7426, 148569.7780, 89260.3035, 860.3997,…
+## $ `2017`     &lt;dbl&gt; NA, NA, NA, 150261.9517, 254178.2672, 142074.7898, 908.947…
+## $ `2018`     &lt;dbl&gt; NA, NA, NA, 55569.8474, 179056.0944, 76761.0587, 347.9129,…</code></pre>
 <p>You may have noticed that while our normal columns are specified as-is, we had to wrap our years with backticks (`), because while a column can technically be a number, asking R to reference a number will interpret it as a value, and not a field name.</p>
 <div id="handling-problematic-delimited-files" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> Handling problematic delimited files</h3>
@@ -391,33 +403,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;gl&quot;       &quot;industry&quot; &quot;tb&quot;       &quot;vendors&quot;</code></pre>
 <p>Typically to get data out of a database, you’ll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="import-data.html#cb22-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl&#39;</span>)</span></code></pre></div>
-<pre><code>##   je_num  amount gl_date gl_date_char vendor_id                   account
-## 1      1  607.81   18257   2019-12-27      2843        exp_materials_6000
-## 2      1 -607.81   18257   2019-12-27        NA liab_accountspayable_2000
-##           description
-## 1 Packaging and boxes
-## 2 Packaging and boxes
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1998 rows ]</code></pre>
+<pre><code>##   je_num   amount gl_date gl_date_char vendor_id            account
+## 1      1 22667.46   18232   2019-12-02      2211 exp_materials_6000
+##   invoice_date         description paid_date
+## 1        18225 Packaging and boxes     18262
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1999 rows ]</code></pre>
 <p>While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the <strong>dplyr</strong> package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the <code>con</code> connection object contains the <code>gl</code> table:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="import-data.html#cb24-1"></a>db_gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>)</span>
 <span id="cb24-2"><a href="import-data.html#cb24-2"></a></span>
 <span id="cb24-3"><a href="import-data.html#cb24-3"></a>db_gl</span></code></pre></div>
-<pre><code>## # Source:   table&lt;gl&gt; [?? x 7]
+<pre><code>## # Source:   table&lt;gl&gt; [?? x 9]
 ## # Database: sqlite 3.30.1
 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
-##    je_num  amount gl_date gl_date_char vendor_id account      description       
-##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;             
-##  1      1    608.   18257 2019-12-27        2843 exp_materia… Packaging and box…
-##  2      1   -608.   18257 2019-12-27          NA liab_accoun… Packaging and box…
-##  3      2  27822.   18052 2019-06-05        2843 exp_materia… Packaging and box…
-##  4      2 -27822.   18052 2019-06-05          NA liab_accoun… Packaging and box…
-##  5      3   9943.   18218 2019-11-18        2843 exp_consult… Advisory fee for …
-##  6      3  -9943.   18218 2019-11-18          NA liab_accoun… Advisory fee for …
-##  7      4  23434.   18106 2019-07-29        2323 exp_materia… Paper             
-##  8      4 -23434.   18106 2019-07-29          NA liab_accoun… Paper             
-##  9      5  21457.   17900 2019-01-04        2737 exp_materia… Quality control t…
-## 10      5 -21457.   17900 2019-01-04          NA liab_accoun… Quality control t…
-## # … with more rows</code></pre>
+##    je_num  amount gl_date gl_date_char vendor_id account invoice_date
+##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;
+##  1      1  22667.   18232 2019-12-02        2211 exp_ma…        18225
+##  2      1 -22667.   18232 2019-12-02          NA liab_a…        18225
+##  3      2   1397.   18228 2019-11-28        2612 exp_ma…        18218
+##  4      2  -1397.   18228 2019-11-28          NA liab_a…        18218
+##  5      3   2319.   17995 2019-04-09        2612 exp_ma…        17985
+##  6      3  -2319.   17995 2019-04-09          NA liab_a…        17985
+##  7      4  20037.   18199 2019-10-30        2612 exp_ma…        18189
+##  8      4 -20037.   18199 2019-10-30          NA liab_a…        18189
+##  9      5  43140.   18051 2019-06-04        2612 exp_ma…        18041
+## 10      5 -43140.   18051 2019-06-04          NA liab_a…        18041
+## # … with more rows, and 2 more variables: description &lt;chr&gt;, paid_date &lt;dbl&gt;</code></pre>
 <p>Not only is it pointing to the same table, but its also performing the same query:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="import-data.html#cb26-1"></a>db_gl <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb26-2"><a href="import-data.html#cb26-2"></a><span class="st">  </span><span class="kw">show_query</span>()</span></code></pre></div>
@@ -432,23 +442,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Lets say that you wanted to filter amounts greater than $75,000 in the database. In the SQL method, you would need to type a whole new SQL query:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="import-data.html#cb28-1"></a><span class="kw">dbGetQuery</span>(con, <span class="st">&#39;select * from gl where amount &gt; 75000&#39;</span>)</span></code></pre></div>
 <pre><code>##   je_num   amount gl_date gl_date_char vendor_id            account
-## 1     12 75608.14   17987   2019-04-01      2323 exp_materials_6000
-## 2    955 91974.59   18102   2019-07-25      2737 exp_materials_6000
-##                        description
-## 1                  Sewing machines
-## 2 Quality control testing supplies</code></pre>
+## 1    140 96354.61   18249   2019-12-19      2211 exp_materials_6000
+##   invoice_date         description paid_date
+## 1        18242 Packaging and boxes     18279
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1 rows ]</code></pre>
 <p>Where in the dplyr method, you would only need to build on the same connection object already established. Identical queries, and results</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="import-data.html#cb30-1"></a>db_gl_threshold &lt;-<span class="st"> </span>db_gl <span class="op">%&gt;%</span></span>
 <span id="cb30-2"><a href="import-data.html#cb30-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span><span class="dv">75000</span>)</span>
 <span id="cb30-3"><a href="import-data.html#cb30-3"></a></span>
 <span id="cb30-4"><a href="import-data.html#cb30-4"></a>db_gl_threshold</span></code></pre></div>
-<pre><code>## # Source:   lazy query [?? x 7]
+<pre><code>## # Source:   lazy query [?? x 9]
 ## # Database: sqlite 3.30.1
 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanalytics.sqlite]
-##   je_num amount gl_date gl_date_char vendor_id account      description         
-##    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;               
-## 1     12 75608.   17987 2019-04-01        2323 exp_materia… Sewing machines     
-## 2    955 91975.   18102 2019-07-25        2737 exp_materia… Quality control tes…</code></pre>
+##   je_num amount gl_date gl_date_char vendor_id account invoice_date description
+##    &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      
+## 1    140 96355.   18249 2019-12-19        2211 exp_ma…        18242 Packaging …
+## 2    693 88524.   18121 2019-08-13        2726 exp_ma…        18114 Quality co…
+## # … with 1 more variable: paid_date &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="import-data.html#cb32-1"></a><span class="kw">show_query</span>(db_gl_threshold)</span></code></pre></div>
 <pre><code>## &lt;SQL&gt;
 ## SELECT *
@@ -478,7 +488,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb35-5"><a href="import-data.html#cb35-5"></a></span>
 <span id="cb35-6"><a href="import-data.html#cb35-6"></a>response</span></code></pre></div>
 <pre><code>## Response [https://api.github.com/users/jonlinca/repos]
-##   Date: 2020-08-13 03:11
+##   Date: 2020-08-15 18:34
 ##   Status: 200
 ##   Content-Type: application/json; charset=utf-8
 ##   Size: 28.6 kB
@@ -497,10 +507,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="import-data.html#cb37-1"></a><span class="kw">names</span>(response)</span></code></pre></div>
 <pre><code>##  [1] &quot;url&quot;         &quot;status_code&quot; &quot;headers&quot;     &quot;all_headers&quot; &quot;cookies&quot;    
 ##  [6] &quot;content&quot;     &quot;date&quot;        &quot;times&quot;       &quot;request&quot;     &quot;handle&quot;</code></pre>
-<p>And the data you want will be in <code>list$content</code>:</p>
+<p>And the data you want will be in the response’s <code>$content</code>:</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="import-data.html#cb39-1"></a><span class="kw">head</span>(response<span class="op">$</span>content)</span></code></pre></div>
 <pre><code>## [1] 5b 0a 20 20 7b 0a</code></pre>
-<p>This raw data is generally uninterpretable, and it is because the file is in a different format - in this case, the Content-Type indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr <code>content()</code> and jsonlite <code>fromJSON()</code> and <code>toJSON()</code> functions:</p>
+<p>This raw data is generally uninterpretable, and it is because the structure of the data is in a different format - in this case, the Content-Type above indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr <code>content()</code> and jsonlite <code>fromJSON()</code> and <code>toJSON()</code> functions:</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="import-data.html#cb41-1"></a>content &lt;-<span class="st"> </span><span class="kw">content</span>(response)</span>
 <span id="cb41-2"><a href="import-data.html#cb41-2"></a></span>
 <span id="cb41-3"><a href="import-data.html#cb41-3"></a>cleancontent &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(jsonlite<span class="op">::</span><span class="kw">toJSON</span>(content), <span class="dt">flatten =</span> <span class="ot">TRUE</span>)</span>
@@ -513,7 +523,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 269707027          auditanalytics
 ## 4 183726578                calgaryr
 ## 5 277917653              galvanizer</code></pre>
-<p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, <a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst">CData</a> supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.</p>
+<p>Some data sources may be difficult to obtain data from, or perhaps you’re not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, <a href="https://www.cdata.com/kb/tech/office365-jdbc-r.rst">CData</a> supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly. Office 365 also offers APIs that expose Sharepoint and Outlook, although they take more time to understand.</p>
 
 </div>
 </div>

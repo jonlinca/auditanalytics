@@ -117,13 +117,13 @@ materials %>%
             highest_amount = max(amount))
 ```
 
-## Data Visualizing - Why
+## Data Visualization - Why
 
 With such useful statistical and summary functions, you may wonder why you ever need to delve into graphics. While summary statistics are fun (and perhaps, highly accurate and even 'authoritative'), they don't help bring to light full patterns of your data. The power of visual deduction can not be understated, especially in situations where superficially summary statistics have no issues.
 
 Consider this data set, which are merely 4 pairs of x-y values (i.e. x1 goes with y1 etc):
 
-```{r}
+```{r rows.print = 20}
 anscombe
 ```
 
@@ -146,7 +146,7 @@ We will use the *ggplot2* to chart these x-y pairs and try to understand the dat
 
 If we produce the four graphs together, what do you notice?
 
-```{r, message=FALSE}
+```{r, message=FALSE, fig.show = 'hold', out.width = '50%'}
 ggplot(anscombe, aes(x = x1, y = y1)) + 
   geom_point() + 
   stat_smooth(method="lm", se = FALSE) +
@@ -188,7 +188,7 @@ Perhaps we want to start analyzing the change over time for the amount spent. Th
 Generally we will want our time to be the x variable (the dependent variable), and the amount spent to be the y variable (the independent variable). We can insert the x and y into a ggplot function and generate the visualization we think may reveal useful infromation.
 
 ```{r}
-ggplot(data = materials, aes(x = gl_date, y = amount)) +
+ggplot(data = materials, mapping = aes(x = gl_date, y = amount)) +
   geom_point()
 ```
 
@@ -205,7 +205,7 @@ This foundations layer of `data`, `mapping` and `geom_*` allows us to call diffe
 For example, histograms are useful to understand the shape of a dataset:
 
 ```{r, message = FALSE}
-ggplot(data = materials, aes(x = amount)) +
+ggplot(materials, aes(x = amount)) + # data is the first default argument, and mapping is the second
   geom_histogram()
 ```
 

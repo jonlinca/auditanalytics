@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-12" />
+<meta name="date" content="2020-08-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,13 @@
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.14/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -210,14 +217,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
 <li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
 <li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
-<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#how-joining-is-different-in-acl-analytics"><i class="fa fa-check"></i><b>7.7.1</b> How joining is different in ACL Analytics</a></li>
-</ul></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
-<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualizing---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualizing - Why</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
 <li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
 <li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
@@ -249,6 +254,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>12</b> Other practices to follow</a><ul>
 <li class="chapter" data-level="12.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>12.1</b> Documentation</a></li>
 <li class="chapter" data-level="12.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>12.2</b> Passwords</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html"><i class="fa fa-check"></i><b>13</b> Appendix A - ACL Analytics to R</a><ul>
+<li class="chapter" data-level="13.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>13.1</b> Import</a></li>
+<li class="chapter" data-level="13.2" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>13.2</b> Data</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>13.2.1</b> Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>13.3</b> Analyze</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -298,36 +310,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A rapid preview of all your columns can be done quickly with <code>summary()</code>. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-completeness.html#cb44-1"></a><span class="kw">summary</span>(gl)</span></code></pre></div>
 <pre><code>##      je_num           amount          gl_date      gl_date_char      
-##  Min.   :   1.0   Min.   :-91975   Min.   :17897   Length:2000       
-##  1st Qu.: 250.8   1st Qu.: -6848   1st Qu.:17987   Class :character  
-##    vendor_id      account          description       
-##  Min.   : 624   Length:2000        Length:2000       
-##  1st Qu.:2323   Class :character   Class :character  
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+##  Min.   :   1.0   Min.   :-96355   Min.   :17897   Length:2000       
+##  1st Qu.: 250.8   1st Qu.: -6846   1st Qu.:17986   Class :character  
+##  Median : 500.5   Median :     0   Median :18080   Mode  :character  
+##  Mean   : 500.5   Mean   :     0   Mean   :18078                     
+##  3rd Qu.: 750.2   3rd Qu.:  6846   3rd Qu.:18171                     
+##  Max.   :1000.0   Max.   : 96355   Max.   :18261                     
+##                                                                      
+##    vendor_id      account           invoice_date   description       
+##  Min.   :  77   Length:2000        Min.   :17887   Length:2000       
+##  1st Qu.:2211   Class :character   1st Qu.:17976   Class :character  
+##  Median :2612   Mode  :character   Median :18072   Mode  :character  
+##  Mean   :2464                      Mean   :18069                     
+##  3rd Qu.:2726                      3rd Qu.:18162                     
+##  Max.   :2726                      Max.   :18254                     
+##  NA&#39;s   :1000                      NA&#39;s   :44                        
+##    paid_date    
+##  Min.   :17900  
+##  1st Qu.:18003  
+##  Median :18097  
+##  Mean   :18096  
+##  3rd Qu.:18188  
+##  Max.   :18291  
+##  NA&#39;s   :44</code></pre>
 <p>A high level summary scan is useful for us:</p>
 <ul>
 <li><code>je_num</code> is a number value, although it has no meaning as a number, as it is a reference.</li>
 <li><code>vendor_id</code> is a number as well, but it contains NA’s. NA’s are R’s way of indicating that data does not exist.</li>
 <li><code>amount</code> is both positive and negative - indicating this column has indicators of both credits and debits</li>
-<li><code>gl_date</code> is numeric while <code>gl_date_char</code> is a character. We will talk about converting these dates to something interpretable in the next chapter.</li>
+<li>The dates (<code>gl_date</code>, <code>invoice_date</code> and <code>paid_date</code>) are numeric while <code>gl_date_char</code> is a character. We will talk about converting these dates to something interpretable in the next chapter.</li>
 </ul>
 <p>It may be useful to look at a few data samples more closely to understand patterns. <code>head()</code> is useful in seeing the first few columns</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="data-completeness.html#cb46-1"></a><span class="kw">head</span>(gl)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 7
-##   je_num  amount gl_date gl_date_char vendor_id account      description        
-##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;              
-## 1      1    608.   18257 2019-12-27        2843 exp_materia… Packaging and boxes
-## 2      1   -608.   18257 2019-12-27          NA liab_accoun… Packaging and boxes
-## 3      2  27822.   18052 2019-06-05        2843 exp_materia… Packaging and boxes
-## 4      2 -27822.   18052 2019-06-05          NA liab_accoun… Packaging and boxes
-## 5      3   9943.   18218 2019-11-18        2843 exp_consult… Advisory fee for f…
-## 6      3  -9943.   18218 2019-11-18          NA liab_accoun… Advisory fee for f…</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   je_num  amount gl_date gl_date_char vendor_id account invoice_date description
+##    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;      
+## 1      1  22667.   18232 2019-12-02        2211 exp_ma…        18225 Packaging …
+## 2      1 -22667.   18232 2019-12-02          NA liab_a…        18225 Packaging …
+## 3      2   1397.   18228 2019-11-28        2612 exp_ma…        18218 Paper      
+## 4      2  -1397.   18228 2019-11-28          NA liab_a…        18218 Paper      
+## 5      3   2319.   17995 2019-04-09        2612 exp_ma…        17985 Paper      
+## 6      3  -2319.   17995 2019-04-09          NA liab_a…        17985 Paper      
+## # … with 1 more variable: paid_date &lt;dbl&gt;</code></pre>
 <p>We get a more detailed understanding of the fields:</p>
 <ul>
 <li><code>je_num</code> indicates a set of lines within a journal entry.</li>
 <li><code>vendor_id</code> is usually associated to an expense account.</li>
 <li><code>amount</code> is both positive and negative for the same journal entry - this means theoretically, it should balance to zero.</li>
-<li><code>gl_date</code> is numeric while <code>gl_date_char</code> appears as a date (but is still a character).</li>
+<li>The dates, <code>gl_date</code> specifically, are numeric while <code>gl_date_char</code> appears as a date (but is still a character).</li>
 </ul>
 </div>
 <div id="examination-of-potential-errors" class="section level2">
@@ -352,20 +382,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb51-4"><a href="data-completeness.html#cb51-4"></a><span class="co"># Tidyverse / dplyr</span></span>
 <span id="cb51-5"><a href="data-completeness.html#cb51-5"></a>gl <span class="op">%&gt;%</span></span>
 <span id="cb51-6"><a href="data-completeness.html#cb51-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id))</span></code></pre></div>
-<pre><code>## # A tibble: 1,000 x 7
-##    je_num  amount gl_date gl_date_char vendor_id account      description       
-##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;             
-##  1      1   -608.   18257 2019-12-27          NA liab_accoun… Packaging and box…
-##  2      2 -27822.   18052 2019-06-05          NA liab_accoun… Packaging and box…
-##  3      3  -9943.   18218 2019-11-18          NA liab_accoun… Advisory fee for …
-##  4      4 -23434.   18106 2019-07-29          NA liab_accoun… Paper             
-##  5      5 -21457.   17900 2019-01-04          NA liab_accoun… Quality control t…
-##  6      6  -2006.   17940 2019-02-13          NA liab_accoun… Sewing machines   
-##  7      7  -4557.   18233 2019-12-03          NA liab_accoun… Quality control t…
-##  8      8 -27459.   18242 2019-12-12          NA liab_accoun… Fancy cloth prints
-##  9      9 -11684.   18260 2019-12-30          NA liab_accoun… Packaging and box…
-## 10     10 -25949.   18164 2019-09-25          NA liab_accoun… Packaging and box…
-## # … with 990 more rows</code></pre>
+<pre><code>## # A tibble: 1,000 x 9
+##    je_num  amount gl_date gl_date_char vendor_id account invoice_date
+##     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;
+##  1      1 -22667.   18232 2019-12-02          NA liab_a…        18225
+##  2      2  -1397.   18228 2019-11-28          NA liab_a…        18218
+##  3      3  -2319.   17995 2019-04-09          NA liab_a…        17985
+##  4      4 -20037.   18199 2019-10-30          NA liab_a…        18189
+##  5      5 -43140.   18051 2019-06-04          NA liab_a…        18041
+##  6      6 -13603.   17927 2019-01-31          NA liab_a…        17920
+##  7      7  -7001.   18190 2019-10-21          NA liab_a…        18183
+##  8      8 -24753.   18010 2019-04-24          NA liab_a…        18003
+##  9      9  -2295.   18087 2019-07-10          NA liab_a…        18080
+## 10     10 -34263.   18060 2019-06-13          NA liab_a…        18053
+## # … with 990 more rows, and 2 more variables: description &lt;chr&gt;,
+## #   paid_date &lt;dbl&gt;</code></pre>
 <p>This indicates that several values are NA. This enables us to ask the proper questions - specifically, we should seek to understand and corroborate with the business if there is a certain pattern associated to these NAs. dplyr’s <code>group_by()</code> and <code>summarize()</code> are useful for identifying these patterns further:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="data-completeness.html#cb53-1"></a>gl <span class="op">%&gt;%</span></span>
 <span id="cb53-2"><a href="data-completeness.html#cb53-2"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(vendor_id)) <span class="op">%&gt;%</span></span>
@@ -402,11 +433,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 13
 ##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 exp_co…           19041.            9865.          19401.           56772. 
-## 2 exp_ma…          904219.          679636.         919778.          844252. 
-## 3 exp_me…               0              180.             93.8             91.7
-## 4 liab_a…         -923259.         -689532.        -939273.         -900122. 
-## 5 liab_c…               0             -150.              0             -993. 
+## 1 exp_co…         28785.              9942.            9715.            9931.
+## 2 exp_ma…       1021508.            834766.          746621.          636011.
+## 3 exp_me…             1.55               0                0              281.
+## 4 liab_a…      -1050295.           -844708.         -756336.         -646057.
+## 5 liab_c…             0                  0                0             -166.
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
@@ -421,11 +452,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             407814.
-## 2 exp_materials_6000             9705440.
-## 3 exp_meals_7000                    2072.
-## 4 liab_accountspayable_2000    -10107652.
-## 5 liab_creditcardpayable_2100      -7674.</code></pre>
+## 1 exp_consulting_6500             248427.
+## 2 exp_materials_6000             9984507.
+## 3 exp_meals_7000                    1706.
+## 4 liab_accountspayable_2000    -10227945.
+## 5 liab_creditcardpayable_2100      -6695.</code></pre>
 <p>While the above works, there are some risks to this code:</p>
 <ul>
 <li>the code is difficult to read, as it is a long string of column names,</li>
@@ -451,11 +482,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 12
 ##   activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
 ##              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1           19041.            9865.          19401.           56772. 
-## 2          904219.          679636.         919778.          844252. 
-## 3               0              180.             93.8             91.7
-## 4         -923259.         -689532.        -939273.         -900122. 
-## 5               0             -150.              0             -993. 
+## 1         28785.              9942.            9715.            9931.
+## 2       1021508.            834766.          746621.          636011.
+## 3             1.55               0                0              281.
+## 4      -1050295.           -844708.         -756336.         -646057.
+## 5             0                  0                0             -166.
 ## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
 ## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
 ## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
@@ -465,7 +496,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb69-3"><a href="data-completeness.html#cb69-3"></a><span class="st">  </span><span class="kw">rowSums</span>() <span class="co"># And sums up the row</span></span>
 <span id="cb69-4"><a href="data-completeness.html#cb69-4"></a></span>
 <span id="cb69-5"><a href="data-completeness.html#cb69-5"></a><span class="kw">print</span>(tb_activity) <span class="co"># This is saved as a numeric vector</span></span></code></pre></div>
-<pre><code>## [1]    407814.03   9705439.92      2072.24 -10107652.35     -7673.84</code></pre>
+<pre><code>## [1]    248426.92   9984507.34      1705.97 -10227945.12     -6695.11</code></pre>
 <p>The newly calculated row summarization will return the total activity as a numeric vector; each item in the vector represents which row it belonged to. As this is a vector of numbers, we can a vector of the same TB account names and join them together.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="data-completeness.html#cb71-1"></a><span class="kw">print</span>(tb<span class="op">$</span>account) <span class="co"># Vector of account names as a character</span></span></code></pre></div>
 <pre><code>## [1] &quot;exp_consulting_6500&quot;         &quot;exp_materials_6000&quot;         
@@ -474,11 +505,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With these two vectors, we can create a new data frame with the account name and TB activity we calculated.</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-completeness.html#cb73-1"></a><span class="kw">data.frame</span>(<span class="dt">account =</span> tb<span class="op">$</span>account, <span class="dt">tb_activity =</span> tb_activity) <span class="co"># We create a new dataframe - one from the character vector in the original trial balance file, the other from the created tb_activity</span></span></code></pre></div>
 <pre><code>##                       account  tb_activity
-## 1         exp_consulting_6500    407814.03
-## 2          exp_materials_6000   9705439.92
-## 3              exp_meals_7000      2072.24
-## 4   liab_accountspayable_2000 -10107652.35
-## 5 liab_creditcardpayable_2100     -7673.84</code></pre>
+## 1         exp_consulting_6500    248426.92
+## 2          exp_materials_6000   9984507.34
+## 3              exp_meals_7000      1705.97
+## 4   liab_accountspayable_2000 -10227945.12
+## 5 liab_creditcardpayable_2100     -6695.11</code></pre>
 </div>
 <div id="sum-by-named-references" class="section level3">
 <h3><span class="header-section-number">6.3.3</span> Sum by named references</h3>
@@ -491,17 +522,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             407814.
-## 2 exp_materials_6000             9705440.
-## 3 exp_meals_7000                    2072.
-## 4 liab_accountspayable_2000    -10107652.
-## 5 liab_creditcardpayable_2100      -7674.</code></pre>
+## 1 exp_consulting_6500             248427.
+## 2 exp_materials_6000             9984507.
+## 3 exp_meals_7000                    1706.
+## 4 liab_accountspayable_2000    -10227945.
+## 5 liab_creditcardpayable_2100      -6695.</code></pre>
 <p>What occurs here is that the dot will take the preceding command (technically known as the ‘left hand side’ or LHS) and feed it directly into the function. So in this case, the command can be narrated as:</p>
 <blockquote>
-<p>Using the <em>TB table</em> (this becomes our LHS), create a column named “tb_activity”…</p>
-</blockquote>
-<blockquote>
-<p>Calculate “tb_activity” by identifying all column names containing the word “activity_” from the <em>TB table</em> (referenced by the dot). Using these columns, add them together with rowSums.</p>
+<p>Using the <em>TB table</em> (this becomes our LHS), create a column named “tb_activity”… <br> <br> Calculate “tb_activity” by identifying all column names containing the word “activity_” from the <em>TB table</em> (referenced by the dot). Using these columns, add them together with rowSums.</p>
 </blockquote>
 <p>By introducing and referencing our columns by names, we’ve introduced a more specific and robust way to aggregate our information by account.</p>
 </div>
@@ -515,51 +543,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>and the dollar value itself for each month.</li>
 </ul>
 <p>When we deconstruct our data, it becomes much easier to delve into the <strong>tidyr</strong> package and the functions <code>pivot_longer()</code> and <code>pivot_wider()</code>. We will discuss the details of pivoting in <a href="cleaning-data.html#clean-pivot">cleaning data</a>.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="data-completeness.html#cb77-1"></a><span class="kw">head</span>(tb) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
-<pre><code>## # A tibble: 5 x 13
-##   account activity_2019_01 activity_2019_02 activity_2019_03 activity_2019_04
-##   &lt;chr&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-## 1 exp_co…           19041.            9865.          19401.           56772. 
-## 2 exp_ma…          904219.          679636.         919778.          844252. 
-## 3 exp_me…               0              180.             93.8             91.7
-## 4 liab_a…         -923259.         -689532.        -939273.         -900122. 
-## 5 liab_c…               0             -150.              0             -993. 
-## # … with 8 more variables: activity_2019_05 &lt;dbl&gt;, activity_2019_06 &lt;dbl&gt;,
-## #   activity_2019_07 &lt;dbl&gt;, activity_2019_08 &lt;dbl&gt;, activity_2019_09 &lt;dbl&gt;,
-## #   activity_2019_10 &lt;dbl&gt;, activity_2019_11 &lt;dbl&gt;, activity_2019_12 &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="data-completeness.html#cb79-1"></a>tb_long &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
-<span id="cb79-2"><a href="data-completeness.html#cb79-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;activity_&quot;</span>), <span class="co"># We want to aggregate the values in these columns</span></span>
-<span id="cb79-3"><a href="data-completeness.html#cb79-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;period&quot;</span>, <span class="co"># What we want to call this new column</span></span>
-<span id="cb79-4"><a href="data-completeness.html#cb79-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;activity&quot;</span>) <span class="co"># And the values we want to take from it</span></span>
-<span id="cb79-5"><a href="data-completeness.html#cb79-5"></a></span>
-<span id="cb79-6"><a href="data-completeness.html#cb79-6"></a>tb_long</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="data-completeness.html#cb77-1"></a><span class="kw">head</span>(tb) <span class="op">%&gt;%</span></span>
+<span id="cb77-2"><a href="data-completeness.html#cb77-2"></a><span class="st">  </span>DT<span class="op">::</span><span class="kw">datatable</span>(<span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">scrollX =</span> <span class="ot">TRUE</span>)) <span class="co"># Notice how this data looks wide</span></span></code></pre></div>
+<div id="htmlwidget-2ed89d089c025399d5f5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2ed89d089c025399d5f5">{"x":{"filter":"none","data":[["1","2","3","4","5"],["exp_consulting_6500","exp_materials_6000","exp_meals_7000","liab_accountspayable_2000","liab_creditcardpayable_2100"],[28784.92,1021508.16,1.55,-1050294.63,0],[9942.01,834765.63,0,-844707.64,0],[9714.97,746620.59,0,-756335.56,0],[9930.94,636011.34,280.88,-646056.78,-166.38],[28973.06,953908.9,198.68,-983080.64,0],[37676.9,951239.95,240.06,-987921.28,-1235.63],[19294.71,915070.71,84.71,-934450.13,0],[9103.6,862191.34,278.21,-869777.57,-1795.58],[28697.69,553827.74,55.99,-581434.44,-1146.98],[28752.91,736083.68,317.74,-764134.43,-1019.9],[28278.54,790839.39,248.15,-819366.08,0],[9276.67,982439.91,0,-990385.94,-1330.64]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>account<\/th>\n      <th>activity_2019_01<\/th>\n      <th>activity_2019_02<\/th>\n      <th>activity_2019_03<\/th>\n      <th>activity_2019_04<\/th>\n      <th>activity_2019_05<\/th>\n      <th>activity_2019_06<\/th>\n      <th>activity_2019_07<\/th>\n      <th>activity_2019_08<\/th>\n      <th>activity_2019_09<\/th>\n      <th>activity_2019_10<\/th>\n      <th>activity_2019_11<\/th>\n      <th>activity_2019_12<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="data-completeness.html#cb78-1"></a>tb_long &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb78-2"><a href="data-completeness.html#cb78-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;activity_&quot;</span>), <span class="co"># We want to aggregate the values in these columns</span></span>
+<span id="cb78-3"><a href="data-completeness.html#cb78-3"></a>               <span class="dt">names_to =</span> <span class="st">&quot;period&quot;</span>, <span class="co"># What we want to call this new column</span></span>
+<span id="cb78-4"><a href="data-completeness.html#cb78-4"></a>               <span class="dt">values_to =</span> <span class="st">&quot;activity&quot;</span>) <span class="co"># And the values we want to take from it</span></span>
+<span id="cb78-5"><a href="data-completeness.html#cb78-5"></a></span>
+<span id="cb78-6"><a href="data-completeness.html#cb78-6"></a>tb_long</span></code></pre></div>
 <pre><code>## # A tibble: 60 x 3
 ##    account             period           activity
 ##    &lt;chr&gt;               &lt;chr&gt;               &lt;dbl&gt;
-##  1 exp_consulting_6500 activity_2019_01   19041.
-##  2 exp_consulting_6500 activity_2019_02    9865.
-##  3 exp_consulting_6500 activity_2019_03   19401.
-##  4 exp_consulting_6500 activity_2019_04   56772.
-##  5 exp_consulting_6500 activity_2019_05    9513.
-##  6 exp_consulting_6500 activity_2019_06   56026.
-##  7 exp_consulting_6500 activity_2019_07   48153.
-##  8 exp_consulting_6500 activity_2019_08   29067.
-##  9 exp_consulting_6500 activity_2019_09   65773.
-## 10 exp_consulting_6500 activity_2019_10   28085.
+##  1 exp_consulting_6500 activity_2019_01   28785.
+##  2 exp_consulting_6500 activity_2019_02    9942.
+##  3 exp_consulting_6500 activity_2019_03    9715.
+##  4 exp_consulting_6500 activity_2019_04    9931.
+##  5 exp_consulting_6500 activity_2019_05   28973.
+##  6 exp_consulting_6500 activity_2019_06   37677.
+##  7 exp_consulting_6500 activity_2019_07   19295.
+##  8 exp_consulting_6500 activity_2019_08    9104.
+##  9 exp_consulting_6500 activity_2019_09   28698.
+## 10 exp_consulting_6500 activity_2019_10   28753.
 ## # … with 50 more rows</code></pre>
 <p>This data is now represented longer - there is now one unique value (activity) for each account and month. From here, we can now <code>summarize()</code>:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="data-completeness.html#cb81-1"></a>tb_long <span class="op">%&gt;%</span></span>
-<span id="cb81-2"><a href="data-completeness.html#cb81-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
-<span id="cb81-3"><a href="data-completeness.html#cb81-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">tb_activity =</span> <span class="kw">sum</span>(activity))</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="data-completeness.html#cb80-1"></a>tb_long <span class="op">%&gt;%</span></span>
+<span id="cb80-2"><a href="data-completeness.html#cb80-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb80-3"><a href="data-completeness.html#cb80-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">tb_activity =</span> <span class="kw">sum</span>(activity))</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             407814.
-## 2 exp_materials_6000             9705440.
-## 3 exp_meals_7000                    2072.
-## 4 liab_accountspayable_2000    -10107652.
-## 5 liab_creditcardpayable_2100      -7674.</code></pre>
+## 1 exp_consulting_6500             248427.
+## 2 exp_materials_6000             9984507.
+## 3 exp_meals_7000                    1706.
+## 4 liab_accountspayable_2000    -10227945.
+## 5 liab_creditcardpayable_2100      -6695.</code></pre>
 <p>While any of these approaches will work to calculate the trial balance of activity, there are sustainability advantages where the columns are not verbatim and explicitly mentioned - what matters is how you believe your dataset can change over time, or how easily readable you can communicate your work to a new individual.</p>
 </div>
 </div>
@@ -567,67 +587,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.4</span> Asserting Completeness</h2>
 <p>The practical goal before we do any further testing is to ensure we’re not wasting time with a data set that is missing information. This completeness test will help validate that we received data for twelve months of GL activity. In Journal Entry testing, this means we will compare the summarized Trial Balance file against the General Ledger entries to obtain reasonableness that our data set we received is complete.</p>
 <p>To compare both the GL and TB, we will want to aggregate the data in both datasets before joining them together. First, we will aggregate the GL:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="data-completeness.html#cb84-1"></a>gl_summarized &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb84-2"><a href="data-completeness.html#cb84-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
-<span id="cb84-3"><a href="data-completeness.html#cb84-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">gl_total =</span> <span class="kw">sum</span>(amount),</span>
-<span id="cb84-4"><a href="data-completeness.html#cb84-4"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span>
-<span id="cb84-5"><a href="data-completeness.html#cb84-5"></a></span>
-<span id="cb84-6"><a href="data-completeness.html#cb84-6"></a>gl_summarized</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="data-completeness.html#cb83-1"></a>gl_summarized &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb83-2"><a href="data-completeness.html#cb83-2"></a><span class="st">  </span><span class="kw">group_by</span>(account) <span class="op">%&gt;%</span></span>
+<span id="cb83-3"><a href="data-completeness.html#cb83-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">gl_total =</span> <span class="kw">sum</span>(amount),</span>
+<span id="cb83-4"><a href="data-completeness.html#cb83-4"></a>           <span class="dt">.groups =</span> <span class="st">&#39;drop&#39;</span>) <span class="co"># Needed to suppress the ungrouping object message</span></span>
+<span id="cb83-5"><a href="data-completeness.html#cb83-5"></a></span>
+<span id="cb83-6"><a href="data-completeness.html#cb83-6"></a>gl_summarized</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                       gl_total
 ##   &lt;chr&gt;                            &lt;dbl&gt;
-## 1 exp_consulting_6500            407814.
-## 2 exp_materials_6000            9705440.
-## 3 exp_meals_7000                   2072.
-## 4 liab_accountspayable_2000   -10107652.
-## 5 liab_creditcardpayable_2100     -7674.</code></pre>
+## 1 exp_consulting_6500            248427.
+## 2 exp_materials_6000            9984507.
+## 3 exp_meals_7000                   1706.
+## 4 liab_accountspayable_2000   -10227945.
+## 5 liab_creditcardpayable_2100     -6695.</code></pre>
 <p>And also aggregate the TB:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="data-completeness.html#cb86-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
-<span id="cb86-2"><a href="data-completeness.html#cb86-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
-<span id="cb86-3"><a href="data-completeness.html#cb86-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
-<span id="cb86-4"><a href="data-completeness.html#cb86-4"></a>    )) <span class="op">%&gt;%</span></span>
-<span id="cb86-5"><a href="data-completeness.html#cb86-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span>
-<span id="cb86-6"><a href="data-completeness.html#cb86-6"></a></span>
-<span id="cb86-7"><a href="data-completeness.html#cb86-7"></a>tb_summarized</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="data-completeness.html#cb85-1"></a>tb_summarized &lt;-<span class="st"> </span>tb <span class="op">%&gt;%</span></span>
+<span id="cb85-2"><a href="data-completeness.html#cb85-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_activity =</span> <span class="kw">rowSums</span>(</span>
+<span id="cb85-3"><a href="data-completeness.html#cb85-3"></a>    <span class="kw">select</span>(., <span class="kw">contains</span>(<span class="st">&#39;activity_&#39;</span>))</span>
+<span id="cb85-4"><a href="data-completeness.html#cb85-4"></a>    )) <span class="op">%&gt;%</span></span>
+<span id="cb85-5"><a href="data-completeness.html#cb85-5"></a><span class="st">  </span><span class="kw">select</span>(account, tb_activity)</span>
+<span id="cb85-6"><a href="data-completeness.html#cb85-6"></a></span>
+<span id="cb85-7"><a href="data-completeness.html#cb85-7"></a>tb_summarized</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
 ##   account                     tb_activity
 ##   &lt;chr&gt;                             &lt;dbl&gt;
-## 1 exp_consulting_6500             407814.
-## 2 exp_materials_6000             9705440.
-## 3 exp_meals_7000                    2072.
-## 4 liab_accountspayable_2000    -10107652.
-## 5 liab_creditcardpayable_2100      -7674.</code></pre>
+## 1 exp_consulting_6500             248427.
+## 2 exp_materials_6000             9984507.
+## 3 exp_meals_7000                    1706.
+## 4 liab_accountspayable_2000    -10227945.
+## 5 liab_creditcardpayable_2100      -6695.</code></pre>
 <div id="completeness-join" class="section level3">
 <h3><span class="header-section-number">6.4.1</span> Joining the GL to the TB</h3>
 <p>To perform a proper test of completeness, we should join both tables together. <em>dplyr</em> and the <code>*_join()</code> family of functions can be used to join tables, and also used as diagnosis tools to help debug information as well.</p>
 <p>Our GL and TB summarized datasets could be joined by the <code>account</code> column, prior to performing the calculation to identify differences:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="data-completeness.html#cb88-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb88-2"><a href="data-completeness.html#cb88-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="data-completeness.html#cb87-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb87-2"><a href="data-completeness.html#cb87-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##   account                       gl_total tb_activity
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;
-## 1 exp_consulting_6500            407814.     407814.
-## 2 exp_materials_6000            9705440.    9705440.
-## 3 exp_meals_7000                   2072.       2072.
-## 4 liab_accountspayable_2000   -10107652.  -10107652.
-## 5 liab_creditcardpayable_2100     -7674.      -7674.</code></pre>
+## 1 exp_consulting_6500            248427.     248427.
+## 2 exp_materials_6000            9984507.    9984507.
+## 3 exp_meals_7000                   1706.       1706.
+## 4 liab_accountspayable_2000   -10227945.  -10227945.
+## 5 liab_creditcardpayable_2100     -6695.      -6695.</code></pre>
 <p>Once you have joined the columns together, a simple difference calculation will let you know what the differences are (if any):</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="data-completeness.html#cb90-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb90-2"><a href="data-completeness.html#cb90-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb90-3"><a href="data-completeness.html#cb90-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="data-completeness.html#cb89-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb89-2"><a href="data-completeness.html#cb89-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb89-3"><a href="data-completeness.html#cb89-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity)</span></code></pre></div>
 <pre><code>## # A tibble: 5 x 4
 ##   account                       gl_total tb_activity tb_diff
 ##   &lt;chr&gt;                            &lt;dbl&gt;       &lt;dbl&gt;   &lt;dbl&gt;
-## 1 exp_consulting_6500            407814.     407814.       0
-## 2 exp_materials_6000            9705440.    9705440.       0
-## 3 exp_meals_7000                   2072.       2072.       0
-## 4 liab_accountspayable_2000   -10107652.  -10107652.       0
-## 5 liab_creditcardpayable_2100     -7674.      -7674.       0</code></pre>
+## 1 exp_consulting_6500            248427.     248427.       0
+## 2 exp_materials_6000            9984507.    9984507.       0
+## 3 exp_meals_7000                   1706.       1706.       0
+## 4 liab_accountspayable_2000   -10227945.  -10227945.       0
+## 5 liab_creditcardpayable_2100     -6695.      -6695.       0</code></pre>
 <p>And if you like clean working papers, simply filter to identify where the reconciliation did not work out:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="data-completeness.html#cb92-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
-<span id="cb92-2"><a href="data-completeness.html#cb92-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb92-3"><a href="data-completeness.html#cb92-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity) <span class="op">%&gt;%</span></span>
-<span id="cb92-4"><a href="data-completeness.html#cb92-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(tb_diff <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="data-completeness.html#cb91-1"></a>gl_summarized <span class="op">%&gt;%</span></span>
+<span id="cb91-2"><a href="data-completeness.html#cb91-2"></a><span class="st">  </span><span class="kw">full_join</span>(tb_summarized, <span class="dt">by =</span> <span class="st">&#39;account&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb91-3"><a href="data-completeness.html#cb91-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tb_diff =</span> gl_total <span class="op">-</span><span class="st"> </span>tb_activity) <span class="op">%&gt;%</span></span>
+<span id="cb91-4"><a href="data-completeness.html#cb91-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(tb_diff <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 0 x 4
 ## # … with 4 variables: account &lt;chr&gt;, gl_total &lt;dbl&gt;, tb_activity &lt;dbl&gt;,
 ## #   tb_diff &lt;dbl&gt;</code></pre>

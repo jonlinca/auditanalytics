@@ -32,7 +32,7 @@ For the data set in our example, we've requested and received a full year's wort
 
 A rapid preview of all your columns can be done quickly with `summary()`. Not only does it list all the fields available in the table, but it also gives quick statistics on numeric columns as well (whether it makes sense is up to you):
 
-```{r, rows.print = 5}
+```{r explore-gl-summary, R.options=list(max.print=100000)}
 summary(gl)
 ```
 
@@ -41,7 +41,7 @@ A high level summary scan is useful for us:
 - `je_num` is a number value, although it has no meaning as a number, as it is a reference.
 - `vendor_id` is a number as well, but it contains NA's. NA's are R's way of indicating that data does not exist.
 - `amount` is both positive and negative - indicating this column has indicators of both credits and debits
-- `gl_date` is numeric while `gl_date_char` is a character. We will talk about converting these dates to something interpretable in the next chapter.
+- The dates (`gl_date`, `invoice_date` and `paid_date`) are numeric while `gl_date_char` is a character. We will talk about converting these dates to something interpretable in the next chapter.
 
 It may be useful to look at a few data samples more closely to understand patterns. `head()` is useful in seeing the first few columns
 
@@ -54,7 +54,7 @@ We get a more detailed understanding of the fields:
 - `je_num` indicates a set of lines within a journal entry.
 - `vendor_id` is usually associated to an expense account. 
 - `amount` is both positive and negative for the same journal entry - this means theoretically, it should balance to zero.
-- `gl_date` is numeric while `gl_date_char` appears as a date (but is still a character).
+- The dates, `gl_date` specifically, are numeric while `gl_date_char` appears as a date (but is still a character).
 
 ## Examination of potential errors
 
@@ -200,9 +200,7 @@ tb %>%
 
 What occurs here is that the dot will take the preceding command (technically known as the 'left hand side' or LHS) and feed it directly into the function. So in this case, the command can be narrated as:
 
-> Using the *TB table* (this becomes our LHS), create a column named "tb_activity"...
-
-> Calculate "tb_activity" by identifying all column names containing the word "activity_" from the *TB table* (referenced by the dot). Using these columns, add them together with rowSums.
+> Using the *TB table* (this becomes our LHS), create a column named "tb_activity"... <br> <br> Calculate "tb_activity" by identifying all column names containing the word "activity_" from the *TB table* (referenced by the dot). Using these columns, add them together with rowSums.
 
 By introducing and referencing our columns by names, we've introduced a more specific and robust way to aggregate our information by account.
 
@@ -220,7 +218,8 @@ When we deconstruct our data, it becomes much easier to delve into the **tidyr**
 
 
 ```{r}
-head(tb) # Notice how this data looks wide
+head(tb) %>%
+  DT::datatable(options = list(scrollX = TRUE)) # Notice how this data looks wide
 
 tb_long <- tb %>%
   pivot_longer(cols = starts_with("activity_"), # We want to aggregate the values in these columns
@@ -308,3 +307,7 @@ While performing completeness, you are proving you have a complete set of data. 
 - `anti_join()` will show what columns are included on the left, but missing on the right. In our example, if the `tb_summarized` data had missing accounts that existed in the `gl_summarized` table, only this account would show up in the results.
 
 You may want to consider testing for invalid values or missing dates up front. While the primary goal is to ensure the datasets received are appropriate, you may want to consider validating this information earlier. The next chapter will show you how to further manipulate and test these columns.
+
+```{r echo = FALSE}
+dbDisconnect(con)
+```

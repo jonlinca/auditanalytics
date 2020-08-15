@@ -216,13 +216,13 @@ The structure of the data in an API looks different than a data frame. Typically
 names(response)
 ```
 
-And the data you want will be in `list$content`:
+And the data you want will be in the response's `$content`:
 
 ```{r}
 head(response$content)
 ```
 
-This raw data is generally uninterpretable, and it is because the file is in a different format - in this case, the Content-Type indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr `content()` and jsonlite `fromJSON()` and `toJSON()` functions:
+This raw data is generally uninterpretable, and it is because the structure of the data is in a different format - in this case, the Content-Type above indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr `content()` and jsonlite `fromJSON()` and `toJSON()` functions:
 
 ```{r}
 content <- content(response)
@@ -233,5 +233,4 @@ cleancontent <- jsonlite::fromJSON(jsonlite::toJSON(content), flatten = TRUE)
 cleancontent[,c('id', 'name')]
 ```
 
-Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly.
-
+Some data sources may be difficult to obtain data from, or perhaps you're not quite ready at the technical skill level to develop your own data connectivity for APIs. One alternative for such information is the use of a third party tool - for example, [CData](https://www.cdata.com/kb/tech/office365-jdbc-r.rst) supports an interface that allows you to interact with programs like Office 365 (including emails and file audit logs) directly. Office 365 also offers APIs that expose Sharepoint and Outlook, although they take more time to understand.
