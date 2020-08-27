@@ -1,34 +1,294 @@
 # Test
 
-## Mutate - If statements
+Testing data is the act of isolating high-risk records that meet criteria. While generally the intent of data analytics within auditing is to gain 100% population coverage and associated assurance, what will inevitably happen is that process deviations are revealed as items are detected. No process is bullet-proof and exception free, and therefore the auditor should have a founded idea of their level of risk tolerance prior to testing. Testing data will then help auditors articulate the nature of the exceptions and the overall risk level. 
 
-- Weekend date
+Auditors must recognize that not all tests (and lines that meet these tests) immediately ascertain that the control has failed or that something suspicious has occurred. Rather, it points to items that require further inspection and judgment. By iterating your workflow, you will be able to reduce the incidence of false positives and increase your detection rate, allowing you to focus on follow-up of higher-risk activity.
 
-## Round zero
+For this section we will use the company GL database.
 
-## Rare Accounts
+```{r include = FALSE}
+library(flair)
+```
 
-## Sequential
+```{r, message = FALSE, warning = FALSE}
+library(dplyr) 
+library(tidyr) 
+library(lubridate) 
+library(DBI) 
+library(benford.analysis)
 
-## Outliers
+dir.create("data", showWarnings = FALSE)
 
-## Duplicates
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
 
-## Age 
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
 
-TODO (need to insert invoice date and paid date)
+gl <- tbl(con, 'gl') %>%
+  collect() %>%
+  mutate(gl_date = as_date(gl_date, origin = '1970-01-01'),
+         paid_date = as_date(paid_date, origin = '1970-01-01'),
+         invoice_date = as_date(invoice_date, origin = '1970-01-01')) %>%
+  select(-gl_date_char)
 
-## Benford Analysis
+dbDisconnect(con)
+```
 
-## Relative size factor testing
+Our primary commands for this chapter will be `mutate()` and `filter()`. The `mutate()` command is useful for testing data, as it allows the auditor to add features and/or criteria to their testing. After records have been identified, `filter()` will extract the rows matching criteria.
+
+While you may able to directly `filter()` rows based on criteria, you may find it more effective to instead create the new fields with `mutate()` that match the filter criteria. This has benefits in the long run, including:
+
+- Keeping all the tests on the same row allows for an easier way to detect any row that met multiple criteria,
+- It is straightforward to extract the rows that meets a test, and 
+- Each new column related to a specific a criteria is akin to feature engineering, enabling the reuse of the tests for machine learning applications.
+
+My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with `t_` as the prefix, and isolate for these invoices to perform inspection and follow-up. There may be reasons why you may need to create separate data frame objects, so do not prescribe yourself to this method for extremely long or sophisticated steps.
+
+## Amount-based tests
+
+### Above threshold
+
+The most classical test is to test items that meet or exceed a material value. 
+
+```{r te_v1}
+gl %>%
+  mutate(t_over_te = amount >= 60000) %>%
+  filter(t_over_te) %>%
+  select(je_num, amount, everything())
+```
+
+```{r, echo = FALSE}
+# decorate("te_v1") %>%
+#   flair_args()
+#   #flair("amount >= 5000")
+```
+
+When performing amount or threshold testing, you may be more interested in the actual magnitude, and not necessarily the direction. This is especially true within accounting matters, where the implication of negative and positive amounts change depending on the transaction - i.e., a debit or a credit transaction, or affecting a balance sheet or income statement account can tell a very different story.
+
+In these cases, you may want to consider using absolute values as the comparison. This allows you to capture the magnitude of the change:
+
+```{r}
+gl %>%
+  mutate(t_over_te = abs(amount) >= 60000) %>%
+  filter(t_over_te)
+```
+
+### Round numbers
+
+In the forensic accounting, auditors tend to take the position that transactions rarely end in whole dollars, especially if they end in multiples of 5, or even in multiples of tens.
+
+Detection of these is contingent on the use of `%%`, better known as the modulo operator. It will calculate the remainder of a division calculation; dividing 1.50 by 1 will give you a remainder of 0.5.
+
+```{r}
+1.50 %% 1
+```
+
+This same approach can be used to detect if a transaction is round, i.e. has no 'cents' in it. How you decide to apply this can be useful in many cases. For example, finding a transaction that happens to be cleanly in the 'thousands', perform the modulo by the corresponding amount and look for results where the remainder is 0.
+
+```{r}
+15000 %% 1000
+```
+
+Or even a round five number, which has its use cases when it comes to things like gift cards or tipping at restaurants:
+
+```{r}
+25 %% 5
+```
+
+When implementing as a test, I'd encourage creating multiple tests to see which test it matched, and then detect these variations together:
+
+```{r}
+gl %>%
+  mutate(t_round_5 = amount %% 5 == 0,
+         t_round_10 = amount %% 10 == 0,
+         t_round_100 = amount %% 100 == 0,
+         t_round_1000 = amount %% 1000 == 0) %>%
+  filter_at(vars(starts_with("t_round")), any_vars(.)) %>%
+  select(je_num, amount, starts_with("t_round"))
+```
+
+## Date-based tests
+
+### Weekend testing
+
+As a typical office business (along with office activities) generally happen on the weekday - that is, Monday through Friday. We may be interested in selecting journal entries from a sample of activities that occurred on the weekend. To test this, we can use the `lubridate` package to determine what day of week our entry falls upon:
+
+```{r}
+gl <- gl %>%
+  mutate(day_of_week = wday(gl_date, label = TRUE),  # Label is useful if you tend to forget what each number means
+         t_weekend = day_of_week %in% c('Sat', 'Sun'))
+
+gl %>%
+  filter(t_weekend) %>%
+  head()
+```
+
+### Cutoff testing
+
+When transactions are near the end of the month (or the end of the year), cutoff testing helps establish that the transactions were recorded within the correct time period. Testing these may require selecting invoices close to month end. 
+
+Similar to how we calculate the period using `floor_date()`, we can take any date and transform it with `ceiling_date()` which will calculate the last date of the month. Then we can test to see if a date falls within the range as needed.
+
+```{r}
+gl %>%
+  mutate(end_of_month = ceiling_date(gl_date, unit = 'month')) %>%
+  select(gl_date, end_of_month) %>%
+  head()
+```
+
+This is close, but all these dates are representative of the beginning of the following month. To transform dates, simply use the unit as desired and treat it like a [math calculation](#differences-between-time). As all these dates are one day ahead, a `days` difference calculation will suffice:
+
+```{r}
+gl <- gl %>%
+  mutate(end_of_month = ceiling_date(gl_date, unit = 'month') - days(1))
+
+gl %>%
+  select(gl_date, end_of_month) %>%
+  head()
+```
+And to detect which lines are close to month end, simply calculate the difference between the end of month and the original date, keeping only dates very close to the end of the month:
+
+```{r}
+gl %>%
+  mutate(t_cutoff = (end_of_month - gl_date) <= 1) %>% # Find entries on or one day prior to month end
+  filter(t_cutoff) %>%
+  select(je_num, gl_date, t_cutoff, everything())
+```
+
+### Age 
+
+Aging invoices is generally a system-ran report out of the accounting system. Independently testing these reports is one of the strongest forms of assurance, which requires an understanding of the underlying data, including calculation accuracy and completeness.
+
+At its core, an aging calculation is the comparison of one date to another certain date, and then aggregating the total amount by buckets indicating a range of days. However, it gets complicated rather quick because of how different systems implement aging:
+
+- Which dates are being compared - invoice dates, entry dates, paid dates and/or due dates?
+- Speaking of due dates, are you able to calculate a due date on a per-vendor (or even, per invoice) basis?
+- Are you able to run a report 'as-of'? The as-of date is intended to help understand the outstanding balances at a specific point of time. Some accounting systems have insufficient information captured, meaning a backdated entered invoice (perhaps to a prior period) may affect the accuracy of a previous report.
+
+We will initially filter our data and only keep valid invoices, by filtering on records that are related to materials:
+
+```{r}
+gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  select(je_num, vendor_id, gl_date, invoice_date, paid_date)
+```
+
+In our GL data set, we have captured invoices (denoted as transactions against expense accounts), as well as the GL date (the day the company received the invoice), the invoice date as written by the supplier, and the date the invoice was paid. 
+
+With a better understanding of the dates, we can now focus on reproducing an accurate report:
+
+- An invoice was recognized in our system as per the `gl_date`,
+- An invoice was considered fully paid as of the `paid_date`, and
+- The definition of age in our system is based off the `invoice_date` and an user-chosen 'as-of' date.
+
+We will use August 1, 2019 as our as-of date, and only include invoices that were recognized on or prior to then.
+
+```{r}
+as_of_date <- as.Date('2019-08-01')
+
+gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  select(je_num, vendor_id, gl_date, invoice_date, paid_date) %>%
+  filter(gl_date <= as_of_date) # Only choose recognized invoices as of a date
+```
+We can also remove any paid invoices too, as they're no longer aged as-of that date. Depending when you are running your report though, an invoice may either be paid or not paid yet.
+
+```{r}
+gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  select(je_num, vendor_id, gl_date, invoice_date, paid_date) %>%
+  filter(gl_date <= as_of_date) %>% # Only choose recognized invoices as of a date
+  filter(paid_date >= as_of_date | is.na(paid_date)) # Keep invoices that were not paid by the as-of date, or not paid at all yet
+```
+
+Having isolated our invoices, we can now calculate the number of aged days:
+
+```{r}
+gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  filter(gl_date <= as_of_date) %>% # Only choose recognized invoices as of a date
+  filter(paid_date >= as_of_date | is.na(paid_date)) %>% # Keep invoices that are not paid by the as-of date, or not paid at all yet
+  mutate(aged_days = as.numeric(as_of_date - invoice_date)) %>%
+  select(invoice_date, paid_date, aged_days)
+```
+Now the most complex part is making buckets for these ages. A rather brute force way is to create a field with the range it falls in, and then eventually pivoting on it:
+
+```{r}
+aged_wip <- gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  select(je_num, account, vendor_id, gl_date, invoice_date, paid_date) %>%
+  filter(gl_date <= as_of_date) %>% # Only choose recognized invoices as of a date
+  filter(paid_date >= as_of_date | is.na(paid_date)) %>% # Keep invoices that are not paid by the as-of date, or not paid at all yet
+  mutate(aged_days = as.numeric(as_of_date - invoice_date)) %>%
+  select(aged_days)
+
+aged_wip %>%
+  mutate(aging_bucket = case_when(
+    aged_days < 15 ~ "Current",
+    aged_days < 30 ~ "15 - 30",
+    aged_days < 90 ~ "30 - 59",
+    TRUE ~ "60+"
+  ))
+```
+
+Another useful method is to use the `cut()` function, which will take the intervals you specify (aged days) and place each row into the category. The labels look a bit different - inclusive boundaries are `(` while exclusive boundaries are `]`, but either of these can be used:
+
+```{r}
+aged_wip %>%
+  mutate(aging_bucket = cut(aged_wip$aged_days, breaks = c(0, 15, 30, 60, Inf)))
+```
+
+With all the pieces, we can now create the aging report, aggregated by vendor. First, lets only keep the variables we want to pivot:
+
+```{r}
+aged <- gl %>%
+  filter(account == 'exp_materials_6000') %>% # In scope invoices for aging
+  filter(gl_date <= as_of_date) %>% # Only choose recognized invoices as of a date
+  filter(paid_date >= as_of_date | is.na(paid_date)) %>% # Keep invoices that are not paid by the as-of date, or not paid at all yet
+  mutate(aged_days = as.numeric(as_of_date - invoice_date)) %>%
+  mutate(aging_bucket = case_when(
+    aged_days < 15 ~ "Current",
+    aged_days < 30 ~ "15 - 30",
+    aged_days < 90 ~ "30 - 59",
+    TRUE ~ "60+"
+  )) %>%
+  select(vendor_id, amount, aging_bucket)
+
+print(aged)
+```
+
+Since our typical aging report has vendors along the left (the unique identifier for `id_cols` argument), aging buckets along the top (the names we want to spread across with `names_from`) and the amount is a summation of the valid values (`values_from` and also `values_fn`), we can use `pivot_wider()` to recreate our report:
+
+```{r}
+aged %>%
+  pivot_wider(id_cols = vendor_id, names_from = aging_bucket, values_from = amount, values_fn = sum)
+```
+
+## Basic Statistical tests
+
+### Outliers
+
+### Benford Analysis
+
+## Unusual pattern and behaviours
+
+### Relative size factor testing
 
 A common request is to understand which vendor had the highest category of a charge (in this case, the `description`). Recall the `group_by()` will perform the calculation at the level requested. In this case, `slice_max()` will select the highest row of values by a variable.
 
 ```{r}
-materials %>%
+gl %>%
+  filter(account == 'exp_materials_6000') %>%
   group_by(vendor_id) %>%
   slice_max(amount, n = 2)
 ```
+
+### Duplicates
+
+### Rare Accounts
+
+### Sequential
+
 
 ## Search text {#test-searchtext}
 

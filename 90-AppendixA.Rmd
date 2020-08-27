@@ -1,8 +1,12 @@
 #  Appendix A - ACL Analytics to R
 
-ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams no to very little expertise in analytics, which strongly tied into the Galvanize Highbond cloud software. R is useful as your team reaches a higher level of maturity due to its ability to incorporate version control, markdown reports and code packages.
+ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams with novice to expert expertise in analytics. ACL Analytics itself is strongly tied into the Galvanize Highbond cloud software, and development efforts can be done locally prior to uploading into their Robotics tool.
 
-There are several similarities and differences to help bridge the gap when transferring between the tools.
+R is useful as your team reaches a higher level of maturity due to its ability to incorporate version control, markdown reports and code packages. The ceiling and technical capabilities required are higher, especially as you move into command prompt oriented software.
+
+Inexperienced teams are encouraged to develop their best audit foundation practices, as it is less about the tool and more about the aptitude. As your team reaches the ceiling of your current toolset and maturity level, then it is worth considering adding to your toolkit. 
+
+There are several similarities and differences to help bridge the gap when transferring between the tools, and this appendix will help you bridge the gap.
 
 ## Import
 
@@ -10,7 +14,7 @@ There are several similarities and differences to help bridge the gap when trans
 
 ### Joins
 
-For those with experience with the ACL Analytics (AN) tool, the [join command](https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm) is similar, but there are some syntax and behaviours differences you need to be aware of:
+The [join command](https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm) is similar, but there are some syntax and behaviours differences you need to be aware of:
 
 | ACL AN | R (tidyverse) | Difference |
 | --- | --- | --- |

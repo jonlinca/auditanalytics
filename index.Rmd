@@ -28,4 +28,5 @@ If you are brand new to R, it is encouraged you to read https://rstudio-educatio
 
 ```{r, setup, include = FALSE}
 library(DT)
+library(flair)
 ```
