@@ -27,9 +27,11 @@ gl <- tbl(con, 'gl') %>%
 dbDisconnect(con)
 ```
 
-## Basic Statistics
+## Basic Statistics {#explore-stats}
 
-Performing summaries, or profiling the data, is a great way to begin analyzing data. It allows you to understand general numeric performance of a group. In our GL account, we have a materials category - lets isolate by that and begin our analysis:
+Performing summaries, or profiling the data, is a great way to begin analyzing data. It allows you to understand general numeric performance of a group. More importantly, understanding the characteristics of a datset, including mean, median, and percentiles are useful, as they help you determine what is both normal and abnormal in your data.
+
+In our GL account, we have a materials category - lets isolate by that and begin our analysis:
 
 ```{r}
 materials <- gl %>%

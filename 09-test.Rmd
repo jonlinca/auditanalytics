@@ -15,7 +15,7 @@ library(dplyr)
 library(tidyr) 
 library(lubridate) 
 library(DBI) 
-library(benford.analysis)
+library(ggplot2)
 
 dir.create("data", showWarnings = FALSE)
 
@@ -75,7 +75,7 @@ gl %>%
 
 ### Round numbers
 
-In the forensic accounting, auditors tend to take the position that transactions rarely end in whole dollars, especially if they end in multiples of 5, or even in multiples of tens.
+In forensic accounting, auditors tend to take the position that transactions rarely end in whole dollars, especially if they end in multiples of 5, or even in multiples of tens.
 
 Detection of these is contingent on the use of `%%`, better known as the modulo operator. It will calculate the remainder of a division calculation; dividing 1.50 by 1 will give you a remainder of 0.5.
 
@@ -136,7 +136,7 @@ gl %>%
   head()
 ```
 
-This is close, but all these dates are representative of the beginning of the following month. To transform dates, simply use the unit as desired and treat it like a [math calculation](#differences-between-time). As all these dates are one day ahead, a `days` difference calculation will suffice:
+This is close to our desired result, but all these dates are representative of the beginning of the following month. To transform dates, simply use the unit as desired and treat it like a [math calculation](#differences-between-time). As all these dates are one day ahead, a `days` difference calculation will suffice:
 
 ```{r}
 gl <- gl %>%
@@ -191,7 +191,7 @@ gl %>%
   select(je_num, vendor_id, gl_date, invoice_date, paid_date) %>%
   filter(gl_date <= as_of_date) # Only choose recognized invoices as of a date
 ```
-We can also remove any paid invoices too, as they're no longer aged as-of that date. Depending when you are running your report though, an invoice may either be paid or not paid yet.
+We can also remove any paid invoices too, as they're no longer aged as-of that date. Depending when you are running your report, an invoice may could either be paid or not paid yet.
 
 ```{r}
 gl %>%
@@ -231,14 +231,14 @@ aged_wip %>%
   ))
 ```
 
-Another useful method is to use the `cut()` function, which will take the intervals you specify (aged days) and place each row into the category. The labels look a bit different - inclusive boundaries are `(` while exclusive boundaries are `]`, but either of these can be used:
+Another useful method is to use the `cut()` function, which will take the intervals you specify (aged days) and place each row into the category. The labels look a bit different - inclusive boundaries are `(` while exclusive boundaries are `]`:
 
 ```{r}
 aged_wip %>%
   mutate(aging_bucket = cut(aged_wip$aged_days, breaks = c(0, 15, 30, 60, Inf)))
 ```
 
-With all the pieces, we can now create the aging report, aggregated by vendor. First, lets only keep the variables we want to pivot:
+You can choose which approach best fits your style. With all the pieces, we can now create the aging report, aggregated by vendor. First, lets only keep the variables we want to pivot:
 
 ```{r}
 aged <- gl %>%
@@ -266,13 +266,189 @@ aged %>%
 
 ## Basic Statistical tests
 
-### Outliers
+In the [exploration of data](#explore-stats), we highlighted that exploring your data using various statistical functions are useful for 
 
-### Benford Analysis
+### Outliers based on amount
+
+> An outlier is an observation that lies an abnormal distance from other values in a random sample from a population. In a sense, this definition leaves it up to the analyst (or a consensus process) to decide what will be considered abnormal. Before abnormal observations can be singled out, it is necessary to characterize normal observations. [@outliers]
+
+Our general approach to using statistical tests is to bring attention to "abnormal" entries in our data. Abnormal may be different depending on the situation, but items that stand apart from the rest are of audit interest.
+
+Outliers are very specific to the dataset we are analyzing, and are highly dependent on the nature and structure of the work we have. 
+
+The most basic detection of extreme outliers can be done on an amount, looking for material transactions, by using the quantiles and IQRs. Quantiles indicate the thresholds where amounts may be in the bottom 25% or above the top 75% of data points. The IQR is defined as the difference between the upper 75% quantile and lower 25% quantile (i.e. the 3rd quartile and 1st quartile).
+
+The extreme outlier test is defined as points less than the 25% quantile minus 1.5 * inter quartile range (IQR), or above the 75% quantile plus 1.5 * IQR. 
+
+In this case, we want to detect items greater than the extreme upper outlier:
+
+```{r}
+# Detect amounts in the top 25% of transactions
+top_75 <- quantile(abs(gl$amount))[4] # This is the 3st quartile, or the 75% quantile
+iqr <- IQR(abs(gl$amount))
+upper_extreme_outlier <- top_75 + iqr * 1.5
+
+print(paste0("The upper_extreme_outlier is $", upper_extreme_outlier))
+
+gl %>%
+  dplyr::filter(amount > upper_extreme_outlier) %>%
+  select(je_num, amount, account, description) %>%
+  arrange(description)
+```
+
+### Outliers based on amounts and other factors
+
+By performing a test based solely on amounts alone, other meaningful data is ignored. The nuances of specific subsets of data are lost due to an overarching amount analysis, which could be too crude.
+
+There are other useful features in our dataset we can use to potentially segment the data. There is the account information, which can be interpreted as consistent categories of information. There are also descriptions, which help us understand more granular detail about the nature of the transaction. A combination of any identifying categories (or factors) could be used to identify outliers.
+
+If we focus our analysis on both the description and amount, we can identify amount extreme outliers on a more unique basis. First, we need to group the descriptions and independently calculate the `upper_extreme_outlier` on a per group basis:
+
+```{r}
+outliers_per_desc <- gl %>%
+  group_by(description) %>%
+  summarize(count = n(),
+            upper_limit = quantile(abs(amount))[4],
+            iqr = IQR(abs(amount))) %>%
+  mutate(upper_extreme_outlier = upper_limit + 1.5 * iqr)
+
+print(outliers_per_desc)
+```
+
+Using this, we can quickly look up the `upper_extreme_outlier` in our gl table, and reduce our scope to only filter amounts greater than the limit per description entry.
+
+```{r}
+gl %>%
+  left_join(outliers_per_desc, by = 'description') %>%
+  filter(amount >= upper_extreme_outlier) %>%
+  select(je_num, amount, account, description, upper_extreme_outlier) %>%
+  group_by(description) %>%
+  slice_max(order_by = amount, n = 5)
+```
+
+The results are different than the outliers based solely on the amount, and are a good evaluation on a per-group basis.
 
 ## Unusual pattern and behaviours
 
-### Relative size factor testing
+### Benford's Law analysis
+
+The general principle of fraud detection is that individuals behave differently when they attempt to conceal, manipulate or make up information, as the fictional creation of numbers by people is different than how the accounting world behaves. As a result, these behaviours tend to stand out when certain tests are applied to them.
+
+Benford's Law is a common application in the accounting and auditing, as it is a quick litmus test to see if there are symptoms of anomalies in a dataset. The law generally states that in a set of values, the leading digit of 1 will occur more often than the leading digit of 2, the leading digit of 2 will naturally occur more often than the leading digit of 3, etc.. With a sufficiently large population, you can reasonably estimate the number of times a leading digit should appear a certain number of times.
+
+Think about the general working population and hourly wages. You could reasonably assume that its relatively accessible to get a job that pays $10-$19/hr. Its more difficult to get a job with $20-$29/hr wage, and even more so to get a job with $90-$99/hr wage.
+
+What is fascinating is that once you reach the next digit, the wages all start with 1's again, and it takes a lot of effort to get out of the $100-$199/hr band. This type of scaling means its increasingly harder for individuals to get a higher hourly salary. While there are some lucky folks that earn $200/hr, those individuals are more rare than those who earn $20/hr.
+
+With Benford's Law and applying the concept to a population of natural numbers, then the concept of leading digits makes intuitive sense. There will be more salaries that start with 1, than with 2, etc. You could estimate that a reasonable proportion of hourly wages could look like this:
+
+```{r echo = FALSE}
+leading_first <- data.frame(digit = 1:9)
+leading_first$prob <- log10(1 + 1 / leading_first$digit)
+
+ggplot(leading_first, aes(x = as.factor(digit), y = prob)) +
+  geom_col()
+```
+
+If we assume the first dataset is an example of a generally real world dataset, then lets look at a completely fictional dataset. For example, lets say in a range of 1 to 999, we randomly sample 1000 numbers and apply the Benford Law, we will notice the following:
+
+```{r}
+benford_sample <- data.frame(seq = sample(1:999, 1000, replace = TRUE))
+benford_sample$leading <- as.numeric(substr(benford_sample$seq, 1, 1))
+
+benford_sample %>%
+  group_by(leading) %>%
+  summarize(times_occured = n()) %>%
+  ggplot(aes(x = as.factor(leading), y = times_occured)) +
+    geom_col()
+```
+
+Notice how uniform the bars appear. The sample we chose was essentially made-up numbers between 1 and 999, the computer would choose these with equal probability, unlike the population of hourly wages, leading to a graph that does not follow the curve of Benford's Law. 
+
+#### Applying Benford's Law
+
+Several statistical tests exist to determine whether or not a population conforms to Benford's Law. While chi-square tests are numerically 'authoritative', remember that the individuals samples will indicate whether or not fraud truly exists.
+
+In application, Benford's Law requires professional judgment, and there can be any number of reasons why a population doesn't follow it. My successful experiences as an auditor have been to chart the actual proportion of leading digits against a curve of the expected outcome, and determine if there are any business reasons that may rationalize a pattern in the data before I perform further sampling. 
+
+To calculate the curve, you need to determine the likelihood that each digit should appear. The expected proportion for each digit can be calculated as follows:
+
+$$log_{10}\left( 1 + \frac{1}{d}\right)$$
+
+In R, this is represented as:
+```{r}
+d <- 1 # Leading digit
+log10(1 + 1 / d)
+```
+
+We can create a quick reference curve of the leading digits for Benford's Law:
+```{r}
+benford_curve <- data.frame(digit = 1:9) %>%
+  mutate(prob = log10(1 + 1 / digit),
+         curve = 'benford')
+
+ggplot(benford_curve, aes(x = as.factor(digit), y = prob, group = curve)) +
+  geom_line(color = 'red') +
+  geom_point(color = 'red')
+```
+
+We can then take any of our populations, create the bar chart, and then apply the expected proportions of Benford's Law to it. Lets take our GL database and create the proportion of how often each leading digit occurs. Note we will try to follow the same variable structure as `benford_curve`, as we will combine these on the same chart.
+
+```{r, warning = FALSE, message = FALSE}
+gl %>%
+  mutate(digit = as.numeric(substr(amount, 1, 1))) %>%
+  group_by(digit) %>%
+  summarize(times_occured = n()) %>%
+  mutate(prop = times_occured / sum(times_occured),
+         curve = 'actual') %>%
+  ggplot(aes(x = as.factor(digit), y = prop)) +
+    geom_col()
+```
+
+Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives). You may choose to perform Benford's Law on the positive and negative numbers, separately or together, transforming the negative numbers with `abs()`. You can also choose to exclude them, as I do below:
+
+```{r, warning = FALSE, message = FALSE}
+actuals <- gl %>%
+  filter(amount > 0) %>%
+  mutate(digit = as.numeric(substr(amount, 1, 1))) %>%
+  group_by(digit) %>%
+  summarize(times_occured = n()) %>%
+  mutate(prop = times_occured / sum(times_occured),
+         curve = 'actual') %>%
+  ggplot(aes(x = as.factor(digit), y = prop)) +
+    geom_col()
+
+actuals
+```
+
+Now that we have the actual proportions, lets layer on the `benford_curve` we created:
+
+```{r}
+actuals +
+  geom_line(data = benford_curve, aes(x = as.factor(digit), y = prob, group = curve), color = 'red') + 
+  geom_point(data = benford_curve, aes(x = as.factor(digit), y = prob), color = 'red')
+```
+
+When you reach this stage, take a moment to pause and understand the business, and if there may be any potential behavours to cause potential curve differences. For example, if there is an approval 'limit' that exists at $1000, you may see a spike of entries at the 9 leading digit.
+
+As with any statistical test, Benford's Law will not give you an answer as to why there may be fraud. There may be both legitimate reasons for why populations or sample sizes do not follow Benford's Law. A higher than expected proportion of leading digits starting with 9 does not mean those numbers starting with 9 are fraudulent.
+
+#### More leading digits?
+
+You can get any number of leading digits to apply Benford's Law - to do so, you need to start on the lowest possible value for the number of digits desired, to remove leading zeros, and extend the sequence to the highest number before a new digit must be added. For example, two leading digits would have a sequence of numbers created from 10:99, and three leading digits would be 100:999:
+
+```{r}
+benford_curve_leading2 <- data.frame(digit = 10:99) %>%
+  mutate(prob = log10(1 + 1 / digit),
+         curve = 'benford')
+
+head(benford_curve_leading2)
+tail(benford_curve_leading2)
+```
+
+### Relative size factor testing (RSF)
+
+The Relative Size Factor test is the comparison of "large amounts to a benchmark to see how large they are relative to some norm." [@nigrini-forensicanalytics-ch11]. The calculation is done by taking the largest value divided by the second largest value within a group. Examples of groups include a listing of payables for a vendor, or the expenses completed by an employee.
 
 A common request is to understand which vendor had the highest category of a charge (in this case, the `description`). Recall the `group_by()` will perform the calculation at the level requested. In this case, `slice_max()` will select the highest row of values by a variable.
 

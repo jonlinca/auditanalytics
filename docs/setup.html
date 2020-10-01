@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-08-27" />
+<meta name="date" content="2020-09-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
-<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#basic-statistics"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
 <li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
 <li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
@@ -239,14 +239,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
 </ul></li>
 <li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
-<li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers"><i class="fa fa-check"></i><b>9.3.1</b> Outliers</a></li>
-<li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#benford-analysis"><i class="fa fa-check"></i><b>9.3.2</b> Benford Analysis</a></li>
+<li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
+<li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#relative-size-factor-testing"><i class="fa fa-check"></i><b>9.4.1</b> Relative size factor testing</a></li>
-<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>9.4.2</b> Duplicates</a></li>
-<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.4.3</b> Rare Accounts</a></li>
-<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4.4</b> Sequential</a></li>
+<li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
+<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-testing-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor testing (RSF)</a></li>
+<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>9.4.3</b> Duplicates</a></li>
+<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.4.4</b> Rare Accounts</a></li>
+<li class="chapter" data-level="9.4.5" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4.5</b> Sequential</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a></li>
 </ul></li>
@@ -373,6 +374,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
