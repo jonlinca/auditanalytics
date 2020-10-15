@@ -304,22 +304,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb265-3"><a href="test.html#cb265-3"></a><span class="kw">library</span>(lubridate) </span>
 <span id="cb265-4"><a href="test.html#cb265-4"></a><span class="kw">library</span>(DBI) </span>
 <span id="cb265-5"><a href="test.html#cb265-5"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb265-6"><a href="test.html#cb265-6"></a></span>
-<span id="cb265-7"><a href="test.html#cb265-7"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb265-8"><a href="test.html#cb265-8"></a></span>
-<span id="cb265-9"><a href="test.html#cb265-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb265-10"><a href="test.html#cb265-10"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb265-11"><a href="test.html#cb265-11"></a></span>
-<span id="cb265-12"><a href="test.html#cb265-12"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb265-13"><a href="test.html#cb265-13"></a></span>
-<span id="cb265-14"><a href="test.html#cb265-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb265-15"><a href="test.html#cb265-15"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
-<span id="cb265-16"><a href="test.html#cb265-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb265-17"><a href="test.html#cb265-17"></a>         <span class="dt">paid_date =</span> <span class="kw">as_date</span>(paid_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb265-18"><a href="test.html#cb265-18"></a>         <span class="dt">invoice_date =</span> <span class="kw">as_date</span>(invoice_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb265-19"><a href="test.html#cb265-19"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span>
-<span id="cb265-20"><a href="test.html#cb265-20"></a></span>
-<span id="cb265-21"><a href="test.html#cb265-21"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
+<span id="cb265-6"><a href="test.html#cb265-6"></a><span class="kw">library</span>(gt) <span class="co"># Used for formatting outputs</span></span>
+<span id="cb265-7"><a href="test.html#cb265-7"></a></span>
+<span id="cb265-8"><a href="test.html#cb265-8"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb265-9"><a href="test.html#cb265-9"></a></span>
+<span id="cb265-10"><a href="test.html#cb265-10"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb265-11"><a href="test.html#cb265-11"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb265-12"><a href="test.html#cb265-12"></a></span>
+<span id="cb265-13"><a href="test.html#cb265-13"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb265-14"><a href="test.html#cb265-14"></a></span>
+<span id="cb265-15"><a href="test.html#cb265-15"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb265-16"><a href="test.html#cb265-16"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
+<span id="cb265-17"><a href="test.html#cb265-17"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb265-18"><a href="test.html#cb265-18"></a>         <span class="dt">paid_date =</span> <span class="kw">as_date</span>(paid_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb265-19"><a href="test.html#cb265-19"></a>         <span class="dt">invoice_date =</span> <span class="kw">as_date</span>(invoice_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb265-20"><a href="test.html#cb265-20"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span>
+<span id="cb265-21"><a href="test.html#cb265-21"></a></span>
+<span id="cb265-22"><a href="test.html#cb265-22"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
 <p>Our primary commands for this chapter will be <code>mutate()</code> and <code>filter()</code>. The <code>mutate()</code> command is useful for testing data, as it allows the auditor to add features and/or criteria to their testing. After records have been identified, <code>filter()</code> will extract the rows matching criteria.</p>
 <p>While you may able to directly <code>filter()</code> rows based on criteria, you may find it more effective to instead create the new fields with <code>mutate()</code> that match the filter criteria. My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with <code>t_</code> as the prefix, and isolate for these invoices to perform inspection and follow-up. This has benefits in the long run, including:</p>
 <ul>
@@ -875,196 +876,4489 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb328-4"><a href="test.html#cb328-4"></a>           <span class="dt">amount =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">2500</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>),</span>
 <span id="cb328-5"><a href="test.html#cb328-5"></a>           <span class="dt">acctcode =</span> <span class="kw">c</span>(<span class="dv">6100</span>, <span class="dv">6100</span>, <span class="dv">6200</span>, <span class="dv">6200</span>, <span class="dv">6100</span>, <span class="dv">6200</span>, <span class="dv">6100</span>))</span>
 <span id="cb328-6"><a href="test.html#cb328-6"></a></span>
-<span id="cb328-7"><a href="test.html#cb328-7"></a>invoices</span></code></pre></div>
-<pre><code>##   system_id invoice_id       date amount acctcode
-## 1         1        156 2019-01-01   1000     6100
-## 2         2        156 2019-01-01   1000     6100
-## 3         3       157A 2019-01-02   2500     6200
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 4 rows ]</code></pre>
+<span id="cb328-7"><a href="test.html#cb328-7"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb328-8"><a href="test.html#cb328-8"></a><span class="st">  </span><span class="kw">gt</span>() <span class="co"># We&#39;ll hide this table-making code in future chunks</span></span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#nfmuettkir .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#nfmuettkir .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#nfmuettkir .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#nfmuettkir .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#nfmuettkir .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#nfmuettkir .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#nfmuettkir .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#nfmuettkir .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nfmuettkir .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#nfmuettkir .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#nfmuettkir .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#nfmuettkir .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#nfmuettkir .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#nfmuettkir .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nfmuettkir .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#nfmuettkir .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#nfmuettkir .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#nfmuettkir .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#nfmuettkir .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#nfmuettkir .gt_left {
+  text-align: left;
+}
+
+#nfmuettkir .gt_center {
+  text-align: center;
+}
+
+#nfmuettkir .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#nfmuettkir .gt_font_normal {
+  font-weight: normal;
+}
+
+#nfmuettkir .gt_font_bold {
+  font-weight: bold;
+}
+
+#nfmuettkir .gt_font_italic {
+  font-style: italic;
+}
+
+#nfmuettkir .gt_super {
+  font-size: 65%;
+}
+
+#nfmuettkir .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="nfmuettkir" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">7</td>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_right">6100</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <div id="same-same-same" class="section level4">
 <h4><span class="header-section-number">9.4.3.1</span> Same-Same-Same</h4>
 <p>To run our Same-Same-Same test, we would collect the key fields we would like to use. In this case, the invoice, date and amount could qualify as key fields - Same Invoice ID, Same Date, Same Amount. You would summarize by how often that combination appears, only keeping items that match more than once:</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="test.html#cb330-1"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb330-2"><a href="test.html#cb330-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
-<span id="cb330-3"><a href="test.html#cb330-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb330-4"><a href="test.html#cb330-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 1 x 4
-## # Groups:   invoice_id, date [1]
-##   invoice_id date       amount times_occured
-##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
-## 1 156        2019-01-01   1000             2</code></pre>
+<pre><code class='language-r'><code>dupes_set1 <- invoices %>%<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>group_by(invoice_id, date, amount)</span> %>%<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>summarize(times_occured = n())</span> %>%<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>filter(times_occured > 1)</span> %>%<br>&nbsp;&nbsp;ungroup()</code></code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#anhjlgvplc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#anhjlgvplc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#anhjlgvplc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#anhjlgvplc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#anhjlgvplc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#anhjlgvplc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#anhjlgvplc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#anhjlgvplc .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#anhjlgvplc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#anhjlgvplc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#anhjlgvplc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#anhjlgvplc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#anhjlgvplc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#anhjlgvplc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#anhjlgvplc .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#anhjlgvplc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#anhjlgvplc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#anhjlgvplc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#anhjlgvplc .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#anhjlgvplc .gt_left {
+  text-align: left;
+}
+
+#anhjlgvplc .gt_center {
+  text-align: center;
+}
+
+#anhjlgvplc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#anhjlgvplc .gt_font_normal {
+  font-weight: normal;
+}
+
+#anhjlgvplc .gt_font_bold {
+  font-weight: bold;
+}
+
+#anhjlgvplc .gt_font_italic {
+  font-style: italic;
+}
+
+#anhjlgvplc .gt_super {
+  font-size: 65%;
+}
+
+#anhjlgvplc .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="anhjlgvplc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">times_occured</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>What is useful is then joining this information to your main dataset. This way, you get to maintain a library of invoices that meet multiple criteria. First off, lets keep keep all the duplicate keys we summarized on, plus a unique identifier so we can match the pairs:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="test.html#cb333-1"></a>dupes_set1 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb333-2"><a href="test.html#cb333-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
-<span id="cb333-3"><a href="test.html#cb333-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb333-4"><a href="test.html#cb333-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb333-5"><a href="test.html#cb333-5"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
-<span id="cb333-6"><a href="test.html#cb333-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes1_same_id_date_amt =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb333-7"><a href="test.html#cb333-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="test.html#cb335-1"></a>dupes_set1</span></code></pre></div>
-<pre><code>## # A tibble: 1 x 4
-##   invoice_id date       amount dupes1_same_id_date_amt
-##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;                   &lt;int&gt;
-## 1 156        2019-01-01   1000                       1</code></pre>
+<pre><code class='language-r'><code>dupes_set1 <- invoices %>%<br>&nbsp;&nbsp;group_by(invoice_id, date, amount) %>%<br>&nbsp;&nbsp;summarize(times_occured = n()) %>%<br>&nbsp;&nbsp;filter(times_occured > 1) %>%<br>&nbsp;&nbsp;ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()<br>&nbsp;&nbsp;<span style='background-color:#ffff7f'>mutate(dupes1 = row_number())</span> %>%<br>&nbsp;&nbsp;select(-times_occured)</code></code></pre>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#yyiteaecjf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yyiteaecjf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yyiteaecjf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yyiteaecjf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yyiteaecjf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yyiteaecjf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yyiteaecjf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yyiteaecjf .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yyiteaecjf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yyiteaecjf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yyiteaecjf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yyiteaecjf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yyiteaecjf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#yyiteaecjf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yyiteaecjf .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yyiteaecjf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yyiteaecjf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#yyiteaecjf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yyiteaecjf .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#yyiteaecjf .gt_left {
+  text-align: left;
+}
+
+#yyiteaecjf .gt_center {
+  text-align: center;
+}
+
+#yyiteaecjf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yyiteaecjf .gt_font_normal {
+  font-weight: normal;
+}
+
+#yyiteaecjf .gt_font_bold {
+  font-weight: bold;
+}
+
+#yyiteaecjf .gt_font_italic {
+  font-style: italic;
+}
+
+#yyiteaecjf .gt_super {
+  font-size: 65%;
+}
+
+#yyiteaecjf .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="yyiteaecjf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>Then bring it into our invoices dataset:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="test.html#cb337-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb337-2"><a href="test.html#cb337-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set1, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;invoice_id&#39;</span>, <span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span>
-<span id="cb337-3"><a href="test.html#cb337-3"></a></span>
-<span id="cb337-4"><a href="test.html#cb337-4"></a>invoices</span></code></pre></div>
-<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
-## 1         1        156 2019-01-01   1000     6100                       1
-## 2         2        156 2019-01-01   1000     6100                       1
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="test.html#cb329-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb329-2"><a href="test.html#cb329-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set1, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;invoice_id&#39;</span>, <span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#zurwiovdug .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zurwiovdug .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zurwiovdug .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zurwiovdug .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zurwiovdug .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zurwiovdug .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zurwiovdug .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zurwiovdug .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zurwiovdug .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zurwiovdug .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zurwiovdug .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zurwiovdug .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zurwiovdug .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#zurwiovdug .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zurwiovdug .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zurwiovdug .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zurwiovdug .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#zurwiovdug .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zurwiovdug .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#zurwiovdug .gt_left {
+  text-align: left;
+}
+
+#zurwiovdug .gt_center {
+  text-align: center;
+}
+
+#zurwiovdug .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zurwiovdug .gt_font_normal {
+  font-weight: normal;
+}
+
+#zurwiovdug .gt_font_bold {
+  font-weight: bold;
+}
+
+#zurwiovdug .gt_font_italic {
+  font-style: italic;
+}
+
+#zurwiovdug .gt_super {
+  font-size: 65%;
+}
+
+#zurwiovdug .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="zurwiovdug" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">7</td>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 <div id="same-same-different" class="section level4">
 <h4><span class="header-section-number">9.4.3.2</span> Same-Same-Different</h4>
 <p>For the Same-Same-Different test, we have to add an extra step. We still collect the key fields we would like to use. In this case, perhaps we would like to check for duplicates on the same date and same amount, but now we’re looking for different invoice_ids. Therefore, Same Date, Same Amount, Different Invoice_id.</p>
 <p>First, lets detect the duplicates on our key fields:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="test.html#cb339-1"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb339-2"><a href="test.html#cb339-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
-<span id="cb339-3"><a href="test.html#cb339-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>())</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 6 x 4
-## # Groups:   invoice_id, date [6]
-##   invoice_id date       amount times_occured
-##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
-## 1 156        2019-01-01   1000             2
-## 2 157A       2019-01-02   2500             1
-## 3 157B       2019-01-02   2500             1
-## 4 158        2019-01-03   3000             1
-## 5 159        2019-01-03   3000             1
-## 6 160        2019-01-04   4000             1</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="test.html#cb330-1"></a>dupes_set2 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb330-2"><a href="test.html#cb330-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb330-3"><a href="test.html#cb330-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb330-4"><a href="test.html#cb330-4"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mcrekmangb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mcrekmangb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mcrekmangb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mcrekmangb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mcrekmangb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mcrekmangb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mcrekmangb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mcrekmangb .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mcrekmangb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mcrekmangb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mcrekmangb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mcrekmangb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mcrekmangb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#mcrekmangb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcrekmangb .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mcrekmangb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mcrekmangb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mcrekmangb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mcrekmangb .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#mcrekmangb .gt_left {
+  text-align: left;
+}
+
+#mcrekmangb .gt_center {
+  text-align: center;
+}
+
+#mcrekmangb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mcrekmangb .gt_font_normal {
+  font-weight: normal;
+}
+
+#mcrekmangb .gt_font_bold {
+  font-weight: bold;
+}
+
+#mcrekmangb .gt_font_italic {
+  font-style: italic;
+}
+
+#mcrekmangb .gt_super {
+  font-size: 65%;
+}
+
+#mcrekmangb .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="mcrekmangb" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">times_occured</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>Then, you perform another <code>group_by</code>, but this time just on the ones that are the same. In this case, that would be Date and Amount.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="test.html#cb342-1"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb342-2"><a href="test.html#cb342-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
-<span id="cb342-3"><a href="test.html#cb342-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb342-4"><a href="test.html#cb342-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
-<span id="cb342-5"><a href="test.html#cb342-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
-<span id="cb342-6"><a href="test.html#cb342-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>())</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## `summarise()` regrouping output by &#39;date&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 4 x 3
-## # Groups:   date [4]
-##   date       amount times_occured
-##   &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
-## 1 2019-01-01   1000             1
-## 2 2019-01-02   2500             2
-## 3 2019-01-03   3000             2
-## 4 2019-01-04   4000             1</code></pre>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="test.html#cb331-1"></a>dupes_set2 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb331-2"><a href="test.html#cb331-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb331-3"><a href="test.html#cb331-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb331-4"><a href="test.html#cb331-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb331-5"><a href="test.html#cb331-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb331-6"><a href="test.html#cb331-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb331-7"><a href="test.html#cb331-7"></a><span class="st">  </span><span class="kw">ungroup</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#rsqcllhxys .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rsqcllhxys .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rsqcllhxys .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rsqcllhxys .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rsqcllhxys .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rsqcllhxys .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rsqcllhxys .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rsqcllhxys .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rsqcllhxys .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rsqcllhxys .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rsqcllhxys .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rsqcllhxys .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rsqcllhxys .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#rsqcllhxys .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rsqcllhxys .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rsqcllhxys .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rsqcllhxys .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rsqcllhxys .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rsqcllhxys .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rsqcllhxys .gt_left {
+  text-align: left;
+}
+
+#rsqcllhxys .gt_center {
+  text-align: center;
+}
+
+#rsqcllhxys .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rsqcllhxys .gt_font_normal {
+  font-weight: normal;
+}
+
+#rsqcllhxys .gt_font_bold {
+  font-weight: bold;
+}
+
+#rsqcllhxys .gt_font_italic {
+  font-style: italic;
+}
+
+#rsqcllhxys .gt_super {
+  font-size: 65%;
+}
+
+#rsqcllhxys .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="rsqcllhxys" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">times_occured</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>This approach is unique but intuitive. By taking all possible ‘same’ combinations, we’ve effectively grouped any sort of duplicate <code>invoice_id</code> we may have already had. We ungroup and then resummarize without the <code>invoice_id</code>, which tells us how many times the <code>invoice_id</code> is different within the new group.</p>
 <p>Lets save this information into our invoice table again:</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="test.html#cb346-1"></a>dupes_set2 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb346-2"><a href="test.html#cb346-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
-<span id="cb346-3"><a href="test.html#cb346-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb346-4"><a href="test.html#cb346-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
-<span id="cb346-5"><a href="test.html#cb346-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
-<span id="cb346-6"><a href="test.html#cb346-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb346-7"><a href="test.html#cb346-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb346-8"><a href="test.html#cb346-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
-<span id="cb346-9"><a href="test.html#cb346-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes2_same_date_amt_diff_id =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb346-10"><a href="test.html#cb346-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## `summarise()` regrouping output by &#39;date&#39; (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="test.html#cb349-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb349-2"><a href="test.html#cb349-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span>
-<span id="cb349-3"><a href="test.html#cb349-3"></a></span>
-<span id="cb349-4"><a href="test.html#cb349-4"></a>invoices</span></code></pre></div>
-<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
-## 1         1        156 2019-01-01   1000     6100                       1
-## 2         2        156 2019-01-01   1000     6100                       1
-##   dupes2_same_date_amt_diff_id
-## 1                           NA
-## 2                           NA
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="test.html#cb332-1"></a>dupes_set2 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb332-2"><a href="test.html#cb332-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb332-3"><a href="test.html#cb332-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb332-4"><a href="test.html#cb332-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb332-5"><a href="test.html#cb332-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb332-6"><a href="test.html#cb332-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb332-7"><a href="test.html#cb332-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb332-8"><a href="test.html#cb332-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb332-9"><a href="test.html#cb332-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes2 =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb332-10"><a href="test.html#cb332-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span>
+<span id="cb332-11"><a href="test.html#cb332-11"></a></span>
+<span id="cb332-12"><a href="test.html#cb332-12"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb332-13"><a href="test.html#cb332-13"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#sdigmvakza .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sdigmvakza .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sdigmvakza .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sdigmvakza .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sdigmvakza .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sdigmvakza .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sdigmvakza .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sdigmvakza .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sdigmvakza .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sdigmvakza .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sdigmvakza .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sdigmvakza .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sdigmvakza .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#sdigmvakza .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdigmvakza .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdigmvakza .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sdigmvakza .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#sdigmvakza .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdigmvakza .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#sdigmvakza .gt_left {
+  text-align: left;
+}
+
+#sdigmvakza .gt_center {
+  text-align: center;
+}
+
+#sdigmvakza .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sdigmvakza .gt_font_normal {
+  font-weight: normal;
+}
+
+#sdigmvakza .gt_font_bold {
+  font-weight: bold;
+}
+
+#sdigmvakza .gt_font_italic {
+  font-style: italic;
+}
+
+#sdigmvakza .gt_super {
+  font-size: 65%;
+}
+
+#sdigmvakza .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="sdigmvakza" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes2</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">7</td>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>The beauty of this method is that, after you’ve run all the scenarios you prefer, you can rapidly assess each invoice and see what duplicate criteria they match. Ideally, you would balance having tests that are very general (same date, same amount) with tests of high precision (same date, same amount, and different account codes).</p>
 </div>
 <div id="aggregating-results" class="section level4">
 <h4><span class="header-section-number">9.4.3.3</span> Aggregating results</h4>
 <p>Lastly, to derived the final list, its is effective to filter the results based on the <code>dupes</code> columns.</p>
 <p>Starting with the invoices we’ve identified, we’ll first group by unique <code>system_id</code> we’ve created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a <code>sum</code>, and return a TRUE (with a value of 1 if coerced). Then, we want to calculate this on multiple columns, specifically with the name starting with <code>dupes</code>, so we will use <code>across()</code> with <code>starts_with()</code>.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="test.html#cb351-1"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb351-2"><a href="test.html#cb351-2"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
-<span id="cb351-3"><a href="test.html#cb351-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb351-4"><a href="test.html#cb351-4"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 8
-## # Rowwise:  system_id
-##   system_id invoice_id date       amount acctcode dupes1_same_id_…
-##       &lt;int&gt; &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;    &lt;dbl&gt;            &lt;int&gt;
-## 1         1 156        2019-01-01   1000     6100                1
-## 2         2 156        2019-01-01   1000     6100                1
-## 3         3 157A       2019-01-02   2500     6200               NA
-## 4         4 157B       2019-01-02   2500     6200               NA
-## 5         5 158        2019-01-03   3000     6100               NA
-## 6         6 159        2019-01-03   3000     6200               NA
-## # … with 2 more variables: dupes2_same_date_amt_diff_id &lt;int&gt;, dupes &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="test.html#cb333-1"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb333-2"><a href="test.html#cb333-2"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
+<span id="cb333-3"><a href="test.html#cb333-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb333-4"><a href="test.html#cb333-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb333-5"><a href="test.html#cb333-5"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb333-6"><a href="test.html#cb333-6"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#rrqcichvgs .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#rrqcichvgs .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#rrqcichvgs .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#rrqcichvgs .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#rrqcichvgs .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#rrqcichvgs .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#rrqcichvgs .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#rrqcichvgs .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rrqcichvgs .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#rrqcichvgs .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#rrqcichvgs .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#rrqcichvgs .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#rrqcichvgs .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#rrqcichvgs .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrqcichvgs .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#rrqcichvgs .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#rrqcichvgs .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rrqcichvgs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#rrqcichvgs .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#rrqcichvgs .gt_left {
+  text-align: left;
+}
+
+#rrqcichvgs .gt_center {
+  text-align: center;
+}
+
+#rrqcichvgs .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#rrqcichvgs .gt_font_normal {
+  font-weight: normal;
+}
+
+#rrqcichvgs .gt_font_bold {
+  font-weight: bold;
+}
+
+#rrqcichvgs .gt_font_italic {
+  font-style: italic;
+}
+
+#rrqcichvgs .gt_super {
+  font-size: 65%;
+}
+
+#rrqcichvgs .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="rrqcichvgs" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>This approach is robust. By maintaining our approach of having a main <code>invoice</code> dataset with all the matches, any new tests we add starting with the column name <code>dupes</code> will be included. For example, if we inserted a higher precision test of same invoice date, amount, and account code, we’ll see our counts go up:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="test.html#cb353-1"></a>dupes_set3 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb353-2"><a href="test.html#cb353-2"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span></span>
-<span id="cb353-3"><a href="test.html#cb353-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb353-4"><a href="test.html#cb353-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb353-5"><a href="test.html#cb353-5"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
-<span id="cb353-6"><a href="test.html#cb353-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes3_same_date_amt_acct =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb353-7"><a href="test.html#cb353-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="test.html#cb355-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb355-2"><a href="test.html#cb355-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set3, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>)) </span>
-<span id="cb355-3"><a href="test.html#cb355-3"></a></span>
-<span id="cb355-4"><a href="test.html#cb355-4"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb355-5"><a href="test.html#cb355-5"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
-<span id="cb355-6"><a href="test.html#cb355-6"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb355-7"><a href="test.html#cb355-7"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 9
-## # Rowwise:  system_id
-##   system_id invoice_id date       amount acctcode dupes1_same_id_…
-##       &lt;int&gt; &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;    &lt;dbl&gt;            &lt;int&gt;
-## 1         1 156        2019-01-01   1000     6100                1
-## 2         2 156        2019-01-01   1000     6100                1
-## 3         3 157A       2019-01-02   2500     6200               NA
-## 4         4 157B       2019-01-02   2500     6200               NA
-## 5         5 158        2019-01-03   3000     6100               NA
-## 6         6 159        2019-01-03   3000     6200               NA
-## # … with 3 more variables: dupes2_same_date_amt_diff_id &lt;int&gt;,
-## #   dupes3_same_date_amt_acct &lt;int&gt;, dupes &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="test.html#cb334-1"></a>dupes_set3 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb334-2"><a href="test.html#cb334-2"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span></span>
+<span id="cb334-3"><a href="test.html#cb334-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb334-4"><a href="test.html#cb334-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb334-5"><a href="test.html#cb334-5"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb334-6"><a href="test.html#cb334-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes3 =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb334-7"><a href="test.html#cb334-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span>
+<span id="cb334-8"><a href="test.html#cb334-8"></a></span>
+<span id="cb334-9"><a href="test.html#cb334-9"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb334-10"><a href="test.html#cb334-10"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set3, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>)) </span>
+<span id="cb334-11"><a href="test.html#cb334-11"></a></span>
+<span id="cb334-12"><a href="test.html#cb334-12"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb334-13"><a href="test.html#cb334-13"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
+<span id="cb334-14"><a href="test.html#cb334-14"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb334-15"><a href="test.html#cb334-15"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb334-16"><a href="test.html#cb334-16"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb334-17"><a href="test.html#cb334-17"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#tisnlxhgqh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tisnlxhgqh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tisnlxhgqh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tisnlxhgqh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tisnlxhgqh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tisnlxhgqh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tisnlxhgqh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tisnlxhgqh .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tisnlxhgqh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tisnlxhgqh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tisnlxhgqh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tisnlxhgqh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tisnlxhgqh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#tisnlxhgqh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tisnlxhgqh .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tisnlxhgqh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tisnlxhgqh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#tisnlxhgqh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tisnlxhgqh .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#tisnlxhgqh .gt_left {
+  text-align: left;
+}
+
+#tisnlxhgqh .gt_center {
+  text-align: center;
+}
+
+#tisnlxhgqh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tisnlxhgqh .gt_font_normal {
+  font-weight: normal;
+}
+
+#tisnlxhgqh .gt_font_bold {
+  font-weight: bold;
+}
+
+#tisnlxhgqh .gt_font_italic {
+  font-style: italic;
+}
+
+#tisnlxhgqh .gt_super {
+  font-size: 65%;
+}
+
+#tisnlxhgqh .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="tisnlxhgqh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 <div id="ruling-out-false-positives" class="section level4">
 <h4><span class="header-section-number">9.4.3.4</span> Ruling out false positives</h4>
 <p>Up to now, you’ve identified duplicates via the Same-Same-Same and Same-Same-Different methods. Perhaps in your own work, you’ve gone ahead and tested potential duplicates, and then realized there is some business logic you didn’t capture that may have nullified the potential duplicate, saving you time and effort.</p>
 <p>A common reason for a false positive is that the company may have already received a refund for the invoice. In this case, its more practical to identify and remove invoices that have had refunds in the original invoice population prior to processing, using an <code>anti_join()</code>. For example, if invoice 156 with a system_id of <code>2</code> was already removed, you could refine the invoice population before executing additional tests.</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="test.html#cb357-1"></a>refunds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">system_id =</span> <span class="dv">2</span>) <span class="co"># A table of credits or refunds</span></span>
-<span id="cb357-2"><a href="test.html#cb357-2"></a></span>
-<span id="cb357-3"><a href="test.html#cb357-3"></a>invoices <span class="op">%&gt;%</span></span>
-<span id="cb357-4"><a href="test.html#cb357-4"></a><span class="st">  </span><span class="kw">anti_join</span>(refunds, <span class="dt">by =</span> <span class="st">&#39;system_id&#39;</span>)</span></code></pre></div>
-<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
-## 1         1        156 2019-01-01   1000     6100                       1
-##   dupes2_same_date_amt_diff_id dupes3_same_date_amt_acct
-## 1                           NA                         1
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="test.html#cb335-1"></a>refunds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">system_id =</span> <span class="dv">2</span>) <span class="co"># A table of credits or refunds</span></span>
+<span id="cb335-2"><a href="test.html#cb335-2"></a></span>
+<span id="cb335-3"><a href="test.html#cb335-3"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb335-4"><a href="test.html#cb335-4"></a><span class="st">  </span><span class="kw">anti_join</span>(refunds, <span class="dt">by =</span> <span class="st">&#39;system_id&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb335-5"><a href="test.html#cb335-5"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#jvdjovcwlg .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jvdjovcwlg .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jvdjovcwlg .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jvdjovcwlg .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jvdjovcwlg .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jvdjovcwlg .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jvdjovcwlg .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jvdjovcwlg .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jvdjovcwlg .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jvdjovcwlg .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jvdjovcwlg .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jvdjovcwlg .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jvdjovcwlg .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#jvdjovcwlg .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jvdjovcwlg .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jvdjovcwlg .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jvdjovcwlg .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jvdjovcwlg .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jvdjovcwlg .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#jvdjovcwlg .gt_left {
+  text-align: left;
+}
+
+#jvdjovcwlg .gt_center {
+  text-align: center;
+}
+
+#jvdjovcwlg .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jvdjovcwlg .gt_font_normal {
+  font-weight: normal;
+}
+
+#jvdjovcwlg .gt_font_bold {
+  font-weight: bold;
+}
+
+#jvdjovcwlg .gt_font_italic {
+  font-style: italic;
+}
+
+#jvdjovcwlg .gt_super {
+  font-size: 65%;
+}
+
+#jvdjovcwlg .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="jvdjovcwlg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes3</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">7</td>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 <p>A duplicate may also be ruled out because because of a minor field that wasn’t used. If you examine lines 5 and 6, you’ll see that that this invoice was picked up because of the same <code>date</code> &amp; <code>amount</code>, with a different <code>invoice_id</code>. You may have noticed that the <code>acctcode</code> is different, representing that the invoice was being allocated to a diffferent cost center. After inquiring with the business, you may determine this behavior is normal. Quite simply, its easier to augment an additional test, helping you increase your accuracy:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="test.html#cb359-1"></a>dupes_set4 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb359-2"><a href="test.html#cb359-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount, acctcode) <span class="op">%&gt;%</span></span>
-<span id="cb359-3"><a href="test.html#cb359-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb359-4"><a href="test.html#cb359-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
-<span id="cb359-5"><a href="test.html#cb359-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
-<span id="cb359-6"><a href="test.html#cb359-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb359-7"><a href="test.html#cb359-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb359-8"><a href="test.html#cb359-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
-<span id="cb359-9"><a href="test.html#cb359-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes4_same_date_amt_acctcode_diff_id =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb359-10"><a href="test.html#cb359-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
-<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
-<pre><code>## `summarise()` regrouping output by &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="test.html#cb362-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
-<span id="cb362-2"><a href="test.html#cb362-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set4, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>))</span>
-<span id="cb362-3"><a href="test.html#cb362-3"></a></span>
-<span id="cb362-4"><a href="test.html#cb362-4"></a>invoices</span></code></pre></div>
-<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
-## 1         1        156 2019-01-01   1000     6100                       1
-##   dupes2_same_date_amt_diff_id dupes3_same_date_amt_acct
-## 1                           NA                         1
-##   dupes4_same_date_amt_acctcode_diff_id
-## 1                                    NA
-##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 6 rows ]</code></pre>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="test.html#cb336-1"></a>dupes_set4 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb336-2"><a href="test.html#cb336-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount, acctcode) <span class="op">%&gt;%</span></span>
+<span id="cb336-3"><a href="test.html#cb336-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb336-4"><a href="test.html#cb336-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb336-5"><a href="test.html#cb336-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb336-6"><a href="test.html#cb336-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb336-7"><a href="test.html#cb336-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb336-8"><a href="test.html#cb336-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb336-9"><a href="test.html#cb336-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes4 =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb336-10"><a href="test.html#cb336-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span>
+<span id="cb336-11"><a href="test.html#cb336-11"></a></span>
+<span id="cb336-12"><a href="test.html#cb336-12"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb336-13"><a href="test.html#cb336-13"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set4, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>))</span>
+<span id="cb336-14"><a href="test.html#cb336-14"></a></span>
+<span id="cb336-15"><a href="test.html#cb336-15"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb336-16"><a href="test.html#cb336-16"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#lgakwafppd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lgakwafppd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lgakwafppd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lgakwafppd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lgakwafppd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lgakwafppd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lgakwafppd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lgakwafppd .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lgakwafppd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lgakwafppd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lgakwafppd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lgakwafppd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lgakwafppd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#lgakwafppd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgakwafppd .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lgakwafppd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lgakwafppd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lgakwafppd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lgakwafppd .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#lgakwafppd .gt_left {
+  text-align: left;
+}
+
+#lgakwafppd .gt_center {
+  text-align: center;
+}
+
+#lgakwafppd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lgakwafppd .gt_font_normal {
+  font-weight: normal;
+}
+
+#lgakwafppd .gt_font_bold {
+  font-weight: bold;
+}
+
+#lgakwafppd .gt_font_italic {
+  font-style: italic;
+}
+
+#lgakwafppd .gt_super {
+  font-size: 65%;
+}
+
+#lgakwafppd .gt_footnote_marks {
+  font-style: italic;
+  font-size: 65%;
+}
+</style>
+<div id="lgakwafppd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;"><table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">system_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">invoice_id</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">amount</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">acctcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes1</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes2</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes3</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">dupes4</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_left">156</td>
+      <td class="gt_row gt_left">2019-01-01</td>
+      <td class="gt_row gt_right">1000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">3</td>
+      <td class="gt_row gt_left">157A</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">4</td>
+      <td class="gt_row gt_left">157B</td>
+      <td class="gt_row gt_left">2019-01-02</td>
+      <td class="gt_row gt_right">2500</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">1</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">1</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">5</td>
+      <td class="gt_row gt_left">158</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">6</td>
+      <td class="gt_row gt_left">159</td>
+      <td class="gt_row gt_left">2019-01-03</td>
+      <td class="gt_row gt_right">3000</td>
+      <td class="gt_row gt_right">6200</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">2</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+    <tr>
+      <td class="gt_row gt_center">7</td>
+      <td class="gt_row gt_left">160</td>
+      <td class="gt_row gt_left">2019-01-04</td>
+      <td class="gt_row gt_right">4000</td>
+      <td class="gt_row gt_right">6100</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+      <td class="gt_row gt_center">NA</td>
+    </tr>
+  </tbody>
+  
+  
+</table></div>
 </div>
 </div>
 <div id="rare-accounts" class="section level3">
