@@ -105,7 +105,7 @@ Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high a
 
 ### RStudio Connect
 
-RStudio PBC, which became a Certified B Corporation in 2020, offers the [RStudio Connect](https://rstudio.com/products/connect/) solution that allows R deliverable to be hosted online. These include:
+RStudio offers commercially supported server software, including the [RStudio Connect](https://rstudio.com/products/connect/) solution that allows R deliverable to be hosted online. These include:
 
 * [RMarkdown](https://rmarkdown.rstudio.com) notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization.
 * These notebooks can also act at Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).
@@ -113,7 +113,9 @@ RStudio PBC, which became a Certified B Corporation in 2020, offers the [RStudio
 
 For audit teams with expertise in programming, RStudio Connect offers some of the best capabilities for publishing visualizations and analysis to your teams and internal stakeholders. With its git capability, it can also receive updates from a code repository, integrating tightly with a team's best practices of a code repository.
 
-RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team.
+RStudio server software will require talent and cost to stand-up and maintain, and should be considered in an environment where automation and internal hosting of data products will bring advantages to an internal audit team. 
+
+For those socially conscious teams, you can check off the box by going with RStudio, which is a Certified B Corporation. A company that has has the Certified B Corporation is obligated to the mission of the company, and not to its shareholders. This means that they are to balance both profit and purpose. RStudio has long contributed to free and open-source data science with its packages that are widely adopted within the R ecosystem, and is a significant driver to creating free and accessible education for individuals all over the world.
 
 Lightweight alternatives include the hosting a free [Shiny Server](https://rstudio.com/products/shiny/shiny-server/) or low-cost publishing to [Shinyapps.io](https://www.shinyapps.io).
 
