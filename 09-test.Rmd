@@ -36,13 +36,13 @@ dbDisconnect(con)
 
 Our primary commands for this chapter will be `mutate()` and `filter()`. The `mutate()` command is useful for testing data, as it allows the auditor to add features and/or criteria to their testing. After records have been identified, `filter()` will extract the rows matching criteria.
 
-While you may able to directly `filter()` rows based on criteria, you may find it more effective to instead create the new fields with `mutate()` that match the filter criteria. This has benefits in the long run, including:
+While you may able to directly `filter()` rows based on criteria, you may find it more effective to instead create the new fields with `mutate()` that match the filter criteria. My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with `t_` as the prefix, and isolate for these invoices to perform inspection and follow-up. This has benefits in the long run, including:
 
-- Keeping all the tests on the same row allows for an easier way to detect any row that met multiple criteria,
+- Keeping all the tests on the same record allows for an easier way to detect any row that met multiple criteria,
 - It is straightforward to extract the rows that meets a test, and 
 - Each new column related to a specific a criteria is akin to feature engineering, enabling the reuse of the tests for machine learning applications.
 
-My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with `t_` as the prefix, and isolate for these invoices to perform inspection and follow-up. There may be reasons why you may need to create separate data frame objects, so do not prescribe yourself to this method for extremely long or sophisticated steps.
+There are practical reasons why you may need to create separate data frame objects, so do not prescribe exclusively to this method for extremely long or sophisticated steps. In cases when you have to perform multiple steps to get to your answer, it is advisable to bring the final result back into an overall reference table.
 
 ## Amount-based tests
 
@@ -266,7 +266,7 @@ aged %>%
 
 ## Basic Statistical tests
 
-In the [exploration of data](#explore-stats), we highlighted that exploring your data using various statistical functions are useful for 
+In the [exploration of data](#explore-stats), we highlighted that exploring your data using various statistical functions are useful for helping understand the shape of your data. After doing so, you can then apply statistical methods directly in your testing to help select samples.
 
 ### Outliers based on amount
 
@@ -300,7 +300,7 @@ gl %>%
 
 By performing a test based solely on amounts alone, other meaningful data is ignored. The nuances of specific subsets of data are lost due to an overarching amount analysis, which could be too crude.
 
-There are other useful features in our dataset we can use to potentially segment the data. There is the account information, which can be interpreted as consistent categories of information. There are also descriptions, which help us understand more granular detail about the nature of the transaction. A combination of any identifying categories (or factors) could be used to identify outliers.
+There are other useful features in our dataset we can use to potentially segment the data. There is the account information, which can be interpreted as consistent categories of information. There are also descriptions, which help us understand more granular detail about the nature of the transaction. A combination of any identifying categories or factors could be used to identify outliers.
 
 If we focus our analysis on both the description and amount, we can identify amount extreme outliers on a more unique basis. First, we need to group the descriptions and independently calculate the `upper_extreme_outlier` on a per group basis:
 
@@ -405,7 +405,7 @@ gl %>%
     geom_col()
 ```
 
-Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives). You may choose to perform Benford's Law on the positive and negative numbers, separately or together, transforming the negative numbers with `abs()`. You can also choose to exclude them, as I do below:
+Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives), and extracting the first character using `substr()` will retrieve the negative symbol. You may choose to perform Benford's Law on the positive and negative numbers, separately or together, transforming the negative numbers with `abs()`. You can also choose to exclude them, as I do below:
 
 ```{r, warning = FALSE, message = FALSE}
 actuals <- gl %>%
@@ -431,7 +431,7 @@ actuals +
 
 When you reach this stage, take a moment to pause and understand the business, and if there may be any potential behavours to cause potential curve differences. For example, if there is an approval 'limit' that exists at $1000, you may see a spike of entries at the 9 leading digit.
 
-As with any statistical test, Benford's Law will not give you an answer as to why there may be fraud. There may be both legitimate reasons for why populations or sample sizes do not follow Benford's Law. A higher than expected proportion of leading digits starting with 9 does not mean those numbers starting with 9 are fraudulent.
+As with any statistical test, Benford's Law will not give you an answer as to why there may be fraud. There may be both legitimate reasons for why populations do not follow Benford's Law. A higher than expected proportion of leading digits starting with 9 does not mean those numbers starting with 9 are fraudulent.
 
 #### More leading digits?
 
@@ -446,20 +446,196 @@ head(benford_curve_leading2)
 tail(benford_curve_leading2)
 ```
 
-### Relative size factor testing (RSF)
+### Relative size factor (RSF)
 
-The Relative Size Factor test is the comparison of "large amounts to a benchmark to see how large they are relative to some norm." [@nigrini-forensicanalytics-ch11]. The calculation is done by taking the largest value divided by the second largest value within a group. Examples of groups include a listing of payables for a vendor, or the expenses completed by an employee.
+The Relative Size Factor test is the comparison of "large amounts to a benchmark to see how large they are relative to some norm." [@nigrini-forensicanalytics-ch11]. The calculation is done by taking the largest value divided by the second largest value within a group. Examples of groups include a listing of payables for a vendor, or the expenses completed by an employee. A larger RSF indicates that there was a larger proportional between the largest and second largest invoice.
 
-A common request is to understand which vendor had the highest category of a charge (in this case, the `description`). Recall the `group_by()` will perform the calculation at the level requested. In this case, `slice_max()` will select the highest row of values by a variable.
+One test is to determining the vendors top two invoice amounts and their RSF ratio. Recall the `group_by()` will perform the calculation at the level requested - adding `slice_max()` will select the highest row of values by the group.
 
 ```{r}
-gl %>%
+top_two_per_vendor <- gl %>%
   filter(account == 'exp_materials_6000') %>%
+  select(vendor_id, je_num, amount) %>%
   group_by(vendor_id) %>%
   slice_max(amount, n = 2)
+
+top_two_per_vendor
 ```
 
-### Duplicates
+Since we've identified the top two invoices per `vendor_id`, we've artifically also created new max and mins for the group, which we can use to calculate our RSF:
+
+```{r, message = FALSE}
+top_two_per_vendor %>%
+  summarize(rsf = max(amount) / min(amount))
+```
+
+This test may reveal invoices that may have been miskeyed with extra zeros, or conversely, identify large one-time orders. 
+
+### Duplicate Invoices
+
+Detection of duplicates are a seemingly simple concept. For invoices, find an invoice with the same invoice date and same amount. Experience will tell you that detecting suspected duplicates and generating a list is easy, and unfortunately there will be a significant number of false positives to wade through. We will go through the basics of duplicate detection with invoices, and then determine additional strategies you can apply to rule out unlikely samples. These same strategies can be applied across any type of payable.
+
+The initial approach is built off the Same-Same-Same or Same-Same-Different duplicate detection approach [@nigrini-forensicanalytics-ch12]. Essentially, you examine for factors where the may be similarities in the key fields, and potentially differences in one of them. Here is a fictional dataset to illustrate how data may be represented.
+
+Note that despite the name, there can be as many 'Same' key fields as needed.
+
+```{r}
+invoices <- data.frame(system_id = 1:7,
+           invoice_id = c('156', '156', '157A', '157B', '158', '159', '160'), 
+           date = c(as.Date('2019-01-01'), as.Date('2019-01-01'), as.Date('2019-01-02'), as.Date('2019-01-02'), as.Date('2019-01-03'), as.Date('2019-01-03'), as.Date('2019-01-04')),
+           amount = c(1000, 1000, 2500, 2500, 3000, 3000, 4000),
+           acctcode = c(6100, 6100, 6200, 6200, 6100, 6200, 6100))
+
+invoices
+```
+
+#### Same-Same-Same
+
+To run our Same-Same-Same test, we would collect the key fields we would like to use. In this case, the invoice, date and amount could qualify as key fields - Same Invoice ID, Same Date, Same Amount. You would summarize by how often that combination appears, only keeping items that match more than once:
+
+```{r}
+invoices %>%
+  group_by(invoice_id, date, amount) %>%
+  summarize(times_occured = n()) %>%
+  filter(times_occured > 1)
+```
+
+What is useful is then joining this information to your main dataset. This way, you get to maintain a library of invoices that meet multiple criteria. First off, lets keep keep all the duplicate keys we summarized on, plus a unique identifier so we can match the pairs:
+
+```{r}
+dupes_set1 <- invoices %>%
+  group_by(invoice_id, date, amount) %>%
+  summarize(times_occured = n()) %>%
+  filter(times_occured > 1) %>%
+  ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
+  mutate(dupes1_same_id_date_amt = row_number()) %>%
+  select(-times_occured)
+
+dupes_set1
+```
+
+Then bring it into our invoices dataset:
+
+```{r}
+invoices <- invoices %>%
+  left_join(dupes_set1, by = c('invoice_id', 'date', 'amount'))
+
+invoices
+```
+
+#### Same-Same-Different
+
+For the Same-Same-Different test, we have to add an extra step. We still collect the key fields we would like to use. In this case, perhaps we would like to check for duplicates on the same date and same amount, but now we're looking for different invoice_ids. Therefore, Same Date, Same Amount, Different Invoice_id.
+
+First, lets detect the duplicates on our key fields:
+
+```{r}
+invoices %>%
+  group_by(invoice_id, date, amount) %>%
+  summarize(times_occured = n())
+```
+
+Then, you perform another `group_by`, but this time just on the ones that are the same. In this case, that would be Date and Amount. 
+
+```{r}
+invoices %>%
+  group_by(invoice_id, date, amount) %>%
+  summarize(times_occured = n()) %>%
+  ungroup() %>% # Remove the grouping aspect, which is kept by default in dplyr
+  group_by(date, amount) %>% # Second set of reductions, but this time, find how many unique invoice ids there are per date-amount
+  summarize(times_occured = n())
+```
+
+This approach is unique but intuitive. By taking all possible 'same' combinations, we've effectively grouped any sort of duplicate `invoice_id` we may have already had. We ungroup and then resummarize without the `invoice_id`, which tells us how many times the `invoice_id` is different within the new group. 
+
+Lets save this information into our invoice table again:
+
+```{r}
+dupes_set2 <- invoices %>%
+  group_by(invoice_id, date, amount) %>%
+  summarize(times_occured = n()) %>%
+  ungroup() %>% # Remove the grouping aspect, which is kept by default in dplyr
+  group_by(date, amount) %>% # Second set of reductions, but this time, find how many unique invoice ids there are per date-amount
+  summarize(times_occured = n()) %>%
+  filter(times_occured > 1) %>%
+  ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
+  mutate(dupes2_same_date_amt_diff_id = row_number()) %>%
+  select(-times_occured)
+
+invoices <- invoices %>%
+  left_join(dupes_set2, by = c('date', 'amount'))
+
+invoices
+```
+
+The beauty of this method is that, after you've run all the scenarios you prefer, you can rapidly assess each invoice and see what duplicate criteria they match. Ideally, you would balance having tests that are very general (same date, same amount) with tests of high precision (same date, same amount, and different account codes).
+
+#### Aggregating results
+
+Lastly, to derived the final list, its is effective to filter the results based on the `dupes` columns. 
+
+Starting with the invoices we've identified, we'll first group by unique `system_id` we've created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a `sum`, and return a TRUE (with a value of 1 if coerced). Then, we want to calculate this on multiple columns, specifically with the name starting with `dupes`, so we will use `across()` with `starts_with()`.
+
+```{r}
+invoices %>%
+  rowwise(system_id) %>%
+  dplyr::mutate(dupes = sum(across(starts_with('dupes')) >= 1, na.rm = TRUE)) %>%
+  filter(dupes > 0)
+```
+
+This approach is robust. By maintaining our approach of having a main `invoice` dataset with all the matches, any new tests we add starting with the column name `dupes` will be included. For example, if we inserted a higher precision test of same invoice date, amount, and account code, we'll see our counts go up:
+
+```{r}
+dupes_set3 <- invoices %>%
+  group_by(date, amount, acctcode) %>%
+  summarize(times_occured = n()) %>%
+  filter(times_occured > 1) %>%
+  ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
+  mutate(dupes3_same_date_amt_acct = row_number()) %>%
+  select(-times_occured)
+
+invoices <- invoices %>%
+  left_join(dupes_set3, by = c('date', 'amount', 'acctcode')) 
+
+invoices %>%
+  rowwise(system_id) %>%
+  dplyr::mutate(dupes = sum(across(starts_with('dupes')) >= 1, na.rm = TRUE)) %>%
+  filter(dupes > 0)
+```
+
+#### Ruling out false positives
+
+Up to now, you've identified duplicates via the Same-Same-Same and Same-Same-Different methods. Perhaps in your own work, you've gone ahead and tested potential duplicates, and then realized there is some business logic you didn't capture that may have nullified the potential duplicate, saving you time and effort. 
+
+A common reason for a false positive is that the company may have already received a refund for the invoice. In this case, its more practical to identify and remove invoices that have had refunds in the original invoice population prior to processing, using an `anti_join()`. For example, if invoice 156 with a system_id of `2` was already removed, you could refine the invoice population before executing additional tests.
+
+```{r}
+refunds <- data.frame(system_id = 2) # A table of credits or refunds
+
+invoices %>%
+  anti_join(refunds, by = 'system_id')
+```
+
+A duplicate may also be ruled out because because of a minor field that wasn't used. If you examine lines 5 and 6, you'll see that that this invoice was picked up because of the same `date` & `amount`, with a different `invoice_id`. You may have noticed that the `acctcode` is different, representing that the invoice was being allocated to a diffferent cost center. After inquiring with the business, you may determine this behavior is normal. Quite simply, its easier to augment an additional test, helping you increase your accuracy:
+
+```{r}
+dupes_set4 <- invoices %>%
+  group_by(invoice_id, date, amount, acctcode) %>%
+  summarize(times_occured = n()) %>%
+  ungroup() %>% # Remove the grouping aspect, which is kept by default in dplyr
+  group_by(date, amount, acctcode) %>% # Second set of reductions, but this time, find how many unique invoice ids there are per date-amount
+  summarize(times_occured = n()) %>%
+  filter(times_occured > 1) %>%
+  ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
+  mutate(dupes4_same_date_amt_acctcode_diff_id = row_number()) %>%
+  select(-times_occured)
+
+invoices <- invoices %>%
+  left_join(dupes_set4, by = c('date', 'amount', 'acctcode'))
+
+invoices
+```
+
 
 ### Rare Accounts
 

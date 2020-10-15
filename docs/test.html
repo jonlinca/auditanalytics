@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-09-30" />
+<meta name="date" content="2020-10-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,17 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.14/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -233,8 +244,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
 <li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
-<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-testing-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor testing (RSF)</a></li>
-<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicates"><i class="fa fa-check"></i><b>9.4.3</b> Duplicates</a></li>
+<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
+<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
 <li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.4.4</b> Rare Accounts</a></li>
 <li class="chapter" data-level="9.4.5" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4.5</b> Sequential</a></li>
 </ul></li>
@@ -288,44 +299,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Testing data is the act of isolating high-risk records that meet criteria. While generally the intent of data analytics within auditing is to gain 100% population coverage and associated assurance, what will inevitably happen is that process deviations are revealed as items are detected. No process is bullet-proof and exception free, and therefore the auditor should have a founded idea of their level of risk tolerance prior to testing. Testing data will then help auditors articulate the nature of the exceptions and the overall risk level.</p>
 <p>Auditors must recognize that not all tests (and lines that meet these tests) immediately ascertain that the control has failed or that something suspicious has occurred. Rather, it points to items that require further inspection and judgment. By iterating your workflow, you will be able to reduce the incidence of false positives and increase your detection rate, allowing you to focus on follow-up of higher-risk activity.</p>
 <p>For this section we will use the company GL database.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="test.html#cb3-1"></a><span class="kw">library</span>(dplyr) </span>
-<span id="cb3-2"><a href="test.html#cb3-2"></a><span class="kw">library</span>(tidyr) </span>
-<span id="cb3-3"><a href="test.html#cb3-3"></a><span class="kw">library</span>(lubridate) </span>
-<span id="cb3-4"><a href="test.html#cb3-4"></a><span class="kw">library</span>(DBI) </span>
-<span id="cb3-5"><a href="test.html#cb3-5"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb3-6"><a href="test.html#cb3-6"></a></span>
-<span id="cb3-7"><a href="test.html#cb3-7"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb3-8"><a href="test.html#cb3-8"></a></span>
-<span id="cb3-9"><a href="test.html#cb3-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb3-10"><a href="test.html#cb3-10"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb3-11"><a href="test.html#cb3-11"></a></span>
-<span id="cb3-12"><a href="test.html#cb3-12"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb3-13"><a href="test.html#cb3-13"></a></span>
-<span id="cb3-14"><a href="test.html#cb3-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb3-15"><a href="test.html#cb3-15"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
-<span id="cb3-16"><a href="test.html#cb3-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb3-17"><a href="test.html#cb3-17"></a>         <span class="dt">paid_date =</span> <span class="kw">as_date</span>(paid_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb3-18"><a href="test.html#cb3-18"></a>         <span class="dt">invoice_date =</span> <span class="kw">as_date</span>(invoice_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb3-19"><a href="test.html#cb3-19"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span>
-<span id="cb3-20"><a href="test.html#cb3-20"></a></span>
-<span id="cb3-21"><a href="test.html#cb3-21"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="test.html#cb265-1"></a><span class="kw">library</span>(dplyr) </span>
+<span id="cb265-2"><a href="test.html#cb265-2"></a><span class="kw">library</span>(tidyr) </span>
+<span id="cb265-3"><a href="test.html#cb265-3"></a><span class="kw">library</span>(lubridate) </span>
+<span id="cb265-4"><a href="test.html#cb265-4"></a><span class="kw">library</span>(DBI) </span>
+<span id="cb265-5"><a href="test.html#cb265-5"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb265-6"><a href="test.html#cb265-6"></a></span>
+<span id="cb265-7"><a href="test.html#cb265-7"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb265-8"><a href="test.html#cb265-8"></a></span>
+<span id="cb265-9"><a href="test.html#cb265-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb265-10"><a href="test.html#cb265-10"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb265-11"><a href="test.html#cb265-11"></a></span>
+<span id="cb265-12"><a href="test.html#cb265-12"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb265-13"><a href="test.html#cb265-13"></a></span>
+<span id="cb265-14"><a href="test.html#cb265-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb265-15"><a href="test.html#cb265-15"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
+<span id="cb265-16"><a href="test.html#cb265-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb265-17"><a href="test.html#cb265-17"></a>         <span class="dt">paid_date =</span> <span class="kw">as_date</span>(paid_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb265-18"><a href="test.html#cb265-18"></a>         <span class="dt">invoice_date =</span> <span class="kw">as_date</span>(invoice_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb265-19"><a href="test.html#cb265-19"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span>
+<span id="cb265-20"><a href="test.html#cb265-20"></a></span>
+<span id="cb265-21"><a href="test.html#cb265-21"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
 <p>Our primary commands for this chapter will be <code>mutate()</code> and <code>filter()</code>. The <code>mutate()</code> command is useful for testing data, as it allows the auditor to add features and/or criteria to their testing. After records have been identified, <code>filter()</code> will extract the rows matching criteria.</p>
-<p>While you may able to directly <code>filter()</code> rows based on criteria, you may find it more effective to instead create the new fields with <code>mutate()</code> that match the filter criteria. This has benefits in the long run, including:</p>
+<p>While you may able to directly <code>filter()</code> rows based on criteria, you may find it more effective to instead create the new fields with <code>mutate()</code> that match the filter criteria. My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with <code>t_</code> as the prefix, and isolate for these invoices to perform inspection and follow-up. This has benefits in the long run, including:</p>
 <ul>
-<li>Keeping all the tests on the same row allows for an easier way to detect any row that met multiple criteria,</li>
+<li>Keeping all the tests on the same record allows for an easier way to detect any row that met multiple criteria,</li>
 <li>It is straightforward to extract the rows that meets a test, and</li>
 <li>Each new column related to a specific a criteria is akin to feature engineering, enabling the reuse of the tests for machine learning applications.</li>
 </ul>
-<p>My style for documenting tests is to create any additional features needed, and then create a corresponding test column, with <code>t_</code> as the prefix, and isolate for these invoices to perform inspection and follow-up. There may be reasons why you may need to create separate data frame objects, so do not prescribe yourself to this method for extremely long or sophisticated steps.</p>
+<p>There are practical reasons why you may need to create separate data frame objects, so do not prescribe exclusively to this method for extremely long or sophisticated steps. In cases when you have to perform multiple steps to get to your answer, it is advisable to bring the final result back into an overall reference table.</p>
 <div id="amount-based-tests" class="section level2">
 <h2><span class="header-section-number">9.1</span> Amount-based tests</h2>
 <div id="above-threshold" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Above threshold</h3>
 <p>The most classical test is to test items that meet or exceed a material value.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="test.html#cb4-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb4-2"><a href="test.html#cb4-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_over_te =</span> amount <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60000</span>) <span class="op">%&gt;%</span></span>
-<span id="cb4-3"><a href="test.html#cb4-3"></a><span class="st">  </span><span class="kw">filter</span>(t_over_te) <span class="op">%&gt;%</span></span>
-<span id="cb4-4"><a href="test.html#cb4-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, <span class="kw">everything</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="test.html#cb266-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb266-2"><a href="test.html#cb266-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_over_te =</span> amount <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60000</span>) <span class="op">%&gt;%</span></span>
+<span id="cb266-3"><a href="test.html#cb266-3"></a><span class="st">  </span><span class="kw">filter</span>(t_over_te) <span class="op">%&gt;%</span></span>
+<span id="cb266-4"><a href="test.html#cb266-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, <span class="kw">everything</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 9
 ##   je_num amount gl_date    vendor_id account invoice_date description paid_date 
 ##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;       &lt;date&gt;    
@@ -334,9 +345,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # … with 1 more variable: t_over_te &lt;lgl&gt;</code></pre>
 <p>When performing amount or threshold testing, you may be more interested in the actual magnitude, and not necessarily the direction. This is especially true within accounting matters, where the implication of negative and positive amounts change depending on the transaction - i.e., a debit or a credit transaction, or affecting a balance sheet or income statement account can tell a very different story.</p>
 <p>In these cases, you may want to consider using absolute values as the comparison. This allows you to capture the magnitude of the change:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="test.html#cb6-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb6-2"><a href="test.html#cb6-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_over_te =</span> <span class="kw">abs</span>(amount) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60000</span>) <span class="op">%&gt;%</span></span>
-<span id="cb6-3"><a href="test.html#cb6-3"></a><span class="st">  </span><span class="kw">filter</span>(t_over_te)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="test.html#cb268-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb268-2"><a href="test.html#cb268-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_over_te =</span> <span class="kw">abs</span>(amount) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">60000</span>) <span class="op">%&gt;%</span></span>
+<span id="cb268-3"><a href="test.html#cb268-3"></a><span class="st">  </span><span class="kw">filter</span>(t_over_te)</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 9
 ##   je_num  amount gl_date    vendor_id account invoice_date description
 ##    &lt;int&gt;   &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;      
@@ -350,22 +361,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">9.1.2</span> Round numbers</h3>
 <p>In forensic accounting, auditors tend to take the position that transactions rarely end in whole dollars, especially if they end in multiples of 5, or even in multiples of tens.</p>
 <p>Detection of these is contingent on the use of <code>%%</code>, better known as the modulo operator. It will calculate the remainder of a division calculation; dividing 1.50 by 1 will give you a remainder of 0.5.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="test.html#cb8-1"></a><span class="fl">1.50</span> <span class="op">%%</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="test.html#cb270-1"></a><span class="fl">1.50</span> <span class="op">%%</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>This same approach can be used to detect if a transaction is round, i.e. has no ‘cents’ in it. How you decide to apply this can be useful in many cases. For example, finding a transaction that happens to be cleanly in the ‘thousands’, perform the modulo by the corresponding amount and look for results where the remainder is 0.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="test.html#cb10-1"></a><span class="dv">15000</span> <span class="op">%%</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="test.html#cb272-1"></a><span class="dv">15000</span> <span class="op">%%</span><span class="st"> </span><span class="dv">1000</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Or even a round five number, which has its use cases when it comes to things like gift cards or tipping at restaurants:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="test.html#cb12-1"></a><span class="dv">25</span> <span class="op">%%</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="test.html#cb274-1"></a><span class="dv">25</span> <span class="op">%%</span><span class="st"> </span><span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>When implementing as a test, I’d encourage creating multiple tests to see which test it matched, and then detect these variations together:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="test.html#cb14-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb14-2"><a href="test.html#cb14-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_round_5 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb14-3"><a href="test.html#cb14-3"></a>         <span class="dt">t_round_10 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">10</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb14-4"><a href="test.html#cb14-4"></a>         <span class="dt">t_round_100 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
-<span id="cb14-5"><a href="test.html#cb14-5"></a>         <span class="dt">t_round_1000 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">1000</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
-<span id="cb14-6"><a href="test.html#cb14-6"></a><span class="st">  </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t_round&quot;</span>)), <span class="kw">any_vars</span>(.)) <span class="op">%&gt;%</span></span>
-<span id="cb14-7"><a href="test.html#cb14-7"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, <span class="kw">starts_with</span>(<span class="st">&quot;t_round&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="test.html#cb276-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb276-2"><a href="test.html#cb276-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_round_5 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb276-3"><a href="test.html#cb276-3"></a>         <span class="dt">t_round_10 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">10</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb276-4"><a href="test.html#cb276-4"></a>         <span class="dt">t_round_100 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">100</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb276-5"><a href="test.html#cb276-5"></a>         <span class="dt">t_round_1000 =</span> amount <span class="op">%%</span><span class="st"> </span><span class="dv">1000</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb276-6"><a href="test.html#cb276-6"></a><span class="st">  </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(<span class="kw">starts_with</span>(<span class="st">&quot;t_round&quot;</span>)), <span class="kw">any_vars</span>(.)) <span class="op">%&gt;%</span></span>
+<span id="cb276-7"><a href="test.html#cb276-7"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, <span class="kw">starts_with</span>(<span class="st">&quot;t_round&quot;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 6
 ##   je_num amount t_round_5 t_round_10 t_round_100 t_round_1000
 ##    &lt;int&gt;  &lt;dbl&gt; &lt;lgl&gt;     &lt;lgl&gt;      &lt;lgl&gt;       &lt;lgl&gt;       
@@ -378,13 +389,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="weekend-testing" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Weekend testing</h3>
 <p>As a typical office business (along with office activities) generally happen on the weekday - that is, Monday through Friday. We may be interested in selecting journal entries from a sample of activities that occurred on the weekend. To test this, we can use the <code>lubridate</code> package to determine what day of week our entry falls upon:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="test.html#cb16-1"></a>gl &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb16-2"><a href="test.html#cb16-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">day_of_week =</span> <span class="kw">wday</span>(gl_date, <span class="dt">label =</span> <span class="ot">TRUE</span>),  <span class="co"># Label is useful if you tend to forget what each number means</span></span>
-<span id="cb16-3"><a href="test.html#cb16-3"></a>         <span class="dt">t_weekend =</span> day_of_week <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Sat&#39;</span>, <span class="st">&#39;Sun&#39;</span>))</span>
-<span id="cb16-4"><a href="test.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="test.html#cb16-5"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb16-6"><a href="test.html#cb16-6"></a><span class="st">  </span><span class="kw">filter</span>(t_weekend) <span class="op">%&gt;%</span></span>
-<span id="cb16-7"><a href="test.html#cb16-7"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="test.html#cb278-1"></a>gl &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb278-2"><a href="test.html#cb278-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">day_of_week =</span> <span class="kw">wday</span>(gl_date, <span class="dt">label =</span> <span class="ot">TRUE</span>),  <span class="co"># Label is useful if you tend to forget what each number means</span></span>
+<span id="cb278-3"><a href="test.html#cb278-3"></a>         <span class="dt">t_weekend =</span> day_of_week <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Sat&#39;</span>, <span class="st">&#39;Sun&#39;</span>))</span>
+<span id="cb278-4"><a href="test.html#cb278-4"></a></span>
+<span id="cb278-5"><a href="test.html#cb278-5"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb278-6"><a href="test.html#cb278-6"></a><span class="st">  </span><span class="kw">filter</span>(t_weekend) <span class="op">%&gt;%</span></span>
+<span id="cb278-7"><a href="test.html#cb278-7"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##   je_num  amount gl_date    vendor_id account invoice_date description
 ##    &lt;int&gt;   &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;      
@@ -400,10 +411,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">9.2.2</span> Cutoff testing</h3>
 <p>When transactions are near the end of the month (or the end of the year), cutoff testing helps establish that the transactions were recorded within the correct time period. Testing these may require selecting invoices close to month end.</p>
 <p>Similar to how we calculate the period using <code>floor_date()</code>, we can take any date and transform it with <code>ceiling_date()</code> which will calculate the last date of the month. Then we can test to see if a date falls within the range as needed.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="test.html#cb18-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb18-2"><a href="test.html#cb18-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">end_of_month =</span> <span class="kw">ceiling_date</span>(gl_date, <span class="dt">unit =</span> <span class="st">&#39;month&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb18-3"><a href="test.html#cb18-3"></a><span class="st">  </span><span class="kw">select</span>(gl_date, end_of_month) <span class="op">%&gt;%</span></span>
-<span id="cb18-4"><a href="test.html#cb18-4"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="test.html#cb280-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb280-2"><a href="test.html#cb280-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">end_of_month =</span> <span class="kw">ceiling_date</span>(gl_date, <span class="dt">unit =</span> <span class="st">&#39;month&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb280-3"><a href="test.html#cb280-3"></a><span class="st">  </span><span class="kw">select</span>(gl_date, end_of_month) <span class="op">%&gt;%</span></span>
+<span id="cb280-4"><a href="test.html#cb280-4"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   gl_date    end_of_month
 ##   &lt;date&gt;     &lt;date&gt;      
@@ -414,12 +425,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 2019-04-09 2019-05-01  
 ## 6 2019-04-09 2019-05-01</code></pre>
 <p>This is close to our desired result, but all these dates are representative of the beginning of the following month. To transform dates, simply use the unit as desired and treat it like a <a href="cleaning-data.html#differences-between-time">math calculation</a>. As all these dates are one day ahead, a <code>days</code> difference calculation will suffice:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="test.html#cb20-1"></a>gl &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb20-2"><a href="test.html#cb20-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">end_of_month =</span> <span class="kw">ceiling_date</span>(gl_date, <span class="dt">unit =</span> <span class="st">&#39;month&#39;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>))</span>
-<span id="cb20-3"><a href="test.html#cb20-3"></a></span>
-<span id="cb20-4"><a href="test.html#cb20-4"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb20-5"><a href="test.html#cb20-5"></a><span class="st">  </span><span class="kw">select</span>(gl_date, end_of_month) <span class="op">%&gt;%</span></span>
-<span id="cb20-6"><a href="test.html#cb20-6"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="test.html#cb282-1"></a>gl &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb282-2"><a href="test.html#cb282-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">end_of_month =</span> <span class="kw">ceiling_date</span>(gl_date, <span class="dt">unit =</span> <span class="st">&#39;month&#39;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>))</span>
+<span id="cb282-3"><a href="test.html#cb282-3"></a></span>
+<span id="cb282-4"><a href="test.html#cb282-4"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb282-5"><a href="test.html#cb282-5"></a><span class="st">  </span><span class="kw">select</span>(gl_date, end_of_month) <span class="op">%&gt;%</span></span>
+<span id="cb282-6"><a href="test.html#cb282-6"></a><span class="st">  </span><span class="kw">head</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   gl_date    end_of_month
 ##   &lt;date&gt;     &lt;date&gt;      
@@ -430,10 +441,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5 2019-04-09 2019-04-30  
 ## 6 2019-04-09 2019-04-30</code></pre>
 <p>And to detect which lines are close to month end, simply calculate the difference between the end of month and the original date, keeping only dates very close to the end of the month:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="test.html#cb22-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb22-2"><a href="test.html#cb22-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_cutoff =</span> (end_of_month <span class="op">-</span><span class="st"> </span>gl_date) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Find entries on or one day prior to month end</span></span>
-<span id="cb22-3"><a href="test.html#cb22-3"></a><span class="st">  </span><span class="kw">filter</span>(t_cutoff) <span class="op">%&gt;%</span></span>
-<span id="cb22-4"><a href="test.html#cb22-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, gl_date, t_cutoff, <span class="kw">everything</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="test.html#cb284-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb284-2"><a href="test.html#cb284-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_cutoff =</span> (end_of_month <span class="op">-</span><span class="st"> </span>gl_date) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Find entries on or one day prior to month end</span></span>
+<span id="cb284-3"><a href="test.html#cb284-3"></a><span class="st">  </span><span class="kw">filter</span>(t_cutoff) <span class="op">%&gt;%</span></span>
+<span id="cb284-4"><a href="test.html#cb284-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, gl_date, t_cutoff, <span class="kw">everything</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 136 x 12
 ##    je_num gl_date    t_cutoff  amount vendor_id account invoice_date description
 ##     &lt;int&gt; &lt;date&gt;     &lt;lgl&gt;      &lt;dbl&gt;     &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;      
@@ -460,9 +471,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Are you able to run a report ‘as-of’? The as-of date is intended to help understand the outstanding balances at a specific point of time. Some accounting systems have insufficient information captured, meaning a backdated entered invoice (perhaps to a prior period) may affect the accuracy of a previous report.</li>
 </ul>
 <p>We will initially filter our data and only keep valid invoices, by filtering on records that are related to materials:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="test.html#cb24-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb24-2"><a href="test.html#cb24-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb24-3"><a href="test.html#cb24-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="test.html#cb286-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb286-2"><a href="test.html#cb286-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb286-3"><a href="test.html#cb286-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date)</span></code></pre></div>
 <pre><code>## # A tibble: 952 x 5
 ##    je_num vendor_id gl_date    invoice_date paid_date 
 ##     &lt;int&gt;     &lt;int&gt; &lt;date&gt;     &lt;date&gt;       &lt;date&gt;    
@@ -485,12 +496,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The definition of age in our system is based off the <code>invoice_date</code> and an user-chosen ‘as-of’ date.</li>
 </ul>
 <p>We will use August 1, 2019 as our as-of date, and only include invoices that were recognized on or prior to then.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="test.html#cb26-1"></a>as_of_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2019-08-01&#39;</span>)</span>
-<span id="cb26-2"><a href="test.html#cb26-2"></a></span>
-<span id="cb26-3"><a href="test.html#cb26-3"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb26-4"><a href="test.html#cb26-4"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb26-5"><a href="test.html#cb26-5"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
-<span id="cb26-6"><a href="test.html#cb26-6"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="co"># Only choose recognized invoices as of a date</span></span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="test.html#cb288-1"></a>as_of_date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&#39;2019-08-01&#39;</span>)</span>
+<span id="cb288-2"><a href="test.html#cb288-2"></a></span>
+<span id="cb288-3"><a href="test.html#cb288-3"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb288-4"><a href="test.html#cb288-4"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb288-5"><a href="test.html#cb288-5"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
+<span id="cb288-6"><a href="test.html#cb288-6"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="co"># Only choose recognized invoices as of a date</span></span></code></pre></div>
 <pre><code>## # A tibble: 571 x 5
 ##    je_num vendor_id gl_date    invoice_date paid_date 
 ##     &lt;int&gt;     &lt;int&gt; &lt;date&gt;     &lt;date&gt;       &lt;date&gt;    
@@ -506,11 +517,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10     17      2612 2019-02-05 2019-01-26   2019-02-28
 ## # … with 561 more rows</code></pre>
 <p>We can also remove any paid invoices too, as they’re no longer aged as-of that date. Depending when you are running your report, an invoice may could either be paid or not paid yet.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="test.html#cb28-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb28-2"><a href="test.html#cb28-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb28-3"><a href="test.html#cb28-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
-<span id="cb28-4"><a href="test.html#cb28-4"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
-<span id="cb28-5"><a href="test.html#cb28-5"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="co"># Keep invoices that were not paid by the as-of date, or not paid at all yet</span></span></code></pre></div>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="test.html#cb290-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb290-2"><a href="test.html#cb290-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb290-3"><a href="test.html#cb290-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
+<span id="cb290-4"><a href="test.html#cb290-4"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
+<span id="cb290-5"><a href="test.html#cb290-5"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="co"># Keep invoices that were not paid by the as-of date, or not paid at all yet</span></span></code></pre></div>
 <pre><code>## # A tibble: 71 x 5
 ##    je_num vendor_id gl_date    invoice_date paid_date 
 ##     &lt;int&gt;     &lt;int&gt; &lt;date&gt;     &lt;date&gt;       &lt;date&gt;    
@@ -526,12 +537,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10     97      2612 2019-07-30 2019-07-20   2019-08-22
 ## # … with 61 more rows</code></pre>
 <p>Having isolated our invoices, we can now calculate the number of aged days:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="test.html#cb30-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb30-2"><a href="test.html#cb30-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb30-3"><a href="test.html#cb30-3"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
-<span id="cb30-4"><a href="test.html#cb30-4"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
-<span id="cb30-5"><a href="test.html#cb30-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
-<span id="cb30-6"><a href="test.html#cb30-6"></a><span class="st">  </span><span class="kw">select</span>(invoice_date, paid_date, aged_days)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="test.html#cb292-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb292-2"><a href="test.html#cb292-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb292-3"><a href="test.html#cb292-3"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
+<span id="cb292-4"><a href="test.html#cb292-4"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
+<span id="cb292-5"><a href="test.html#cb292-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
+<span id="cb292-6"><a href="test.html#cb292-6"></a><span class="st">  </span><span class="kw">select</span>(invoice_date, paid_date, aged_days)</span></code></pre></div>
 <pre><code>## # A tibble: 71 x 3
 ##    invoice_date paid_date  aged_days
 ##    &lt;date&gt;       &lt;date&gt;         &lt;dbl&gt;
@@ -547,21 +558,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 2019-07-20   2019-08-22        12
 ## # … with 61 more rows</code></pre>
 <p>Now the most complex part is making buckets for these ages. A rather brute force way is to create a field with the range it falls in, and then eventually pivoting on it:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="test.html#cb32-1"></a>aged_wip &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb32-2"><a href="test.html#cb32-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb32-3"><a href="test.html#cb32-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, account, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
-<span id="cb32-4"><a href="test.html#cb32-4"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
-<span id="cb32-5"><a href="test.html#cb32-5"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
-<span id="cb32-6"><a href="test.html#cb32-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
-<span id="cb32-7"><a href="test.html#cb32-7"></a><span class="st">  </span><span class="kw">select</span>(aged_days)</span>
-<span id="cb32-8"><a href="test.html#cb32-8"></a></span>
-<span id="cb32-9"><a href="test.html#cb32-9"></a>aged_wip <span class="op">%&gt;%</span></span>
-<span id="cb32-10"><a href="test.html#cb32-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">case_when</span>(</span>
-<span id="cb32-11"><a href="test.html#cb32-11"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> &quot;Current&quot;</span>,</span>
-<span id="cb32-12"><a href="test.html#cb32-12"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">~</span><span class="st"> &quot;15 - 30&quot;</span>,</span>
-<span id="cb32-13"><a href="test.html#cb32-13"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">90</span> <span class="op">~</span><span class="st"> &quot;30 - 59&quot;</span>,</span>
-<span id="cb32-14"><a href="test.html#cb32-14"></a>    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;60+&quot;</span></span>
-<span id="cb32-15"><a href="test.html#cb32-15"></a>  ))</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="test.html#cb294-1"></a>aged_wip &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb294-2"><a href="test.html#cb294-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb294-3"><a href="test.html#cb294-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, account, vendor_id, gl_date, invoice_date, paid_date) <span class="op">%&gt;%</span></span>
+<span id="cb294-4"><a href="test.html#cb294-4"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
+<span id="cb294-5"><a href="test.html#cb294-5"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
+<span id="cb294-6"><a href="test.html#cb294-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
+<span id="cb294-7"><a href="test.html#cb294-7"></a><span class="st">  </span><span class="kw">select</span>(aged_days)</span>
+<span id="cb294-8"><a href="test.html#cb294-8"></a></span>
+<span id="cb294-9"><a href="test.html#cb294-9"></a>aged_wip <span class="op">%&gt;%</span></span>
+<span id="cb294-10"><a href="test.html#cb294-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">case_when</span>(</span>
+<span id="cb294-11"><a href="test.html#cb294-11"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> &quot;Current&quot;</span>,</span>
+<span id="cb294-12"><a href="test.html#cb294-12"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">~</span><span class="st"> &quot;15 - 30&quot;</span>,</span>
+<span id="cb294-13"><a href="test.html#cb294-13"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">90</span> <span class="op">~</span><span class="st"> &quot;30 - 59&quot;</span>,</span>
+<span id="cb294-14"><a href="test.html#cb294-14"></a>    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;60+&quot;</span></span>
+<span id="cb294-15"><a href="test.html#cb294-15"></a>  ))</span></code></pre></div>
 <pre><code>## # A tibble: 71 x 2
 ##    aged_days aging_bucket
 ##        &lt;dbl&gt; &lt;chr&gt;       
@@ -577,8 +588,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10        12 Current     
 ## # … with 61 more rows</code></pre>
 <p>Another useful method is to use the <code>cut()</code> function, which will take the intervals you specify (aged days) and place each row into the category. The labels look a bit different - inclusive boundaries are <code>(</code> while exclusive boundaries are <code>]</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="test.html#cb34-1"></a>aged_wip <span class="op">%&gt;%</span></span>
-<span id="cb34-2"><a href="test.html#cb34-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">cut</span>(aged_wip<span class="op">$</span>aged_days, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">60</span>, <span class="ot">Inf</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="test.html#cb296-1"></a>aged_wip <span class="op">%&gt;%</span></span>
+<span id="cb296-2"><a href="test.html#cb296-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">cut</span>(aged_wip<span class="op">$</span>aged_days, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">60</span>, <span class="ot">Inf</span>)))</span></code></pre></div>
 <pre><code>## # A tibble: 71 x 2
 ##    aged_days aging_bucket
 ##        &lt;dbl&gt; &lt;fct&gt;       
@@ -594,20 +605,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10        12 (0,15]      
 ## # … with 61 more rows</code></pre>
 <p>You can choose which approach best fits your style. With all the pieces, we can now create the aging report, aggregated by vendor. First, lets only keep the variables we want to pivot:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="test.html#cb36-1"></a>aged &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb36-2"><a href="test.html#cb36-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
-<span id="cb36-3"><a href="test.html#cb36-3"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
-<span id="cb36-4"><a href="test.html#cb36-4"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
-<span id="cb36-5"><a href="test.html#cb36-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
-<span id="cb36-6"><a href="test.html#cb36-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">case_when</span>(</span>
-<span id="cb36-7"><a href="test.html#cb36-7"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> &quot;Current&quot;</span>,</span>
-<span id="cb36-8"><a href="test.html#cb36-8"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">~</span><span class="st"> &quot;15 - 30&quot;</span>,</span>
-<span id="cb36-9"><a href="test.html#cb36-9"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">90</span> <span class="op">~</span><span class="st"> &quot;30 - 59&quot;</span>,</span>
-<span id="cb36-10"><a href="test.html#cb36-10"></a>    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;60+&quot;</span></span>
-<span id="cb36-11"><a href="test.html#cb36-11"></a>  )) <span class="op">%&gt;%</span></span>
-<span id="cb36-12"><a href="test.html#cb36-12"></a><span class="st">  </span><span class="kw">select</span>(vendor_id, amount, aging_bucket)</span>
-<span id="cb36-13"><a href="test.html#cb36-13"></a></span>
-<span id="cb36-14"><a href="test.html#cb36-14"></a><span class="kw">print</span>(aged)</span></code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="test.html#cb298-1"></a>aged &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb298-2"><a href="test.html#cb298-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># In scope invoices for aging</span></span>
+<span id="cb298-3"><a href="test.html#cb298-3"></a><span class="st">  </span><span class="kw">filter</span>(gl_date <span class="op">&lt;=</span><span class="st"> </span>as_of_date) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Only choose recognized invoices as of a date</span></span>
+<span id="cb298-4"><a href="test.html#cb298-4"></a><span class="st">  </span><span class="kw">filter</span>(paid_date <span class="op">&gt;=</span><span class="st"> </span>as_of_date <span class="op">|</span><span class="st"> </span><span class="kw">is.na</span>(paid_date)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Keep invoices that are not paid by the as-of date, or not paid at all yet</span></span>
+<span id="cb298-5"><a href="test.html#cb298-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aged_days =</span> <span class="kw">as.numeric</span>(as_of_date <span class="op">-</span><span class="st"> </span>invoice_date)) <span class="op">%&gt;%</span></span>
+<span id="cb298-6"><a href="test.html#cb298-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">aging_bucket =</span> <span class="kw">case_when</span>(</span>
+<span id="cb298-7"><a href="test.html#cb298-7"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span> <span class="op">~</span><span class="st"> &quot;Current&quot;</span>,</span>
+<span id="cb298-8"><a href="test.html#cb298-8"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">~</span><span class="st"> &quot;15 - 30&quot;</span>,</span>
+<span id="cb298-9"><a href="test.html#cb298-9"></a>    aged_days <span class="op">&lt;</span><span class="st"> </span><span class="dv">90</span> <span class="op">~</span><span class="st"> &quot;30 - 59&quot;</span>,</span>
+<span id="cb298-10"><a href="test.html#cb298-10"></a>    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &quot;60+&quot;</span></span>
+<span id="cb298-11"><a href="test.html#cb298-11"></a>  )) <span class="op">%&gt;%</span></span>
+<span id="cb298-12"><a href="test.html#cb298-12"></a><span class="st">  </span><span class="kw">select</span>(vendor_id, amount, aging_bucket)</span>
+<span id="cb298-13"><a href="test.html#cb298-13"></a></span>
+<span id="cb298-14"><a href="test.html#cb298-14"></a><span class="kw">print</span>(aged)</span></code></pre></div>
 <pre><code>## # A tibble: 71 x 3
 ##    vendor_id amount aging_bucket
 ##        &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;       
@@ -623,8 +634,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10      2612 13593. Current     
 ## # … with 61 more rows</code></pre>
 <p>Since our typical aging report has vendors along the left (the unique identifier for <code>id_cols</code> argument), aging buckets along the top (the names we want to spread across with <code>names_from</code>) and the amount is a summation of the valid values (<code>values_from</code> and also <code>values_fn</code>), we can use <code>pivot_wider()</code> to recreate our report:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="test.html#cb38-1"></a>aged <span class="op">%&gt;%</span></span>
-<span id="cb38-2"><a href="test.html#cb38-2"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols =</span> vendor_id, <span class="dt">names_from =</span> aging_bucket, <span class="dt">values_from =</span> amount, <span class="dt">values_fn =</span> sum)</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="test.html#cb300-1"></a>aged <span class="op">%&gt;%</span></span>
+<span id="cb300-2"><a href="test.html#cb300-2"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols =</span> vendor_id, <span class="dt">names_from =</span> aging_bucket, <span class="dt">values_from =</span> amount, <span class="dt">values_fn =</span> sum)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   vendor_id Current `15 - 30` `30 - 59`
 ##       &lt;int&gt;   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
@@ -635,7 +646,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="basic-statistical-tests" class="section level2">
 <h2><span class="header-section-number">9.3</span> Basic Statistical tests</h2>
-<p>In the <a href="exploring-data.html#explore-stats">exploration of data</a>, we highlighted that exploring your data using various statistical functions are useful for</p>
+<p>In the <a href="exploring-data.html#explore-stats">exploration of data</a>, we highlighted that exploring your data using various statistical functions are useful for helping understand the shape of your data. After doing so, you can then apply statistical methods directly in your testing to help select samples.</p>
 <div id="outliers-based-on-amount" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> Outliers based on amount</h3>
 <blockquote>
@@ -646,17 +657,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The most basic detection of extreme outliers can be done on an amount, looking for material transactions, by using the quantiles and IQRs. Quantiles indicate the thresholds where amounts may be in the bottom 25% or above the top 75% of data points. The IQR is defined as the difference between the upper 75% quantile and lower 25% quantile (i.e. the 3rd quartile and 1st quartile).</p>
 <p>The extreme outlier test is defined as points less than the 25% quantile minus 1.5 * inter quartile range (IQR), or above the 75% quantile plus 1.5 * IQR.</p>
 <p>In this case, we want to detect items greater than the extreme upper outlier:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="test.html#cb40-1"></a><span class="co"># Detect amounts in the top 25% of transactions</span></span>
-<span id="cb40-2"><a href="test.html#cb40-2"></a>top_<span class="dv">75</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(gl<span class="op">$</span>amount))[<span class="dv">4</span>] <span class="co"># This is the 3st quartile, or the 75% quantile</span></span>
-<span id="cb40-3"><a href="test.html#cb40-3"></a>iqr &lt;-<span class="st"> </span><span class="kw">IQR</span>(<span class="kw">abs</span>(gl<span class="op">$</span>amount))</span>
-<span id="cb40-4"><a href="test.html#cb40-4"></a>upper_extreme_outlier &lt;-<span class="st"> </span>top_<span class="dv">75</span> <span class="op">+</span><span class="st"> </span>iqr <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span></span>
-<span id="cb40-5"><a href="test.html#cb40-5"></a></span>
-<span id="cb40-6"><a href="test.html#cb40-6"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;The upper_extreme_outlier is $&quot;</span>, upper_extreme_outlier))</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="test.html#cb302-1"></a><span class="co"># Detect amounts in the top 25% of transactions</span></span>
+<span id="cb302-2"><a href="test.html#cb302-2"></a>top_<span class="dv">75</span> &lt;-<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">abs</span>(gl<span class="op">$</span>amount))[<span class="dv">4</span>] <span class="co"># This is the 3st quartile, or the 75% quantile</span></span>
+<span id="cb302-3"><a href="test.html#cb302-3"></a>iqr &lt;-<span class="st"> </span><span class="kw">IQR</span>(<span class="kw">abs</span>(gl<span class="op">$</span>amount))</span>
+<span id="cb302-4"><a href="test.html#cb302-4"></a>upper_extreme_outlier &lt;-<span class="st"> </span>top_<span class="dv">75</span> <span class="op">+</span><span class="st"> </span>iqr <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span></span>
+<span id="cb302-5"><a href="test.html#cb302-5"></a></span>
+<span id="cb302-6"><a href="test.html#cb302-6"></a><span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;The upper_extreme_outlier is $&quot;</span>, upper_extreme_outlier))</span></code></pre></div>
 <pre><code>## [1] &quot;The upper_extreme_outlier is $31929.19125&quot;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="test.html#cb42-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb42-2"><a href="test.html#cb42-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span>upper_extreme_outlier) <span class="op">%&gt;%</span></span>
-<span id="cb42-3"><a href="test.html#cb42-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, account, description) <span class="op">%&gt;%</span></span>
-<span id="cb42-4"><a href="test.html#cb42-4"></a><span class="st">  </span><span class="kw">arrange</span>(description)</span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="test.html#cb304-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb304-2"><a href="test.html#cb304-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span>upper_extreme_outlier) <span class="op">%&gt;%</span></span>
+<span id="cb304-3"><a href="test.html#cb304-3"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, account, description) <span class="op">%&gt;%</span></span>
+<span id="cb304-4"><a href="test.html#cb304-4"></a><span class="st">  </span><span class="kw">arrange</span>(description)</span></code></pre></div>
 <pre><code>## # A tibble: 46 x 4
 ##    je_num amount account            description            
 ##     &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;                  
@@ -675,16 +686,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="outliers-based-on-amounts-and-other-factors" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> Outliers based on amounts and other factors</h3>
 <p>By performing a test based solely on amounts alone, other meaningful data is ignored. The nuances of specific subsets of data are lost due to an overarching amount analysis, which could be too crude.</p>
-<p>There are other useful features in our dataset we can use to potentially segment the data. There is the account information, which can be interpreted as consistent categories of information. There are also descriptions, which help us understand more granular detail about the nature of the transaction. A combination of any identifying categories (or factors) could be used to identify outliers.</p>
+<p>There are other useful features in our dataset we can use to potentially segment the data. There is the account information, which can be interpreted as consistent categories of information. There are also descriptions, which help us understand more granular detail about the nature of the transaction. A combination of any identifying categories or factors could be used to identify outliers.</p>
 <p>If we focus our analysis on both the description and amount, we can identify amount extreme outliers on a more unique basis. First, we need to group the descriptions and independently calculate the <code>upper_extreme_outlier</code> on a per group basis:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="test.html#cb44-1"></a>outliers_per_desc &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb44-2"><a href="test.html#cb44-2"></a><span class="st">  </span><span class="kw">group_by</span>(description) <span class="op">%&gt;%</span></span>
-<span id="cb44-3"><a href="test.html#cb44-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>(),</span>
-<span id="cb44-4"><a href="test.html#cb44-4"></a>            <span class="dt">upper_limit =</span> <span class="kw">quantile</span>(<span class="kw">abs</span>(amount))[<span class="dv">4</span>],</span>
-<span id="cb44-5"><a href="test.html#cb44-5"></a>            <span class="dt">iqr =</span> <span class="kw">IQR</span>(<span class="kw">abs</span>(amount))) <span class="op">%&gt;%</span></span>
-<span id="cb44-6"><a href="test.html#cb44-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">upper_extreme_outlier =</span> upper_limit <span class="op">+</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span>iqr)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="test.html#cb306-1"></a>outliers_per_desc &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb306-2"><a href="test.html#cb306-2"></a><span class="st">  </span><span class="kw">group_by</span>(description) <span class="op">%&gt;%</span></span>
+<span id="cb306-3"><a href="test.html#cb306-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">count =</span> <span class="kw">n</span>(),</span>
+<span id="cb306-4"><a href="test.html#cb306-4"></a>            <span class="dt">upper_limit =</span> <span class="kw">quantile</span>(<span class="kw">abs</span>(amount))[<span class="dv">4</span>],</span>
+<span id="cb306-5"><a href="test.html#cb306-5"></a>            <span class="dt">iqr =</span> <span class="kw">IQR</span>(<span class="kw">abs</span>(amount))) <span class="op">%&gt;%</span></span>
+<span id="cb306-6"><a href="test.html#cb306-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">upper_extreme_outlier =</span> upper_limit <span class="op">+</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span>iqr)</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="test.html#cb46-1"></a><span class="kw">print</span>(outliers_per_desc)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="test.html#cb308-1"></a><span class="kw">print</span>(outliers_per_desc)</span></code></pre></div>
 <pre><code>## # A tibble: 25 x 5
 ##    description                       count upper_limit    iqr upper_extreme_out…
 ##    &lt;chr&gt;                             &lt;int&gt;       &lt;dbl&gt;  &lt;dbl&gt;              &lt;dbl&gt;
@@ -700,12 +711,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 Facilitation payment to agent fi…     2       9715. 0.                  9715.
 ## # … with 15 more rows</code></pre>
 <p>Using this, we can quickly look up the <code>upper_extreme_outlier</code> in our gl table, and reduce our scope to only filter amounts greater than the limit per description entry.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="test.html#cb48-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb48-2"><a href="test.html#cb48-2"></a><span class="st">  </span><span class="kw">left_join</span>(outliers_per_desc, <span class="dt">by =</span> <span class="st">&#39;description&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb48-3"><a href="test.html#cb48-3"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">&gt;=</span><span class="st"> </span>upper_extreme_outlier) <span class="op">%&gt;%</span></span>
-<span id="cb48-4"><a href="test.html#cb48-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, account, description, upper_extreme_outlier) <span class="op">%&gt;%</span></span>
-<span id="cb48-5"><a href="test.html#cb48-5"></a><span class="st">  </span><span class="kw">group_by</span>(description) <span class="op">%&gt;%</span></span>
-<span id="cb48-6"><a href="test.html#cb48-6"></a><span class="st">  </span><span class="kw">slice_max</span>(<span class="dt">order_by =</span> amount, <span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="test.html#cb310-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb310-2"><a href="test.html#cb310-2"></a><span class="st">  </span><span class="kw">left_join</span>(outliers_per_desc, <span class="dt">by =</span> <span class="st">&#39;description&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb310-3"><a href="test.html#cb310-3"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">&gt;=</span><span class="st"> </span>upper_extreme_outlier) <span class="op">%&gt;%</span></span>
+<span id="cb310-4"><a href="test.html#cb310-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, account, description, upper_extreme_outlier) <span class="op">%&gt;%</span></span>
+<span id="cb310-5"><a href="test.html#cb310-5"></a><span class="st">  </span><span class="kw">group_by</span>(description) <span class="op">%&gt;%</span></span>
+<span id="cb310-6"><a href="test.html#cb310-6"></a><span class="st">  </span><span class="kw">slice_max</span>(<span class="dt">order_by =</span> amount, <span class="dt">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 33 x 5
 ## # Groups:   description [14]
 ##    je_num  amount account        description                  upper_extreme_out…
@@ -733,18 +744,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Think about the general working population and hourly wages. You could reasonably assume that its relatively accessible to get a job that pays $10-$19/hr. Its more difficult to get a job with $20-$29/hr wage, and even more so to get a job with $90-$99/hr wage.</p>
 <p>What is fascinating is that once you reach the next digit, the wages all start with 1’s again, and it takes a lot of effort to get out of the $100-$199/hr band. This type of scaling means its increasingly harder for individuals to get a higher hourly salary. While there are some lucky folks that earn $200/hr, those individuals are more rare than those who earn $20/hr.</p>
 <p>With Benford’s Law and applying the concept to a population of natural numbers, then the concept of leading digits makes intuitive sense. There will be more salaries that start with 1, than with 2, etc. You could estimate that a reasonable proportion of hourly wages could look like this:</p>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
 <p>If we assume the first dataset is an example of a generally real world dataset, then lets look at a completely fictional dataset. For example, lets say in a range of 1 to 999, we randomly sample 1000 numbers and apply the Benford Law, we will notice the following:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="test.html#cb50-1"></a>benford_sample &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">seq =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">999</span>, <span class="dv">1000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
-<span id="cb50-2"><a href="test.html#cb50-2"></a>benford_sample<span class="op">$</span>leading &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(benford_sample<span class="op">$</span>seq, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb50-3"><a href="test.html#cb50-3"></a></span>
-<span id="cb50-4"><a href="test.html#cb50-4"></a>benford_sample <span class="op">%&gt;%</span></span>
-<span id="cb50-5"><a href="test.html#cb50-5"></a><span class="st">  </span><span class="kw">group_by</span>(leading) <span class="op">%&gt;%</span></span>
-<span id="cb50-6"><a href="test.html#cb50-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb50-7"><a href="test.html#cb50-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(leading), <span class="dt">y =</span> times_occured)) <span class="op">+</span></span>
-<span id="cb50-8"><a href="test.html#cb50-8"></a><span class="st">    </span><span class="kw">geom_col</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="test.html#cb312-1"></a>benford_sample &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">seq =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">999</span>, <span class="dv">1000</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb312-2"><a href="test.html#cb312-2"></a>benford_sample<span class="op">$</span>leading &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(benford_sample<span class="op">$</span>seq, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb312-3"><a href="test.html#cb312-3"></a></span>
+<span id="cb312-4"><a href="test.html#cb312-4"></a>benford_sample <span class="op">%&gt;%</span></span>
+<span id="cb312-5"><a href="test.html#cb312-5"></a><span class="st">  </span><span class="kw">group_by</span>(leading) <span class="op">%&gt;%</span></span>
+<span id="cb312-6"><a href="test.html#cb312-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb312-7"><a href="test.html#cb312-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(leading), <span class="dt">y =</span> times_occured)) <span class="op">+</span></span>
+<span id="cb312-8"><a href="test.html#cb312-8"></a><span class="st">    </span><span class="kw">geom_col</span>()</span></code></pre></div>
 <pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 <p>Notice how uniform the bars appear. The sample we chose was essentially made-up numbers between 1 and 999, the computer would choose these with equal probability, unlike the population of hourly wages, leading to a graph that does not follow the curve of Benford’s Law.</p>
 <div id="applying-benfords-law" class="section level4">
 <h4><span class="header-section-number">9.4.1.1</span> Applying Benford’s Law</h4>
@@ -753,97 +764,308 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To calculate the curve, you need to determine the likelihood that each digit should appear. The expected proportion for each digit can be calculated as follows:</p>
 <p><span class="math display">\[log_{10}\left( 1 + \frac{1}{d}\right)\]</span></p>
 <p>In R, this is represented as:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="test.html#cb52-1"></a>d &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co"># Leading digit</span></span>
-<span id="cb52-2"><a href="test.html#cb52-2"></a><span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>d)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="test.html#cb314-1"></a>d &lt;-<span class="st"> </span><span class="dv">1</span> <span class="co"># Leading digit</span></span>
+<span id="cb314-2"><a href="test.html#cb314-2"></a><span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>d)</span></code></pre></div>
 <pre><code>## [1] 0.30103</code></pre>
 <p>We can create a quick reference curve of the leading digits for Benford’s Law:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="test.html#cb54-1"></a>benford_curve &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">digit =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span></span>
-<span id="cb54-2"><a href="test.html#cb54-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>digit),</span>
-<span id="cb54-3"><a href="test.html#cb54-3"></a>         <span class="dt">curve =</span> <span class="st">&#39;benford&#39;</span>)</span>
-<span id="cb54-4"><a href="test.html#cb54-4"></a></span>
-<span id="cb54-5"><a href="test.html#cb54-5"></a><span class="kw">ggplot</span>(benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob, <span class="dt">group =</span> curve)) <span class="op">+</span></span>
-<span id="cb54-6"><a href="test.html#cb54-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
-<span id="cb54-7"><a href="test.html#cb54-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<p>We can then take any of our populations, create the bar chart, and then apply the expected proportions of Benford’s Law to it. Lets take our <code>gl</code> database and create the proportion of how often each leading digit occurs. Note we will try to follow the same variable structure as <code>benford_curve</code>, as we will combine these on the same chart.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="test.html#cb55-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb55-2"><a href="test.html#cb55-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">digit =</span> <span class="kw">as.numeric</span>(<span class="kw">substr</span>(amount, <span class="dv">1</span>, <span class="dv">1</span>))) <span class="op">%&gt;%</span></span>
-<span id="cb55-3"><a href="test.html#cb55-3"></a><span class="st">  </span><span class="kw">group_by</span>(digit) <span class="op">%&gt;%</span></span>
-<span id="cb55-4"><a href="test.html#cb55-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb55-5"><a href="test.html#cb55-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> times_occured <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(times_occured),</span>
-<span id="cb55-6"><a href="test.html#cb55-6"></a>         <span class="dt">curve =</span> <span class="st">&#39;actual&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb55-7"><a href="test.html#cb55-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prop)) <span class="op">+</span></span>
-<span id="cb55-8"><a href="test.html#cb55-8"></a><span class="st">    </span><span class="kw">geom_col</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<p>Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives). You may choose to perform Benford’s Law on the positive and negative numbers, separately or together, transforming the negative numbers with <code>abs()</code>. You can also choose to exclude them, as I do below:</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="test.html#cb56-1"></a>actuals &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb56-2"><a href="test.html#cb56-2"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
-<span id="cb56-3"><a href="test.html#cb56-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">digit =</span> <span class="kw">as.numeric</span>(<span class="kw">substr</span>(amount, <span class="dv">1</span>, <span class="dv">1</span>))) <span class="op">%&gt;%</span></span>
-<span id="cb56-4"><a href="test.html#cb56-4"></a><span class="st">  </span><span class="kw">group_by</span>(digit) <span class="op">%&gt;%</span></span>
-<span id="cb56-5"><a href="test.html#cb56-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb56-6"><a href="test.html#cb56-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> times_occured <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(times_occured),</span>
-<span id="cb56-7"><a href="test.html#cb56-7"></a>         <span class="dt">curve =</span> <span class="st">&#39;actual&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb56-8"><a href="test.html#cb56-8"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prop)) <span class="op">+</span></span>
-<span id="cb56-9"><a href="test.html#cb56-9"></a><span class="st">    </span><span class="kw">geom_col</span>()</span>
-<span id="cb56-10"><a href="test.html#cb56-10"></a></span>
-<span id="cb56-11"><a href="test.html#cb56-11"></a>actuals</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="test.html#cb316-1"></a>benford_curve &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">digit =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">9</span>) <span class="op">%&gt;%</span></span>
+<span id="cb316-2"><a href="test.html#cb316-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>digit),</span>
+<span id="cb316-3"><a href="test.html#cb316-3"></a>         <span class="dt">curve =</span> <span class="st">&#39;benford&#39;</span>)</span>
+<span id="cb316-4"><a href="test.html#cb316-4"></a></span>
+<span id="cb316-5"><a href="test.html#cb316-5"></a><span class="kw">ggplot</span>(benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob, <span class="dt">group =</span> curve)) <span class="op">+</span></span>
+<span id="cb316-6"><a href="test.html#cb316-6"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span></span>
+<span id="cb316-7"><a href="test.html#cb316-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<p>We can then take any of our populations, create the bar chart, and then apply the expected proportions of Benford’s Law to it. Lets take our GL database and create the proportion of how often each leading digit occurs. Note we will try to follow the same variable structure as <code>benford_curve</code>, as we will combine these on the same chart.</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="test.html#cb317-1"></a>gl <span class="op">%&gt;%</span></span>
+<span id="cb317-2"><a href="test.html#cb317-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">digit =</span> <span class="kw">as.numeric</span>(<span class="kw">substr</span>(amount, <span class="dv">1</span>, <span class="dv">1</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb317-3"><a href="test.html#cb317-3"></a><span class="st">  </span><span class="kw">group_by</span>(digit) <span class="op">%&gt;%</span></span>
+<span id="cb317-4"><a href="test.html#cb317-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb317-5"><a href="test.html#cb317-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> times_occured <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(times_occured),</span>
+<span id="cb317-6"><a href="test.html#cb317-6"></a>         <span class="dt">curve =</span> <span class="st">&#39;actual&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb317-7"><a href="test.html#cb317-7"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prop)) <span class="op">+</span></span>
+<span id="cb317-8"><a href="test.html#cb317-8"></a><span class="st">    </span><span class="kw">geom_col</span>()</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p>Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives), and extracting the first character using <code>substr()</code> will retrieve the negative symbol. You may choose to perform Benford’s Law on the positive and negative numbers, separately or together, transforming the negative numbers with <code>abs()</code>. You can also choose to exclude them, as I do below:</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="test.html#cb318-1"></a>actuals &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb318-2"><a href="test.html#cb318-2"></a><span class="st">  </span><span class="kw">filter</span>(amount <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb318-3"><a href="test.html#cb318-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">digit =</span> <span class="kw">as.numeric</span>(<span class="kw">substr</span>(amount, <span class="dv">1</span>, <span class="dv">1</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb318-4"><a href="test.html#cb318-4"></a><span class="st">  </span><span class="kw">group_by</span>(digit) <span class="op">%&gt;%</span></span>
+<span id="cb318-5"><a href="test.html#cb318-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb318-6"><a href="test.html#cb318-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> times_occured <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(times_occured),</span>
+<span id="cb318-7"><a href="test.html#cb318-7"></a>         <span class="dt">curve =</span> <span class="st">&#39;actual&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb318-8"><a href="test.html#cb318-8"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prop)) <span class="op">+</span></span>
+<span id="cb318-9"><a href="test.html#cb318-9"></a><span class="st">    </span><span class="kw">geom_col</span>()</span>
+<span id="cb318-10"><a href="test.html#cb318-10"></a></span>
+<span id="cb318-11"><a href="test.html#cb318-11"></a>actuals</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>Now that we have the actual proportions, lets layer on the <code>benford_curve</code> we created:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="test.html#cb57-1"></a>actuals <span class="op">+</span></span>
-<span id="cb57-2"><a href="test.html#cb57-2"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob, <span class="dt">group =</span> curve), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb57-3"><a href="test.html#cb57-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="test.html#cb319-1"></a>actuals <span class="op">+</span></span>
+<span id="cb319-2"><a href="test.html#cb319-2"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob, <span class="dt">group =</span> curve), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb319-3"><a href="test.html#cb319-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> benford_curve, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(digit), <span class="dt">y =</span> prob), <span class="dt">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
 <p>When you reach this stage, take a moment to pause and understand the business, and if there may be any potential behavours to cause potential curve differences. For example, if there is an approval ‘limit’ that exists at $1000, you may see a spike of entries at the 9 leading digit.</p>
-<p>As with any statistical test, Benford’s Law will not give you an answer as to why there may be fraud. There may be both legitimate reasons for why populations or sample sizes do not follow Benford’s Law. A higher than expected proportion of leading digits starting with 9 does not mean those numbers starting with 9 are fraudulent.</p>
+<p>As with any statistical test, Benford’s Law will not give you an answer as to why there may be fraud. There may be both legitimate reasons for why populations do not follow Benford’s Law. A higher than expected proportion of leading digits starting with 9 does not mean those numbers starting with 9 are fraudulent.</p>
 </div>
 <div id="more-leading-digits" class="section level4">
 <h4><span class="header-section-number">9.4.1.2</span> More leading digits?</h4>
 <p>You can get any number of leading digits to apply Benford’s Law - to do so, you need to start on the lowest possible value for the number of digits desired, to remove leading zeros, and extend the sequence to the highest number before a new digit must be added. For example, two leading digits would have a sequence of numbers created from 10:99, and three leading digits would be 100:999:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="test.html#cb58-1"></a>benford_curve_leading2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">digit =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">99</span>) <span class="op">%&gt;%</span></span>
-<span id="cb58-2"><a href="test.html#cb58-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>digit),</span>
-<span id="cb58-3"><a href="test.html#cb58-3"></a>         <span class="dt">curve =</span> <span class="st">&#39;benford&#39;</span>)</span>
-<span id="cb58-4"><a href="test.html#cb58-4"></a></span>
-<span id="cb58-5"><a href="test.html#cb58-5"></a><span class="kw">head</span>(benford_curve_leading2)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="test.html#cb320-1"></a>benford_curve_leading2 &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">digit =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">99</span>) <span class="op">%&gt;%</span></span>
+<span id="cb320-2"><a href="test.html#cb320-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prob =</span> <span class="kw">log10</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>digit),</span>
+<span id="cb320-3"><a href="test.html#cb320-3"></a>         <span class="dt">curve =</span> <span class="st">&#39;benford&#39;</span>)</span>
+<span id="cb320-4"><a href="test.html#cb320-4"></a></span>
+<span id="cb320-5"><a href="test.html#cb320-5"></a><span class="kw">head</span>(benford_curve_leading2)</span></code></pre></div>
 <pre><code>##   digit       prob   curve
 ## 1    10 0.04139269 benford
 ## 2    11 0.03778856 benford
 ## 3    12 0.03476211 benford
 ## 4    13 0.03218468 benford
 ## 5    14 0.02996322 benford
-## 6    15 0.02802872 benford</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="test.html#cb60-1"></a><span class="kw">tail</span>(benford_curve_leading2)</span></code></pre></div>
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1 rows ]</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="test.html#cb322-1"></a><span class="kw">tail</span>(benford_curve_leading2)</span></code></pre></div>
 <pre><code>##    digit        prob   curve
 ## 85    94 0.004595752 benford
 ## 86    95 0.004547628 benford
 ## 87    96 0.004500501 benford
 ## 88    97 0.004454341 benford
 ## 89    98 0.004409119 benford
-## 90    99 0.004364805 benford</code></pre>
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 1 rows ]</code></pre>
 </div>
 </div>
-<div id="relative-size-factor-testing-rsf" class="section level3">
-<h3><span class="header-section-number">9.4.2</span> Relative size factor testing (RSF)</h3>
-<p>The Relative Size Factor test is the comparison of “large amounts to a benchmark to see how large they are relative to some norm.” <span class="citation">(<em>Identifying Anomalies Using the Relative Size Factor Test</em> <a href="#ref-nigrini-forensicanalytics-ch11" role="doc-biblioref">2012</a>)</span>. The calculation is done by taking the largest value divided by the second largest value within a group. Examples of groups include a listing of payables for a vendor, or the expenses completed by an employee.</p>
-<p>A common request is to understand which vendor had the highest category of a charge (in this case, the <code>description</code>). Recall the <code>group_by()</code> will perform the calculation at the level requested. In this case, <code>slice_max()</code> will select the highest row of values by a variable.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="test.html#cb62-1"></a>gl <span class="op">%&gt;%</span></span>
-<span id="cb62-2"><a href="test.html#cb62-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb62-3"><a href="test.html#cb62-3"></a><span class="st">  </span><span class="kw">group_by</span>(vendor_id) <span class="op">%&gt;%</span></span>
-<span id="cb62-4"><a href="test.html#cb62-4"></a><span class="st">  </span><span class="kw">slice_max</span>(amount, <span class="dt">n =</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 11
+<div id="relative-size-factor-rsf" class="section level3">
+<h3><span class="header-section-number">9.4.2</span> Relative size factor (RSF)</h3>
+<p>The Relative Size Factor test is the comparison of “large amounts to a benchmark to see how large they are relative to some norm.” <span class="citation">(<em>Identifying Anomalies Using the Relative Size Factor Test</em> <a href="#ref-nigrini-forensicanalytics-ch11" role="doc-biblioref">2012</a>)</span>. The calculation is done by taking the largest value divided by the second largest value within a group. Examples of groups include a listing of payables for a vendor, or the expenses completed by an employee. A larger RSF indicates that there was a larger proportional between the largest and second largest invoice.</p>
+<p>One test is to determining the vendors top two invoice amounts and their RSF ratio. Recall the <code>group_by()</code> will perform the calculation at the level requested - adding <code>slice_max()</code> will select the highest row of values by the group.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="test.html#cb324-1"></a>top_two_per_vendor &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
+<span id="cb324-2"><a href="test.html#cb324-2"></a><span class="st">  </span><span class="kw">filter</span>(account <span class="op">==</span><span class="st"> &#39;exp_materials_6000&#39;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb324-3"><a href="test.html#cb324-3"></a><span class="st">  </span><span class="kw">select</span>(vendor_id, je_num, amount) <span class="op">%&gt;%</span></span>
+<span id="cb324-4"><a href="test.html#cb324-4"></a><span class="st">  </span><span class="kw">group_by</span>(vendor_id) <span class="op">%&gt;%</span></span>
+<span id="cb324-5"><a href="test.html#cb324-5"></a><span class="st">  </span><span class="kw">slice_max</span>(amount, <span class="dt">n =</span> <span class="dv">2</span>)</span>
+<span id="cb324-6"><a href="test.html#cb324-6"></a></span>
+<span id="cb324-7"><a href="test.html#cb324-7"></a>top_two_per_vendor</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
 ## # Groups:   vendor_id [3]
-##   je_num amount gl_date    vendor_id account invoice_date description paid_date 
-##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;       &lt;date&gt;    
-## 1    140 96355. 2019-12-19      2211 exp_ma… 2019-12-12   Packaging … 2020-01-18
-## 2    555 57258. 2019-06-19      2211 exp_ma… 2019-06-12   Packaging … 2019-07-19
-## 3    583 47748. 2019-06-27      2612 exp_ma… 2019-06-17   Paper       2019-07-20
-## 4    337 46066. 2019-03-18      2612 exp_ma… 2019-03-08   Paper       2019-04-10
-## 5    693 88524. 2019-08-13      2726 exp_ma… 2019-08-06   Quality co… 2019-08-16
-## 6    756 57567. 2019-12-30      2726 exp_ma… 2019-12-23   Medical gr… 2020-01-02
-## # … with 3 more variables: day_of_week &lt;ord&gt;, t_weekend &lt;lgl&gt;,
-## #   end_of_month &lt;date&gt;</code></pre>
+##   vendor_id je_num amount
+##       &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt;
+## 1      2211    140 96355.
+## 2      2211    555 57258.
+## 3      2612    583 47748.
+## 4      2612    337 46066.
+## 5      2726    693 88524.
+## 6      2726    756 57567.</code></pre>
+<p>Since we’ve identified the top two invoices per <code>vendor_id</code>, we’ve artifically also created new max and mins for the group, which we can use to calculate our RSF:</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="test.html#cb326-1"></a>top_two_per_vendor <span class="op">%&gt;%</span></span>
+<span id="cb326-2"><a href="test.html#cb326-2"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">rsf =</span> <span class="kw">max</span>(amount) <span class="op">/</span><span class="st"> </span><span class="kw">min</span>(amount))</span></code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##   vendor_id   rsf
+##       &lt;int&gt; &lt;dbl&gt;
+## 1      2211  1.68
+## 2      2612  1.04
+## 3      2726  1.54</code></pre>
+<p>This test may reveal invoices that may have been miskeyed with extra zeros, or conversely, identify large one-time orders.</p>
 </div>
-<div id="duplicates" class="section level3">
-<h3><span class="header-section-number">9.4.3</span> Duplicates</h3>
+<div id="duplicate-invoices" class="section level3">
+<h3><span class="header-section-number">9.4.3</span> Duplicate Invoices</h3>
+<p>Detection of duplicates are a seemingly simple concept. For invoices, find an invoice with the same invoice date and same amount. Experience will tell you that detecting suspected duplicates and generating a list is easy, and unfortunately there will be a significant number of false positives to wade through. We will go through the basics of duplicate detection with invoices, and then determine additional strategies you can apply to rule out unlikely samples. These same strategies can be applied across any type of payable.</p>
+<p>The initial approach is built off the Same-Same-Same or Same-Same-Different duplicate detection approach <span class="citation">(<em>Identifying Fraud Using Abnormal Duplications Within Subsets</em> <a href="#ref-nigrini-forensicanalytics-ch12" role="doc-biblioref">2012</a>)</span>. Essentially, you examine for factors where the may be similarities in the key fields, and potentially differences in one of them. Here is a fictional dataset to illustrate how data may be represented.</p>
+<p>Note that despite the name, there can be as many ‘Same’ key fields as needed.</p>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="test.html#cb328-1"></a>invoices &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">system_id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>,</span>
+<span id="cb328-2"><a href="test.html#cb328-2"></a>           <span class="dt">invoice_id =</span> <span class="kw">c</span>(<span class="st">&#39;156&#39;</span>, <span class="st">&#39;156&#39;</span>, <span class="st">&#39;157A&#39;</span>, <span class="st">&#39;157B&#39;</span>, <span class="st">&#39;158&#39;</span>, <span class="st">&#39;159&#39;</span>, <span class="st">&#39;160&#39;</span>), </span>
+<span id="cb328-3"><a href="test.html#cb328-3"></a>           <span class="dt">date =</span> <span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-01&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-02&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-02&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-03&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-03&#39;</span>), <span class="kw">as.Date</span>(<span class="st">&#39;2019-01-04&#39;</span>)),</span>
+<span id="cb328-4"><a href="test.html#cb328-4"></a>           <span class="dt">amount =</span> <span class="kw">c</span>(<span class="dv">1000</span>, <span class="dv">1000</span>, <span class="dv">2500</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="dv">3000</span>, <span class="dv">4000</span>),</span>
+<span id="cb328-5"><a href="test.html#cb328-5"></a>           <span class="dt">acctcode =</span> <span class="kw">c</span>(<span class="dv">6100</span>, <span class="dv">6100</span>, <span class="dv">6200</span>, <span class="dv">6200</span>, <span class="dv">6100</span>, <span class="dv">6200</span>, <span class="dv">6100</span>))</span>
+<span id="cb328-6"><a href="test.html#cb328-6"></a></span>
+<span id="cb328-7"><a href="test.html#cb328-7"></a>invoices</span></code></pre></div>
+<pre><code>##   system_id invoice_id       date amount acctcode
+## 1         1        156 2019-01-01   1000     6100
+## 2         2        156 2019-01-01   1000     6100
+## 3         3       157A 2019-01-02   2500     6200
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 4 rows ]</code></pre>
+<div id="same-same-same" class="section level4">
+<h4><span class="header-section-number">9.4.3.1</span> Same-Same-Same</h4>
+<p>To run our Same-Same-Same test, we would collect the key fields we would like to use. In this case, the invoice, date and amount could qualify as key fields - Same Invoice ID, Same Date, Same Amount. You would summarize by how often that combination appears, only keeping items that match more than once:</p>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="test.html#cb330-1"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb330-2"><a href="test.html#cb330-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb330-3"><a href="test.html#cb330-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb330-4"><a href="test.html#cb330-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 1 x 4
+## # Groups:   invoice_id, date [1]
+##   invoice_id date       amount times_occured
+##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
+## 1 156        2019-01-01   1000             2</code></pre>
+<p>What is useful is then joining this information to your main dataset. This way, you get to maintain a library of invoices that meet multiple criteria. First off, lets keep keep all the duplicate keys we summarized on, plus a unique identifier so we can match the pairs:</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="test.html#cb333-1"></a>dupes_set1 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb333-2"><a href="test.html#cb333-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb333-3"><a href="test.html#cb333-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb333-4"><a href="test.html#cb333-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb333-5"><a href="test.html#cb333-5"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb333-6"><a href="test.html#cb333-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes1_same_id_date_amt =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb333-7"><a href="test.html#cb333-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="test.html#cb335-1"></a>dupes_set1</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 4
+##   invoice_id date       amount dupes1_same_id_date_amt
+##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;                   &lt;int&gt;
+## 1 156        2019-01-01   1000                       1</code></pre>
+<p>Then bring it into our invoices dataset:</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="test.html#cb337-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb337-2"><a href="test.html#cb337-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set1, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;invoice_id&#39;</span>, <span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span>
+<span id="cb337-3"><a href="test.html#cb337-3"></a></span>
+<span id="cb337-4"><a href="test.html#cb337-4"></a>invoices</span></code></pre></div>
+<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
+## 1         1        156 2019-01-01   1000     6100                       1
+## 2         2        156 2019-01-01   1000     6100                       1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+</div>
+<div id="same-same-different" class="section level4">
+<h4><span class="header-section-number">9.4.3.2</span> Same-Same-Different</h4>
+<p>For the Same-Same-Different test, we have to add an extra step. We still collect the key fields we would like to use. In this case, perhaps we would like to check for duplicates on the same date and same amount, but now we’re looking for different invoice_ids. Therefore, Same Date, Same Amount, Different Invoice_id.</p>
+<p>First, lets detect the duplicates on our key fields:</p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="test.html#cb339-1"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb339-2"><a href="test.html#cb339-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb339-3"><a href="test.html#cb339-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   invoice_id, date [6]
+##   invoice_id date       amount times_occured
+##   &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
+## 1 156        2019-01-01   1000             2
+## 2 157A       2019-01-02   2500             1
+## 3 157B       2019-01-02   2500             1
+## 4 158        2019-01-03   3000             1
+## 5 159        2019-01-03   3000             1
+## 6 160        2019-01-04   4000             1</code></pre>
+<p>Then, you perform another <code>group_by</code>, but this time just on the ones that are the same. In this case, that would be Date and Amount.</p>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="test.html#cb342-1"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb342-2"><a href="test.html#cb342-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb342-3"><a href="test.html#cb342-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb342-4"><a href="test.html#cb342-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb342-5"><a href="test.html#cb342-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb342-6"><a href="test.html#cb342-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;date&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+## # Groups:   date [4]
+##   date       amount times_occured
+##   &lt;date&gt;      &lt;dbl&gt;         &lt;int&gt;
+## 1 2019-01-01   1000             1
+## 2 2019-01-02   2500             2
+## 3 2019-01-03   3000             2
+## 4 2019-01-04   4000             1</code></pre>
+<p>This approach is unique but intuitive. By taking all possible ‘same’ combinations, we’ve effectively grouped any sort of duplicate <code>invoice_id</code> we may have already had. We ungroup and then resummarize without the <code>invoice_id</code>, which tells us how many times the <code>invoice_id</code> is different within the new group.</p>
+<p>Lets save this information into our invoice table again:</p>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="test.html#cb346-1"></a>dupes_set2 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb346-2"><a href="test.html#cb346-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount) <span class="op">%&gt;%</span></span>
+<span id="cb346-3"><a href="test.html#cb346-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb346-4"><a href="test.html#cb346-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb346-5"><a href="test.html#cb346-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb346-6"><a href="test.html#cb346-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb346-7"><a href="test.html#cb346-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb346-8"><a href="test.html#cb346-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb346-9"><a href="test.html#cb346-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes2_same_date_amt_diff_id =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb346-10"><a href="test.html#cb346-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;date&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="test.html#cb349-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb349-2"><a href="test.html#cb349-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set2, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>))</span>
+<span id="cb349-3"><a href="test.html#cb349-3"></a></span>
+<span id="cb349-4"><a href="test.html#cb349-4"></a>invoices</span></code></pre></div>
+<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
+## 1         1        156 2019-01-01   1000     6100                       1
+## 2         2        156 2019-01-01   1000     6100                       1
+##   dupes2_same_date_amt_diff_id
+## 1                           NA
+## 2                           NA
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<p>The beauty of this method is that, after you’ve run all the scenarios you prefer, you can rapidly assess each invoice and see what duplicate criteria they match. Ideally, you would balance having tests that are very general (same date, same amount) with tests of high precision (same date, same amount, and different account codes).</p>
+</div>
+<div id="aggregating-results" class="section level4">
+<h4><span class="header-section-number">9.4.3.3</span> Aggregating results</h4>
+<p>Lastly, to derived the final list, its is effective to filter the results based on the <code>dupes</code> columns.</p>
+<p>Starting with the invoices we’ve identified, we’ll first group by unique <code>system_id</code> we’ve created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a <code>sum</code>, and return a TRUE (with a value of 1 if coerced). Then, we want to calculate this on multiple columns, specifically with the name starting with <code>dupes</code>, so we will use <code>across()</code> with <code>starts_with()</code>.</p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="test.html#cb351-1"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb351-2"><a href="test.html#cb351-2"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
+<span id="cb351-3"><a href="test.html#cb351-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb351-4"><a href="test.html#cb351-4"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 8
+## # Rowwise:  system_id
+##   system_id invoice_id date       amount acctcode dupes1_same_id_…
+##       &lt;int&gt; &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;    &lt;dbl&gt;            &lt;int&gt;
+## 1         1 156        2019-01-01   1000     6100                1
+## 2         2 156        2019-01-01   1000     6100                1
+## 3         3 157A       2019-01-02   2500     6200               NA
+## 4         4 157B       2019-01-02   2500     6200               NA
+## 5         5 158        2019-01-03   3000     6100               NA
+## 6         6 159        2019-01-03   3000     6200               NA
+## # … with 2 more variables: dupes2_same_date_amt_diff_id &lt;int&gt;, dupes &lt;int&gt;</code></pre>
+<p>This approach is robust. By maintaining our approach of having a main <code>invoice</code> dataset with all the matches, any new tests we add starting with the column name <code>dupes</code> will be included. For example, if we inserted a higher precision test of same invoice date, amount, and account code, we’ll see our counts go up:</p>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="test.html#cb353-1"></a>dupes_set3 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb353-2"><a href="test.html#cb353-2"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span></span>
+<span id="cb353-3"><a href="test.html#cb353-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb353-4"><a href="test.html#cb353-4"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb353-5"><a href="test.html#cb353-5"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb353-6"><a href="test.html#cb353-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes3_same_date_amt_acct =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb353-7"><a href="test.html#cb353-7"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="test.html#cb355-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb355-2"><a href="test.html#cb355-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set3, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>)) </span>
+<span id="cb355-3"><a href="test.html#cb355-3"></a></span>
+<span id="cb355-4"><a href="test.html#cb355-4"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb355-5"><a href="test.html#cb355-5"></a><span class="st">  </span><span class="kw">rowwise</span>(system_id) <span class="op">%&gt;%</span></span>
+<span id="cb355-6"><a href="test.html#cb355-6"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">dupes =</span> <span class="kw">sum</span>(<span class="kw">across</span>(<span class="kw">starts_with</span>(<span class="st">&#39;dupes&#39;</span>)) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb355-7"><a href="test.html#cb355-7"></a><span class="st">  </span><span class="kw">filter</span>(dupes <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 9
+## # Rowwise:  system_id
+##   system_id invoice_id date       amount acctcode dupes1_same_id_…
+##       &lt;int&gt; &lt;chr&gt;      &lt;date&gt;      &lt;dbl&gt;    &lt;dbl&gt;            &lt;int&gt;
+## 1         1 156        2019-01-01   1000     6100                1
+## 2         2 156        2019-01-01   1000     6100                1
+## 3         3 157A       2019-01-02   2500     6200               NA
+## 4         4 157B       2019-01-02   2500     6200               NA
+## 5         5 158        2019-01-03   3000     6100               NA
+## 6         6 159        2019-01-03   3000     6200               NA
+## # … with 3 more variables: dupes2_same_date_amt_diff_id &lt;int&gt;,
+## #   dupes3_same_date_amt_acct &lt;int&gt;, dupes &lt;int&gt;</code></pre>
+</div>
+<div id="ruling-out-false-positives" class="section level4">
+<h4><span class="header-section-number">9.4.3.4</span> Ruling out false positives</h4>
+<p>Up to now, you’ve identified duplicates via the Same-Same-Same and Same-Same-Different methods. Perhaps in your own work, you’ve gone ahead and tested potential duplicates, and then realized there is some business logic you didn’t capture that may have nullified the potential duplicate, saving you time and effort.</p>
+<p>A common reason for a false positive is that the company may have already received a refund for the invoice. In this case, its more practical to identify and remove invoices that have had refunds in the original invoice population prior to processing, using an <code>anti_join()</code>. For example, if invoice 156 with a system_id of <code>2</code> was already removed, you could refine the invoice population before executing additional tests.</p>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="test.html#cb357-1"></a>refunds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">system_id =</span> <span class="dv">2</span>) <span class="co"># A table of credits or refunds</span></span>
+<span id="cb357-2"><a href="test.html#cb357-2"></a></span>
+<span id="cb357-3"><a href="test.html#cb357-3"></a>invoices <span class="op">%&gt;%</span></span>
+<span id="cb357-4"><a href="test.html#cb357-4"></a><span class="st">  </span><span class="kw">anti_join</span>(refunds, <span class="dt">by =</span> <span class="st">&#39;system_id&#39;</span>)</span></code></pre></div>
+<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
+## 1         1        156 2019-01-01   1000     6100                       1
+##   dupes2_same_date_amt_diff_id dupes3_same_date_amt_acct
+## 1                           NA                         1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<p>A duplicate may also be ruled out because because of a minor field that wasn’t used. If you examine lines 5 and 6, you’ll see that that this invoice was picked up because of the same <code>date</code> &amp; <code>amount</code>, with a different <code>invoice_id</code>. You may have noticed that the <code>acctcode</code> is different, representing that the invoice was being allocated to a diffferent cost center. After inquiring with the business, you may determine this behavior is normal. Quite simply, its easier to augment an additional test, helping you increase your accuracy:</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="test.html#cb359-1"></a>dupes_set4 &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb359-2"><a href="test.html#cb359-2"></a><span class="st">  </span><span class="kw">group_by</span>(invoice_id, date, amount, acctcode) <span class="op">%&gt;%</span></span>
+<span id="cb359-3"><a href="test.html#cb359-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb359-4"><a href="test.html#cb359-4"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which is kept by default in dplyr</span></span>
+<span id="cb359-5"><a href="test.html#cb359-5"></a><span class="st">  </span><span class="kw">group_by</span>(date, amount, acctcode) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Second set of reductions, but this time, find how many unique invoice ids there are per date-amount</span></span>
+<span id="cb359-6"><a href="test.html#cb359-6"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">times_occured =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb359-7"><a href="test.html#cb359-7"></a><span class="st">  </span><span class="kw">filter</span>(times_occured <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb359-8"><a href="test.html#cb359-8"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove the grouping aspect, which affects the ranking by row_number()</span></span>
+<span id="cb359-9"><a href="test.html#cb359-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dupes4_same_date_amt_acctcode_diff_id =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb359-10"><a href="test.html#cb359-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>times_occured)</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;invoice_id&#39;, &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;date&#39;, &#39;amount&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="test.html#cb362-1"></a>invoices &lt;-<span class="st"> </span>invoices <span class="op">%&gt;%</span></span>
+<span id="cb362-2"><a href="test.html#cb362-2"></a><span class="st">  </span><span class="kw">left_join</span>(dupes_set4, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&#39;date&#39;</span>, <span class="st">&#39;amount&#39;</span>, <span class="st">&#39;acctcode&#39;</span>))</span>
+<span id="cb362-3"><a href="test.html#cb362-3"></a></span>
+<span id="cb362-4"><a href="test.html#cb362-4"></a>invoices</span></code></pre></div>
+<pre><code>##   system_id invoice_id       date amount acctcode dupes1_same_id_date_amt
+## 1         1        156 2019-01-01   1000     6100                       1
+##   dupes2_same_date_amt_diff_id dupes3_same_date_amt_acct
+## 1                           NA                         1
+##   dupes4_same_date_amt_acctcode_diff_id
+## 1                                    NA
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 6 rows ]</code></pre>
+</div>
 </div>
 <div id="rare-accounts" class="section level3">
 <h3><span class="header-section-number">9.4.4</span> Rare Accounts</h3>
@@ -865,6 +1087,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="refs" class="references">
 <div id="ref-nigrini-forensicanalytics-ch11">
 <p><em>Identifying Anomalies Using the Relative Size Factor Test</em>. 2012. John Wiley &amp; Sons, Ltd. <a href="https://doi.org/10.1002/9781118386798.ch11">https://doi.org/10.1002/9781118386798.ch11</a>.</p>
+</div>
+<div id="ref-nigrini-forensicanalytics-ch12">
+<p><em>Identifying Fraud Using Abnormal Duplications Within Subsets</em>. 2012. John Wiley &amp; Sons, Ltd. <a href="https://doi.org/10.1002/9781118386798.ch12">https://doi.org/10.1002/9781118386798.ch12</a>.</p>
 </div>
 <div id="ref-outliers">
 <p><em>NIST/Sematech E-Handbook of Statistical Methods</em>. n.d. <a href="https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm">https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm</a>.</p>
