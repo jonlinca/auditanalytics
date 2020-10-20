@@ -488,14 +488,14 @@ invoices <- data.frame(system_id = 1:7,
            acctcode = c(6100, 6100, 6200, 6200, 6100, 6200, 6100))
 
 invoices %>%
-  gt() # We'll hide this table-making code in future chunks
+  gt() # We'll hide this table-making code in future chunks. For now, its going to make our table prettier
 ```
 
 #### Same-Same-Same
 
 To run our Same-Same-Same test, we would collect the key fields we would like to use. In this case, the invoice, date and amount could qualify as key fields - Same Invoice ID, Same Date, Same Amount. You would summarize by how often that combination appears, only keeping items that match more than once:
 
-```{r, sss1, include = FALSE, message = FALSE, eval = FALSE}
+```{r sss1, message = FALSE}
 dupes_set1 <- invoices %>%
   group_by(invoice_id, date, amount) %>%
   summarize(times_occured = n()) %>%
@@ -504,33 +504,15 @@ dupes_set1 <- invoices %>%
 ```
 
 ```{r, echo = FALSE, message = FALSE}
-decorate('sss1') %>%
-  flair("group_by(invoice_id, date, amount)") %>%
-  flair("summarize(times_occured = n())") %>%
-  flair("filter(times_occured > 1)")  %>%
-  knit_print.with_flair()
-```
-
-```{r, echo = FALSE, message = FALSE}
 gt(dupes_set1)
 ```
 
-What is useful is then joining this information to your main dataset. This way, you get to maintain a library of invoices that meet multiple criteria. First off, lets keep keep all the duplicate keys we summarized on, plus a unique identifier so we can match the pairs:
+To keep track of which invoices meet specific criteria, we will then join this information to the main dataset. This way, you'll maintain a library of invoices that meet multiple criteria. First off, lets keep keep all the duplicate keys we summarized on, plus a unique identifier so we can match the pairs:
 
-```{r set1, include = FALSE, message = FALSE}
-dupes_set1 <- invoices %>%
-  group_by(invoice_id, date, amount) %>%
-  summarize(times_occured = n()) %>%
-  filter(times_occured > 1) %>%
+```{r set1, message = FALSE}
+dupes_set1 <- dupes_set1 %>% 
   ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
-  mutate(dupes1 = row_number()) %>%
-  select(-times_occured)
-```
-
-```{r, echo = FALSE, message = FALSE}
-decorate('set1') %>%
-  flair('mutate(dupes1 = row_number())') %>%
-  knit_print.with_flair()
+  mutate(t_dupes1 = row_number()) 
 ```
 
 ```{r, echo = FALSE, message = FALSE}
@@ -540,6 +522,9 @@ gt(dupes_set1)
 Then bring it into our invoices dataset:
 
 ```{r, message = FALSE}
+dupes_set1 <- dupes_set1 %>%
+  select(-times_occured) # Unneeded for final result
+
 invoices <- invoices %>%
   left_join(dupes_set1, by = c('invoice_id', 'date', 'amount'))
 ```
@@ -568,12 +553,10 @@ gt(dupes_set2)
 Then, you perform another `group_by`, but this time just on the ones that are the same. In this case, that would be Date and Amount. 
 
 ```{r, message = FALSE}
-dupes_set2 <- invoices %>%
-  group_by(invoice_id, date, amount) %>%
-  summarize(times_occured = n()) %>%
-  ungroup() %>% # Remove the grouping aspect, which is kept by default in dplyr
+dupes_set2 <- dupes_set2 %>% # Remove the grouping aspect, which is kept by default in dplyr
   group_by(date, amount) %>% # Second set of reductions, but this time, find how many unique invoice ids there are per date-amount
   summarize(times_occured = n()) %>%
+  filter(times_occured > 1) %>%
   ungroup()
 ```
 
@@ -581,20 +564,13 @@ dupes_set2 <- invoices %>%
 gt(dupes_set2)
 ```
 
-This approach is unique but intuitive. By taking all possible 'same' combinations, we've effectively grouped any sort of duplicate `invoice_id` we may have already had. We ungroup and then resummarize without the `invoice_id`, which tells us how many times the `invoice_id` is different within the new group. 
+This approach is unique but intuitive. By taking all possible 'same' combinations, we've effectively grouped any sort of duplicate `invoice_id` we may have already had. We then ungroup and resummarize without the `invoice_id`, which tells us how many times the `invoice_id` is different within the new group. 
 
 Lets save this information into our invoice table again:
 
 ```{r, message = FALSE}
-dupes_set2 <- invoices %>%
-  group_by(invoice_id, date, amount) %>%
-  summarize(times_occured = n()) %>%
-  ungroup() %>% # Remove the grouping aspect, which is kept by default in dplyr
-  group_by(date, amount) %>% # Second set of reductions, but this time, find how many unique invoice ids there are per date-amount
-  summarize(times_occured = n()) %>%
-  filter(times_occured > 1) %>%
-  ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
-  mutate(dupes2 = row_number()) %>%
+dupes_set2 <- dupes_set2 %>%
+  mutate(t_dupes2 = row_number()) %>%
   select(-times_occured)
 
 invoices <- invoices %>%
@@ -609,20 +585,20 @@ The beauty of this method is that, after you've run all the scenarios you prefer
 
 #### Aggregating results
 
-Lastly, to derived the final list, its is effective to filter the results based on the `dupes` columns. 
+To derive the final list, becai effective to filter the results based on the `dupes` columns. 
 
-Starting with the invoices we've identified, we'll first group by unique `system_id` we've created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a `sum`, and return a TRUE (with a value of 1 if coerced). Then, we want to calculate this on multiple columns, specifically with the name starting with `dupes`, so we will use `across()` with `starts_with()`.
+Starting with the invoices we've identified, we'll first group by unique `system_id` we've created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a `sum` of any number of columns that return a TRUE (with a value of 1 when coerced from logical to numeric). Then, we want to calculate this on multiple columns, specifically with the name starting with `dupes`, so we will use `across()` with `starts_with()`.
 
 ```{r, message = FALSE}
 invoices %>%
   rowwise(system_id) %>%
-  dplyr::mutate(dupes = sum(across(starts_with('dupes')) >= 1, na.rm = TRUE)) %>%
+  dplyr::mutate(dupes = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(dupes > 0) %>%
   gt()
 ```
 
-This approach is robust. By maintaining our approach of having a main `invoice` dataset with all the matches, any new tests we add starting with the column name `dupes` will be included. For example, if we inserted a higher precision test of same invoice date, amount, and account code, we'll see our counts go up:
+This approach is powerful, yet flexible. By maintaining our approach of having a main `invoice` dataset with all the matches, any new tests we add starting with the column name `dupes` will be included. For example, if we inserted a higher precision test of same invoice date, amount, and account code, we'll see our counts go up:
 
 ```{r, message = FALSE}
 dupes_set3 <- invoices %>%
@@ -630,7 +606,7 @@ dupes_set3 <- invoices %>%
   summarize(times_occured = n()) %>%
   filter(times_occured > 1) %>%
   ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
-  mutate(dupes3 = row_number()) %>%
+  mutate(t_dupes3 = row_number()) %>%
   select(-times_occured)
 
 invoices <- invoices %>%
@@ -638,9 +614,9 @@ invoices <- invoices %>%
 
 invoices %>%
   rowwise(system_id) %>%
-  dplyr::mutate(dupes = sum(across(starts_with('dupes')) >= 1, na.rm = TRUE)) %>%
+  dplyr::mutate(t_dupesmatched = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
   ungroup() %>%
-  filter(dupes > 0) %>%
+  filter(t_dupesmatched > 0) %>%
   gt()
 ```
 
@@ -653,12 +629,15 @@ A common reason for a false positive is that the company may have already receiv
 ```{r}
 refunds <- data.frame(system_id = 2) # A table of credits or refunds
 
-invoices %>%
-  anti_join(refunds, by = 'system_id') %>%
+new_invoices <- invoices %>%
+  anti_join(refunds, by = 'system_id') %>% # Remove refunds
+  select(system_id, invoice_id, date, amount, acctcode)
+
+new_invoices %>% 
   gt()
 ```
 
-A duplicate may also be ruled out because because of a minor field that wasn't used. If you examine lines 5 and 6, you'll see that that this invoice was picked up because of the same `date` & `amount`, with a different `invoice_id`. You may have noticed that the `acctcode` is different, representing that the invoice was being allocated to a diffferent cost center. After inquiring with the business, you may determine this behavior is normal. Quite simply, its easier to augment an additional test, helping you increase your accuracy:
+A duplicate may also be ruled out because because of a minor field that wasn't used. If you examine lines 5 and 6, you'll see that that this invoice was picked up because of the same `date` & `amount`, with a different `invoice_id`. You may have noticed that the `acctcode` is different, representing that the invoice was being allocated to a different cost center. After inquiring with the business, you may determine this behavior is normal. Its easier add another test to accommodate for this scenario, following the Same-Same-Different approach, to help increase the accuracy of test:
 
 ```{r, message = FALSE}
 dupes_set4 <- invoices %>%
@@ -669,7 +648,7 @@ dupes_set4 <- invoices %>%
   summarize(times_occured = n()) %>%
   filter(times_occured > 1) %>%
   ungroup() %>% # Remove the grouping aspect, which affects the ranking by row_number()
-  mutate(dupes4 = row_number()) %>%
+  mutate(t_dupes4 = row_number()) %>%
   select(-times_occured)
 
 invoices <- invoices %>%
@@ -680,10 +659,48 @@ invoices %>%
 ```
 
 
-### Rare Accounts
+### Detecting gaps in data
 
-### Sequential
+A sequential test is commonly used for cheques, specifically to determine which ones are missing from a cheque run. They are also useful for measuring a level of dependency that a vendor relies upon a company, assuming the vendor issue invoices sequentially as well.
 
+As an example, lets say we create a register with 1000 cheques. You can start with any minimum and maximum range:
+
+```{r}
+register <- seq(1020, 2019)
+length(register)
+range(register)
+```
+
+And if we were to create a listing of all cheques we have written, we could simulate perhaps 50 cheques that were taken out:
+
+````{r}
+set.seed(123)
+cheques_issued <- sample(register, size = 975)
+```
+
+To detect which cheques have been taken out, we can check the difference between our sets using `setdiff()` - that is, if we compare our original cheque register to the cheques issued, we can see which ones were missing:
+
+```{r}
+missing <- setdiff(register, cheques_issued)
+
+missing
+```
+
+If you wanted to know which ones were sequential, you could check the differences between each missing cheque. In this case, it would be a `lag()` calculation first, to find the difference between each row:
+
+```{r}
+data.frame(missing) %>%
+  mutate(gap_between = missing - lag(missing))
+```
+
+And finally, since we want to know which sequential cheques were missing, we could filter and look for any rows that had only a difference of one, implying one missing cheque. Since we want chains, we also want to look ahead with `lead()` since 
+
+```{r}
+data.frame(missing) %>%
+  mutate(gap_between = missing - lag(missing)) %>%
+  filter(lead(gap_between) == 1 | # Chooses the first row in the chain, by looking at the next row to see if its equal to one
+         gap_between ==1 ) # Any subsequent numbers will always have a difference of 1
+```
 
 ## Search text {#test-searchtext}
 

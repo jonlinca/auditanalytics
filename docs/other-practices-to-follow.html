@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-10-15" />
+<meta name="date" content="2020-10-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="applied-audit-analytics.html"/>
-<link rel="next" href="appendix-a-acl-analytics-to-r.html"/>
+<link rel="next" href="acl-analytics-to-r.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -148,6 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="part"><span><b>I Structure</b></span></li>
 <li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
 <li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
 <li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
@@ -173,6 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
+<li class="part"><span><b>II Technical</b></span></li>
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
 <li class="chapter" data-level="4.1" data-path="architecture.html"><a href="architecture.html#r-and-rstudio"><i class="fa fa-check"></i><b>4.1</b> R and RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
@@ -246,8 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
 <li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
 <li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
-<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#rare-accounts"><i class="fa fa-check"></i><b>9.4.4</b> Rare Accounts</a></li>
-<li class="chapter" data-level="9.4.5" data-path="test.html"><a href="test.html#sequential"><i class="fa fa-check"></i><b>9.4.5</b> Sequential</a></li>
+<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-data"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in data</a></li>
 </ul></li>
 <li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a></li>
 </ul></li>
@@ -255,6 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#rmarkdown"><i class="fa fa-check"></i><b>10.1</b> RMarkdown</a></li>
 <li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export"><i class="fa fa-check"></i><b>10.2</b> Export</a></li>
 </ul></li>
+<li class="part"><span><b>III Advanced teams</b></span></li>
 <li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a><ul>
 <li class="chapter" data-level="11.1" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#auditpackage"><i class="fa fa-check"></i><b>11.1</b> Audit R Package creation</a></li>
 <li class="chapter" data-level="11.2" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html#continious-monitoring"><i class="fa fa-check"></i><b>11.2</b> Continious Monitoring</a></li>
@@ -266,12 +268,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>12.1</b> Documentation</a></li>
 <li class="chapter" data-level="12.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>12.2</b> Passwords</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html"><i class="fa fa-check"></i><b>13</b> Appendix A - ACL Analytics to R</a><ul>
-<li class="chapter" data-level="13.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>13.1</b> Import</a></li>
-<li class="chapter" data-level="13.2" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>13.2</b> Data</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>13.2.1</b> Joins</a></li>
+<li class="part"><span><b>IV Appendix</b></span></li>
+<li class="chapter" data-level="13" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html"><i class="fa fa-check"></i><b>13</b> ACL Analytics to R</a><ul>
+<li class="chapter" data-level="13.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>13.1</b> Import</a></li>
+<li class="chapter" data-level="13.2" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>13.2</b> Data</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>13.2.1</b> Joins</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="appendix-a-acl-analytics-to-r.html"><a href="appendix-a-acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>13.3</b> Analyze</a></li>
+<li class="chapter" data-level="13.3" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>13.3</b> Analyze</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -308,13 +311,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
 <a href="applied-audit-analytics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendix-a-acl-analytics-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="acl-analytics-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,3 +1,5 @@
+# (PART) Structure {-}
+
 # Approach
 
 For many audit teams, having data analytics employed in your audit team is generally a given. The advantages are well articulated - 100% population coverage, timely response, and targeted high risk identification and results are true and real.

@@ -1,3 +1,5 @@
+# (PART) Technical {-}
+
 # Setup
 
 There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.

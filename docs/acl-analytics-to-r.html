@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>About the author | Audit Analytics with R</title>
+  <title>Chapter 13 ACL Analytics to R | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="About the author | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 13 ACL Analytics to R | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="About the author | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 13 ACL Analytics to R | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="other-practices-to-follow.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -297,17 +297,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="about-the-author" class="section level1 unnumbered">
-<h1>About the author</h1>
+<div id="acl-analytics-to-r" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> ACL Analytics to R</h1>
+<p>ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams with novice to expert expertise in analytics. ACL Analytics itself is strongly tied into the Galvanize Highbond cloud software, and development efforts can be done locally prior to uploading into their Robotics tool.</p>
+<p>R is useful as your team reaches a higher level of maturity due to its ability to incorporate version control, markdown reports and code packages. The ceiling and technical capabilities required are higher, especially as you move into command prompt oriented software.</p>
+<p>Inexperienced teams are encouraged to develop their best audit foundation practices, as it is less about the tool and more about the aptitude. As your team reaches the ceiling of your current toolset and maturity level, then it is worth considering adding to your toolkit.</p>
+<p>There are several similarities and differences to help bridge the gap when transferring between the tools, and this appendix will help you bridge the gap.</p>
+<div id="import" class="section level2">
+<h2><span class="header-section-number">13.1</span> Import</h2>
+</div>
+<div id="data" class="section level2">
+<h2><span class="header-section-number">13.2</span> Data</h2>
+<div id="joins" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> Joins</h3>
+<p>The <a href="https://help.highbond.com/helpdocs/analytics/142/scripting-guide/en-us/Content/lang_ref/commands/r_join.htm">join command</a> is similar, but there are some syntax and behaviours differences you need to be aware of:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ACL AN</th>
+<th>R (tidyverse)</th>
+<th>Difference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>JOIN</code> with no keywords</td>
+<td><code>inner_join(...)</code></td>
+<td>R will return all matches with all columns in Secondary table, if found in Primary table. <br><strong>Can effectively return more rows than exist in Primary table.</strong><br> AN will return the first match found in the Primary table per row.</td>
+</tr>
+<tr class="even">
+<td><code>PKEY &lt;pkey1&gt;</code> <br> <code>SKEY &lt;skey1&gt;</code></td>
+<td><code>*_join(..., by = c('pkey1' = 'skey1', 'pkey2' = 'skey2'))</code></td>
+<td>Join key goes into the <code>by</code> command. Additional join keys can be added.</td>
+</tr>
+<tr class="odd">
+<td><code>FIELDS ALL</code></td>
+<td><code>semi_join(...)</code></td>
+<td>Filters the Primary table, only keeping matches that existed in the Secondary table</td>
+</tr>
+<tr class="even">
+<td><code>FIELDS &lt;names&gt;</code> <br> <code>WITH &lt;names&gt;</code></td>
+<td></td>
+<td>All columns from both tables are kept by design. <br> <code>&lt;names&gt;</code> of columns can not be specified, and need to be pre-selected beforehand</td>
+</tr>
+<tr class="odd">
+<td><code>PRIMARY</code></td>
+<td><code>left_join(...)</code></td>
+<td>Unmatched keys will have secondary column values written as <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>SECONDARY</code></td>
+<td><code>right_join(...)</code></td>
+<td>Unmatched keys will have primary column values be written as <code>NA</code></td>
+</tr>
+<tr class="odd">
+<td><code>PRIMARY SECONDARY</code></td>
+<td><code>full_join(...)</code></td>
+<td>Unmatched keys will have primary or secondary column values written as <code>NA</code></td>
+</tr>
+<tr class="even">
+<td><code>UNMATCHED</code></td>
+<td><code>anti_join(...)</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="analyze" class="section level2">
+<h2><span class="header-section-number">13.3</span> Analyze</h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="other-practices-to-follow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
