@@ -1,10 +1,10 @@
 # (PART) Technical {-}
 
-# Setup
+# Setup 
 
 There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.
 
-## R and RStudio
+## R with RStudio {#setup-r}
 
 One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley and Garrett, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
 

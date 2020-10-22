@@ -17,6 +17,9 @@ library(lubridate)
 library(DBI) 
 library(ggplot2)
 library(gt) # Used for formatting outputs
+library(pryr) # Used casually in the text chapter
+library(stringr) # tidyverse text search and manipulation
+library(stringi) # specialized string processing
 
 dir.create("data", showWarnings = FALSE)
 
@@ -112,7 +115,7 @@ gl %>%
 
 ### Weekend testing
 
-As a typical office business (along with office activities) generally happen on the weekday - that is, Monday through Friday. We may be interested in selecting journal entries from a sample of activities that occurred on the weekend. To test this, we can use the `lubridate` package to determine what day of week our entry falls upon:
+As a typical office business (along with office activities) generally happen on the weekday - that is, Monday through Friday. We may be interested in selecting journal entries from a sample of activities that occurred on the weekend. To test this, we can use the **lubridate** package to determine what day of week our entry falls upon:
 
 ```{r}
 gl <- gl %>%
@@ -592,7 +595,7 @@ Starting with the invoices we've identified, we'll first group by unique `system
 ```{r, message = FALSE}
 invoices %>%
   rowwise(system_id) %>%
-  dplyr::mutate(dupes = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
+  mutate(dupes = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(dupes > 0) %>%
   gt()
@@ -614,7 +617,7 @@ invoices <- invoices %>%
 
 invoices %>%
   rowwise(system_id) %>%
-  dplyr::mutate(t_dupesmatched = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
+  mutate(t_dupesmatched = sum(across(starts_with('t_dupes')) >= 1, na.rm = TRUE)) %>%
   ungroup() %>%
   filter(t_dupesmatched > 0) %>%
   gt()
@@ -659,7 +662,7 @@ invoices %>%
 ```
 
 
-### Detecting gaps in data
+### Detecting gaps in sequences
 
 A sequential test is commonly used for cheques, specifically to determine which ones are missing from a cheque run. They are also useful for measuring a level of dependency that a vendor relies upon a company, assuming the vendor issue invoices sequentially as well.
 
@@ -704,9 +707,189 @@ data.frame(missing) %>%
 
 ## Search text {#test-searchtext}
 
-- Facilitation
-- Quebec
+For typical fields in a structured dataset, it is straight forward to `filter()` on a field to isolate specific traits, like usernames or accounts. However, a great deal of information kept within a database is also unstructured, where the user is allowed to input their own information as they see fit, like description or comment fields. While this information is messy, free-form and generally user-generated, it usually contains a valuable trove of information
 
-```{r include=FALSE}
-#Page 44 https://www.aicpa.org/content/dam/aicpa/research/standards/auditattest/downloadabledocuments/sas-142.pdf
+To scan these unstructured datasets, you need an effective, powerful and rapid method for analysis. Key word searches are an effective method of isolating high-value entries, especially when examining invoices, journal entries, or other datasets where the data may be inconsistent. We may also be interested in words that imply an action like override, or simply looking for mentions of a name in a comment field. 
+
+### Regex basics
+
+We will need to expand our skill set and dabble in regular expression, also known as **regex**. Regular expression is another language that specializes in the searching of patterns, specifically within text fields. 
+
+To use regex effectively, you need to consider the pattern of the text to look for, and the field you want to search up. Lets start off by listing of Canadian capitial cities and their provinces:
+
+```{r}
+canada <- data.frame(province = c("Newfoundland and Labrador", "Prince Edward Island", "Nova Scotia", "New Brunswick", "Quebec", "Ontario", "Manitoba", "Saskatchewan", "Alberta", "British Columbia", "Nunavut", "Northwest Territories", "Yukon Territory"),
+                     capital = c("St. John's", "Charlottetown", "Halifax", "Fredericton", "Québec City", "Toronto", "Winnipeg", "Regina", "Edmonton", "Victoria", "Iqaluit", "Yellowknife", "Whitehorse"))
+
+print(canada)
 ```
+
+Lets say we wanted to find the city of Edmonton in the column of capitals. We'll use R base function `grepl()`, which needs a string to search up and a pattern to look into. It returns a logical vector, telling us where matches occur.
+
+```{r}
+grepl('Edmonton', canada$capital)
+```
+
+There is only one row that matches our test. We can use this to further isolate our data:
+
+```{r}
+canada %>%
+  filter(grepl('Edmonton', capital))
+```
+
+What if you wanted to find two words? Separate words with the `|` (pipe) character, which stands for 'or', and you chain as many words as you like:
+
+```{r}
+canada %>%
+  filter(grepl('Charlottetown|Regina', capital))
+```
+
+Regular expressions are powerful because you can customize them to the nth degree. I'll highlight a few of the common use cases in testing.
+
+### Starts or Ends with (Anchors)
+
+Lets say you wanted to find any provinces starting with 'o'. Lets start with this:
+
+```{r}
+canada %>%
+  filter(grepl('o', province))
+```
+
+Notice that `grepl()` is returning any rows where where 'o' is found in the province. We can be more precise and use the prefix `^`, which is an anchor. This directs regex to only match where it finds a match at the beginning of the string. 
+
+As regex is case sensitive, we can tell regex to ignore case sensitivity by using the `ignore.case = TRUE` argument, which allows us to include both upper and lower case letters in our search (you can try `grepl('^o', province)` and see what happens):
+
+```{r}
+canada %>%
+  filter(grepl('^o', province, ignore.case = TRUE))
+```
+
+What if we wanted to find all capitals ending in 'ton'? There is another anchor we can use, `$`, which tells us that we should match the regex only at the end of a string:
+
+```{r}
+canada %>%
+  filter(grepl('ton$', capital, ignore.case = TRUE))
+```
+
+### Crash course in Encoding
+
+Simple question. What if we wanted to find Quebec City?
+
+```{r}
+canada %>%
+  dplyr::filter(str_detect(capital, 'Quebec'))
+```
+
+There are no hits! But why is that? If you look closely at Quebec, you'll notice the accented é in Quêbec City. Unfortunately, regex is quite strict on character matching, and you will need to prepare on how to deal with these situations. (Did you notice that the accented é is in Québec City but not the province of Quebec? Why? The province is the English constitutional name and therefore has no diacritics.[@quebec])
+
+Text can be 'encoded' in multiple ways. Encoding is the way a computer saves the representation of a letter. If you look at your standard QWERTY keyboard (which is probably in front of you), you'll see letters and numbers. Each letter on your keyboard can be represented by a sequence of 8 bits (aka a byte), or a combination of zeros and ones. For example, the letter `A` can be represented as:
+
+```{r}
+pryr::bits('A') 
+Encoding('A')
+```
+
+**pryr** is good for understanding the depths of R. In this case, its helpful for us in understanding character encodings. In this case, the letter is represented as one single byte block with eight bits, which is typical of the **ASCII encoding**. In R, ASCII is also known as 'unknown' - not because it is truly unknown, but because ASCII is the same across all computer systems, no matter if you're using Unix, Windows, or Mac.
+
+What if we did the accented é in Québec City?
+
+```{r}
+pryr::bits('é')
+Encoding('é')
+```
+
+Notice there are two bytes! This is known as a **multi-byte encoding**, and here it is represented as **UTF-8** (or Unicode 8-bit). In multi-byte encodings, multiple bytes (could be more than two!) could be used to represent a single character on a screen.
+
+### Cleaning Text
+
+One method of cleaning text information, especially if perfect replication isn't necessary, is to strip out any and all characters with accents/diacritics. [This method](https://stackoverflow.com/questions/26393341/r-delete-accents-in-string) appears to be the most effective, and uses the **stringi** library and the `stri_trans_general()` function. 
+
+```{r}
+clean_e <- stringi::stri_trans_general('é', 'Latin-ASCII')
+clean_e
+Encoding(clean_e)
+pryr::bits(clean_e)
+```
+
+So if we apply this cleaning conversion across the cities in our dataset, we can then find words without worrying about accents.
+
+```{r}
+canada %>%
+  mutate(capital = stringi::stri_trans_general(capital, 'Latin-ASCII')) %>%
+  dplyr::filter(grepl('Quebec', capital, ignore.case = TRUE))
+```
+
+### Searching Multiple Fields
+
+Using `grepl()`, we can detect text phrases in one column. More often than not, we are searching not only for multiple words, but across any text columns as well.
+
+First off, lets assemble a set of test words to search in our GL dataset, separating them with the 'or' symbol:
+
+```{r}
+searchterms <- c('quebec', 'facilitation', 'as per')
+searchterms <- paste(searchterms, collapse = "|")
+```
+
+We're going to use dplyr syntax to [search multiple columns](https://dplyr.tidyverse.org/articles/colwise.html#how-do-you-convert-existing-code-), and explain how its working. To search across text, we need to create a little helper function first. Lets make a function that will tell us if any row has more than 0, which is another way of saying lets evaluate this row as `TRUE` if any number of columns found is `TRUE.`
+
+```{r}
+rowAny <- function(x) rowSums(x) > 0
+```
+
+Lets say you had three columns, and you were looking for a word in each one. After executing `grepl()` on each one, you got this result, indicating `TRUE` where the word was found.
+
+```{r}
+example <- data.frame(colA = c(TRUE, FALSE, FALSE),
+          colB = c(FALSE, FALSE, FALSE),
+          colC = c(TRUE, FALSE, TRUE))
+
+example
+```
+
+Then `rowAny()` would evaluate as:
+
+```{r}
+example$rowAnyResult <- rowAny(example)
+
+example
+```
+
+This outcome will then be used as the filter to return the matching rows.
+
+`across()` is a relatively young function that came with dplyr 1.0.0. It basically allows you to run a function 'across' multiple columns. `across()` has two arguments:
+
+- the first argument, `.cols`, is where you want your function to apply to. You could say `everything()` for all columns, or only run the function on where the column name `contains()` a certain word, or `where(is.numeric))` specifically for numeric columns.
+- the second argument, `.fns`, is where you specify the function itself. Here, we specify `grepl`, but make one change: instead of listing a specific column, we instead use `.x` to indicate which column we want to analyze.
+
+In our case, we want to run the function `grepl` (with arguments) 'across' `everything()`
+
+```{r}
+gl %>%
+ filter(rowAny(
+   across(everything(), ~ grepl(searchterms, .x, ignore.case = TRUE))
+   ))
+```
+
+What if we wanted to make individual columns for each test, and sum them up like we do for our standard testing approach? That can be done as well. First, lets make new columns for each of our keywords (and make sure it works)
+
+```{r}
+keyword_matches <- gl %>%
+  mutate(t_quebec = rowAny(across(everything(), ~ grepl('quebec', .x, ignore.case = TRUE))),
+         t_facilitation = rowAny(across(everything(), ~ grepl('facilitation', .x, ignore.case = TRUE))),
+         t_as_per = rowAny(across(everything(), ~ grepl('as per', .x, ignore.case = TRUE)))) %>%
+  select(je_num, t_quebec, t_facilitation, t_as_per) %>%
+  filter(t_quebec | t_facilitation | t_as_per)
+
+keyword_matches
+```
+
+We can also see how many keywords match each row:
+
+```{r}
+keyword_matches %>%
+  mutate(t_keywords = rowSums(across(starts_with('t_'))))
+```
+
+### Further reading {#regex-further}
+
+Regular expressions are powerful, yet deeply complicated. Many sources exist to explain regex ([1](https://regexone.com), [2](https://www.regular-expressions.info/quickstart.html), [3](https://regexr.com)). Many R packages have functions to help you understand and make use of regex as well - check out the **stringr** and **stringi** packages for some of these, as well as the help file with `?grep`.

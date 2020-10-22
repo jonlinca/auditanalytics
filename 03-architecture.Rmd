@@ -36,7 +36,7 @@ Other things to consider: You should have, at a bare minimum, direct access to r
 
 Any software you consider should be able to talk to your company's internal and external applications. Be wary of software that locks you in or makes access to data cumbersome, as it limits your ability to integrate with your company's tools as you gain sophistication.
 
-## R and RStudio
+## R and RStudio {#architecture-r}
 
 [R](https://www.r-project.org) is a programming language with an emphasis on statistics. It is considered free software, free in the perspective that you can run, distribute, and change it as you like. 
 
