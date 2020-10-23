@@ -22,7 +22,7 @@ library(jsonlite)
 
 The most common method of obtaining data is via flat files, usually in the form of comma separated files (CSV). While delimited data sources are the most convenient for data sources where direct data connections are otherwise unobtainable, they are not set up for long term sustainability and automation.
 
-The base package, installed with all instances of R, and `read.table()` is a convenient built-in standard function for importing CSV files. Another package, readr, includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus an numeric).
+The base package, installed with all instances of R, and `read.table()` is a convenient built-in standard function for importing CSV files. Another package, [readr](https://readr.tidyverse.org), includes a similar function called `read_delim()`, which is faster and allows for easy altering of column specifications, which directs the data types each column is imported as (for example, overriding an employee's identification number as a character versus a numeric).
 
 Before importing the file, lets download the file from the repository that contains the Vendor Master. This dataset contains the vendor system ID number, the date it was added, and other traits.
 
@@ -32,7 +32,7 @@ download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/
               destfile = "data/vendor_master.csv", mode = "wb") # Downloads this csv file into the data folder
 ```
 
-When importing delimited files, there will always be a few aspects to consider. The *delimiter* is the character that separates each field - while commas (,) are popular, pipes (|) and tabs are also used as they tend to be less common. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, *qualifiers* should used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
+When importing delimited files, there will always be a few aspects to consider. The *delimiter* is the character that separates each field - most common delimiters are commas (,), pipes (|) and tab separators. Using an uncommon character was a typical workaround when exporting data from legacy systems, as commas within text fields were incorrectly parsed as extra columns. If possible, *qualifiers* should be used to enclose text with a field, typically quotes or double quotes. This will indicate to the system that everything within those quotes belongs to a specific field.
 
 In this case, if you view the file (on the Files panel on the right, go to the data folder, click on vendor_master.csv, and select View File), you will see the data is separated by commas.
 
@@ -40,9 +40,9 @@ In this case, if you view the file (on the Files panel on the right, go to the d
 raw_vendors <- read_delim('data/vendor_master.csv', delim = ",")
 ```
 
-The message indicates that default column types were assigned to each field imported. If it all the fields imported as expected, this message can be ignored. 
+The message indicates that default column types were assigned to each field imported. If all the fields imported as expected, this message can be ignored. 
 
-However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the col_types argument, copy and pasting the framework in the message and changing the fields as need be:
+However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the `col_types` argument, copy and pasting the framework in the message and changing the fields as need be:
 
 ```{r}
 cols <- cols(
@@ -64,7 +64,7 @@ You may have noticed that while our normal columns are specified as-is, we had t
 
 ### Handling problematic delimited files
 
-While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous csv file from active directory (the controller for Windows authentication), with a username and manager fields:
+While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous CSV file from active directory (the controller for Windows authentication), with a username and manager fields:
 
 ```{r}
 # Active directory file, with just a username and manager field.
@@ -75,7 +75,7 @@ download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/
 raw_ad <- read_delim('data/active_directory.csv', delim = ";")
 ```
 
-These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the csv file in the RStudio interface by clicking on the file on the navigation pane to the right, and select 'View File'. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e. raw):
+These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the CSV file in the RStudio interface by clicking on the file on the navigation pane to the right, and select 'View File'. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e. raw):
 
 ```{r}
 ad_char <- readChar('data/active_directory.csv', file.info('data/active_directory.csv')$size)
@@ -103,15 +103,17 @@ print(ad_raw)
 
 ## Databases {#import-db}
 
-It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they mostly adhere to the same principles,.
+It is likely that the company you are auditing will have their data stored in a database. While having skills in SQL is recommended, having R skills means you are able to perform basic queries on databases. There are many different database brands and vendors in the world, and thus there are many different subtleties on how SQL works for each vendor, but they all operate on the same standard.
 
-The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. Installing a driver is straight forward
+The Open Databases Connectivity (ODBC) standard allows different vendors to write drivers, or the technical back-end methods, to connect to their database. Generally, you will need a driver that matches the vendor and version of the database you're using. 
 
 The Database Interface (DBI) is the interaction between R and the driver. Practically speaking, it enables R to send queries to the database via the driver that is defined in the ODBC.
 
 The most common way to connect to a database on your network is to install the vendor drivers, and then create a Data Source Name (DSN). To properly create this DSN, you'll need the name of your database, as well as read-only credentials. Alternatively, you may specify the server name, database schema and credentials explicitly, which offers some advantages from a portability perspective as your other team mates will not need to create DSNs, and only need to install the drivers themselves.
 
-For this example, we will use an SQLite database, which are self sustained databases files and perfect for lightweight applications (including training!) Again, lets start by downloading the file, or in this case, a database:
+For this example, we will use an SQLite database. Unlike commercial databases you have to install, configure and hire database administrators to manage, a SQLite database is a small self-sustaining file. SQLite files can be kept in your normal documents folders, and are perfect for lightweight applications (including training!) 
+
+Again, lets start by downloading the file, or in this case, a database:
 
 ```{r}
 dir.create("data", showWarnings = FALSE)
@@ -128,19 +130,19 @@ We're going to establish a connection with the database, creating the `con` conn
 con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
 ```
 
-You can confirm it works by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.
+You can confirm the connection works correctly by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.
 
 ```{r}
 dbListTables(con)
 ```
 
-Typically to get data out of a database, you'll need to communicate to it in its own language to obtain data - SQL (Structured Query Language). Here is an example of how to select all the records in a table:
+To get data out of a database, you'll need to communicate to it with SQL (Structured Query Language). Here is an example of how to select all the records in a table:
 
 ```{r}
 dbGetQuery(con, 'select * from gl')
 ```
 
-While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the **dplyr** package, you can generate several of the same queries using the dplyr syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
+While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the **dplyr** package, you can generate several of the same SQL queries using R syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
 
 ```{r}
 db_gl <- tbl(con, 'gl')
@@ -148,7 +150,7 @@ db_gl <- tbl(con, 'gl')
 db_gl
 ```
 
-Not only is it pointing to the same table, but its also performing the same query:
+Not only is it pointing to the same table, but its also performing the same query, even though it was made up using R and dplyr:
 
 ```{r}
 db_gl %>% 
@@ -191,21 +193,25 @@ We will go through an advanced application of setting up database queries in [Au
 
 ## APIs
 
-As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via a Application Programming Interface (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
+As more applications are hosted on the cloud, it is an important skill to obtain information from them without resorting to manually triggered reports. Data can be accessed from these systems via an **Application Programming Interface** (API), and typically it is exposed via the method Representational State Transfer (REST). An API will allow one application to talk to another. Some examples of APIs are web sites with search functions, or loading a list of comments other users have published, or determining who is friends with whom. REST advises how the endpoint is structured, and also suggests how the data is returned.
 
-While APIs may be more complicated, the end objective is to obtain data is quite straight forward. A user needs to know what they want, then:
+While APIs may appear to be daunting, retrieving data from them is not difficult at all. A user needs to know what they want, then:
 
 - match what is desired to the 'endpoint', a pre-defined url or path where the data resides,
 - send a valid request to `GET` the data, and
 - receive the response.
 
-Here is an oversimplistic example. Lets say you want to see what repositories I have available to the public. You can list the repositories I have through the [github api](https://developer.github.com/v3/repos/#list-repositories-for-a-user) via the httr package and the `GET` command. For anything sensitive, it will likely be protected and require authentication as well.
+Here is an example. Lets say you want to see what repositories I have available to the public on GitHub. 
+
+- You look up the GitHub API documentation, and discover you can [list what repositories a user has](https://developer.github.com/v3/repos/#list-repositories-for-a-user). 
+- You formulate your request, and the request URL becomes `https://api.github.com/users/jonlinca/repos`
+- Then you send the above URL using the httr package and the `GET` command. 
 
 ```{r}
 library(httr)
 library(jsonlite)
 
-response <- GET('https://api.github.com/users/jonlinca/repos')
+response <- GET('https://api.github.com/users/jonlinca/repos') # Endpoint
 
 response
 ```

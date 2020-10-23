@@ -1,24 +1,24 @@
 # Report
 
-Communicating the results of your testing, from start to finish, is essential in having others depend and interpret your results. While classic methods of documentation include Word memos-to-file, and perhaps even Excel documents that appear to be filled to the brim with essays, the audit practice could take on a more sophisticated and modern approach to documentation.
+Communicating the results of your testing, from data retireval to conclusions, is essential in having others depend and interpret your results. While traditional methods of documentation include Word memos-to-file, and even Excel documents that are filled to the brim with essays, the audit practice can easily take advantage of a more modern and integrated approach to documentation.
 
-**Notebooks** are a great medium to communicate your results in. Specifically, [RMarkdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book (like this one) if you so desire! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
+**Notebooks** are a great medium to communicate your results in. Specifically, [RMarkdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book if you so desire (like this one)! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
 
 ## Report Structure
 
 AU-C section 230, *Audit Documentation*, outlines the general level of documentation expected in an audit working paper. The level of documentation should meet a reperformance standard where an experienced auditor can pick up and be able to replicate your thought process and work flow.
 
-From an Audit Data Analytics (ADA) perspective, you should also consider having the following sections in each notebook you produce. These were partially derived from [@aicpa2018guide]:
+From an Audit Data Analytics (ADA) perspective, you should also consider having the following sections in each notebook you produce, inspired by the AICPA's Guide to Data Analytics[@aicpa2018guide]:
 
 - The auditor's name & date
-- Objective - What objective is being met with the procedure
-- Risks addressed - The risk of material statement is the procedure addressing, at the financial statement level or assertion level
+- Objective - What objective is being met with the procedure.
+- Risks addressed - The risk of material statement is the procedure addressing, at the financial statement level or assertion level.
 - Data source - The sources of the underlying data, and how it was appropriate relative to the procedure performed. How was the data deemed to be reliable (strong Internal Controls over Financial Reporting with IT General Controls).
 - Data extraction - The steps taken to extract the data into the notebook (whether from a database or file). Include an assessment of the data as initially retrieved.
 - Data transformation - The tools, procedures and techniques used to get the data into an analyzable state.
 - Test procedures - Including the isolation of data and graphical representations.
 - Test results - Any items of note, including deviations from expectations.
-- Session info - The packages and version of R used for the analysis, with `sessionInfo()`
+- Session info - The packages and version of R used for the analysis, with `sessionInfo()`.
 
 Within an RMarkdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.
 
@@ -66,7 +66,7 @@ When you're ready to preview your report, all you need to do is 'knit' and you'r
 
 ## Export files
 
-You may wish to keep some data files to aid in file review. Most standard exports for regular consumption would be CSV or Excel files. You can write to a CSV using `write.csv()`, although the readr package includes a handy `write_excel_csv()` to prepare files that can be easily read by Excel.
+You may wish to keep some data files to aid in file review. Most standard exports for regular consumption would be CSV or Excel files. You can write to a CSV using `write.csv()`, and the readr package includes a handy `write_excel_csv()` to prepare files that can be easily read by Excel.
 
 ```{r, message = FALSE}
 library(tidyverse)
@@ -87,7 +87,7 @@ Sometimes you may want to retain whole datasets, which can be unwieldy. The **ar
 
 With the same general ledger data, lets use `write_parquet()` to export and then compare the sizes to the CSV format:
 
-```{r}
+```{r, message = FALSE}
 library(arrow)
 
 write_parquet(gl, 'gl.parquet')
@@ -95,13 +95,14 @@ write_parquet(gl, 'gl.parquet')
 #File comparison
 csv <- utils:::format.object_size(file.size('gl.csv'), "auto")
 parq <- utils:::format.object_size(file.size('gl.parquet'), "auto")
-
+```
+```{r}
 print(paste('File size differences. CSV:', csv, '- Parquet:', parq))
 ```
 
-The size difference is almost a magnitude apart!
+The size difference is significant, and its not unusual to achieve file size reductions of up to 90%, especially when compared to a CSV output.
 
-When you're ready to read the data, you can use `read_parquet()` to bring it back into R.
+When you're ready to read the data back in, you can use `read_parquet()` to bring it into R.
 
 ```{r}
 gl2 <- read_parquet('gl.parquet')

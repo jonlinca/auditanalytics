@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-10-22" />
+<meta name="date" content="2020-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,19 +306,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Setup</h1>
+<p>The next set of technical chapters are intended to give you more hands-on guidance for using R in an audit environment. You should have R and RStudio installed, as well as some of the packages we intend to use.</p>
 <p>There are countless number of guides to setting up your local R and RStudio environment. If you’re learning on your own, its easy to get some of the below applications and packages installed.</p>
 <div id="setup-r" class="section level2">
 <h2><span class="header-section-number">4.1</span> R with RStudio</h2>
-<p>One of the most respected introductions to R is <a href="https://r4ds.had.co.nz/introduction.html">R for Data Science</a> by Hadley and Garrett, and the <a href="https://r4ds.had.co.nz/introduction.html#prerequisites">Prerequisities</a> section is set up for installing R.</p>
+<p>One of the most respected introductions to R is <a href="https://r4ds.had.co.nz/introduction.html">R for Data Science</a> by Hadley Wickham and Garrett Grolemund, and the <a href="https://r4ds.had.co.nz/introduction.html#prerequisites">Prerequisities</a> section is set up for installing R.</p>
 </div>
 <div id="common-packages" class="section level2">
 <h2><span class="header-section-number">4.2</span> Common packages</h2>
 <p>We will use several common packages; if you haven’t installed them yet, feel free to install them into R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;tidyverse&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>, <span class="st">&#39;DBI&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;tidyverse&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>, <span class="st">&#39;DBI&#39;</span>, <span class="st">&#39;devtools&#39;</span>))</span></code></pre></div>
 </div>
 <div id="audit-package-helpers" class="section level2">
 <h2><span class="header-section-number">4.3</span> Audit Package helpers</h2>
 <p>For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package <a href="https://github.com/jonlinca/galvanizer">galvanizer</a> to use Results information in the applied analytics components.</p>
+<p>As these packages are in active development, they are not currently available on CRAN. You are able to install any package on GitHub - simply install <a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a> on your computer, which allows you to bundle your own packages.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setup.html#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;jonlinca/galvanizer&#39;</span>)</span></code></pre></div>
 </div>
 <div id="github-or-another-git-related-brand" class="section level2">

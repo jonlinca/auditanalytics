@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-10-22" />
+<meta name="date" content="2020-10-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -306,22 +306,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="report" class="section level1">
 <h1><span class="header-section-number">Chapter 10</span> Report</h1>
-<p>Communicating the results of your testing, from start to finish, is essential in having others depend and interpret your results. While classic methods of documentation include Word memos-to-file, and perhaps even Excel documents that appear to be filled to the brim with essays, the audit practice could take on a more sophisticated and modern approach to documentation.</p>
-<p><strong>Notebooks</strong> are a great medium to communicate your results in. Specifically, <a href="https://rmarkdown.rstudio.com">RMarkdown</a> helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book (like this one) if you so desire! You can export &amp; attach files that capture your data at a point in time, so others can review your work and data too.</p>
+<p>Communicating the results of your testing, from data retireval to conclusions, is essential in having others depend and interpret your results. While traditional methods of documentation include Word memos-to-file, and even Excel documents that are filled to the brim with essays, the audit practice can easily take advantage of a more modern and integrated approach to documentation.</p>
+<p><strong>Notebooks</strong> are a great medium to communicate your results in. Specifically, <a href="https://rmarkdown.rstudio.com">RMarkdown</a> helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book if you so desire (like this one)! You can export &amp; attach files that capture your data at a point in time, so others can review your work and data too.</p>
 <div id="report-structure" class="section level2">
 <h2><span class="header-section-number">10.1</span> Report Structure</h2>
 <p>AU-C section 230, <em>Audit Documentation</em>, outlines the general level of documentation expected in an audit working paper. The level of documentation should meet a reperformance standard where an experienced auditor can pick up and be able to replicate your thought process and work flow.</p>
-<p>From an Audit Data Analytics (ADA) perspective, you should also consider having the following sections in each notebook you produce. These were partially derived from <span class="citation">(AICPA <a href="#ref-aicpa2018guide" role="doc-biblioref">2018</a>)</span>:</p>
+<p>From an Audit Data Analytics (ADA) perspective, you should also consider having the following sections in each notebook you produce, inspired by the AICPA’s Guide to Data Analytics<span class="citation">(AICPA <a href="#ref-aicpa2018guide" role="doc-biblioref">2018</a>)</span>:</p>
 <ul>
 <li>The auditor’s name &amp; date</li>
-<li>Objective - What objective is being met with the procedure</li>
-<li>Risks addressed - The risk of material statement is the procedure addressing, at the financial statement level or assertion level</li>
+<li>Objective - What objective is being met with the procedure.</li>
+<li>Risks addressed - The risk of material statement is the procedure addressing, at the financial statement level or assertion level.</li>
 <li>Data source - The sources of the underlying data, and how it was appropriate relative to the procedure performed. How was the data deemed to be reliable (strong Internal Controls over Financial Reporting with IT General Controls).</li>
 <li>Data extraction - The steps taken to extract the data into the notebook (whether from a database or file). Include an assessment of the data as initially retrieved.</li>
 <li>Data transformation - The tools, procedures and techniques used to get the data into an analyzable state.</li>
 <li>Test procedures - Including the isolation of data and graphical representations.</li>
 <li>Test results - Any items of note, including deviations from expectations.</li>
-<li>Session info - The packages and version of R used for the analysis, with <code>sessionInfo()</code></li>
+<li>Session info - The packages and version of R used for the analysis, with <code>sessionInfo()</code>.</li>
 </ul>
 <p>Within an RMarkdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb394-1"><a href="report.html#cb394-1"></a><span class="fu"># Objective</span></span>
@@ -360,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="export-files" class="section level2">
 <h2><span class="header-section-number">10.2</span> Export files</h2>
-<p>You may wish to keep some data files to aid in file review. Most standard exports for regular consumption would be CSV or Excel files. You can write to a CSV using <code>write.csv()</code>, although the readr package includes a handy <code>write_excel_csv()</code> to prepare files that can be easily read by Excel.</p>
+<p>You may wish to keep some data files to aid in file review. Most standard exports for regular consumption would be CSV or Excel files. You can write to a CSV using <code>write.csv()</code>, and the readr package includes a handy <code>write_excel_csv()</code> to prepare files that can be easily read by Excel.</p>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="report.html#cb396-1"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb396-2"><a href="report.html#cb396-2"></a><span class="kw">library</span>(DBI)</span>
 <span id="cb396-3"><a href="report.html#cb396-3"></a></span>
@@ -375,25 +375,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb396-12"><a href="report.html#cb396-12"></a><span class="kw">write.csv</span>(gl, <span class="st">&#39;gl.csv&#39;</span>)</span></code></pre></div>
 <p>Sometimes you may want to retain whole datasets, which can be unwieldy. The <strong>arrow</strong> package, which is designed for advanced data processing, contains an open source data format called Parquet. The main advantage of Parquet is its ability to write and shrink even the most basic of data structures into a barebone size, making fields portable and quick to read.</p>
 <p>With the same general ledger data, lets use <code>write_parquet()</code> to export and then compare the sizes to the CSV format:</p>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="report.html#cb397-1"></a><span class="kw">library</span>(arrow)</span></code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;arrow&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:utils&#39;:
-## 
-##     timestamp</code></pre>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="report.html#cb400-1"></a><span class="kw">write_parquet</span>(gl, <span class="st">&#39;gl.parquet&#39;</span>)</span>
-<span id="cb400-2"><a href="report.html#cb400-2"></a></span>
-<span id="cb400-3"><a href="report.html#cb400-3"></a><span class="co">#File comparison</span></span>
-<span id="cb400-4"><a href="report.html#cb400-4"></a>csv &lt;-<span class="st"> </span>utils<span class="op">:::</span><span class="kw">format.object_size</span>(<span class="kw">file.size</span>(<span class="st">&#39;gl.csv&#39;</span>), <span class="st">&quot;auto&quot;</span>)</span>
-<span id="cb400-5"><a href="report.html#cb400-5"></a>parq &lt;-<span class="st"> </span>utils<span class="op">:::</span><span class="kw">format.object_size</span>(<span class="kw">file.size</span>(<span class="st">&#39;gl.parquet&#39;</span>), <span class="st">&quot;auto&quot;</span>)</span>
-<span id="cb400-6"><a href="report.html#cb400-6"></a></span>
-<span id="cb400-7"><a href="report.html#cb400-7"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;File size differences. CSV:&#39;</span>, csv, <span class="st">&#39;- Parquet:&#39;</span>, parq))</span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="report.html#cb397-1"></a><span class="kw">library</span>(arrow)</span>
+<span id="cb397-2"><a href="report.html#cb397-2"></a></span>
+<span id="cb397-3"><a href="report.html#cb397-3"></a><span class="kw">write_parquet</span>(gl, <span class="st">&#39;gl.parquet&#39;</span>)</span>
+<span id="cb397-4"><a href="report.html#cb397-4"></a></span>
+<span id="cb397-5"><a href="report.html#cb397-5"></a><span class="co">#File comparison</span></span>
+<span id="cb397-6"><a href="report.html#cb397-6"></a>csv &lt;-<span class="st"> </span>utils<span class="op">:::</span><span class="kw">format.object_size</span>(<span class="kw">file.size</span>(<span class="st">&#39;gl.csv&#39;</span>), <span class="st">&quot;auto&quot;</span>)</span>
+<span id="cb397-7"><a href="report.html#cb397-7"></a>parq &lt;-<span class="st"> </span>utils<span class="op">:::</span><span class="kw">format.object_size</span>(<span class="kw">file.size</span>(<span class="st">&#39;gl.parquet&#39;</span>), <span class="st">&quot;auto&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="report.html#cb398-1"></a><span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&#39;File size differences. CSV:&#39;</span>, csv, <span class="st">&#39;- Parquet:&#39;</span>, parq))</span></code></pre></div>
 <pre><code>## [1] &quot;File size differences. CSV: 197.1 Kb - Parquet: 39.7 Kb&quot;</code></pre>
-<p>The size difference is almost a magnitude apart!</p>
-<p>When you’re ready to read the data, you can use <code>read_parquet()</code> to bring it back into R.</p>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="report.html#cb402-1"></a>gl2 &lt;-<span class="st"> </span><span class="kw">read_parquet</span>(<span class="st">&#39;gl.parquet&#39;</span>)</span>
-<span id="cb402-2"><a href="report.html#cb402-2"></a></span>
-<span id="cb402-3"><a href="report.html#cb402-3"></a><span class="kw">identical</span>(gl, gl2)</span></code></pre></div>
+<p>The size difference is significant, and its not unusual to achieve file size reductions of up to 90%, especially when compared to a CSV output.</p>
+<p>When you’re ready to read the data back in, you can use <code>read_parquet()</code> to bring it into R.</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="report.html#cb400-1"></a>gl2 &lt;-<span class="st"> </span><span class="kw">read_parquet</span>(<span class="st">&#39;gl.parquet&#39;</span>)</span>
+<span id="cb400-2"><a href="report.html#cb400-2"></a></span>
+<span id="cb400-3"><a href="report.html#cb400-3"></a><span class="kw">identical</span>(gl, gl2)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 
 </div>

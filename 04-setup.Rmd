@@ -2,23 +2,27 @@
 
 # Setup 
 
+The next set of technical chapters are intended to give you more hands-on guidance for using R in an audit environment. You should have R and RStudio installed, as well as some of the packages we intend to use.
+
 There are countless number of guides to setting up your local R and RStudio environment. If you're learning on your own, its easy to get some of the below applications and packages installed.
 
 ## R with RStudio {#setup-r}
 
-One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley and Garrett, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
+One of the most respected introductions to R is [R for Data Science](https://r4ds.had.co.nz/introduction.html) by Hadley Wickham and Garrett Grolemund, and the [Prerequisities](https://r4ds.had.co.nz/introduction.html#prerequisites) section is set up for installing R. 
 
 ## Common packages
 
 We will use several common packages; if you haven't installed them yet, feel free to install them into R:
 
 ```{r, eval = FALSE}
-install.packages(c('tidyverse', 'lubridate', 'httr', 'jsonlite', 'DBI'))
+install.packages(c('tidyverse', 'lubridate', 'httr', 'jsonlite', 'DBI', 'devtools'))
 ```
 
 ## Audit Package helpers
 
 For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package [galvanizer](https://github.com/jonlinca/galvanizer) to use Results information in the applied analytics components.
+
+As these packages are in active development, they are not currently available on CRAN. You are able to install any package on GitHub - simply install [RTools](https://cran.r-project.org/bin/windows/Rtools/) on your computer, which allows you to bundle your own packages. 
 
 ```{r, eval = FALSE}
 remotes::install_github('jonlinca/galvanizer')

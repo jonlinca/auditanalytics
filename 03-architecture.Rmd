@@ -40,7 +40,7 @@ Any software you consider should be able to talk to your company's internal and 
 
 [R](https://www.r-project.org) is a programming language with an emphasis on statistics. It is considered free software, free in the perspective that you can run, distribute, and change it as you like. 
 
-What makes R so great is the large suite of packages that are available to use to help analyze information. What doesn't exist in base R will likely have been developed by someone else: there are hundreds of packages that support data connectivity ([DBI](https://cran.r-project.org/web/packages/DBI/), [xlsx](https://cran.r-project.org/web/packages/xlsx/)), day-to-day manipulation and analysis ([dplyr](https://cran.r-project.org/web/packages/dplyr/), [ggplot2](https://cran.r-project.org/web/packages/ggplot2/)), and even auditing ([jfa](https://cran.r-project.org/web/packages/jfa/), [MUS](https://cran.r-project.org/web/packages/MUS/)). CRAN is the central repository for all these packages that meet minimum quality standards.
+What makes R so great is the large suite of packages that are available to use to help analyze information. This is distributed through [CRAN](https://cran.r-project.org), which is the central repository for R packages that meet minimum quality standards. What doesn't exist in base R will likely have been developed by someone else: there are hundreds of packages that support data connectivity ([DBI](https://cran.r-project.org/web/packages/DBI/), [xlsx](https://cran.r-project.org/web/packages/xlsx/)), day-to-day manipulation and analysis ([dplyr](https://cran.r-project.org/web/packages/dplyr/), [ggplot2](https://cran.r-project.org/web/packages/ggplot2/)), and even auditing ([jfa](https://cran.r-project.org/web/packages/jfa/), [MUS](https://cran.r-project.org/web/packages/MUS/)). 
 
 As R is a language, you may want to consider an application to code in, similar to how you may write memos in Microsoft Word. [RStudio Desktop](https://rstudio.com) is an integrated development environment (IDE) that has an open source version and is free to use. There are also free versions of RStudio Server, as well as commercially supported versions of its Desktop, Server, and two unique products that we will go into more later - Package Manager and Connect.
 
@@ -48,7 +48,7 @@ With both R and RStudio installed, you can perform the minimum requirements of y
 
 ## Code repositories 
 
-Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (V1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file (now V2), but Person B will not benefit from the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.
+Here is a typical logistical challenge faced in even the smallest of audit teams. Person A will write the first version of a script to download data (version 1). Person B in the team may want to use it to download data from elsewhere, so they will get an emailed script file from person B, modify it, and start to use it. Person A may make improvements to their own file (now version 2), but Person B will not benefit from the improvements. Knowledge are immediately siloed, and changes become more difficult to share between auditors.
 
 One of the most effective ways to solve this problem is to leverage a code repository (also known as version control). While version control has several software engineering advantages, the most notable advantages for audit teams are:
 
@@ -69,37 +69,37 @@ The basics of git are:
 - Commit code on your local computer.
 - Push code from your local computer to the remote server.
 
-While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. The git hole can go very deep, so if things don't go according to plan, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
+While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If using git sometimes results in infinite frustration, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
 
 Several different server technologies support git - [GitHub](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
 
 ### Packages
 
-As you write more code and templates, you will eventually want to share these new techniques with others on your team. Packages put your best practices together, including templates, functions to solve common problems, and templates for common workflows. In short: packages contain tasks help you do your job, and save you time.
+As you write more code and templates, you will eventually want to share these new techniques with others on your team. Packages put your best practices together, including templates, functions to solve common problems, and templates for common workflows. In short: packages contain tasks to help you do your job and save you time.
 
 Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team's workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.
 
 How do you share packages? You certainly don't not need to force your team to copy-and-paste code or even a templates from a central folder! The most elegant way to distribute your code is via hosting packages on a code or package repository. These repositories (hosted internally or externally) enable your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive. 
 
-The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don't call it auditR.
+The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don't call it auditR!
 
 ## Data products
 
 All auditors face this problem at one point or another. An audit finding doesn't matter until someone takes accountability for it. And if an audit finding is too vague, or does not have the buy-in from the right stakeholders, it is as good as unsolicited advice.
 
-The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asks for an email instead?
+The data analysis you deliver are vulnerable to the same expectations. Not only do they need to be objective and accurate, but they also need to be accessible, relevant, and delivered at the right time. If there are too many barriers for entry or usage, someone will revert back to their old processes and methods. Here is a sobering thought: when was the last time you made a beautiful visualization for someone, only to be asked for the detailed Excel worksheet afterwards? Or instead of an automated report that users can self-serve, someone asked you to just forward them an email instead?
 
 Data products are deliverable that enhance your customer's ability to gather, process and analyze information. They facilitate decision making and are integrated into their processes. They should be designed thoughtfully and simply, masking the complexity underneath. In short, they should make your co-auditors feel like rockstars. The reports you write and code you develop should strive for the goal of being accessible by your team, on-time and on-demand. 
 
 ### Galvanize Highbond
 
-[Galvanize](https://www.wegalvanize.com), the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. One of their modules, Highbond Results, is an unrivaled for audit exception and remediation workflow.
+[Galvanize](https://www.wegalvanize.com), the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. 
 
-The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers. 
-
-While Galvanize is a separate, third-party product that is not directly in the R universe, it does integrate with R through its API. The API enables you to upload findings and results directly into a Results set, allowing you to create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams that design their workpaper environments effectively.
+**Highbond Results** is an unrivaled for audit exception and remediation workflow. The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers. 
 
 Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.
+
+While Galvanize and its products (most notably, Projects and Results) are distinct products not directly in the R universe, it does integrate with R through its **Application Programming Interface** (API). An API allows you to interact with a cloud service via code, and Highbond's API enables you to upload findings and results directly into a Results set. This enables you to handle the data on R, and then upload the analyzed results online so you can create the workflows on the website. The API also enables access to its Projects data that your audit team may already use to document audits, offering advantages to audit teams that design their workpaper environments effectively.
 
 Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high availability and security maintained by a professional team. Galvanize supports the [security](https://www.wegalvanize.com/trust/), design and coding for hosting a tool online, allowing you to focus on designing workflows for your internal customers.
 
@@ -127,7 +127,9 @@ An alternative is also [miniCRAN](https://cran.r-project.org/web/packages/miniCR
 
 ## Data sources
 
-The end goal of automation ETLs, and creating and hosting data products for audit customers to consume. To achieve these goals, an audit team needs direct, programmatic access to the data being audited. By programmatic, we mean that code can be used to access data, versus going through a front-end user interface. 
+To create and host a data product that is always up-to-date, it needs to be directly connected to data sources and can grab data on-demand to refresh itself. Any manual steps in this process, whether manually triggering a report on a website, or waiting for an email with a data file attachment, means the data has an intolerable source of error - the person who is tasked with manually copying the file to the folder and manually refreshing the data product.
+
+A modern audit team will need direct, programmatic access to the data being audited. By programmatic, we mean that code can be used to access data, versus going through a front-end graphical user interface or website. This can be achieved whether internal or external data sources are used.
 
 ### Internal databases
 
@@ -135,8 +137,11 @@ At its core, databases hold transactional information that runs the business. Da
 
 The language of choice to access internal databases is Structured Query Language (SQL). As a defacto standard for accessing databases since 1970's, all relational databases still leverage SQL. While each brand may have subtle nuances in the way SQL works, this essential language will allow your audit team to access a majority of sources within the company. Non-relational databases and NoSQL are becoming more mainstream, as well as graph databases, so your audit team will need to tool up as necessary.
 
-Audit teams historically had a bad reputation for 'bringing down the database'. While this used to be quite common, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. Great caution should still be taken, where you should avoid querying any production database that supports customers or staff directly, unless absolutely necessary. Other strategies are useful depending on the circumstances:
+The preferred approach is to get data from an internal **data warehouse**. A data warehouse mirrors the data activity from an application's database - the application processes data and acts as an OLTP, and it will send any processed data to the data warehouse which is an OLAP. That way, critical business functionality can continue on the application with its dedicated computing resources, and intense queries can be directed to the data warehouse with its own set of computing resources.
 
+Audit teams historically had a bad reputation for 'bringing down the database', meaning that an attempt to download data crashed the database and made it unaccessible to the business. While this historically used to be a common catastrophe, nowadays computing power is so accessible and cheap that the fear is generally unwarranted. An auditor should still take precautions, and you should avoid querying any production database that supports customers or staff directly unless absolutely necessary. If needed, some other strategies are useful depending on the circumstances:
+
+- Test queries in a test application database, before trying them in production,
 - Filter the data with WHERE clauses,
 - Perform joins in the database, instead of downloading multiple tables individually and joining them on the desktop,
 - Download data in chunks or segments, split by day, week or month, or
@@ -146,14 +151,14 @@ Audit teams historically had a bad reputation for 'bringing down the database'. 
 
 As more applications move to the cloud, using SQL to access data becomes more difficult. While some of this data can be brought into an internal data warehouse or used as an integration, more often than not transactional data is left online within the tool.
 
-Certain online cloud software providers will make an Application Programming Interface (API) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like [httr](https://cran.r-project.org/web/packages/httr/index.html) and digested with [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html).
+Certain online cloud software providers will make an [Application Programming Interface (API)](#APIs) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like [httr](https://cran.r-project.org/web/packages/httr/index.html) and digested with [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html).
 
 While APIs enable audit teams to retrieve data, it adds a layer of difficulty in obtaining data:
 
 - Each API behaves differently - authentication, calls, and the data return all may vary between systems.
 - APIs endpoints, the part that allows a tool to query it, tend to be highly specific-use cases, and may provide a limited scope of data at one time.
 - Data may not be in the format that you want, or even exist - you are at the mercy what the API supplies.
-- If an API does allow for a larger data download, it may be limited by pagnation, where multiple results are spread out over multiple pages.
+- If an API does allow for a larger data download, it may be limited by pagination, where multiple results are spread out over multiple pages.
 - APIs may be 'rate-limited', which means it may restrict the number of queries, whether in parallel or in sequence.
 
 Tips for audit teams needing to rely on cloud providers:
