@@ -6,10 +6,6 @@ Auditors must recognize that not all tests (and lines that meet these tests) imm
 
 For this section we will use the company GL database.
 
-```{r include = FALSE}
-library(flair)
-```
-
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr) 
 library(tidyr) 
@@ -17,8 +13,7 @@ library(lubridate)
 library(DBI) 
 library(ggplot2)
 library(gt) # Used for formatting outputs
-library(pryr) # Used casually in the text chapter
-library(stringr) # tidyverse text search and manipulation
+library(pryr) # Used to analyze encoding in text chapter
 library(stringi) # specialized string processing
 
 dir.create("data", showWarnings = FALSE)
@@ -60,13 +55,6 @@ gl %>%
   filter(t_over_te) %>%
   select(je_num, amount, everything())
 ```
-
-```{r, echo = FALSE}
-# decorate("te_v1") %>%
-#   flair_args()
-#   #flair("amount >= 5000")
-```
-
 When performing amount or threshold testing, you may be more interested in the actual magnitude, and not necessarily the direction. This is especially true within accounting matters, where the implication of negative and positive amounts change depending on the transaction - i.e., a debit or a credit transaction, or affecting a balance sheet or income statement account can tell a very different story.
 
 In these cases, you may want to consider using absolute values as the comparison. This allows you to capture the magnitude of the change:
@@ -777,7 +765,7 @@ Simple question. What if we wanted to find Quebec City?
 
 ```{r}
 canada %>%
-  dplyr::filter(str_detect(capital, 'Quebec'))
+  dplyr::filter(grepl('Quebec', capital))
 ```
 
 There are no hits! But why is that? If you look closely at Quebec, you'll notice the accented é in Quêbec City. Unfortunately, regex is quite strict on character matching, and you will need to prepare on how to deal with these situations. (Did you notice that the accented é is in Québec City but not the province of Quebec? Why? The province is the English constitutional name and therefore has no diacritics.[@quebec])

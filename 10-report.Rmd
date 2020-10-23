@@ -1,5 +1,116 @@
 # Report
 
-## RMarkdown
+Communicating the results of your testing, from start to finish, is essential in having others depend and interpret your results. While classic methods of documentation include Word memos-to-file, and perhaps even Excel documents that appear to be filled to the brim with essays, the audit practice could take on a more sophisticated and modern approach to documentation.
 
-## Export
+**Notebooks** are a great medium to communicate your results in. Specifically, [RMarkdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book (like this one) if you so desire! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
+
+## Report Structure
+
+AU-C section 230, *Audit Documentation*, outlines the general level of documentation expected in an audit working paper. The level of documentation should meet a reperformance standard where an experienced auditor can pick up and be able to replicate your thought process and work flow.
+
+From an Audit Data Analytics (ADA) perspective, you should also consider having the following sections in each notebook you produce. These were partially derived from [@aicpa2018guide]:
+
+- The auditor's name & date
+- Objective - What objective is being met with the procedure
+- Risks addressed - The risk of material statement is the procedure addressing, at the financial statement level or assertion level
+- Data source - The sources of the underlying data, and how it was appropriate relative to the procedure performed. How was the data deemed to be reliable (strong Internal Controls over Financial Reporting with IT General Controls).
+- Data extraction - The steps taken to extract the data into the notebook (whether from a database or file). Include an assessment of the data as initially retrieved.
+- Data transformation - The tools, procedures and techniques used to get the data into an analyzable state.
+- Test procedures - Including the isolation of data and graphical representations.
+- Test results - Any items of note, including deviations from expectations.
+- Session info - The packages and version of R used for the analysis, with `sessionInfo()`
+
+Within an RMarkdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.
+
+```markdown
+# Objective
+
+# Risks addresses
+
+# Data source
+```
+
+You can also embed code in the form of a chunk. You would create a chunk with ```` ```{r}````, enter in your R code, and end it with ```` ``` ````. So as an example, with our database, you could document the data retrieval procedure with:
+
+````markdown
+# Data source
+
+The general ledger data source was provided by the ERP service provider,
+and uploaded to their super secure file storage.
+
+`r ''````{r}
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
+
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
+
+print(con) # Shows the active database connection
+```
+
+## Control totals
+We confirmed that the general ledger data had the following characteristics, 
+and matched the control totals as provided by the client:
+
+`r ''````{r}
+gl <- tbl(con, 'gl') %>%
+  collect()
+
+nrow(gl) # Number of rows
+ncol(gl) # Number of columns
+glimpse(gl) # Preview of column contents
+```
+
+````
+
+When you're ready to preview your report, all you need to do is 'knit' and you're ready to go. [Learn the basics](https://rmarkdown.rstudio.com/lesson-1.html) on how to use RMarkdown. It is a good idea to start developing RMarkdown templates for your team to reuse We will cover where to retain these templates when you are create your own [Audit R Package](#auditpackage).
+
+## Export files
+
+You may wish to keep some data files to aid in file review. Most standard exports for regular consumption would be CSV or Excel files. You can write to a CSV using `write.csv()`, although the readr package includes a handy `write_excel_csv()` to prepare files that can be easily read by Excel.
+
+```{r, message = FALSE}
+library(tidyverse)
+library(DBI)
+
+download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
+             destfile = "data/rauditanalytics.sqlite", mode = "wb")
+
+con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
+
+gl <- tbl(con, 'gl') %>%
+  collect()
+
+write.csv(gl, 'gl.csv')
+```
+
+Sometimes you may want to retain whole datasets, which can be unwieldy. The **arrow** package, which is designed for advanced data processing, contains an open source data format called Parquet. The main advantage of Parquet is its ability to write and shrink even the most basic of data structures into a barebone size, making fields portable and quick to read.
+
+With the same general ledger data, lets use `write_parquet()` to export and then compare the sizes to the CSV format:
+
+```{r}
+library(arrow)
+
+write_parquet(gl, 'gl.parquet')
+
+#File comparison
+csv <- utils:::format.object_size(file.size('gl.csv'), "auto")
+parq <- utils:::format.object_size(file.size('gl.parquet'), "auto")
+
+print(paste('File size differences. CSV:', csv, '- Parquet:', parq))
+```
+
+The size difference is almost a magnitude apart!
+
+When you're ready to read the data, you can use `read_parquet()` to bring it back into R.
+
+```{r}
+gl2 <- read_parquet('gl.parquet')
+
+identical(gl, gl2)
+```
+
+```{r, include = FALSE}
+# Remove files
+file.remove('gl.csv')
+file.remove('gl.parquet')
+```
