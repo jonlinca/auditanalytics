@@ -4,7 +4,7 @@ Communicating the results of your testing, from data retireval to conclusions, i
 
 **Notebooks** are a great medium to communicate your results in. Specifically, [RMarkdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book if you so desire (like this one)! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
 
-## Report Structure
+## Report Structure {#report-structure}
 
 AU-C section 230, *Audit Documentation*, outlines the general level of documentation expected in an audit working paper. The level of documentation should meet a reperformance standard where an experienced auditor can pick up and be able to replicate your thought process and work flow.
 
@@ -16,19 +16,20 @@ From an Audit Data Analytics (ADA) perspective, you should also consider having 
 - Data source - The sources of the underlying data, and how it was appropriate relative to the procedure performed. How was the data deemed to be reliable (strong Internal Controls over Financial Reporting with IT General Controls).
 - Data extraction - The steps taken to extract the data into the notebook (whether from a database or file). Include an assessment of the data as initially retrieved.
 - Data transformation - The tools, procedures and techniques used to get the data into an analyzable state.
+- Data completeness - The evaluation of ensuring all expected information is included, and has not introduced items not-in-scope or inadvertently left information out.
 - Test procedures - Including the isolation of data and graphical representations.
 - Test results - Any items of note, including deviations from expectations.
 - Session info - The packages and version of R used for the analysis, with `sessionInfo()`.
 
 Within an RMarkdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.
 
-```markdown
+````markdown
 # Objective
 
 # Risks addresses
 
 # Data source
-```
+````
 
 You can also embed code in the form of a chunk. You would create a chunk with ```` ```{r}````, enter in your R code, and end it with ```` ``` ````. So as an example, with our database, you could document the data retrieval procedure with:
 

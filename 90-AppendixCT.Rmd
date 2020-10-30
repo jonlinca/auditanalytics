@@ -1,0 +1,58 @@
+# (PART) Appendix {-}
+
+# Continuous testing methodology {#appendixct}
+
+## Support for Continuous Auditing
+
+There is a lot of hype around continuous controls testing, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.
+
+This should not discourage your team in applying analytics on a continuous basis. Rather, it gives you a point to open up conversation with external auditors about how the tests of controls offer greater assurance at a higher degree of efficiency.
+
+## The requirements for evaluting ICFR
+
+The Security and Exchange Commission (SEC) provides oversight to the Public Company Accounting Oversight Board (PCAOB), and the PCAOB provides many of the Audit Standards that accounting firms interpret. The SEC explicitly avoids detailing guidance and providing examples to test controls, encouraging companies to design controls to mitigate the risk to the reliability of financial reporting. [@sec-princples-based] 
+
+As a result, if we take a first principles approach, *"The objective of internal control over financial reporting ("ICFR") is to provide reasonable assurance regarding the reliability of financial reporting and the preparation of financial statements for external purposes in accordance with generally accepted accounting principles ("GAAP")."* (section A)
+
+Monitoring activities, including *"controls to monitor results of operations and controls to monitor other controls"*, also help address ICFR (A.1.b), and *"For any individual control, different combinations of the nature, timing, and extent of evaluation procedures may provide sufficient evidence."* (A.2). More specifically, the evidence of the ICFR is allowed to come from on-going monitoring activities (A.2.b), and even to the point where *"evidence from on-going monitoring is sufficient and that no further direct testing is required."* (A.2.b)  
+
+This enables us to critically consider the usage of a strong audit data analytics program in the evaluation of the ICFR. The onus then, is on you to demonstrate high levels of objectivity and competency of the individuals and team for the monitoring program: *"Management’s on-going monitoring activities may provide sufficient evidence when the monitoring activities are carried out by individuals with a high degree of objectivity."* (E.2)
+
+AS 2201 does allow for the use of entity level controls as conducted by internal audit (.24) [@pcaob-as2201] to lower the risk of other controls (.47), and providing sufficient documentation and evidence of operation around the program (.45) may be enough to contribute to the operating effectiveness and evaluation of a control and risk.
+
+## Determining population tolerable error rate
+
+You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. 
+
+One key method to help acknowledge that errors do indeed exist is through clarifying the *population tolerable error rate* - i.e. the maximum rate of deviations of a prescribed control (.34) (@pcaob-as2315). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met. 
+
+Typical sampling asks the auditor to consider control risk, or the *risk of incorrect acceptance* - i.e. the risk that a control can be deemed effective when it is not. However, when an entire population is considered, this risk effectively reduces to zero, as there is no sampling conducted.
+
+Traditionally, sample sizes are calculated when you know the population tolerable error rate, and the risk of incorrect acceptance. Where $\beta$ is the risk of incorrect acceptance, $p_{t}$ is the population tolerable error rate, and $n$ is the sample size, we can derive the sample size necessary to satisfy audit sampling. (@sampling-technical) We assume an expectation of no errors in the population with the below:
+
+$$
+n = \frac{ln(\beta)}{ln(1 - p_{t})}
+$$
+
+In R, if we were to determine the sample size necessary with a risk of incorrect acceptance of 5% and tolerable error percentage of 5%, our sample size would be:
+
+```{r}
+b <- 0.05
+pt <- 0.05
+log(b) / log(1 - pt)
+```
+
+If it is difficult to ascertain what the population tolerable error rate may be, it is possible to work backwards from both a *sample size* and an assumption on the control risk. Derived from Sampling Guide technical notes (@sampling-technical), the population tolerable error rate can be defined as:
+
+$$
+p_{t} = -e^\frac{ln(\beta)}{n} + 1
+$$
+From the previous example, lets say our sample size was 59, and our risk of incorrect acceptance was 10%, we can estimate the population tolerable error rates.
+
+```{r}
+n <- 59
+b <- 0.05
+-exp(1)^(log(b) / n) + 1
+```
+
+With this, your methodology could be derived from existing sampling, and you could set your threshold of control operating effectiveness, when tested on the full population, to accept 5% of samples with errors.

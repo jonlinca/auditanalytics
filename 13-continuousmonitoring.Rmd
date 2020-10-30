@@ -1,0 +1,12 @@
+# Continuous testing
+
+Continuous Monitoring (CM) and Continuous Auditing (CA, or automated controls testing) relies on the same premise - that a specific entity of interest is being evaluated on a high frequency and regular basis. Both definitions are used inconsistently in the audit industry - I tend to rely on CM for general risk measurement, and CA for controls.
+
+Continuous Auditing is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is exclusively pointed towards sampling. See the [appendix](#appendixct) on how to help get started on establishing an agreeable methodology.
+
+## Workflow
+
+## Why Highbond Results
+
+## Example
+

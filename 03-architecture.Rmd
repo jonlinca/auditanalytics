@@ -1,6 +1,6 @@
 # Architecture
 
-```{r architecture, fig.align='center', fig.cap="Internal Audit Data Analytics Architecture", fig.dim=c(3, 6), out.width="100%", echo = FALSE}
+```{r architecture, fig.align='center', fig.cap="Internal Audit Data Analytics Architecture", out.width="100%", echo = FALSE}
 DiagrammeR::grViz("
 digraph boxes_and_circles {
 

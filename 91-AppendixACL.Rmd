@@ -1,5 +1,3 @@
-# (PART) Appendix {-}
-
 #  ACL Analytics to R
 
 ACL Analytics is the Audit Command Language and tool, and is useful for analytics teams with novice to expert expertise in analytics. ACL Analytics itself is strongly tied into the Galvanize Highbond cloud software, and development efforts can be done locally prior to uploading into their Robotics tool.

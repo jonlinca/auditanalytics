@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Continious Monitoring | Audit Analytics with R</title>
+  <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Continious Monitoring | Audit Analytics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Continious Monitoring | Audit Analytics with R" />
+  
+  <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+<meta name="author" content="Jonathan Lin" />
+
+
+<meta name="date" content="2020-10-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="auditpackage.html"/>
+<link rel="next" href="applied-adw.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Audit Analytics in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="part"><span><b>I Structure</b></span></li>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
+<li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
+<li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
+<li class="chapter" data-level="2.4" data-path="approach.html"><a href="approach.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>2.4</b> Always deliver useful product</a></li>
+<li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
+<li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#architecture-r"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
+<li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#internal-databases"><i class="fa fa-check"></i><b>3.4.1</b> Internal databases</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
+</ul></li>
+<li class="part"><span><b>II Technical</b></span></li>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers</a></li>
+<li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> GitHub (or another git-related brand)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
+<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
+<li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
+<li class="chapter" data-level="7.2.4" data-path="cleaning-data.html"><a href="cleaning-data.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
+<li class="chapter" data-level="7.2.5" data-path="cleaning-data.html"><a href="cleaning-data.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7.2.6" data-path="cleaning-data.html"><a href="cleaning-data.html#cleaning-numerical-dates"><i class="fa fa-check"></i><b>7.2.6</b> Cleaning numerical dates</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="cleaning-data.html"><a href="cleaning-data.html#separate"><i class="fa fa-check"></i><b>7.3</b> Separate</a></li>
+<li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
+<li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
+<li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
+<li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-threshold"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
+<li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="test.html"><a href="test.html#weekend-testing"><i class="fa fa-check"></i><b>9.2.1</b> Weekend testing</a></li>
+<li class="chapter" data-level="9.2.2" data-path="test.html"><a href="test.html#cutoff-testing"><i class="fa fa-check"></i><b>9.2.2</b> Cutoff testing</a></li>
+<li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
+<li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
+<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
+<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
+<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-sequences"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="test.html"><a href="test.html#regex-basics"><i class="fa fa-check"></i><b>9.5.1</b> Regex basics</a></li>
+<li class="chapter" data-level="9.5.2" data-path="test.html"><a href="test.html#starts-or-ends-with-anchors"><i class="fa fa-check"></i><b>9.5.2</b> Starts or Ends with (Anchors)</a></li>
+<li class="chapter" data-level="9.5.3" data-path="test.html"><a href="test.html#crash-course-in-encoding"><i class="fa fa-check"></i><b>9.5.3</b> Crash course in Encoding</a></li>
+<li class="chapter" data-level="9.5.4" data-path="test.html"><a href="test.html#cleaning-text"><i class="fa fa-check"></i><b>9.5.4</b> Cleaning Text</a></li>
+<li class="chapter" data-level="9.5.5" data-path="test.html"><a href="test.html#searching-multiple-fields"><i class="fa fa-check"></i><b>9.5.5</b> Searching Multiple Fields</a></li>
+<li class="chapter" data-level="9.5.6" data-path="test.html"><a href="test.html#regex-further"><i class="fa fa-check"></i><b>9.5.6</b> Further reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#report-structure"><i class="fa fa-check"></i><b>10.1</b> Report Structure</a></li>
+<li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export-files"><i class="fa fa-check"></i><b>10.2</b> Export files</a></li>
+</ul></li>
+<li class="part"><span><b>III Advanced teams</b></span></li>
+<li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a></li>
+<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a><ul>
+<li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
+<li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="continious-monitoring.html"><a href="continious-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continious Monitoring</a><ul>
+<li class="chapter" data-level="13.1" data-path="continious-monitoring.html"><a href="continious-monitoring.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>13.1</b> Support for Continuous Auditing</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="continious-monitoring.html"><a href="continious-monitoring.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>13.1.1</b> The requirements for evaluting ICFR</a></li>
+<li class="chapter" data-level="13.1.2" data-path="continious-monitoring.html"><a href="continious-monitoring.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>13.1.2</b> Determining population tolerable error rate</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="15.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>15.1</b> Documentation</a></li>
+<li class="chapter" data-level="15.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>15.2</b> Passwords</a></li>
+</ul></li>
+<li class="part"><span><b>IV Appendix</b></span></li>
+<li class="chapter" data-level="16" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html"><i class="fa fa-check"></i><b>16</b> ACL Analytics to R</a><ul>
+<li class="chapter" data-level="16.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>16.1</b> Import</a></li>
+<li class="chapter" data-level="16.2" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>16.2</b> Data</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>16.2.1</b> Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>16.3</b> Analyze</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Audit Analytics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="continious-monitoring" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> Continious Monitoring</h1>
+<p>Continuous Monitoring (CM) and Continuous Auditing (CA, or automated controls testing) relies on the same premise - that a specific entity of interest is being evaluated on a high frequency and regular basis. Both definitions are used inconsistently in the audit industry - I tend to rely on CM for general risk measurement, and CA for controls.</p>
+<p>Continuous Auditing is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is exclusively pointed towards sampling.</p>
+<p>In this unit, we’ll cover why its OK to blaze your own trail, and how you can deal with exceptions (that you’ll inevitably find!)</p>
+<div id="support-for-continuous-auditing" class="section level2">
+<h2><span class="header-section-number">13.1</span> Support for Continuous Auditing</h2>
+<p>There is a lot of hype around continuous controls testing, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.</p>
+<p>This should not discourage your team in applying analytics on a continuous basis. Rather, it gives you a point to open up conversation with external auditors about how the tests of controls offer greater assurance at a higher degree of efficiency.</p>
+<div id="the-requirements-for-evaluting-icfr" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> The requirements for evaluting ICFR</h3>
+<p>The Security and Exchange Commission (SEC) provides oversight to the Public Company Accounting Oversight Board (PCAOB), and the PCAOB provides many of the Audit Standards that accounting firms interpret. The SEC explicitly avoids detailing guidance and providing examples to test controls, encouraging companies to design controls to mitigate the risk to the reliability of financial reporting. <span class="citation">(“Commission Guidance Regarding Management’s Report on Internal Control over Financial Reporting Under Section 13(a) or 15(d) of the Securities Exchange Act of 1934; Final Rule” <a href="#ref-sec-princples-based" role="doc-biblioref">2007</a>)</span></p>
+<p>As a result, if we take a first principles approach, <em>“The objective of internal control over financial reporting (”ICFR“) is to provide reasonable assurance regarding the reliability of financial reporting and the preparation of financial statements for external purposes in accordance with generally accepted accounting principles (”GAAP“).”</em> (section A)</p>
+<p>Monitoring activities, including <em>“controls to monitor results of operations and controls to monitor other controls”</em>, also help address ICFR (A.1.b), and <em>“For any individual control, different combinations of the nature, timing, and extent of evaluation procedures may provide sufficient evidence.”</em> (A.2). More specifically, the evidence of the ICFR is allowed to come from on-going monitoring activities (A.2.b), and even to the point where <em>“evidence from on-going monitoring is sufficient and that no further direct testing is required.”</em> (A.2.b)</p>
+<p>This enables us to critically consider the usage of a strong audit data analytics program in the evaluation of the ICFR. The onus then, is on you to demonstrate high levels of objectivity and competency of the individuals and team for the monitoring program: <em>“Management’s on-going monitoring activities may provide sufficient evidence when the monitoring activities are carried out by individuals with a high degree of objectivity.”</em> (E.2)</p>
+<p>AS 2201 does allow for the use of entity level controls as conducted by internal audit (.24, <span class="citation">(“AS 2201: An Audit of Internal Control over Financial Reporting That Is Integrated with an Audit of Financial Statements” <a href="#ref-pcaob-as2201" role="doc-biblioref">2007</a>)</span>) to lower the risk of other controls (.47), and providing sufficient documentation and evidence of operation around the program (.45) may be enough to contribute to the operating effectiveness and evaluation of a control and risk.</p>
+</div>
+<div id="determining-population-tolerable-error-rate" class="section level3">
+<h3><span class="header-section-number">13.1.2</span> Determining population tolerable error rate</h3>
+<p>You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point.</p>
+<p>One key method to help acknowledge that errors do indeed exist is through clarifying the <em>population tolerable error rate</em> - i.e. the maximum rate of deviations of a prescribed control (.34, <span class="citation">(“AS 2315: Audit Sampling” <a href="#ref-pcaob-as2315" role="doc-biblioref">2015</a>)</span>). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met.</p>
+<p>Typical sampling asks the auditor to consider control risk, or the <em>risk of incorrect acceptance</em> - i.e. the risk that a control can be deemed effective when it is not. However, when an entire population is considered, this risk effectively reduces to zero, as there is no sampling conducted.</p>
+<p>Traditionally, sample sizes are calculated when you know the population tolerable error rate, and the risk of incorrect acceptance. Where <span class="math inline">\(\beta\)</span> is the risk of incorrect acceptance, <span class="math inline">\(p_{t}\)</span> is the population tolerable error rate, and <span class="math inline">\(n\)</span> is the sample size, we can derive the sample size necessary to satisfy audit sampling. (<span class="citation">Stewart (<a href="#ref-sampling-technical" role="doc-biblioref">2008</a>)</span>) We assume an expectation of no errors in the population with the below:</p>
+<p><span class="math display">\[
+n = \frac{ln(\beta)}{ln(1 - p_{t})}
+\]</span></p>
+<p>In R, if we were to determine the sample size necessary with a risk of incorrect acceptance of 5% and tolerable error percentage of 5%, our sample size would be:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="continious-monitoring.html#cb1-1"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb1-2"><a href="continious-monitoring.html#cb1-2"></a>pt &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb1-3"><a href="continious-monitoring.html#cb1-3"></a><span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pt)</span></code></pre></div>
+<pre><code>## [1] 58.40397</code></pre>
+<p>If it is difficult to ascertain what the population tolerable error rate may be, it is possible to work backwards from both a <em>sample size</em> and an assumption on the control risk. Derived from Sampling Guide technical notes (<span class="citation">Stewart (<a href="#ref-sampling-technical" role="doc-biblioref">2008</a>)</span>), the population tolerable error rate can be defined as:</p>
+<p><span class="math display">\[
+p_{t} = -e^\frac{ln(\beta)}{n} + 1
+\]</span>
+From the previous example, lets say our sample size was 59, and our risk of incorrect acceptance was 10%, we can estimate the population tolerable error rates.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="continious-monitoring.html#cb3-1"></a>n &lt;-<span class="st"> </span><span class="dv">59</span></span>
+<span id="cb3-2"><a href="continious-monitoring.html#cb3-2"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb3-3"><a href="continious-monitoring.html#cb3-3"></a><span class="op">-</span><span class="kw">exp</span>(<span class="dv">1</span>)<span class="op">^</span>(<span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span>n) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<pre><code>## [1] 0.04950761</code></pre>
+<p>With this, your methodology could be derived from existing sampling, and you could set your threshold of control operating effectiveness, when tested on the full population, to accept 5% of samples with errors.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-pcaob-as2201">
+<p>“AS 2201: An Audit of Internal Control over Financial Reporting That Is Integrated with an Audit of Financial Statements.” 2007. <a href="https://pcaobus.org/Standards/Auditing/Pages/AS2201.aspx">https://pcaobus.org/Standards/Auditing/Pages/AS2201.aspx</a>.</p>
+</div>
+<div id="ref-pcaob-as2315">
+<p>“AS 2315: Audit Sampling.” 2015. <a href="https://pcaobus.org/Standards/Auditing/Pages/AS2315.aspx">https://pcaobus.org/Standards/Auditing/Pages/AS2315.aspx</a>.</p>
+</div>
+<div id="ref-sec-princples-based">
+<p>“Commission Guidance Regarding Management’s Report on Internal Control over Financial Reporting Under Section 13(a) or 15(d) of the Securities Exchange Act of 1934; Final Rule.” 2007. <a href="https://www.sec.gov/rules/interp/2007/33-8810fr.pdf">https://www.sec.gov/rules/interp/2007/33-8810fr.pdf</a>.</p>
+</div>
+<div id="ref-sampling-technical">
+<p>Stewart, Trevor R. 2008. “Technical Notes on the Aicpa Audit Guide Audit Sampling.” <a href="http://cte.univ-setif.dz/coursenligne/cheriguiomar/Ressources/SamplingGuideTechnicalNotes.pdf">http://cte.univ-setif.dz/coursenligne/cheriguiomar/Ressources/SamplingGuideTechnicalNotes.pdf</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="auditpackage.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applied-adw.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Audit_Analytics_with-R.pdf", "Audit_Analytics_with-R.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

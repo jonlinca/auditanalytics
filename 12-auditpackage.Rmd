@@ -1,0 +1,266 @@
+
+# Audit R Package {#auditpackage}
+
+> In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. [@r-pkgs]
+
+Every time you asked your team to assemble furniture, would you rather have your team learn and makeshift their own flathead screwdriver every single time they solve a problem, or give them a pre-made screwdriver so they can get to assembly? An audit R package is the toolkit of your data analytics team. With it, instead of members learning how to make the tool, they can instead use the Package and all its pre-developed tools to solve problems.
+
+What can be in an R Package? Whatever day-to-day challenges that need to be solved! An effective R package that is customized to your team can address many of the following.
+
+- Data connectivity, including databases and cloud providers
+- Script and R Markdown templates, to help standardize reporting structure
+- Themes, to help promote visualization consistency
+- Documentation of functions
+- Vignettes, which are demonstrations on how to effectively use the package and functions in a real scenario
+
+The package that the team develops together must not be a static product, nor does it perform all the work in your team automatically. Whenever a team member encounters a new problem, they will go find a way to develop a solution to solve their task at hand, probably in R Markdown notebook. These learnings and the task it solves stay specific to that notebook, within a project. 
+
+There are two great resources for learning about packages:
+
+- [R Packages](https://r-pkgs.org) [@r-pkgs]
+- [My organization's first R package workshop](https://my-org-first-pkg-2020.netlify.app)
+
+## Package functions
+
+The evolution of your package is highly dependent on users breaking down their own work and contributing functions, and should be reviewed at the conclusion of each engagement. As your team completes audits within a notebook, you should consider what could you break out so it could be reused elsewhere. One way to think about functions in an R package is 'what kind of puzzle pieces are needed to make this picture complete?', where the pieces are the individual functions that give you the full picture.
+
+What you would want to do is break down a task you've done into a reusable component - that is, generic enough to be called upon any code, but specific enough that it achieves a certain functionality. Lets step through an example of what this could be.
+
+Lets say you've performed duplicate payment analysis. You need to download your data, clean it, analyze it, and upload the results for follow-up. At a high level, you've completed a single notebook:
+```{r, fig.dim=c(1, 1), out.width="100%", echo = FALSE}
+DiagrammeR::grViz("
+digraph G {
+
+  # a 'graph' statement
+  graph [overlap = true, 
+          fontsize = 10,
+          rankdir = LR,
+          compound = true]
+
+  # several 'node' statements
+  node [shape = box,
+        fontname = Helvetica]
+
+  subgraph download_cluster {
+    'Download';
+    color = black;
+    label = 'Download';
+  }
+  
+  subgraph clean_cluster {
+    'Clean'
+    color = black;
+    label = 'Clean';
+  }
+  
+  subgraph analyze_cluster {
+    'Analyze'
+    color = black;
+    label = 'Analyze';
+  }
+  
+  subgraph upload_cluster {
+    'Upload'
+    color = black;
+    label = 'Upload';
+  }
+
+ # Edges
+  'Download' -> 'Clean' [ltail=download_cluster lhead=clean_cluster];
+  'Clean' -> 'Analyze' [ltail=clean_cluster lhead=analyze_cluster];
+  'Analyze' -> 'Upload' [ltail=analyze_cluster lhead=upload_cluster];
+
+}
+")
+```
+
+If you crack open each section, you'll see what you had to perform, which gives you an idea about what functions you may need. For example, you may have downloaded several tables from your accounting software, and a listing of employees from the HR database, amongst the other several procedures you needed to do.
+
+```{r, fig.dim=c(1.5, 4), out.width="100%", echo = FALSE}
+DiagrammeR::grViz("
+digraph G {
+
+  # a 'graph' statement
+  graph [overlap = true, 
+          fontsize = 10,
+          rankdir = LR,
+          compound = true]
+
+  # several 'node' statements
+  node [shape = box,
+        fontname = Helvetica]
+
+  subgraph cluster_download {
+    fontname = Helvetica;
+    fontsize = 10;
+    'ERP: Invoices joined Payments' 'ERP: Vendor Master' 'HR: Employee listing';
+    color = black;
+    label = 'Download';
+  }
+
+  subgraph cluster_clean {
+    'Join tables together' 'Remove void invoices' 'Remove characters' 'Remove numbers' 'Clean dates'
+    color = black;
+    label = 'Clean';
+  }
+  
+  subgraph cluster_analyze {
+    'SSS Test 1' 'SSS Test 2' 'SSSD Test 3' 'SSSD Test 4'
+    color = black;
+    label = 'Analyze';
+  }
+  
+  subgraph cluster_upload {
+    'Authenticate via API' 'Upload results', 'Email results'
+    color = black;
+    label = 'Upload';
+  }
+  
+   # Edges
+  'ERP: Invoices joined Payments' -> 'Join tables together' [ltail=cluster_download lhead=cluster_clean];
+  'Join tables together' -> 'SSS Test 1' [ltail=cluster_clean lhead=cluster_analyze];
+  'SSS Test 1' -> 'Authenticate via API' [ltail=cluster_analyze lhead=cluster_upload];
+}
+")
+```
+
+If you further dig into the download phase, you'll see that you had to create two separate database connections to download information from the ERP and also HR database, before it could be used the even download the information. 
+
+```{r, fig.dim=c(1.5, 4), out.width="100%", echo = FALSE}
+DiagrammeR::grViz("
+digraph G {
+
+  # a 'graph' statement
+  graph [overlap = true, 
+          fontsize = 10,
+          rankdir = LR,
+          compound = true]
+
+  # several 'node' statements
+  node [shape = box,
+        fontname = Helvetica]
+
+  subgraph cluster_download {
+    fontname = Helvetica;
+    fontsize = 10;
+    color = black;
+    label = 'Download';
+    
+    A91 [label = 'ERP: Invoices joined Payments']
+    A92 [label = 'ERP: Vendor Master']
+    A93 [label = 'HR: Employee listing']
+    
+    A01 [label = 'DBI::dbConnect(oracle, host = erp.abc.com, user = me)', style = 'filled', fillcolor = 'gold']
+    A02 [label = 'DBI::dbConnect(sql, host = hr.abc.com, user = me)', style = 'filled', fillcolor = 'gold']
+    
+    A11 [label = 'dplyr::tbl(erp, &rsquo;ap_1200&rsquo;)']
+    A12 [label = 'dplyr::tbl(erp, &rsquo;ap_1201&rsquo;)']
+    A13 [label = 'dplyr::tbl(erp, &rsquo;vm_5000&rsquo;)']
+    A14 [label = 'dplyr::tbl(hr, &rsquo;v_emp_list&rsquo;)']
+    
+    A01 -> A11
+    A01 -> A12
+    A01 -> A13
+    A11 -> A91
+    A12 -> A91
+    A13 -> A92
+    
+    A02 -> A14
+    A14 -> A93
+  }
+
+}
+")
+```
+
+There are some functions that are worth considering to make. The code you can consider turning into a function could be:
+
+- Database connections to the ERP via Oracle or HR via SQL.
+- Downloading and creating of the vendor master, invoices and payments.
+- Perform everything - Connecting, downloading and joining the information at the same time.
+
+Which ones do you end up choosing to implement? This is a design choice, and is known in programming as cohesion and coupling. **Cohesion** is where a function does one thing, does it incredibly well, and the inputs and outputs of this are passed between functions. **Coupling** is how dependent the function is on the input data. Ideally you would choose to retain implement functions that are highly cohesive, and have low coupling.
+
+Database connections, `connect_erp()` and `connect_hr()`, serve as connectivity mechanisms to their respective databases. These would be reasonably dependent on its input data (a username and password), and would be useful functions to implement. They would quite short and sweet too:
+
+```{r, eval = FALSE}
+connect_erp <- function(username, password){
+  DBI::dbConnect(oracle, host = erp.abc.com, username, password)
+}
+```
+
+The `tbl()` functions serve well for their purpose, which is to point to a specific table. You can further lock in that knowledge by implementing a `tbl_erp_invoices()`, `tbl_erp_payments()` and `tbl_hr_emplist()`. This is still highly cohesive (does one thing: connects to a data table), but also starts to increase coupling (where it is highly dependent on the database connection provided). The increase in coupling may be reasonable - you may choose accept this design and implement these functions, as it is hard to remember exactly the table names that house the data you are looking for.
+
+```{r, eval = FALSE}
+tbl_erp_invoices <- function(erp){
+  dplyr::tbl(erp, 'ap_1200')
+}
+```
+
+The last option, connecting and downloading all the data you need, may make a monolithic module that is tailored only for one use case, and it also performs too many things. At first glance, this structure seems to make sense because this is how the notebook was written:
+
+```{r, eval = FALSE}
+all_in_one <- function(username_1, password_1, username_2, password_2){
+  erp <- DBI::dbConnect(oracle, host = erp.abc.com, username_1, password_1)
+  sql <- DBI::dbConnect(sql, host = hr.abc.com, username_2, password_2)
+  
+  invoices <- dplyr::tbl(erp, 'ap_1200')
+  payments <- dplyr::tbl(erp, 'ap_1201')
+  vendors <- dplyr::tbl(erp, 'vm_5000')
+  emps <- dplyr::tbl(hr, 'v_emp_list')
+  
+  invoices %>%
+   dplyr::semi_join(payments, by = 'invoice_id')
+}
+```
+
+However, now we're presented with a function that has low cohesion (its doing multiple things) - it is creating the database connecting, downloading and then joining the tables. Not to mention the two sets of credentials that aren't obviously related to the output:
+
+- The username and password to the ERP database.
+- The username and password to the HR database.
+
+From a function maintenance perspective, it is difficult to maintain:
+
+- Will you copy and paste the database connections every single time you want to use it elsewhere?
+- What happens when this database changes host locations?
+- What happens when the ERP is upgraded and the table names change?
+- What if you wanted to keep invoices that were both paid and unpaid?
+
+While this function technically achieves one highly specific objective, its highly dependent on making sure the company and systems stays constant. With experience, we know this never happens. Given the frailness of the design, a function like this should be used sparingly, and ideally should be kept in a notebook.
+
+## Templates
+
+Pre-developed layouts help standardize thought processes and deliverables that your team members should go through when assembling a report. Read more about [templates within R Markdown](https://bookdown.org/yihui/rmarkdown-cookbook/package-template.html).
+
+Within the [Reporting Section](#report-structure), we highlight what items are key within an  Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the `inst/rmarkdown/templates` folder of your package. Specifically, an ADA R Markdown template can be kept at `inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd`.
+
+````markdown
+---
+title: "Audit Data Analytics - "
+author: "Your name"
+date: "`r Sys.time()`"
+output:
+  html_document
+---
+
+# Objective
+
+# Risks addresses
+
+# Data source
+
+# Data extraction
+
+# Data transformation
+
+# Data completeness
+
+# Test procedures
+
+# Test results
+
+# Session Info
+`r ''````{r}
+sessionInfo()
+```
+````

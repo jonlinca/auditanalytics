@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Audit R Package | Audit Analytics with R</title>
+  <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Audit R Package | Audit Analytics with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Audit R Package | Audit Analytics with R" />
+  
+  <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
+  
+
+<meta name="author" content="Jonathan Lin" />
+
+
+<meta name="date" content="2020-10-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="applied-audit-analytics.html"/>
+<link rel="next" href="continuous-testing.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.14/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Audit Analytics in R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="part"><span><b>I Structure</b></span></li>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
+<li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
+<li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
+<li class="chapter" data-level="2.4" data-path="approach.html"><a href="approach.html#always-deliver-useful-product"><i class="fa fa-check"></i><b>2.4</b> Always deliver useful product</a></li>
+<li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
+<li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#architecture-r"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
+<li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
+<li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#internal-databases"><i class="fa fa-check"></i><b>3.4.1</b> Internal databases</a></li>
+<li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
+</ul></li>
+<li class="part"><span><b>II Technical</b></span></li>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
+<li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers</a></li>
+<li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> GitHub (or another git-related brand)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
+<li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
+<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
+<li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
+<li class="chapter" data-level="6.3.2" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
+<li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
+<li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
+<li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
+<li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
+<li class="chapter" data-level="7.2.4" data-path="cleaning-data.html"><a href="cleaning-data.html#differences-between-time"><i class="fa fa-check"></i><b>7.2.4</b> Differences between time</a></li>
+<li class="chapter" data-level="7.2.5" data-path="cleaning-data.html"><a href="cleaning-data.html#derived-date-information"><i class="fa fa-check"></i><b>7.2.5</b> Derived date information</a></li>
+<li class="chapter" data-level="7.2.6" data-path="cleaning-data.html"><a href="cleaning-data.html#cleaning-numerical-dates"><i class="fa fa-check"></i><b>7.2.6</b> Cleaning numerical dates</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="cleaning-data.html"><a href="cleaning-data.html#separate"><i class="fa fa-check"></i><b>7.3</b> Separate</a></li>
+<li class="chapter" data-level="7.4" data-path="cleaning-data.html"><a href="cleaning-data.html#separate_rows"><i class="fa fa-check"></i><b>7.4</b> Separate_rows</a></li>
+<li class="chapter" data-level="7.5" data-path="cleaning-data.html"><a href="cleaning-data.html#tidy-data"><i class="fa fa-check"></i><b>7.5</b> Tidy data</a></li>
+<li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
+<li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
+<li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
+<li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
+<li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-threshold"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
+<li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="test.html"><a href="test.html#weekend-testing"><i class="fa fa-check"></i><b>9.2.1</b> Weekend testing</a></li>
+<li class="chapter" data-level="9.2.2" data-path="test.html"><a href="test.html#cutoff-testing"><i class="fa fa-check"></i><b>9.2.2</b> Cutoff testing</a></li>
+<li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
+<li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
+<li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
+<li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
+<li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-sequences"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a><ul>
+<li class="chapter" data-level="9.5.1" data-path="test.html"><a href="test.html#regex-basics"><i class="fa fa-check"></i><b>9.5.1</b> Regex basics</a></li>
+<li class="chapter" data-level="9.5.2" data-path="test.html"><a href="test.html#starts-or-ends-with-anchors"><i class="fa fa-check"></i><b>9.5.2</b> Starts or Ends with (Anchors)</a></li>
+<li class="chapter" data-level="9.5.3" data-path="test.html"><a href="test.html#crash-course-in-encoding"><i class="fa fa-check"></i><b>9.5.3</b> Crash course in Encoding</a></li>
+<li class="chapter" data-level="9.5.4" data-path="test.html"><a href="test.html#cleaning-text"><i class="fa fa-check"></i><b>9.5.4</b> Cleaning Text</a></li>
+<li class="chapter" data-level="9.5.5" data-path="test.html"><a href="test.html#searching-multiple-fields"><i class="fa fa-check"></i><b>9.5.5</b> Searching Multiple Fields</a></li>
+<li class="chapter" data-level="9.5.6" data-path="test.html"><a href="test.html#regex-further"><i class="fa fa-check"></i><b>9.5.6</b> Further reading</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#report-structure"><i class="fa fa-check"></i><b>10.1</b> Report Structure</a></li>
+<li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export-files"><i class="fa fa-check"></i><b>10.2</b> Export files</a></li>
+</ul></li>
+<li class="part"><span><b>III Advanced teams</b></span></li>
+<li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a></li>
+<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a><ul>
+<li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
+<li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="continuous-testing.html"><a href="continuous-testing.html"><i class="fa fa-check"></i><b>13</b> Continuous testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="continuous-testing.html"><a href="continuous-testing.html#workflow"><i class="fa fa-check"></i><b>13.1</b> Workflow</a></li>
+<li class="chapter" data-level="13.2" data-path="continuous-testing.html"><a href="continuous-testing.html#why-highbond-results"><i class="fa fa-check"></i><b>13.2</b> Why Highbond Results</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-testing.html"><a href="continuous-testing.html#example"><i class="fa fa-check"></i><b>13.3</b> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
+<li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="15.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>15.1</b> Documentation</a></li>
+<li class="chapter" data-level="15.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>15.2</b> Passwords</a></li>
+</ul></li>
+<li class="part"><span><b>IV Appendix</b></span></li>
+<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous testing methodology</a><ul>
+<li class="chapter" data-level="16.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
+<li class="chapter" data-level="16.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
+<li class="chapter" data-level="16.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html"><i class="fa fa-check"></i><b>17</b> ACL Analytics to R</a><ul>
+<li class="chapter" data-level="17.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>17.1</b> Import</a></li>
+<li class="chapter" data-level="17.2" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>17.2</b> Data</a><ul>
+<li class="chapter" data-level="17.2.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>17.2.1</b> Joins</a></li>
+</ul></li>
+<li class="chapter" data-level="17.3" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>17.3</b> Analyze</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Audit Analytics with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="auditpackage" class="section level1">
+<h1><span class="header-section-number">Chapter 12</span> Audit R Package</h1>
+<blockquote>
+<p>In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. <span class="citation">(Hadley Wickham <a href="#ref-r-pkgs" role="doc-biblioref">2020</a>)</span></p>
+</blockquote>
+<p>Every time you asked your team to assemble furniture, would you rather have your team learn and makeshift their own flathead screwdriver every single time they solve a problem, or give them a pre-made screwdriver so they can get to assembly? An audit R package is the toolkit of your data analytics team. With it, instead of members learning how to make the tool, they can instead use the Package and all its pre-developed tools to solve problems.</p>
+<p>What can be in an R Package? Whatever day-to-day challenges that need to be solved! An effective R package that is customized to your team can address many of the following.</p>
+<ul>
+<li>Data connectivity, including databases and cloud providers</li>
+<li>Script and R Markdown templates, to help standardize reporting structure</li>
+<li>Themes, to help promote visualization consistency</li>
+<li>Documentation of functions</li>
+<li>Vignettes, which are demonstrations on how to effectively use the package and functions in a real scenario</li>
+</ul>
+<p>The package that the team develops together must not be a static product, nor does it perform all the work in your team automatically. Whenever a team member encounters a new problem, they will go find a way to develop a solution to solve their task at hand, probably in R Markdown notebook. These learnings and the task it solves stay specific to that notebook, within a project.</p>
+<p>There are two great resources for learning about packages:</p>
+<ul>
+<li><a href="https://r-pkgs.org">R Packages</a> <span class="citation">(Hadley Wickham <a href="#ref-r-pkgs" role="doc-biblioref">2020</a>)</span></li>
+<li><a href="https://my-org-first-pkg-2020.netlify.app">My organization’s first R package workshop</a></li>
+</ul>
+<div id="package-functions" class="section level2">
+<h2><span class="header-section-number">12.1</span> Package functions</h2>
+<p>The evolution of your package is highly dependent on users breaking down their own work and contributing functions, and should be reviewed at the conclusion of each engagement. As your team completes audits within a notebook, you should consider what could you break out so it could be reused elsewhere. One way to think about functions in an R package is ‘what kind of puzzle pieces are needed to make this picture complete?’, where the pieces are the individual functions that give you the full picture.</p>
+<p>What you would want to do is break down a task you’ve done into a reusable component - that is, generic enough to be called upon any code, but specific enough that it achieves a certain functionality. Lets step through an example of what this could be.</p>
+<p>Lets say you’ve performed duplicate payment analysis. You need to download your data, clean it, analyze it, and upload the results for follow-up. At a high level, you’ve completed a single notebook:
+<div id="htmlwidget-04b86049118139366995" style="width:100%;height:96px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-04b86049118139366995">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph download_cluster {\n    \"Download\";\n    color = black;\n    label = \"Download\";\n  }\n  \n  subgraph clean_cluster {\n    \"Clean\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph analyze_cluster {\n    \"Analyze\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph upload_cluster {\n    \"Upload\"\n    color = black;\n    label = \"Upload\";\n  }\n\n # Edges\n  \"Download\" -> \"Clean\" [ltail=download_cluster lhead=clean_cluster];\n  \"Clean\" -> \"Analyze\" [ltail=clean_cluster lhead=analyze_cluster];\n  \"Analyze\" -> \"Upload\" [ltail=analyze_cluster lhead=upload_cluster];\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+<p>If you crack open each section, you’ll see what you had to perform, which gives you an idea about what functions you may need. For example, you may have downloaded several tables from your accounting software, and a listing of employees from the HR database, amongst the other several procedures you needed to do.</p>
+<div id="htmlwidget-7e11ebb96252113cfa10" style="width:100%;height:384px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7e11ebb96252113cfa10">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    \"ERP: Invoices joined Payments\" \"ERP: Vendor Master\" \"HR: Employee listing\";\n    color = black;\n    label = \"Download\";\n  }\n\n  subgraph cluster_clean {\n    \"Join tables together\" \"Remove void invoices\" \"Remove characters\" \"Remove numbers\" \"Clean dates\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph cluster_analyze {\n    \"SSS Test 1\" \"SSS Test 2\" \"SSSD Test 3\" \"SSSD Test 4\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph cluster_upload {\n    \"Authenticate via API\" \"Upload results\", \"Email results\"\n    color = black;\n    label = \"Upload\";\n  }\n  \n   # Edges\n  \"ERP: Invoices joined Payments\" -> \"Join tables together\" [ltail=cluster_download lhead=cluster_clean];\n  \"Join tables together\" -> \"SSS Test 1\" [ltail=cluster_clean lhead=cluster_analyze];\n  \"SSS Test 1\" -> \"Authenticate via API\" [ltail=cluster_analyze lhead=cluster_upload];\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>If you further dig into the download phase, you’ll see that you had to create two separate database connections to download information from the ERP and also HR database, before it could be used the even download the information.</p>
+<div id="htmlwidget-74eb44fcba7de23bdc4a" style="width:100%;height:384px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74eb44fcba7de23bdc4a">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    color = black;\n    label = \"Download\";\n    \n    A91 [label = \"ERP: Invoices joined Payments\"]\n    A92 [label = \"ERP: Vendor Master\"]\n    A93 [label = \"HR: Employee listing\"]\n    \n    A01 [label = \"DBI::dbConnect(oracle, host = erp.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    A02 [label = \"DBI::dbConnect(sql, host = hr.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    \n    A11 [label = \"dplyr::tbl(erp, &rsquo;ap_1200&rsquo;)\"]\n    A12 [label = \"dplyr::tbl(erp, &rsquo;ap_1201&rsquo;)\"]\n    A13 [label = \"dplyr::tbl(erp, &rsquo;vm_5000&rsquo;)\"]\n    A14 [label = \"dplyr::tbl(hr, &rsquo;v_emp_list&rsquo;)\"]\n    \n    A01 -> A11\n    A01 -> A12\n    A01 -> A13\n    A11 -> A91\n    A12 -> A91\n    A13 -> A92\n    \n    A02 -> A14\n    A14 -> A93\n  }\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>There are some functions that are worth considering to make. The code you can consider turning into a function could be:</p>
+<ul>
+<li>Database connections to the ERP via Oracle or HR via SQL.</li>
+<li>Downloading and creating of the vendor master, invoices and payments.</li>
+<li>Perform everything - Connecting, downloading and joining the information at the same time.</li>
+</ul>
+<p>Which ones do you end up choosing to implement? This is a design choice, and is known in programming as cohesion and coupling. <strong>Cohesion</strong> is where a function does one thing, does it incredibly well, and the inputs and outputs of this are passed between functions. <strong>Coupling</strong> is how dependent the function is on the input data. Ideally you would choose to retain implement functions that are highly cohesive, and have low coupling.</p>
+<p>Database connections, <code>connect_erp()</code> and <code>connect_hr()</code>, serve as connectivity mechanisms to their respective databases. These would be reasonably dependent on its input data (a username and password), and would be useful functions to implement. They would quite short and sweet too:</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="auditpackage.html#cb402-1"></a>connect_erp &lt;-<span class="st"> </span><span class="cf">function</span>(username, password){</span>
+<span id="cb402-2"><a href="auditpackage.html#cb402-2"></a>  DBI<span class="op">::</span><span class="kw">dbConnect</span>(oracle, <span class="dt">host =</span> erp.abc.com, username, password)</span>
+<span id="cb402-3"><a href="auditpackage.html#cb402-3"></a>}</span></code></pre></div>
+<p>The <code>tbl()</code> functions serve well for their purpose, which is to point to a specific table. You can further lock in that knowledge by implementing a <code>tbl_erp_invoices()</code>, <code>tbl_erp_payments()</code> and <code>tbl_hr_emplist()</code>. This is still highly cohesive (does one thing: connects to a data table), but also starts to increase coupling (where it is highly dependent on the database connection provided). The increase in coupling may be reasonable - you may choose accept this design and implement these functions, as it is hard to remember exactly the table names that house the data you are looking for.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="auditpackage.html#cb403-1"></a>tbl_erp_invoices &lt;-<span class="st"> </span><span class="cf">function</span>(erp){</span>
+<span id="cb403-2"><a href="auditpackage.html#cb403-2"></a>  dplyr<span class="op">::</span><span class="kw">tbl</span>(erp, <span class="st">&#39;ap_1200&#39;</span>)</span>
+<span id="cb403-3"><a href="auditpackage.html#cb403-3"></a>}</span></code></pre></div>
+<p>The last option, connecting and downloading all the data you need, may make a monolithic module that is tailored only for one use case, and it also performs too many things. At first glance, this structure seems to make sense because this is how the notebook was written:</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="auditpackage.html#cb404-1"></a>all_in_one &lt;-<span class="st"> </span><span class="cf">function</span>(username_<span class="dv">1</span>, password_<span class="dv">1</span>, username_<span class="dv">2</span>, password_<span class="dv">2</span>){</span>
+<span id="cb404-2"><a href="auditpackage.html#cb404-2"></a>  erp &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(oracle, <span class="dt">host =</span> erp.abc.com, username_<span class="dv">1</span>, password_<span class="dv">1</span>)</span>
+<span id="cb404-3"><a href="auditpackage.html#cb404-3"></a>  sql &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(sql, <span class="dt">host =</span> hr.abc.com, username_<span class="dv">2</span>, password_<span class="dv">2</span>)</span>
+<span id="cb404-4"><a href="auditpackage.html#cb404-4"></a>  </span>
+<span id="cb404-5"><a href="auditpackage.html#cb404-5"></a>  invoices &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">tbl</span>(erp, <span class="st">&#39;ap_1200&#39;</span>)</span>
+<span id="cb404-6"><a href="auditpackage.html#cb404-6"></a>  payments &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">tbl</span>(erp, <span class="st">&#39;ap_1201&#39;</span>)</span>
+<span id="cb404-7"><a href="auditpackage.html#cb404-7"></a>  vendors &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">tbl</span>(erp, <span class="st">&#39;vm_5000&#39;</span>)</span>
+<span id="cb404-8"><a href="auditpackage.html#cb404-8"></a>  emps &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">tbl</span>(hr, <span class="st">&#39;v_emp_list&#39;</span>)</span>
+<span id="cb404-9"><a href="auditpackage.html#cb404-9"></a>  </span>
+<span id="cb404-10"><a href="auditpackage.html#cb404-10"></a>  invoices <span class="op">%&gt;%</span></span>
+<span id="cb404-11"><a href="auditpackage.html#cb404-11"></a><span class="st">   </span>dplyr<span class="op">::</span><span class="kw">semi_join</span>(payments, <span class="dt">by =</span> <span class="st">&#39;invoice_id&#39;</span>)</span>
+<span id="cb404-12"><a href="auditpackage.html#cb404-12"></a>}</span></code></pre></div>
+<p>However, now we’re presented with a function that has low cohesion (its doing multiple things) - it is creating the database connecting, downloading and then joining the tables. Not to mention the two sets of credentials that aren’t obviously related to the output:</p>
+<ul>
+<li>The username and password to the ERP database.</li>
+<li>The username and password to the HR database.</li>
+</ul>
+<p>From a function maintenance perspective, it is difficult to maintain:</p>
+<ul>
+<li>Will you copy and paste the database connections every single time you want to use it elsewhere?</li>
+<li>What happens when this database changes host locations?</li>
+<li>What happens when the ERP is upgraded and the table names change?</li>
+<li>What if you wanted to keep invoices that were both paid and unpaid?</li>
+</ul>
+<p>While this function technically achieves one highly specific objective, its highly dependent on making sure the company and systems stays constant. With experience, we know this never happens. Given the frailness of the design, a function like this should be used sparingly, and ideally should be kept in a notebook.</p>
+</div>
+<div id="templates" class="section level2">
+<h2><span class="header-section-number">12.2</span> Templates</h2>
+<p>Pre-developed layouts help standardize thought processes and deliverables that your team members should go through when assembling a report. Read more about <a href="https://bookdown.org/yihui/rmarkdown-cookbook/package-template.html">templates within R Markdown</a>.</p>
+<p>Within the <a href="report.html#report-structure">Reporting Section</a>, we highlight what items are key within an Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the <code>inst/rmarkdown/templates</code> folder of your package. Specifically, an ADA R Markdown template can be kept at <code>inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd</code>.</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb405-1"><a href="auditpackage.html#cb405-1"></a>---</span>
+<span id="cb405-2"><a href="auditpackage.html#cb405-2"></a>title: &quot;Audit Data Analytics - &quot;</span>
+<span id="cb405-3"><a href="auditpackage.html#cb405-3"></a>author: &quot;Your name&quot;</span>
+<span id="cb405-4"><a href="auditpackage.html#cb405-4"></a>date: &quot;2020-10-29 23:03:42&quot;</span>
+<span id="cb405-5"><a href="auditpackage.html#cb405-5"></a>output:</span>
+<span id="cb405-6"><a href="auditpackage.html#cb405-6"></a>  html_document</span>
+<span id="cb405-7"><a href="auditpackage.html#cb405-7"></a>---</span>
+<span id="cb405-8"><a href="auditpackage.html#cb405-8"></a></span>
+<span id="cb405-9"><a href="auditpackage.html#cb405-9"></a><span class="fu"># Objective</span></span>
+<span id="cb405-10"><a href="auditpackage.html#cb405-10"></a></span>
+<span id="cb405-11"><a href="auditpackage.html#cb405-11"></a><span class="fu"># Risks addresses</span></span>
+<span id="cb405-12"><a href="auditpackage.html#cb405-12"></a></span>
+<span id="cb405-13"><a href="auditpackage.html#cb405-13"></a><span class="fu"># Data source</span></span>
+<span id="cb405-14"><a href="auditpackage.html#cb405-14"></a></span>
+<span id="cb405-15"><a href="auditpackage.html#cb405-15"></a><span class="fu"># Data extraction</span></span>
+<span id="cb405-16"><a href="auditpackage.html#cb405-16"></a></span>
+<span id="cb405-17"><a href="auditpackage.html#cb405-17"></a><span class="fu"># Data transformation</span></span>
+<span id="cb405-18"><a href="auditpackage.html#cb405-18"></a></span>
+<span id="cb405-19"><a href="auditpackage.html#cb405-19"></a><span class="fu"># Data completeness</span></span>
+<span id="cb405-20"><a href="auditpackage.html#cb405-20"></a></span>
+<span id="cb405-21"><a href="auditpackage.html#cb405-21"></a><span class="fu"># Test procedures</span></span>
+<span id="cb405-22"><a href="auditpackage.html#cb405-22"></a></span>
+<span id="cb405-23"><a href="auditpackage.html#cb405-23"></a><span class="fu"># Test results</span></span>
+<span id="cb405-24"><a href="auditpackage.html#cb405-24"></a></span>
+<span id="cb405-25"><a href="auditpackage.html#cb405-25"></a><span class="fu"># Session Info</span></span>
+<span id="cb405-26"><a href="auditpackage.html#cb405-26"></a><span class="bn">```{r}</span></span>
+<span id="cb405-27"><a href="auditpackage.html#cb405-27"></a><span class="bn">sessionInfo()</span></span>
+<span id="cb405-28"><a href="auditpackage.html#cb405-28"></a><span class="bn">```</span></span></code></pre></div>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-r-pkgs">
+<p>Hadley Wickham, Jennifer Bryan. 2020. <em>R Packages</em>. <a href="https://r-pkgs.org">https://r-pkgs.org</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="applied-audit-analytics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Audit_Analytics_with-R.pdf", "Audit_Analytics_with-R.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

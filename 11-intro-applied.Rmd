@@ -1,0 +1,14 @@
+# (PART) Advanced teams {-}
+
+# Applied Audit Analytics
+
+After a team has gotten their hands on performing analytics, there will be consistent wins in the form of delivering audit analytics for individual engagements. Momentum and demand for analytics will build, and the team will be asked to be involved in more audits.
+
+There comes a point where an internal audit data analytics team will hit a limit on the team's effectiveness to deliver work. Some symptoms to watch out for are:
+
+- Team members using different versions of code, or having their own specialized procedures that aren't actively shared, resulting in redundancy and best practices not shared.
+- Manually executing the same report, on a high frequency schedule, and then distributing the report manually to team members and stakeholders.
+- Ad-hoc requests taking a long time to fulfill, due to the special uniqueness and customization needed of each request.
+- Incorporating business actions to findings is always a drawn out affair - send out potential exceptions, wait for response, integrating responses - hindering rapid risk identification.
+
+To effectively scale both capability and responsiveness, it is your job as an innovation leader to balance your teams ability to deliver audit findings, and also build the foundation that the team stands on. This requires deliberately thinking about how an individual can break down their work into reusable and functional components, which is a shift from simply getting the job done. With careful consideration of the [architecture](#architecture) and tools chosen, the transition to an adept and mature data analytics team is within reach.
