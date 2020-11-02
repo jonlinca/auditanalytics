@@ -1,10 +1,10 @@
 # (PART) Appendix {-}
 
-# Continuous testing methodology {#appendixct}
+# Continuous Auditing methodology {#appendixct}
 
 ## Support for Continuous Auditing
 
-There is a lot of hype around continuous controls testing, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.
+There is a lot of hype around continuous controls monitoring, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.
 
 This should not discourage your team in applying analytics on a continuous basis. Rather, it gives you a point to open up conversation with external auditors about how the tests of controls offer greater assurance at a higher degree of efficiency.
 
@@ -22,7 +22,7 @@ AS 2201 does allow for the use of entity level controls as conducted by internal
 
 ## Determining population tolerable error rate
 
-You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. 
+You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. Finding one failure in a population of several hundred transactions should not be detrimental - however, to some professionals, truly accepting deviations is a difficult fact to accept.
 
 One key method to help acknowledge that errors do indeed exist is through clarifying the *population tolerable error rate* - i.e. the maximum rate of deviations of a prescribed control (.34) (@pcaob-as2315). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met. 
 

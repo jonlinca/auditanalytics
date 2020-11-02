@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Continuous testing methodology | Audit Analytics with R</title>
+  <title>Chapter 16 Continuous Auditing methodology | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Continuous testing methodology | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 16 Continuous Auditing methodology | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Continuous testing methodology | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 16 Continuous Auditing methodology | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-10-29" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -55,6 +55,12 @@
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.6.1/DiagrammeR.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.14/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -269,10 +275,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="continuous-testing.html"><a href="continuous-testing.html"><i class="fa fa-check"></i><b>13</b> Continuous testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="continuous-testing.html"><a href="continuous-testing.html#workflow"><i class="fa fa-check"></i><b>13.1</b> Workflow</a></li>
-<li class="chapter" data-level="13.2" data-path="continuous-testing.html"><a href="continuous-testing.html#why-highbond-results"><i class="fa fa-check"></i><b>13.2</b> Why Highbond Results</a></li>
-<li class="chapter" data-level="13.3" data-path="continuous-testing.html"><a href="continuous-testing.html#example"><i class="fa fa-check"></i><b>13.3</b> Example</a></li>
+<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
+<li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#key-aspects"><i class="fa fa-check"></i><b>13.1</b> Key aspects</a></li>
+<li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#workflow"><i class="fa fa-check"></i><b>13.2</b> Workflow</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#step-1-setup-environment"><i class="fa fa-check"></i><b>13.3</b> Step 1: Setup Environment</a></li>
+<li class="chapter" data-level="13.4" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#example"><i class="fa fa-check"></i><b>13.4</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
 <li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
@@ -280,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>15.2</b> Passwords</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous testing methodology</a><ul>
+<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
 <li class="chapter" data-level="16.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
@@ -314,10 +321,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="appendixct" class="section level1">
-<h1><span class="header-section-number">Chapter 16</span> Continuous testing methodology</h1>
+<h1><span class="header-section-number">Chapter 16</span> Continuous Auditing methodology</h1>
 <div id="support-for-continuous-auditing" class="section level2">
 <h2><span class="header-section-number">16.1</span> Support for Continuous Auditing</h2>
-<p>There is a lot of hype around continuous controls testing, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.</p>
+<p>There is a lot of hype around continuous controls monitoring, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.</p>
 <p>This should not discourage your team in applying analytics on a continuous basis. Rather, it gives you a point to open up conversation with external auditors about how the tests of controls offer greater assurance at a higher degree of efficiency.</p>
 </div>
 <div id="the-requirements-for-evaluting-icfr" class="section level2">
@@ -330,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="determining-population-tolerable-error-rate" class="section level2">
 <h2><span class="header-section-number">16.3</span> Determining population tolerable error rate</h2>
-<p>You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point.</p>
+<p>You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. Finding one failure in a population of several hundred transactions should not be detrimental - however, to some professionals, truly accepting deviations is a difficult fact to accept.</p>
 <p>One key method to help acknowledge that errors do indeed exist is through clarifying the <em>population tolerable error rate</em> - i.e. the maximum rate of deviations of a prescribed control (.34) (<span class="citation">(“AS 2315: Audit Sampling” <a href="#ref-pcaob-as2315" role="doc-biblioref">2015</a>)</span>). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met.</p>
 <p>Typical sampling asks the auditor to consider control risk, or the <em>risk of incorrect acceptance</em> - i.e. the risk that a control can be deemed effective when it is not. However, when an entire population is considered, this risk effectively reduces to zero, as there is no sampling conducted.</p>
 <p>Traditionally, sample sizes are calculated when you know the population tolerable error rate, and the risk of incorrect acceptance. Where <span class="math inline">\(\beta\)</span> is the risk of incorrect acceptance, <span class="math inline">\(p_{t}\)</span> is the population tolerable error rate, and <span class="math inline">\(n\)</span> is the sample size, we can derive the sample size necessary to satisfy audit sampling. (<span class="citation">Stewart (<a href="#ref-sampling-technical" role="doc-biblioref">2008</a>)</span>) We assume an expectation of no errors in the population with the below:</p>

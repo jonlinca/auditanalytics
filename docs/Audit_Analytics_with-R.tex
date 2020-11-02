@@ -117,7 +117,7 @@
 
 \title{Audit Analytics with R}
 \author{Jonathan Lin}
-\date{2020-10-29}
+\date{2020-11-02}
 
 \begin{document}
 \maketitle
@@ -312,6 +312,8 @@ The basics of git are:
   Push code from your local computer to the remote server.
 \end{itemize}
 
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-1-1}
+
 While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If using git sometimes results in infinite frustration, just remember that you can always \href{https://xkcd.com/1597/}{make a new folder and start fresh}.
 
 Several different server technologies support git - \href{https://github.com}{GitHub}, \href{https://azure.microsoft.com/en-us/services/devops/repos/}{Azure Repos} within Azure DevOps, \href{https://gitlab.com}{gitlab} are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
@@ -324,6 +326,8 @@ As you write more code and templates, you will eventually want to share these ne
 Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team's workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.
 
 How do you share packages? You certainly don't not need to force your team to copy-and-paste code or even a templates from a central folder! The most elegant way to distribute your code is via hosting packages on a code or package repository. These repositories (hosted internally or externally) enable your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive.
+
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-2-1}
 
 The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don't call it auditR!
 
@@ -341,7 +345,7 @@ Data products are deliverable that enhance your customer's ability to gather, pr
 
 \href{https://www.wegalvanize.com}{Galvanize}, the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond.
 
-\textbf{Highbond Results} is an unrivaled for audit exception and remediation workflow. The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.
+\textbf{Highbond Results} is unrivaled for audit exception and remediation workflow. The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers.
 
 Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.
 
@@ -352,12 +356,12 @@ Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high a
 \hypertarget{rstudio-connect}{%
 \subsection{RStudio Connect}\label{rstudio-connect}}
 
-RStudio offers commercially supported server software, including the \href{https://rstudio.com/products/connect/}{RStudio Connect} solution that allows R deliverable to be hosted online. These include:
+RStudio offers commercially supported server software, including the \href{https://rstudio.com/products/connect/}{RStudio Connect} solution that allows R deliverable to be hosted and accessible via a web browser. Features include:
 
 \begin{itemize}
 \tightlist
 \item
-  \href{https://rmarkdown.rstudio.com}{RMarkdown} notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization.
+  \href{https://rmarkdown.rstudio.com}{RMarkdown} notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization, and can be scheduled on a regular basis.
 \item
   These notebooks can also act as Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).
 \item
@@ -900,7 +904,7 @@ Here is an example. Lets say you want to see what repositories I have available 
 
 \begin{verbatim}
 ## Response [https://api.github.com/users/jonlinca/repos]
-##   Date: 2020-10-30 05:09
+##   Date: 2020-11-02 21:36
 ##   Status: 200
 ##   Content-Type: application/json; charset=utf-8
 ##   Size: 34.1 kB
@@ -1433,7 +1437,7 @@ When we deconstruct our data, it becomes much easier to delve into the \textbf{t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-39-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-41-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2949,7 +2953,7 @@ If we produce the four graphs together, what do you notice?
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-95-1} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-95-2} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-95-3} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-95-4}
+\includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-2} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-3} \includegraphics[width=0.5\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-4}
 
 These four charts and scatterplots themselves are quite different! While the blue correlation line and the prior summary statistics are similar, the points all follow a different general path. Independently looking at the graphics for each one will give you different insight, and may influence your audit approach. Graphics matter a lot!
 
@@ -2991,7 +2995,7 @@ Generally we will want our time to be the x variable (the dependent variable), a
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf}
 
 The foundations of any ggplot are essentially:
 
@@ -3018,7 +3022,7 @@ For example, histograms are useful to understand the shape of a dataset:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-98-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf}
 
 And boxplots are useful to understand the distribution of the data:
 
@@ -3029,7 +3033,7 @@ And boxplots are useful to understand the distribution of the data:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-101-1.pdf}
 
 \hypertarget{time-series}{%
 \subsection{Time-series}\label{time-series}}
@@ -3043,7 +3047,7 @@ As the gl table (and materials subset) is a time-series data, containing both th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf}
 
 Since our time-series data has a relatively high resolution with detailed data, we may sometimes gain insight by aggregating data (by week, month, or even year). As of now, the data needs to be aggregated into a higher level time period.
 
@@ -3087,7 +3091,7 @@ Aggregating this same information by month may be more illustrative:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf}
 
 \hypertarget{facets}{%
 \subsection{Facets}\label{facets}}
@@ -3130,7 +3134,7 @@ We can pull these specific expense accounts (starting with `exp\_'), and can cho
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-106-1.pdf}
 
 Instead of plotting them onto the same chart, we can \texttt{facet\_*} them:
 
@@ -3142,7 +3146,7 @@ Instead of plotting them onto the same chart, we can \texttt{facet\_*} them:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-105-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-107-1.pdf}
 
 \hypertarget{test}{%
 \chapter{Test}\label{test}}
@@ -3853,7 +3857,7 @@ What is fascinating is that once you reach the next digit, the wages all start w
 
 With Benford's Law and applying the concept to a population of natural numbers, then the concept of leading digits makes intuitive sense. There will be more salaries that start with 1, than with 2, etc. You could estimate that a reasonable proportion of hourly wages could look like this:
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-127-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-129-1.pdf}
 
 If we assume the first dataset is an example of a generally real world dataset, then lets look at a completely fictional dataset. For example, lets say in a range of 1 to 999, we randomly sample 1000 numbers and apply the Benford Law, we will notice the following:
 
@@ -3874,7 +3878,7 @@ If we assume the first dataset is an example of a generally real world dataset, 
 ## `summarise()` ungrouping output (override with `.groups` argument)
 \end{verbatim}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-128-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf}
 
 Notice how uniform the bars appear. The sample we chose was essentially made-up numbers between 1 and 999, the computer would choose these with equal probability, unlike the population of hourly wages, leading to a graph that does not follow the curve of Benford's Law.
 
@@ -3916,7 +3920,7 @@ We can create a quick reference curve of the leading digits for Benford's Law:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf}
 
 We can then take any of our populations, create the bar chart, and then apply the expected proportions of Benford's Law to it. Lets take our GL database and create the proportion of how often each leading digit occurs. Note we will try to follow the same variable structure as \texttt{benford\_curve}, as we will combine these on the same chart.
 
@@ -3933,7 +3937,7 @@ We can then take any of our populations, create the bar chart, and then apply th
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-131-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf}
 
 Notice in our chart that there are several NAs. In our dataset, we have several negative numbers (as journal entry credits as represented with negatives), and extracting the first character using \texttt{substr()} will retrieve the negative symbol. You may choose to perform Benford's Law on the positive and negative numbers, separately or together, transforming the negative numbers with \texttt{abs()}. You can also choose to exclude them, as I do below:
 
@@ -3953,7 +3957,7 @@ Notice in our chart that there are several NAs. In our dataset, we have several 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-134-1.pdf}
 
 Now that we have the actual proportions, lets layer on the \texttt{benford\_curve} we created:
 
@@ -3965,7 +3969,7 @@ Now that we have the actual proportions, lets layer on the \texttt{benford\_curv
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf}
+\includegraphics{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-135-1.pdf}
 
 When you reach this stage, take a moment to pause and understand the business, and if there may be any potential behavours to cause potential curve differences. For example, if there is an approval `limit' that exists at \$1000, you may see a spike of entries at the 9 leading digit.
 
@@ -5101,15 +5105,15 @@ What you would want to do is break down a task you've done into a reusable compo
 
 Lets say you've performed duplicate payment analysis. You need to download your data, clean it, analyze it, and upload the results for follow-up. At a high level, you've completed a single notebook:
 
-\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-181-1}
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1}
 
 If you crack open each section, you'll see what you had to perform, which gives you an idea about what functions you may need. For example, you may have downloaded several tables from your accounting software, and a listing of employees from the HR database, amongst the other several procedures you needed to do.
 
-\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-182-1}
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-184-1}
 
 If you further dig into the download phase, you'll see that you had to create two separate database connections to download information from the ERP and also HR database, before it could be used the even download the information.
 
-\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1}
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-185-1}
 
 There are some functions that are worth considering to make. The code you can consider turning into a function could be:
 
@@ -5202,7 +5206,7 @@ Within the \protect\hyperlink{report-structure}{Reporting Section}, we highlight
 \NormalTok{---}
 \NormalTok{title: "Audit Data Analytics - "}
 \NormalTok{author: "Your name"}
-\NormalTok{date: "2020-10-29 23:09:31"}
+\NormalTok{date: "2020-11-02 14:36:31"}
 \NormalTok{output:}
 \NormalTok{  html_document}
 \NormalTok{---}
@@ -5230,18 +5234,59 @@ Within the \protect\hyperlink{report-structure}{Reporting Section}, we highlight
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{continuous-testing}{%
-\chapter{Continuous testing}\label{continuous-testing}}
+\hypertarget{continuous-monitoring}{%
+\chapter{Continuous monitoring}\label{continuous-monitoring}}
 
 Continuous Monitoring (CM) and Continuous Auditing (CA, or automated controls testing) relies on the same premise - that a specific entity of interest is being evaluated on a high frequency and regular basis. Both definitions are used inconsistently in the audit industry - I tend to rely on CM for general risk measurement, and CA for controls.
 
-Continuous Auditing is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is exclusively pointed towards sampling. See the \protect\hyperlink{appendixct}{appendix} on how to help get started on establishing an agreeable methodology.
+Continuous Monitoring is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is almost exclusively pointed towards sampling. See the \protect\hyperlink{appendixct}{appendix} on how to help get started on establishing an agreeable methodology.
+
+\hypertarget{key-aspects}{%
+\section{Key aspects}\label{key-aspects}}
+
+To effectively implement a CM task, you need to consider the following:
+
+\begin{itemize}
+\tightlist
+\item
+  Audit application platform - An audit application platform needs to be secure and accessible to your stakeholders. More sophisticated platforms require audit trails for uploading of information and tracking responses.
+\item
+  Close-to-event detection - An exceptions-based CM testing model will need to be ran on a frequent basis, so not only do you need direct access to the data, but a platform to execute the analysis as well.
+\item
+  Timely response - Response mechanisms needs to be integrated with your business, where emerging risks and alerts need to be handled effectively to be considered reasonable.
+\item
+  Comprehensiveness of evidence - Both the detection mechanism and response both need to be well documented to aid in follow-up inspection by external parties.
+\end{itemize}
 
 \hypertarget{workflow}{%
 \section{Workflow}\label{workflow}}
 
-\hypertarget{why-highbond-results}{%
-\section{Why Highbond Results}\label{why-highbond-results}}
+In the \protect\hypertarget{architecture}{}{Architecture chapter}, we explained the tooling needed to set up a modern audit department. For this example, we'll implement and simulate R workflow that will analyze the data and isolate any potential issues, and we'll use R for monitoring stakeholder responses and the health of the analytic
+
+While R analytical capabilities are powerful for upfront analysis, serving results ready for consumers requires a different skill set and time investment. I recommend Highbond \textbf{Results}, as not only is it easy to upload information to host and serve information, but it is also easy to set up triggers with a questionnaire, and record the responses from stakeholders.
+
+Requirements:
+
+\begin{itemize}
+\tightlist
+\item
+  A data analytic, ingesting data and preparing potential exceptions. You could productionize this in RStudio Connect, enabling you to run a schedule on a frequent basis.
+\item
+  A control contact, someone who can inspect exceptions and provide sufficient evidence or response.
+\item
+  A Highbond administrator account, which enables you access to the API.
+\item
+  A product license to Results. with access to the Results module.
+\end{itemize}
+
+\includegraphics[width=1\linewidth]{Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-189-1}
+
+\hypertarget{step-1-setup-environment}{%
+\section{Step 1: Setup Environment}\label{step-1-setup-environment}}
+
+\textbf{Caution} Please note that you may be working with your live Highbond environment and data. Take caution and ensure you do not inadvertently delete your data.
+
+We will need a table upload your data into Highbond Results. Head to your Results component and prepare the collection, analysis \& table for upload. You can create a collection manually.
 
 \hypertarget{example}{%
 \section{Example}\label{example}}
@@ -5270,12 +5315,12 @@ TODO Storing secrets - .Renviron, config, keyring
 \part{Appendix}\label{part-appendix}}
 
 \hypertarget{appendixct}{%
-\chapter{Continuous testing methodology}\label{appendixct}}
+\chapter{Continuous Auditing methodology}\label{appendixct}}
 
 \hypertarget{support-for-continuous-auditing}{%
 \section{Support for Continuous Auditing}\label{support-for-continuous-auditing}}
 
-There is a lot of hype around continuous controls testing, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.
+There is a lot of hype around continuous controls monitoring, and how it will automate or eliminate the need for manual testing or sampling. Regulations have struggled to keep up with the view of continuous testing, despite independent advancements resulting in greater assurances of internal control through these advanced testing mechanisms.
 
 This should not discourage your team in applying analytics on a continuous basis. Rather, it gives you a point to open up conversation with external auditors about how the tests of controls offer greater assurance at a higher degree of efficiency.
 
@@ -5295,7 +5340,7 @@ AS 2201 does allow for the use of entity level controls as conducted by internal
 \hypertarget{determining-population-tolerable-error-rate}{%
 \section{Determining population tolerable error rate}\label{determining-population-tolerable-error-rate}}
 
-You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100\% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point.
+You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100\% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. Finding one failure in a population of several hundred transactions should not be detrimental - however, to some professionals, truly accepting deviations is a difficult fact to accept.
 
 One key method to help acknowledge that errors do indeed exist is through clarifying the \emph{population tolerable error rate} - i.e.~the maximum rate of deviations of a prescribed control (.34) ((``AS 2315: Audit Sampling'' \protect\hyperlink{ref-pcaob-as2315}{2015})). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met.
 

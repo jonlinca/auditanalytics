@@ -1,12 +1,49 @@
-# Continuous testing
+# Continuous monitoring
 
 Continuous Monitoring (CM) and Continuous Auditing (CA, or automated controls testing) relies on the same premise - that a specific entity of interest is being evaluated on a high frequency and regular basis. Both definitions are used inconsistently in the audit industry - I tend to rely on CM for general risk measurement, and CA for controls.
 
-Continuous Auditing is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is exclusively pointed towards sampling. See the [appendix](#appendixct) on how to help get started on establishing an agreeable methodology.
+Continuous Monitoring is a no brainer - who would say no to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is almost exclusively pointed towards sampling. See the [appendix](#appendixct) on how to help get started on establishing an agreeable methodology.
+
+## Key aspects
+
+To effectively implement a CM task, you need to consider the following:
+
+- Audit application platform - An audit application platform needs to be secure and accessible to your stakeholders. More sophisticated platforms require audit trails for uploading of information and tracking responses.
+- Close-to-event detection - An exceptions-based CM testing model will need to be ran on a frequent basis, so not only do you need direct access to the data, but a platform to execute the analysis as well.
+- Timely response - Response mechanisms needs to be integrated with your business, where emerging risks and alerts need to be handled effectively to be considered reasonable.
+- Comprehensiveness of evidence - Both the detection mechanism and response both need to be well documented to aid in follow-up inspection by external parties.
 
 ## Workflow
 
-## Highbond Results
+In the [Architecture chapter]{#architecture}, we explained the tooling needed to set up a modern audit department. For this example, we'll implement and simulate R workflow that will analyze the data and isolate any potential issues, and we'll use R for monitoring stakeholder responses and the health of the analytic
+
+While R analytical capabilities are powerful for upfront analysis, serving results ready for consumers requires a different skill set and time investment. I recommend Highbond **Results**, as not only is it easy to upload information to host and serve information, but it is also easy to set up triggers with a questionnaire, and record the responses from stakeholders.
+
+Requirements:
+
+- A data analytic, ingesting data and preparing potential exceptions. You could productionize this in RStudio Connect, enabling you to run a schedule on a frequent basis.
+- A control contact, someone who can inspect exceptions and provide sufficient evidence or response.
+- A Highbond administrator account, which enables you access to the API.
+- A product license to Results. with access to the Results module.
+
+```{r out.width="100%", echo = FALSE}
+DiagrammeR::mermaid("
+sequenceDiagram
+  data source->>data analytic: get data
+  data analytic->>highbond results: API upload exceptions
+  highbond results->>control executor: notify of potential issues
+  control executor->>highbond results: record response & remediation
+  highbond results->>data analytic: API download responses
+  data analytic-->>auditor: review results
+  data analytic-->>auditor: monitor health
+")
+```
+
+## Step 1: Setup Environment
+
+**Caution** Please note that you may be working with your live Highbond environment and data. Take caution and ensure you do not inadvertently delete your data.
+
+We will need a table upload your data into Highbond Results. Head to your Results component and prepare the collection, analysis & table for upload. You can create a collection manually.
 
 ## Example
 

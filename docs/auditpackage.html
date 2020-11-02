@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-10-29" />
+<meta name="date" content="2020-11-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="applied-audit-analytics.html"/>
-<link rel="next" href="continuous-testing.html"/>
+<link rel="next" href="continuous-monitoring.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -55,6 +55,12 @@
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<script src="libs/d3-3.3.8/d3.min.js"></script>
+<script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+<link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+<script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+<script src="libs/chromatography-0.1/chromatography.js"></script>
+<script src="libs/DiagrammeR-binding-1.0.6.1/DiagrammeR.js"></script>
 <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
 <script src="libs/datatables-binding-0.14/datatables.js"></script>
 <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -269,10 +275,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="continuous-testing.html"><a href="continuous-testing.html"><i class="fa fa-check"></i><b>13</b> Continuous testing</a><ul>
-<li class="chapter" data-level="13.1" data-path="continuous-testing.html"><a href="continuous-testing.html#workflow"><i class="fa fa-check"></i><b>13.1</b> Workflow</a></li>
-<li class="chapter" data-level="13.2" data-path="continuous-testing.html"><a href="continuous-testing.html#why-highbond-results"><i class="fa fa-check"></i><b>13.2</b> Why Highbond Results</a></li>
-<li class="chapter" data-level="13.3" data-path="continuous-testing.html"><a href="continuous-testing.html#example"><i class="fa fa-check"></i><b>13.3</b> Example</a></li>
+<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
+<li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#key-aspects"><i class="fa fa-check"></i><b>13.1</b> Key aspects</a></li>
+<li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#workflow"><i class="fa fa-check"></i><b>13.2</b> Workflow</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#step-1-setup-environment"><i class="fa fa-check"></i><b>13.3</b> Step 1: Setup Environment</a></li>
+<li class="chapter" data-level="13.4" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#example"><i class="fa fa-check"></i><b>13.4</b> Example</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
 <li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
@@ -280,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>15.2</b> Passwords</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous testing methodology</a><ul>
+<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
 <li class="chapter" data-level="16.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
@@ -338,14 +345,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The evolution of your package is highly dependent on users breaking down their own work and contributing functions, and should be reviewed at the conclusion of each engagement. As your team completes audits within a notebook, you should consider what could you break out so it could be reused elsewhere. One way to think about functions in an R package is ‘what kind of puzzle pieces are needed to make this picture complete?’, where the pieces are the individual functions that give you the full picture.</p>
 <p>What you would want to do is break down a task you’ve done into a reusable component - that is, generic enough to be called upon any code, but specific enough that it achieves a certain functionality. Lets step through an example of what this could be.</p>
 <p>Lets say you’ve performed duplicate payment analysis. You need to download your data, clean it, analyze it, and upload the results for follow-up. At a high level, you’ve completed a single notebook:
-<div id="htmlwidget-ffaeb12c7c76e2ae4490" style="width:100%;height:96px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ffaeb12c7c76e2ae4490">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph download_cluster {\n    \"Download\";\n    color = black;\n    label = \"Download\";\n  }\n  \n  subgraph clean_cluster {\n    \"Clean\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph analyze_cluster {\n    \"Analyze\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph upload_cluster {\n    \"Upload\"\n    color = black;\n    label = \"Upload\";\n  }\n\n # Edges\n  \"Download\" -> \"Clean\" [ltail=download_cluster lhead=clean_cluster];\n  \"Clean\" -> \"Analyze\" [ltail=clean_cluster lhead=analyze_cluster];\n  \"Analyze\" -> \"Upload\" [ltail=analyze_cluster lhead=upload_cluster];\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-81b1d8c965d75a3ae004" style="width:100%;height:96px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-81b1d8c965d75a3ae004">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph download_cluster {\n    \"Download\";\n    color = black;\n    label = \"Download\";\n  }\n  \n  subgraph clean_cluster {\n    \"Clean\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph analyze_cluster {\n    \"Analyze\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph upload_cluster {\n    \"Upload\"\n    color = black;\n    label = \"Upload\";\n  }\n\n # Edges\n  \"Download\" -> \"Clean\" [ltail=download_cluster lhead=clean_cluster];\n  \"Clean\" -> \"Analyze\" [ltail=clean_cluster lhead=analyze_cluster];\n  \"Analyze\" -> \"Upload\" [ltail=analyze_cluster lhead=upload_cluster];\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></p>
 <p>If you crack open each section, you’ll see what you had to perform, which gives you an idea about what functions you may need. For example, you may have downloaded several tables from your accounting software, and a listing of employees from the HR database, amongst the other several procedures you needed to do.</p>
-<div id="htmlwidget-baa81de7daccfbd53b1e" style="width:100%;height:384px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-baa81de7daccfbd53b1e">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    \"ERP: Invoices joined Payments\" \"ERP: Vendor Master\" \"HR: Employee listing\";\n    color = black;\n    label = \"Download\";\n  }\n\n  subgraph cluster_clean {\n    \"Join tables together\" \"Remove void invoices\" \"Remove characters\" \"Remove numbers\" \"Clean dates\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph cluster_analyze {\n    \"SSS Test 1\" \"SSS Test 2\" \"SSSD Test 3\" \"SSSD Test 4\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph cluster_upload {\n    \"Authenticate via API\" \"Upload results\", \"Email results\"\n    color = black;\n    label = \"Upload\";\n  }\n  \n   # Edges\n  \"ERP: Invoices joined Payments\" -> \"Join tables together\" [ltail=cluster_download lhead=cluster_clean];\n  \"Join tables together\" -> \"SSS Test 1\" [ltail=cluster_clean lhead=cluster_analyze];\n  \"SSS Test 1\" -> \"Authenticate via API\" [ltail=cluster_analyze lhead=cluster_upload];\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-1ed5b9c1bf8656cd155a" style="width:100%;height:384px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ed5b9c1bf8656cd155a">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    \"ERP: Invoices joined Payments\" \"ERP: Vendor Master\" \"HR: Employee listing\";\n    color = black;\n    label = \"Download\";\n  }\n\n  subgraph cluster_clean {\n    \"Join tables together\" \"Remove void invoices\" \"Remove characters\" \"Remove numbers\" \"Clean dates\"\n    color = black;\n    label = \"Clean\";\n  }\n  \n  subgraph cluster_analyze {\n    \"SSS Test 1\" \"SSS Test 2\" \"SSSD Test 3\" \"SSSD Test 4\"\n    color = black;\n    label = \"Analyze\";\n  }\n  \n  subgraph cluster_upload {\n    \"Authenticate via API\" \"Upload results\", \"Email results\"\n    color = black;\n    label = \"Upload\";\n  }\n  \n   # Edges\n  \"ERP: Invoices joined Payments\" -> \"Join tables together\" [ltail=cluster_download lhead=cluster_clean];\n  \"Join tables together\" -> \"SSS Test 1\" [ltail=cluster_clean lhead=cluster_analyze];\n  \"SSS Test 1\" -> \"Authenticate via API\" [ltail=cluster_analyze lhead=cluster_upload];\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>If you further dig into the download phase, you’ll see that you had to create two separate database connections to download information from the ERP and also HR database, before it could be used the even download the information.</p>
-<div id="htmlwidget-03634cb5d4cc14991b71" style="width:100%;height:384px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-03634cb5d4cc14991b71">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    color = black;\n    label = \"Download\";\n    \n    A91 [label = \"ERP: Invoices joined Payments\"]\n    A92 [label = \"ERP: Vendor Master\"]\n    A93 [label = \"HR: Employee listing\"]\n    \n    A01 [label = \"DBI::dbConnect(oracle, host = erp.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    A02 [label = \"DBI::dbConnect(sql, host = hr.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    \n    A11 [label = \"dplyr::tbl(erp, &rsquo;ap_1200&rsquo;)\"]\n    A12 [label = \"dplyr::tbl(erp, &rsquo;ap_1201&rsquo;)\"]\n    A13 [label = \"dplyr::tbl(erp, &rsquo;vm_5000&rsquo;)\"]\n    A14 [label = \"dplyr::tbl(hr, &rsquo;v_emp_list&rsquo;)\"]\n    \n    A01 -> A11\n    A01 -> A12\n    A01 -> A13\n    A11 -> A91\n    A12 -> A91\n    A13 -> A92\n    \n    A02 -> A14\n    A14 -> A93\n  }\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d80c571bf77da4dcdb84" style="width:100%;height:384px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d80c571bf77da4dcdb84">{"x":{"diagram":"\ndigraph G {\n\n  # a \"graph\" statement\n  graph [overlap = true, \n          fontsize = 10,\n          rankdir = LR,\n          compound = true]\n\n  # several \"node\" statements\n  node [shape = box,\n        fontname = Helvetica]\n\n  subgraph cluster_download {\n    fontname = Helvetica;\n    fontsize = 10;\n    color = black;\n    label = \"Download\";\n    \n    A91 [label = \"ERP: Invoices joined Payments\"]\n    A92 [label = \"ERP: Vendor Master\"]\n    A93 [label = \"HR: Employee listing\"]\n    \n    A01 [label = \"DBI::dbConnect(oracle, host = erp.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    A02 [label = \"DBI::dbConnect(sql, host = hr.abc.com, user = me)\", style = \"filled\", fillcolor = \"gold\"]\n    \n    A11 [label = \"dplyr::tbl(erp, &rsquo;ap_1200&rsquo;)\"]\n    A12 [label = \"dplyr::tbl(erp, &rsquo;ap_1201&rsquo;)\"]\n    A13 [label = \"dplyr::tbl(erp, &rsquo;vm_5000&rsquo;)\"]\n    A14 [label = \"dplyr::tbl(hr, &rsquo;v_emp_list&rsquo;)\"]\n    \n    A01 -> A11\n    A01 -> A12\n    A01 -> A13\n    A11 -> A91\n    A12 -> A91\n    A13 -> A92\n    \n    A02 -> A14\n    A14 -> A93\n  }\n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>There are some functions that are worth considering to make. The code you can consider turning into a function could be:</p>
 <ul>
 <li>Database connections to the ERP via Oracle or HR via SQL.</li>
@@ -395,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb405"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb405-1"><a href="auditpackage.html#cb405-1"></a>---</span>
 <span id="cb405-2"><a href="auditpackage.html#cb405-2"></a>title: &quot;Audit Data Analytics - &quot;</span>
 <span id="cb405-3"><a href="auditpackage.html#cb405-3"></a>author: &quot;Your name&quot;</span>
-<span id="cb405-4"><a href="auditpackage.html#cb405-4"></a>date: &quot;2020-10-29 23:08:54&quot;</span>
+<span id="cb405-4"><a href="auditpackage.html#cb405-4"></a>date: &quot;2020-11-02 14:35:54&quot;</span>
 <span id="cb405-5"><a href="auditpackage.html#cb405-5"></a>output:</span>
 <span id="cb405-6"><a href="auditpackage.html#cb405-6"></a>  html_document</span>
 <span id="cb405-7"><a href="auditpackage.html#cb405-7"></a>---</span>
@@ -435,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="applied-audit-analytics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="continuous-testing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="continuous-monitoring.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

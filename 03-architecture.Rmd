@@ -21,9 +21,9 @@ digraph boxes_and_circles {
   R -> G
   G -> R
   R -> D
-  D -> G
+  D -> DB
+  D -> R
   G -> D
-  R -> DB
   DB -> R
   DB -> D
 }
@@ -69,6 +69,19 @@ The basics of git are:
 - Commit code on your local computer.
 - Push code from your local computer to the remote server.
 
+```{r out.width="100%", echo = FALSE}
+DiagrammeR::mermaid("
+sequenceDiagram
+  participant auditor
+  participant code repository
+  code repository->>auditor: pull code
+  loop Make changes
+    auditor->>auditor: Commit code
+  end
+  auditor->>code repository: push code
+")
+```
+
 While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If using git sometimes results in infinite frustration, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
 
 Several different server technologies support git - [GitHub](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
@@ -80,6 +93,20 @@ As you write more code and templates, you will eventually want to share these ne
 Packages go beyond the tangible and provide several qualitative benefits as well. They standardize your team's workflow, create consistency and readability standards, and get your team to speak a single language. It creates a cohesive foundation where anyone on the team can contribute, and a library for those who wish to learn more.
 
 How do you share packages? You certainly don't not need to force your team to copy-and-paste code or even a templates from a central folder! The most elegant way to distribute your code is via hosting packages on a code or package repository. These repositories (hosted internally or externally) enable your team to download best practices with a simple line of code. You can also compile your packages and leave them on a network drive. 
+
+```{r out.width="100%", echo = FALSE}
+DiagrammeR::mermaid("
+sequenceDiagram
+  participant auditor
+  participant audit team
+  participant git repository
+  participant package
+  auditor->>git repository: update package and add features
+  git repository->>package: create a package for distribution
+  package->>auditor: download new features
+  package->>audit team: download new features
+")
+```
 
 The best part? You can give your package a creative name that represents the culture of your internal audit team or organization. Just don't call it auditR!
 
@@ -95,7 +122,7 @@ Data products are deliverable that enhance your customer's ability to gather, pr
 
 [Galvanize](https://www.wegalvanize.com), the parent company of ACL Analytics and one of the most popular companies in the audit software industry, invested significant efforts into their cloud-based working paper solution, Highbond. 
 
-**Highbond Results** is an unrivaled for audit exception and remediation workflow. The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers. 
+**Highbond Results** is unrivaled for audit exception and remediation workflow. The idea with an audit exception workflow is that audit testing will identify an actionable transaction or outcome. This may be an exception within a process, a control requiring execution, or even a request for additional information or clarification. Once a process has been designed, Highbond Results will allow you to focus on the users who should action the workflow and the rules for setting up triggers. 
 
 Highbond Results also provides capabilities to do no-code based visualizations hosted on the web. Once set up, they offer a stable method of delivering storyboards and visualizations.
 
@@ -105,9 +132,9 @@ Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high a
 
 ### RStudio Connect
 
-RStudio offers commercially supported server software, including the [RStudio Connect](https://rstudio.com/products/connect/) solution that allows R deliverable to be hosted online. These include:
+RStudio offers commercially supported server software, including the [RStudio Connect](https://rstudio.com/products/connect/) solution that allows R deliverable to be hosted and accessible via a web browser. Features include:
 
-* [RMarkdown](https://rmarkdown.rstudio.com) notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization.
+* [RMarkdown](https://rmarkdown.rstudio.com) notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization, and can be scheduled on a regular basis.
 * These notebooks can also act as Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).
 * The hosting of [Shiny](https://shiny.rstudio.com) apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.
 
