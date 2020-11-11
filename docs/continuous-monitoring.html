@@ -359,8 +359,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A product license to Results.</li>
 </ul>
 <p>For an individual control, the flow of information may look something like this:</p>
-<div id="htmlwidget-5480dd3bbf98828ee3be" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5480dd3bbf98828ee3be">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ec6568a63ba0e7de5b56" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ec6568a63ba0e7de5b56">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="create-a-collection-analytic-and-table" class="section level2">
 <h2><span class="header-section-number">13.2</span> Create a Collection, Analytic and Table</h2>
@@ -419,7 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 7
 ##   id     type   name        description created_at    updated_at   relationships
 ##   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;list&gt;       
-## 1 166827 analy… Journal en… NA          2020-11-11T0… 2020-11-11T… &lt;tibble [1 ×…</code></pre>
+## 1 166883 analy… Journal en… NA          2020-11-11T1… 2020-11-11T… &lt;tibble [1 ×…</code></pre>
 <p>Lastly, we will want to make a spot to house our results, which will be stored in the Table within the Analysis. The table ID is important as it represents the number that we will reference in all our uploads</p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="continuous-monitoring.html#cb414-1"></a>new_table &lt;-<span class="st"> </span><span class="kw">create_results_tables</span>(highbond_auth, </span>
 <span id="cb414-2"><a href="continuous-monitoring.html#cb414-2"></a>                                   new_analysis<span class="op">$</span>id[[<span class="dv">1</span>]], </span>
@@ -431,7 +431,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 10
 ##   id    type  name  description data_table_id script_name table_type created_at
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;               &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;      &lt;chr&gt;     
-## 1 5617… tabl… High… NA                1203087 NA          data_anal… 2020-11-1…
+## 1 5623… tabl… High… NA                1203723 NA          data_anal… 2020-11-1…
 ## # … with 2 more variables: updated_at &lt;chr&gt;, relationships &lt;list&gt;</code></pre>
 <p>By now, you should see this within your Highbond Results instance.</p>
 </div>
@@ -476,7 +476,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb420-3"><a href="continuous-monitoring.html#cb420-3"></a>                     <span class="dt">upload =</span> upload_rows, </span>
 <span id="cb420-4"><a href="continuous-monitoring.html#cb420-4"></a>                     <span class="dt">purge =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/561758/upload</code></pre>
+<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/562390/upload</code></pre>
 <p>Upon checking the Results Table on the website, we see that the record was added.</p>
 <p>Once we uploaded the information, we should specify the primary key in the Table’s settings. The primary key’s purpose in Highbond Results is to ensure that this record stays persistent. When you upload another batch of records, if a ‘primary key’ is defined, then Highbond will merge the information in the new upload, but not automatically repeat any triggers that have been already acted on (example: if you already sent out a request for a response via a questionnaire, it will not occur again).</p>
 <p>For our example, we will want to let the control owner know which journal entry is high risk, so its probably useful to also make this the primary key. To assign this field as the primary key, within the list of Tables in Highbond, select the ellipses (three dots) corresponding to the Table, and select Settings.</p>
@@ -500,7 +500,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Uploading new records is quite straight forward. Simply remove the <code>purge</code> argument (by default, <code>post_results_records()</code> will not erase the contents of the existing table):</p>
 <div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="continuous-monitoring.html#cb425-1"></a><span class="kw">post_results_records</span>(highbond_auth, <span class="dt">table_id =</span> table_id, <span class="dt">upload =</span> upload_rows)</span></code></pre></div>
 <pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/561758/upload</code></pre>
+<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/562390/upload</code></pre>
 </div>
 <div id="downloading-records-and-responses" class="section level2">
 <h2><span class="header-section-number">13.5</span> Downloading records and responses</h2>
