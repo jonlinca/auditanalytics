@@ -60,7 +60,7 @@ Code versioning technologies resonate closely with IT General Controls and even 
 
 ### git
 
-[git](https://git-scm.com) is a type of version control. Another free, open source software, and the basic usage of the tool is  accessible. 
+[git](https://git-scm.com) is a type of version control. Another free, open source software, and the basic usage of the tool is accessible. 
 
 The basics of git are:
 
@@ -85,6 +85,8 @@ sequenceDiagram
 While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If using git sometimes results in infinite frustration, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
 
 Several different server technologies support git - [GitHub](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
+
+If you're learning, GitHub is a fantastic free source to set up shop at. Within your own company, see what the IT and developers are using, as its far more convenient to jump onto that. Like the R tutorial, [Happy Git and GitHub for the useR](https://happygitwithr.com) by Jenny Bryan et. al. is a practical guide to installing R, setting up keys and the core fundamentals.
 
 ### Packages
 

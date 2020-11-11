@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="other-practices-to-follow.html"/>
-<link rel="next" href="acl-analytics-to-r.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -184,8 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
 <li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
-<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#audit-package-helpers"><i class="fa fa-check"></i><b>4.3</b> Audit Package helpers</a></li>
-<li class="chapter" data-level="4.4" data-path="setup.html"><a href="setup.html#github-or-another-git-related-brand"><i class="fa fa-check"></i><b>4.4</b> GitHub (or another git-related brand)</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package."><i class="fa fa-check"></i><b>4.3</b> Highbond R package.</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
 <li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
@@ -238,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
 <li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-threshold"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
+<li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-te"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
 <li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
@@ -276,10 +275,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
-<li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#key-aspects"><i class="fa fa-check"></i><b>13.1</b> Key aspects</a></li>
-<li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#workflow"><i class="fa fa-check"></i><b>13.2</b> Workflow</a></li>
-<li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#step-1-setup-environment"><i class="fa fa-check"></i><b>13.3</b> Step 1: Setup Environment</a></li>
-<li class="chapter" data-level="13.4" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#example"><i class="fa fa-check"></i><b>13.4</b> Example</a></li>
+<li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#considerations"><i class="fa fa-check"></i><b>13.1</b> Considerations</a></li>
+<li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#create-a-collection-analytic-and-table"><i class="fa fa-check"></i><b>13.2</b> Create a Collection, Analytic and Table</a></li>
+<li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#define-the-high-risk-test"><i class="fa fa-check"></i><b>13.3</b> Define the High Risk test</a></li>
+<li class="chapter" data-level="13.4" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#uploading-additional-results"><i class="fa fa-check"></i><b>13.4</b> Uploading additional results</a></li>
+<li class="chapter" data-level="13.5" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#downloading-records-and-responses"><i class="fa fa-check"></i><b>13.5</b> Downloading records and responses</a></li>
+<li class="chapter" data-level="13.6" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#triggers-and-questionnaires"><i class="fa fa-check"></i><b>13.6</b> Triggers and Questionnaires</a></li>
 </ul></li>
 <li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
 <li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
@@ -291,13 +292,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html"><i class="fa fa-check"></i><b>17</b> ACL Analytics to R</a><ul>
-<li class="chapter" data-level="17.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#import"><i class="fa fa-check"></i><b>17.1</b> Import</a></li>
-<li class="chapter" data-level="17.2" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#data"><i class="fa fa-check"></i><b>17.2</b> Data</a><ul>
-<li class="chapter" data-level="17.2.1" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#joins"><i class="fa fa-check"></i><b>17.2.1</b> Joins</a></li>
-</ul></li>
-<li class="chapter" data-level="17.3" data-path="acl-analytics-to-r.html"><a href="acl-analytics-to-r.html#analyze"><i class="fa fa-check"></i><b>17.3</b> Analyze</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -337,26 +331,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="determining-population-tolerable-error-rate" class="section level2">
 <h2><span class="header-section-number">16.3</span> Determining population tolerable error rate</h2>
-<p>You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. Finding one failure in a population of several hundred transactions should not be detrimental - however, to some professionals, truly accepting deviations is a difficult fact to accept.</p>
-<p>One key method to help acknowledge that errors do indeed exist is through clarifying the <em>population tolerable error rate</em> - i.e. the maximum rate of deviations of a prescribed control (.34) (<span class="citation">(“AS 2315: Audit Sampling” <a href="#ref-pcaob-as2315" role="doc-biblioref">2015</a>)</span>). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met.</p>
+<p>You should define the methodology you will use to Continuously Audit control operations. The reason to have these conversations with your external auditors is because testing 100% of the population will invariably find a deviation. It is inevitable, as any control that involves people (or even systems, to an extent) may trip at some point. Finding one failure in a population of several hundred transactions should not be detrimental - however, to some professionals, truly accepting deviations is a difficult fact to accept. You can help them with this - AS 2201 does allow for individual controls to have deviations, yet be considered effective (.48).</p>
+<p>One key method to help acknowledge that errors could indeed exist is through clarifying the <em>population tolerable error rate</em> - i.e. the maximum rate of deviations of a prescribed control (.34) (<span class="citation">(“AS 2315: Audit Sampling” <a href="#ref-pcaob-as2315" role="doc-biblioref">2015</a>)</span>). This will be based upon the control risk that the audit team decides. In addition, when deviations are found, it does not ultimately result in a misstatement either (.35), as there would have to be sufficient evidence proven that all assertions were not met.</p>
 <p>Typical sampling asks the auditor to consider control risk, or the <em>risk of incorrect acceptance</em> - i.e. the risk that a control can be deemed effective when it is not. However, when an entire population is considered, this risk effectively reduces to zero, as there is no sampling conducted.</p>
 <p>Traditionally, sample sizes are calculated when you know the population tolerable error rate, and the risk of incorrect acceptance. Where <span class="math inline">\(\beta\)</span> is the risk of incorrect acceptance, <span class="math inline">\(p_{t}\)</span> is the population tolerable error rate, and <span class="math inline">\(n\)</span> is the sample size, we can derive the sample size necessary to satisfy audit sampling. (<span class="citation">Stewart (<a href="#ref-sampling-technical" role="doc-biblioref">2008</a>)</span>) We assume an expectation of no errors in the population with the below:</p>
 <p><span class="math display">\[
 n = \frac{ln(\beta)}{ln(1 - p_{t})}
 \]</span></p>
 <p>In R, if we were to determine the sample size necessary with a risk of incorrect acceptance of 5% and tolerable error percentage of 5%, our sample size would be:</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="appendixct.html#cb406-1"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb406-2"><a href="appendixct.html#cb406-2"></a>pt &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb406-3"><a href="appendixct.html#cb406-3"></a><span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pt)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="appendixct.html#cb433-1"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb433-2"><a href="appendixct.html#cb433-2"></a>pt &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb433-3"><a href="appendixct.html#cb433-3"></a><span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>pt)</span></code></pre></div>
 <pre><code>## [1] 58.40397</code></pre>
 <p>If it is difficult to ascertain what the population tolerable error rate may be, it is possible to work backwards from both a <em>sample size</em> and an assumption on the control risk. Derived from Sampling Guide technical notes (<span class="citation">Stewart (<a href="#ref-sampling-technical" role="doc-biblioref">2008</a>)</span>), the population tolerable error rate can be defined as:</p>
 <p><span class="math display">\[
 p_{t} = -e^\frac{ln(\beta)}{n} + 1
 \]</span>
 From the previous example, lets say our sample size was 59, and our risk of incorrect acceptance was 10%, we can estimate the population tolerable error rates.</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="appendixct.html#cb408-1"></a>n &lt;-<span class="st"> </span><span class="dv">59</span></span>
-<span id="cb408-2"><a href="appendixct.html#cb408-2"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
-<span id="cb408-3"><a href="appendixct.html#cb408-3"></a><span class="op">-</span><span class="kw">exp</span>(<span class="dv">1</span>)<span class="op">^</span>(<span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span>n) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="appendixct.html#cb435-1"></a>n &lt;-<span class="st"> </span><span class="dv">59</span></span>
+<span id="cb435-2"><a href="appendixct.html#cb435-2"></a>b &lt;-<span class="st"> </span><span class="fl">0.05</span></span>
+<span id="cb435-3"><a href="appendixct.html#cb435-3"></a><span class="op">-</span><span class="kw">exp</span>(<span class="dv">1</span>)<span class="op">^</span>(<span class="kw">log</span>(b) <span class="op">/</span><span class="st"> </span>n) <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <pre><code>## [1] 0.04950761</code></pre>
 <p>With this, your methodology could be derived from existing sampling, and you could set your threshold of control operating effectiveness, when tested on the full population, to accept 5% of samples with errors.</p>
 
@@ -383,7 +377,7 @@ From the previous example, lets say our sample size was 59, and our risk of inco
         </div>
       </div>
 <a href="other-practices-to-follow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="acl-analytics-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

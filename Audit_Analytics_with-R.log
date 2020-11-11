@@ -1,0 +1,2480 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.29)  11 NOV 2020 00:42
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Audit_Analytics_with-R.tex
+(./Audit_Analytics_with-R.tex
+LaTeX2e <2020-10-01> patch level 2
+L3 programming layer <2020-10-27> xparse <2020-03-03> (/Users/jon/Library/TinyT
+eX/texmf-dist/tex/latex/base/book.cls
+Document Class: book 2020/04/10 v1.4m Standard LaTeX document class
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/bk10.clo
+File: bk10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count175
+\c@chapter=\count176
+\c@section=\count177
+\c@subsection=\count178
+\c@subsubsection=\count179
+\c@paragraph=\count180
+\c@subparagraph=\count181
+\c@figure=\count182
+\c@table=\count183
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks15
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip49
+For additional information on amsmath, use the `?' option.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks16
+\ex@=\dimen139
+)) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count184
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count185
+\leftroot@=\count186
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count187
+\DOTSCASE@=\count188
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box47
+\strutbox@=\box48
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count189
+\c@MaxMatrixCols=\count190
+\dotsspace@=\muskip16
+\c@parentequation=\count191
+\dspbrk@lvl=\count192
+\tag@help=\toks17
+\row@=\count193
+\column@=\count194
+\maxfields@=\count195
+\andhelp@=\toks18
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks19
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+)) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2020/08/01 v1.3d Input encoding file
+\inpenc@prehook=\toks21
+\inpenc@posthook=\toks22
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2020-05-15 v7.00e Hypertext links for LaTeX
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks23
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.st
+y
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen148
+\Hy@linkcounter=\count196
+\Hy@pagecounter=\count197
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2020-05-15 v7.00e Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count198
+Package hyperref Info: Option `unicode' set `true' on input line 4338.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2020-05-15 v7.00e Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Hyper figures OFF on input line 4464.
+Package hyperref Info: Link nesting OFF on input line 4469.
+Package hyperref Info: Hyper index ON on input line 4472.
+Package hyperref Info: Plain pages OFF on input line 4479.
+Package hyperref Info: Backreferencing OFF on input line 4484.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4717.
+\c@Hy@tempcnt=\count199
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5076.
+\XeTeXLinkMargin=\dimen149
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count266
+\Field@Width=\dimen150
+\Fld@charsize=\dimen151
+Package hyperref Info: Hyper figures OFF on input line 6347.
+Package hyperref Info: Link nesting OFF on input line 6352.
+Package hyperref Info: Hyper index ON on input line 6355.
+Package hyperref Info: backreferencing OFF on input line 6362.
+Package hyperref Info: Link coloring OFF on input line 6367.
+Package hyperref Info: Link coloring with OCG OFF on input line 6372.
+Package hyperref Info: PDF/A mode OFF on input line 6377.
+LaTeX Info: Redefining \ref on input line 6417.
+LaTeX Info: Redefining \pageref on input line 6421.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
+ge
+with kernel methods
+)
+\Hy@abspage=\count267
+\c@Item=\count268
+\c@Hfootnote=\count269
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2020-05-15 v7.00e Hyperref driver for pdfTeX
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery packag
+e
+with kernel methods
+)
+\Fld@listcount=\count270
+\c@bookmark@seq@number=\count271
+
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.
+sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.
+sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip52
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count272
+\FV@InFile=\read2
+\FV@TabBox=\box49
+\c@FancyVerbLine=\count273
+\FV@StepNumber=\count274
+\FV@OutFile=\write3
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen152
+\fb@frh=\dimen153
+\FrameRule=\dimen154
+\FrameSep=\dimen155
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count275
+\LTcapwidth=\dimen156
+\LT@head=\box50
+\LT@firsthead=\box51
+\LT@foot=\box52
+\LT@lastfoot=\box53
+\LT@cols=\count276
+\LT@rows=\count277
+\c@LT@tables=\count278
+\c@LT@chunks=\count279
+\LT@p@ftn=\toks24
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen157
+\lightrulewidth=\dimen158
+\cmidrulewidth=\dimen159
+\belowrulesep=\dimen160
+\belowbottomsep=\dimen161
+\aboverulesep=\dimen162
+\abovetopsep=\dimen163
+\cmidrulesep=\dimen164
+\cmidrulekern=\dimen165
+\defaultaddspace=\dimen166
+\@cmidla=\count280
+\@cmidlb=\count281
+\@aboverulesep=\dimen167
+\@belowrulesep=\dimen168
+\@thisruleclass=\count282
+\@lastruleclass=\count283
+\@thisrulewidth=\dimen169
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count284
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
+Package: footnote 1997/01/28 1.13 Save footnotes around boxes
+\fn@notes=\box54
+\fn@width=\dimen170
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen171
+\Gin@req@width=\dimen172
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
+Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
+y)
+Package grffile Info: This package is an empty stub for compatibility on input 
+line 40.
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box55
+\UL@hyphenbox=\box56
+\UL@skip=\skip58
+\UL@hook=\toks25
+\UL@height=\dimen173
+\UL@pe=\count285
+\UL@pixel=\dimen174
+\ULC@box=\box57
+Package: ulem 2019/11/18
+\ULdepth=\dimen175
+) (/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen176
+\captionmargin@=\dimen177
+\captionwidth=\dimen178
+\caption@tempdima=\dimen179
+\caption@indent=\dimen180
+\caption@parindent=\dimen181
+\caption@hangindent=\dimen182
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count286
+\c@continuedfloat=\count287
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
+))
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
+\l__kernel_color_stack_int=\count288
+\l__pdf_internal_box=\box58
+)
+No file Audit_Analytics_with-R.aux.
+\openout1 = `Audit_Analytics_with-R.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 122.
+LaTeX Font Info:    ... okay on input line 122.
+
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+Package hyperref Info: Link coloring OFF on input line 122.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestrin
+g.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count289
+)
+LaTeX Info: Redefining \ref on input line 122.
+LaTeX Info: Redefining \pageref on input line 122.
+LaTeX Info: Redefining \nameref on input line 122.
+\@outlinefile=\write4
+\openout4 = `Audit_Analytics_with-R.out'.
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+24.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+24.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+124.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+124.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 124.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 124.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 124.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 124
+.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 124
+.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+
+{/Users/jon/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+]
+\tf@toc=\write5
+\openout5 = `Audit_Analytics_with-R.toc'.
+
+[3] [4
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+40.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 147.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 147.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 147.
+[5] [6
+
+] [7] [8
+
+]
+Chapter 1.
+[9] [10
+
+] [11] [12]
+Chapter 2.
+[13
+
+] [14] [15] [16] [17] [18
+
+]
+Chapter 3.
+<Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf, id=121, 1003.75p
+t x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf Graphic file
+ (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/architecture
+-1.pdf  used on input line 253.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+[19 <./Audit_Analytics_with-R_files/figure-latex/architecture-1.pdf>] [20]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-1-1.pdf, id=157, 1003.
+75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-1-1.pdf Graphic f
+ile (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-1-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-1-1.pdf  used on input line 315.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+[21 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-1-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-2-1.pdf, id=179, 1003.
+75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-2-1.pdf Graphic f
+ile (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-2-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-2-1.pdf  used on input line 332.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[22]
+Underfull \vbox (badness 1442) has occurred while \output is active []
+
+[23 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-2-1.pdf>] [24] [
+25] [26] [27] [28] [29
+
+] [30]
+Chapter 4.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+85.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 486.
+[31
+
+] [32]
+Chapter 5.
+[33
+
+] [34]
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ id         <chr> "793", "666", "77", "2726", "2612", "22
+11", "2726", "261...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ name       <chr> "al-Bangura, Habeeba", "Akina, Duncan",
+ "el-Kazmi, Munee...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ date_added <date> 2015-07-15, 2015-07-28, 2015-05-26, 20
+15-05-23, 2015-07...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ summary    <chr> NA, NA, NA, "spend", "spend", "spend", 
+"credits", "credi...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ `2015`     <dbl> NA, NA, NA, 65325.5287, 88270.0937, 518
+47.2728, 509.4308...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ `2016`     <dbl> NA, NA, NA, 83413.7426, 148569.7780, 89
+260.3035, 860.399...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ `2017`     <dbl> NA, NA, NA, 150261.9517, 254178.2672, 1
+42074.7898, 908.9...[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 598--598
+[]\T1/lmtt/m/n/10 ## $ `2018`     <dbl> NA, NA, NA, 55569.8474, 179056.0944, 76
+761.0587, 347.912...[] 
+ []
+
+[35]
+Overfull \hbox (232.49832pt too wide) in paragraph at lines 645--645
+[]\T1/lmtt/m/n/10 ## [1] "uid;manager\r\njonlin; jason durrand\nlocation: calga
+ry\r\nronaldlee; reid turra\nlocation: melbourne"[] 
+ []
+
+
+Overfull \hbox (221.99835pt too wide) in paragraph at lines 661--661
+[]\T1/lmtt/m/n/10 ## [1] "uid;manager\r\njonlin; jason durrand location: calgar
+y\r\nronaldlee; reid turra location: melbourne"[] 
+ []
+
+[36] [37]
+Underfull \hbox (badness 1270) in paragraph at lines 705--706
+[]\T1/lmr/m/n/10 One thing that is dif-fer-ent about con-nect-ing to databases 
+is that you
+ []
+
+
+Underfull \hbox (badness 1253) in paragraph at lines 705--706
+\T1/lmr/m/n/10 con-nec-tion (au-then-ti-cat-ing au-to-mat-i-cally with your own
+ ac-tive di-rec-tory
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 741--741
+[]\T1/lmtt/m/n/10 ##   je_num   amount gl_date gl_date_char vendor_id          
+  account[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 741--741
+[]\T1/lmtt/m/n/10 ## 1      1 22667.46   18232   2019-12-02      2211 exp_mater
+ials_6000[] 
+ []
+
+
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 741--741
+[]\T1/lmtt/m/n/10 ##  [ reached 'max' / getOption("max.print") -- omitted 1999 
+rows ][] 
+ []
+
+[38]
+Overfull \hbox (43.49887pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanal
+ytics.sqlite][] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##    je_num  amount gl_date gl_date_char vendor_id account i
+nvoice_date[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##     <int>   <dbl>   <dbl> <chr>            <int> <chr>    
+      <dbl>[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  1      1  22667.   18232 2019-12-02        2211 exp_ma~  
+      18225[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  2      1 -22667.   18232 2019-12-02          NA liab_a~  
+      18225[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  3      2   1397.   18228 2019-11-28        2612 exp_ma~  
+      18218[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  4      2  -1397.   18228 2019-11-28          NA liab_a~  
+      18218[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  5      3   2319.   17995 2019-04-09        2612 exp_ma~  
+      17985[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  6      3  -2319.   17995 2019-04-09          NA liab_a~  
+      17985[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  7      4  20037.   18199 2019-10-30        2612 exp_ma~  
+      18189[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  8      4 -20037.   18199 2019-10-30          NA liab_a~  
+      18189[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ##  9      5  43140.   18051 2019-06-04        2612 exp_ma~  
+      18041[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ## 10      5 -43140.   18051 2019-06-04          NA liab_a~  
+      18041[] 
+ []
+
+
+Overfull \hbox (80.24876pt too wide) in paragraph at lines 770--770
+[]\T1/lmtt/m/n/10 ## # ... with more rows, and 2 more variables: description <c
+hr>, paid_date <dbl>[] 
+ []
+
+[39]
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 810--810
+[]\T1/lmtt/m/n/10 ##   je_num   amount gl_date gl_date_char vendor_id          
+  account[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 810--810
+[]\T1/lmtt/m/n/10 ## 1    140 96354.61   18249   2019-12-19      2211 exp_mater
+ials_6000[] 
+ []
+
+
+Overfull \hbox (43.49887pt too wide) in paragraph at lines 832--832
+[]\T1/lmtt/m/n/10 ## #   [/Users/jon/Documents/R/auditanalytics/data/rauditanal
+ytics.sqlite][] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 832--832
+[]\T1/lmtt/m/n/10 ##   je_num amount gl_date gl_date_char vendor_id account inv
+oice_date description[] 
+ []
+
+
+Overfull \hbox (53.99884pt too wide) in paragraph at lines 832--832
+[]\T1/lmtt/m/n/10 ##    <int>  <dbl>   <dbl> <chr>            <int> <chr>      
+    <dbl> <chr>[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 832--832
+[]\T1/lmtt/m/n/10 ## 1    140 96355.   18249 2019-12-19        2211 exp_ma~    
+    18242 Packaging ~[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 832--832
+[]\T1/lmtt/m/n/10 ## 2    693 88524.   18121 2019-08-13        2726 exp_ma~    
+    18114 Quality co~[] 
+ []
+
+[40]
+Overfull \hbox (157.63742pt too wide) in paragraph at lines 884--886
+[]\T1/lmr/m/n/10 You for-mu-late your re-quest, and the re-quest URL be-comes \
+T1/lmtt/m/n/10 https://api.github.com/users/jonlinca/repos 
+ []
+
+[41]
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 930--930
+[]\T1/lmtt/m/n/10 ##  [1] "url"         "status_code" "headers"     "all_header
+s" "cookies"[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 930--930
+[]\T1/lmtt/m/n/10 ##  [6] "content"     "date"        "times"       "request"  
+   "handle"[] 
+ []
+
+[42] [43] [44
+
+]
+Chapter 6.
+[45]
+Overfull \hbox (1.499pt too wide) in paragraph at lines 1038--1038
+[]\T1/lmtt/m/n/10 ##      je_num           amount          gl_date      gl_date
+_char[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1038--1038
+[]\T1/lmtt/m/n/10 ##  1st Qu.: 250.8   1st Qu.: -6846   1st Qu.:17986   Class :
+character[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1038--1038
+[]\T1/lmtt/m/n/10 ##  Median : 500.5   Median :     0   Median :18080   Mode  :
+character[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1038--1038
+[]\T1/lmtt/m/n/10 ##  1st Qu.:2211   Class :character   1st Qu.:17976   Class :
+character[] 
+ []
+
+
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 1038--1038
+[]\T1/lmtt/m/n/10 ##  Median :2612   Mode  :character   Median :18072   Mode  :
+character[] 
+ []
+
+[46]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ##   je_num  amount gl_date gl_date_char vendor_id account in
+voice_date description[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ##    <int>   <dbl>   <dbl> <chr>            <int> <chr>     
+     <dbl> <chr>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 1      1  22667.   18232 2019-12-02        2211 exp_ma~   
+     18225 Packaging ~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 2      1 -22667.   18232 2019-12-02          NA liab_a~   
+     18225 Packaging ~[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 3      2   1397.   18228 2019-11-28        2612 exp_ma~   
+     18218 Paper[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 4      2  -1397.   18228 2019-11-28          NA liab_a~   
+     18218 Paper[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 5      3   2319.   17995 2019-04-09        2612 exp_ma~   
+     17985 Paper[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1073--1073
+[]\T1/lmtt/m/n/10 ## 6      3  -2319.   17995 2019-04-09          NA liab_a~   
+     17985 Paper[] 
+ []
+
+[47]
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##    je_num  amount gl_date gl_date_char vendor_id account i
+nvoice_date[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##     <int>   <dbl>   <dbl> <chr>            <int> <chr>    
+      <dbl>[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  1      1 -22667.   18232 2019-12-02          NA liab_a~  
+      18225[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  2      2  -1397.   18228 2019-11-28          NA liab_a~  
+      18218[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  3      3  -2319.   17995 2019-04-09          NA liab_a~  
+      17985[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  4      4 -20037.   18199 2019-10-30          NA liab_a~  
+      18189[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  5      5 -43140.   18051 2019-06-04          NA liab_a~  
+      18041[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  6      6 -13603.   17927 2019-01-31          NA liab_a~  
+      17920[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  7      7  -7001.   18190 2019-10-21          NA liab_a~  
+      18183[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  8      8 -24753.   18010 2019-04-24          NA liab_a~  
+      18003[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ##  9      9  -2295.   18087 2019-07-10          NA liab_a~  
+      18080[] 
+ []
+
+[48]
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ## 10     10 -34263.   18060 2019-06-13          NA liab_a~  
+      18053[] 
+ []
+
+
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 1153--1153
+[]\T1/lmtt/m/n/10 ## # ... with 990 more rows, and 2 more variables: descriptio
+n <chr>,[] 
+ []
+
+[49]
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ##   account activity_2019_01 activity_2019_02 activity_2019_
+03 activity_2019_04[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ##   <chr>              <dbl>            <dbl>            <db
+l>            <dbl>[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## 1 exp_co~         28785.              9942.            971
+5.            9931.[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## 2 exp_ma~       1021508.            834766.          74662
+1.          636011.[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## 3 exp_me~             1.55               0                
+0              281.[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## 4 liab_a~      -1050295.           -844708.         -75633
+6.         -646057.[] 
+ []
+
+
+Overfull \hbox (74.99878pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## 5 liab_c~             0                  0                
+0             -166.[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## # ... with 8 more variables: activity_2019_05 <dbl>, activ
+ity_2019_06 <dbl>,[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## #   activity_2019_07 <dbl>, activity_2019_08 <dbl>, activi
+ty_2019_09 <dbl>,[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1225--1225
+[]\T1/lmtt/m/n/10 ## #   activity_2019_10 <dbl>, activity_2019_11 <dbl>, activi
+ty_2019_12 <dbl>[] 
+ []
+
+[50]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1283--1283
+[]\T1/lmtt/m/n/10 ##  [1] "account"          "activity_2019_01" "activity_2019_
+02" "activity_2019_03"[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1283--1283
+[]\T1/lmtt/m/n/10 ##  [5] "activity_2019_04" "activity_2019_05" "activity_2019_
+06" "activity_2019_07"[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 1283--1283
+[]\T1/lmtt/m/n/10 ##  [9] "activity_2019_08" "activity_2019_09" "activity_2019_
+10" "activity_2019_11"[] 
+ []
+
+[51]
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ##   activity_2019_01 activity_2019_02 activity_2019_03 activ
+ity_2019_04[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ##              <dbl>            <dbl>            <dbl>      
+      <dbl>[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## 1         28785.              9942.            9715.      
+      9931.[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## 2       1021508.            834766.          746621.      
+    636011.[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## 3             1.55               0                0       
+       281.[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## 4      -1050295.           -844708.         -756336.      
+   -646057.[] 
+ []
+
+
+Overfull \hbox (32.9989pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## 5             0                  0                0       
+      -166.[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## # ... with 8 more variables: activity_2019_05 <dbl>, activ
+ity_2019_06 <dbl>,[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## #   activity_2019_07 <dbl>, activity_2019_08 <dbl>, activi
+ty_2019_09 <dbl>,[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 1326--1326
+[]\T1/lmtt/m/n/10 ## #   activity_2019_10 <dbl>, activity_2019_11 <dbl>, activi
+ty_2019_12 <dbl>[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 1342--1342
+[]\T1/lmtt/m/n/10 ## [1]    248426.92   9984507.34      1705.97 -10227945.12   
+  -6695.11[] 
+ []
+
+[52] [53]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-41-1.pdf, id=414, 1003
+.75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-41-1.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-41-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-41-1.pdf  used on input line 1435.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+[54 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-41-1.pdf>]
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 1477--1477
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+[55] [56]
+Overfull \hbox (53.99884pt too wide) in paragraph at lines 1607--1607
+[]\T1/lmtt/m/n/10 ## # ... with 4 variables: account <chr>, gl_total <dbl>, tb_
+activity <dbl>,[] 
+ []
+
+[57] [58]
+Chapter 7.
+[59
+
+] [60] [61] [62] [63] [64] [65] [66] [67] [68]
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 2225--2225
+[]\T1/lmtt/m/n/10 ## Warning: Expected 2 pieces. Additional pieces discarded in
+ 4 rows [4, 5, 7, 8].[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 2229--2229
+[]\T1/lmtt/m/n/10 ## Warning: Expected 2 pieces. Missing pieces filled with `NA
+` in 1 rows [2].[] 
+ []
+
+[69]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2258--2258
+[]\T1/lmtt/m/n/10 ## Warning: Expected 2 pieces. Missing pieces filled with `NA
+` in 3 rows [1, 2, 3].[] 
+ []
+
+[70] [71]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2349--2349
+[]\T1/lmtt/m/n/10 ## Warning: Expected 2 pieces. Missing pieces filled with `NA
+` in 3 rows [1, 2, 3].[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ##      id type  name  company_contact date_added summary `20
+15` `2016` `2017`[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ##   <int> <chr> <chr> <chr>           <date>     <chr>    <d
+bl>  <dbl>  <dbl>[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 1  2726 V     "el-~ Rivera, Evan    2015-05-23 spend   653
+26. 8.34e4 1.50e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 2  2612 V     "Bra~ el-Jaffer, Sha~ 2015-07-04 spend   882
+70. 1.49e5 2.54e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 3  2211 V     "Chr~ Burch, Kryslyn  2015-08-05 spend   518
+47. 8.93e4 1.42e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 4  2726 V     "el-~ Rivera, Evan    2015-05-23 credits   5
+09. 8.60e2 9.09e2[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 5  2612 V     "Bra~ el-Jaffer, Sha~ 2015-07-04 credits   7
+77. 1.09e3 1.85e3[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2368--2368
+[]\T1/lmtt/m/n/10 ## 6  2211 V     "Chr~ Burch, Kryslyn  2015-08-05 credits   2
+21. 3.69e2 6.57e2[] 
+ []
+
+[72]
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ##      id type  name  company_contact date_added summary `20
+15` `2016` `2017`[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ##   <int> <chr> <chr> <chr>           <date>     <chr>    <d
+bl>  <dbl>  <dbl>[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 1  2726 V     "el-~ Rivera, Evan    2015-05-23 spend   653
+26. 8.34e4 1.50e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 2  2612 V     "Bra~ el-Jaffer, Sha~ 2015-07-04 spend   882
+70. 1.49e5 2.54e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 3  2211 V     "Chr~ Burch, Kryslyn  2015-08-05 spend   518
+47. 8.93e4 1.42e5[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 4  2726 V     "el-~ Rivera, Evan    2015-05-23 credits   5
+09. 8.60e2 9.09e2[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 5  2612 V     "Bra~ el-Jaffer, Sha~ 2015-07-04 credits   7
+77. 1.09e3 1.85e3[] 
+ []
+
+
+Overfull \hbox (64.49881pt too wide) in paragraph at lines 2416--2416
+[]\T1/lmtt/m/n/10 ## 6  2211 V     "Chr~ Burch, Kryslyn  2015-08-05 credits   2
+21. 3.69e2 6.57e2[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##       id type  name            company_contact   date_adde
+d summary year  amount[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##    <int> <chr> <chr>           <chr>             <date>   
+  <chr>   <chr>  <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  1  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 spend   2015  6.53e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  2  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 spend   2016  8.34e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  3  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 spend   2017  1.50e5[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  4  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 spend   2018  5.56e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  5  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2015  8.83e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  6  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2016  1.49e5[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  7  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2017  2.54e5[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  8  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2018  1.79e5[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ##  9  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2015  5.18e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2444--2444
+[]\T1/lmtt/m/n/10 ## 10  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2016  8.93e4[] 
+ []
+
+[73]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##       id type  name            company_contact   date_adde
+d summary year  amount[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##    <int> <chr> <chr>           <chr>             <date>   
+  <chr>   <chr>  <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  1  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2015  5.18e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  2  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2016  8.93e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  3  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2017  1.42e5[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  4  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 spend   2018  7.68e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  5  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 credits 2015  2.21e2[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  6  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 credits 2016  3.69e2[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  7  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 credits 2017  6.57e2[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  8  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 credits 2018  4.58e2[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ##  9  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2015  8.83e4[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2473--2473
+[]\T1/lmtt/m/n/10 ## 10  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 spend   2016  1.49e5[] 
+ []
+
+[74]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##       id type  name            company_contact   date_adde
+d year   spend credits[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##    <int> <chr> <chr>           <chr>             <date>   
+  <chr>  <dbl>   <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  1  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 2015  6.53e4    509.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  2  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 2016  8.34e4    860.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  3  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 2017  1.50e5    909.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  4  2726 V     "el-Shafi Comp~ Rivera, Evan      2015-05-2
+3 2018  5.56e4    348.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  5  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 2015  8.83e4    777.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  6  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 2016  1.49e5   1094.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  7  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 2017  2.54e5   1854.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  8  2612 V     "Bray Company ~ el-Jaffer, Shahe~ 2015-07-0
+4 2018  1.79e5   1395.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ##  9  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 2015  5.18e4    221.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ## 10  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 2016  8.93e4    369.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ## 11  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 2017  1.42e5    657.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2514--2514
+[]\T1/lmtt/m/n/10 ## 12  2211 V     "Chrisman Comp~ Burch, Kryslyn    2015-08-0
+5 2018  7.68e4    458.[] 
+ []
+
+[75] [76
+
+]
+Chapter 8.
+[77]
+Overfull \hbox (22.49893pt too wide) in paragraph at lines 2587--2587
+[]\T1/lmtt/m/n/10 ##      je_num           amount          gl_date             
+vendor_id[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 2587--2587
+[]\T1/lmtt/m/n/10 ##  Min.   :   1.0   Min.   :-18873   Min.   :2019-01-01   Mi
+n.   :2211[] 
+ []
+
+
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 2587--2587
+[]\T1/lmtt/m/n/10 ##    account           invoice_date   description          p
+aid_date[] 
+ []
+
+
+Overfull \hbox (27.74892pt too wide) in paragraph at lines 2587--2587
+[]\T1/lmtt/m/n/10 ##  Length:952         Min.   :17887   Length:952         Min
+.   :17900[] 
+ []
+
+[78] [79]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##    je_num amount gl_date    vendor_id account invoice_date
+ description paid_date[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##     <int>  <dbl> <date>         <int> <chr>          <dbl>
+ <chr>           <dbl>[] 
+ []
+
+[80]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  1      1 22667. 2019-12-02      2211 exp_ma~        18225
+ Packaging ~     18262[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  2      2  1397. 2019-11-28      2612 exp_ma~        18218
+ Paper           18251[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  3      3  2319. 2019-04-09      2612 exp_ma~        17985
+ Paper           18018[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  4      4 20037. 2019-10-30      2612 exp_ma~        18189
+ Paper           18222[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  5      5 43140. 2019-06-04      2612 exp_ma~        18041
+ Blue dye        18074[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  6      6 13603. 2019-01-31      2726 exp_ma~        17920
+ Medical gr~     17930[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  7      7  7001. 2019-10-21      2726 exp_ma~        18183
+ Quality co~     18193[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  8      8 24753. 2019-04-24      2211 exp_ma~        18003
+ Packaging ~     18040[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ##  9      9  2295. 2019-07-10      2726 exp_ma~        18080
+ Quality co~     18090[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2774--2774
+[]\T1/lmtt/m/n/10 ## 10     10 34263. 2019-06-13      2211 exp_ma~        18053
+ Packaging ~     18090[] 
+ []
+
+
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 2788--2788
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 2813--2813
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##    description                      number_of_trans lowest
+_amount highest_amount[] 
+ []
+
+[81]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##    <chr>                                      <int>       
+  <dbl>          <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  1 Blue dye                                      40       
+  1071.         43140.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  2 Fabric cutting machines                       34       
+   432.         44950.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  3 Face mask elastics                            37       
+   526.         42785.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  4 Fancy cloth prints                            46       
+   294.         37269.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  5 Meals for launch celebration                   1       
+  1630.          1630.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  6 Medical grade filters                        156       
+   258.         57567.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  7 Packaging and boxes                          316       
+   304.         96355.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  8 Paper                                        134       
+   284.         47748.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ##  9 Partial refund for medical grad~               1       
+-18873.        -18873.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ## 10 Quality control testing supplies             169       
+   273.         88524.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2830--2830
+[]\T1/lmtt/m/n/10 ## 11 Sewing machines                               18       
+   268.         36332.[] 
+ []
+
+[82] [83]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1.pdf, id=632, 469.
+755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-97-1.pdf  used on input line 2951.
+(pdftex.def)             Requested size: 172.4949pt x 119.41954pt.
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-2.pdf, id=633, 469.
+755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-2.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-2.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-97-2.pdf  used on input line 2951.
+(pdftex.def)             Requested size: 172.4949pt x 119.41954pt.
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-3.pdf, id=634, 469.
+755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-3.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-3.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-97-3.pdf  used on input line 2951.
+(pdftex.def)             Requested size: 172.4949pt x 119.41954pt.
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-4.pdf, id=635, 469.
+755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-4.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-4.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-97-4.pdf  used on input line 2951.
+(pdftex.def)             Requested size: 172.4949pt x 119.41954pt.
+
+Overfull \hbox (2.21202pt too wide) in paragraph at lines 2951--2952
+[][] []
+ []
+
+
+Overfull \hbox (2.21202pt too wide) in paragraph at lines 2951--2952
+[] [] 
+ []
+
+[84 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-97-1.pdf> <./Aud
+it_Analytics_with-R_files/figure-latex/unnamed-chunk-97-2.pdf> <./Audit_Analyti
+cs_with-R_files/figure-latex/unnamed-chunk-97-3.pdf> <./Audit_Analytics_with-R_
+files/figure-latex/unnamed-chunk-97-4.pdf>]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ##   je_num amount gl_date    vendor_id account  invoice_date
+ description paid_date[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ##    <int>  <dbl> <date>         <int> <chr>           <dbl>
+ <chr>           <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 1    373 13520. 2019-01-01      2612 exp_mat~        17887
+ Paper           17920[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 2    951 13486. 2019-01-01      2612 exp_mat~        17887
+ Paper           17920[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 3    961 16026. 2019-01-01      2726 exp_mat~        17890
+ Quality co~     17900[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 4     90  3777. 2019-01-02      2612 exp_mat~        17888
+ Face mask ~     17921[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 5    115 13402. 2019-01-02      2211 exp_mat~        17891
+ Packaging ~     17928[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 2980--2980
+[]\T1/lmtt/m/n/10 ## 6    198  2431. 2019-01-02      2612 exp_mat~        17888
+ Face mask ~     17921[] 
+ []
+
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf, id=663, 469.
+755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf Graphic 
+file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-99-1.pdf  used on input line 2993.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[85]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf, id=669, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-100-1.pdf  used on input line 3020.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 7522) has occurred while \output is active []
+
+[86 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-99-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-101-1.pdf, id=679, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-101-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-101-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-101-1.pdf  used on input line 3031.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[87 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-100-1.pdf> <./Au
+dit_Analytics_with-R_files/figure-latex/unnamed-chunk-101-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf, id=695, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-102-1.pdf  used on input line 3045.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 3060--3060
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+[88 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-102-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf, id=706, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-104-1.pdf  used on input line 3089.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Overfull \hbox (1.499pt too wide) in paragraph at lines 3106--3106
+[]\T1/lmtt/m/n/10 ## [3] "exp_meals_7000"              "liab_creditcardpayable_
+2100"[] 
+ []
+
+[89 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-104-1.pdf>]
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3123--3123
+[]\T1/lmtt/m/n/10 ## `summarise()` regrouping output by 'account' (override wit
+h `.groups` argument)[] 
+ []
+
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-106-1.pdf, id=718, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-106-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-106-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-106-1.pdf  used on input line 3132.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-107-1.pdf, id=719, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-107-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-107-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-107-1.pdf  used on input line 3144.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[90 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-106-1.pdf>] [91 
+<./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-107-1.pdf>] [92
+
+]
+Chapter 9.
+[93] [94]
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3224--3224
+[]\T1/lmtt/m/n/10 ##   je_num amount gl_date    vendor_id account invoice_date 
+description paid_date[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 3224--3224
+[]\T1/lmtt/m/n/10 ##    <int>  <dbl> <date>         <int> <chr>   <date>       
+<chr>       <date>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3224--3224
+[]\T1/lmtt/m/n/10 ## 1    140 96355. 2019-12-19      2211 exp_ma~ 2019-12-12   
+Packaging ~ 2020-01-18[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3224--3224
+[]\T1/lmtt/m/n/10 ## 2    693 88524. 2019-08-13      2726 exp_ma~ 2019-08-06   
+Quality co~ 2019-08-16[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ##   je_num  amount gl_date    vendor_id account invoice_date
+ description[] 
+ []
+
+
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ##    <int>   <dbl> <date>         <int> <chr>   <date>      
+ <chr>[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ## 1    140  96355. 2019-12-19      2211 exp_ma~ 2019-12-12  
+ Packaging ~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ## 2    140 -96355. 2019-12-19        NA liab_a~ 2019-12-12  
+ Packaging ~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ## 3    693  88524. 2019-08-13      2726 exp_ma~ 2019-08-06  
+ Quality co~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3247--3247
+[]\T1/lmtt/m/n/10 ## 4    693 -88524. 2019-08-13        NA liab_a~ 2019-08-06  
+ Quality co~[] 
+ []
+
+[95] [96]
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ##   je_num  amount gl_date    vendor_id account invoice_date
+ description[] 
+ []
+
+
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ##    <int>   <dbl> <date>         <int> <chr>   <date>      
+ <chr>[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 1     54  35758. 2019-01-12      2612 exp_ma~ 2019-01-02  
+ Face mask ~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 2     54 -35758. 2019-01-12        NA liab_a~ 2019-01-02  
+ Face mask ~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 3    102  50135. 2019-01-12      2726 exp_ma~ 2019-01-05  
+ Medical gr~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 4    102 -50135. 2019-01-12        NA liab_a~ 2019-01-05  
+ Medical gr~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 5    223  50128. 2019-01-12      2211 exp_ma~ 2019-01-05  
+ Packaging ~[] 
+ []
+
+
+Overfull \hbox (38.24889pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## 6    223 -50128. 2019-01-12        NA liab_a~ 2019-01-05  
+ Packaging ~[] 
+ []
+
+
+Overfull \hbox (11.99896pt too wide) in paragraph at lines 3344--3344
+[]\T1/lmtt/m/n/10 ## # ... with 3 more variables: paid_date <date>, day_of_week
+ <ord>,[] 
+ []
+
+[97]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##    je_num gl_date    t_cutoff  amount vendor_id account in
+voice_date description[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##     <int> <date>     <lgl>      <dbl>     <int> <chr>   <d
+ate>       <chr>[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  1      4 2019-10-30 TRUE      20037.      2612 exp_ma~ 20
+19-10-20   Paper[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  2      4 2019-10-30 TRUE     -20037.        NA liab_a~ 20
+19-10-20   Paper[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  3      6 2019-01-31 TRUE      13603.      2726 exp_ma~ 20
+19-01-24   Medical gr~[] 
+ []
+
+[98]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  4      6 2019-01-31 TRUE     -13603.        NA liab_a~ 20
+19-01-24   Medical gr~[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  5     11 2019-07-30 TRUE       3000.      2612 exp_ma~ 20
+19-07-20   Paper[] 
+ []
+
+
+Overfull \hbox (59.24883pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  6     11 2019-07-30 TRUE      -3000.        NA liab_a~ 20
+19-07-20   Paper[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  7     31 2019-04-29 TRUE       9931.      2211 exp_co~ 20
+19-04-14   Advisory s~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  8     31 2019-04-29 TRUE      -9931.        NA liab_a~ 20
+19-04-14   Advisory s~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ##  9     44 2019-02-28 TRUE       3838.      2211 exp_ma~ 20
+19-02-21   Packaging ~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ## 10     44 2019-02-28 TRUE      -3838.        NA liab_a~ 20
+19-02-21   Packaging ~[] 
+ []
+
+
+Overfull \hbox (11.99896pt too wide) in paragraph at lines 3426--3426
+[]\T1/lmtt/m/n/10 ## # ... with 126 more rows, and 4 more variables: paid_date 
+<date>,[] 
+ []
+
+[99] [100] [101] [102] [103] [104] [105]
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 3781--3781
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##    description                       count upper_limit    
+iqr upper_extreme_out~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##    <chr>                             <int>       <dbl>  <d
+bl>              <dbl>[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  1 Advisory fee for face mask manuf~    10       9277. 1.8
+4e2              9552.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  2 Advisory services for tax expats     24       9897. 3.5
+3e2             10427.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  3 Audit fees for big four audit fi~    10       9788. 4.7
+3e2             10497.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  4 Blue dye                             80      14581. 1.2
+0e4             32509.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  5 Buffet                                4        156. 3.7
+6e1               212.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  6 Catering                              8        120. 7.2
+6e1               229.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  7 Consulting fee on how to adhere ~     6       9784. 5.1
+4e2             10556.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  8 Fabric cutting machines              68      15591. 1.3
+1e4             35204.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ##  9 Face mask elastics                   74      13461. 1.1
+0e4             30007.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3804--3804
+[]\T1/lmtt/m/n/10 ## 10 Facilitation payment to agent fi~     2       9715. 0. 
+                 9715.[] 
+ []
+
+[106]
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##    je_num  amount account        description              
+    upper_extreme_out~[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##     <int>   <dbl> <chr>          <chr>                    
+                 <dbl>[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  1    975  9834.  exp_consultin~ Advisory fee for face mas
+k ~             9552.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  2      5 43140.  exp_materials~ Blue dye                 
+               32509.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  3    430 37341.  exp_materials~ Blue dye                 
+               32509.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  4    825 36918.  exp_materials~ Blue dye                 
+               32509.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  5    427 44950.  exp_materials~ Fabric cutting machines  
+               35204.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  6    531 42785.  exp_materials~ Face mask elastics       
+               30007.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  7     54 35758.  exp_materials~ Face mask elastics       
+               30007.[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  8    755  9715.  exp_consultin~ Facilitation payment to a
+ge~             9715.[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ##  9    335    52.2 exp_meals_7000 Italian food restaurant  
+                  52.2[] 
+ []
+
+
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 3835--3835
+[]\T1/lmtt/m/n/10 ## 10    309  1630.  exp_materials~ Meals for launch celebrat
+ion             1630.[] 
+ []
+
+[107]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-129-1.pdf, id=836, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-129-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-129-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-129-1.pdf  used on input line 3855.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[108 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-129-1.pdf>]
+Overfull \hbox (17.24895pt too wide) in paragraph at lines 3874--3874
+[]\T1/lmtt/m/n/10 ## `summarise()` ungrouping output (override with `.groups` a
+rgument)[] 
+ []
+
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf, id=846, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-130-1.pdf  used on input line 3876.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+[109 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-130-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf, id=859, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-132-1.pdf  used on input line 3918.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[110]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf, id=868, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-133-1.pdf  used on input line 3935.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[111 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-132-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-134-1.pdf, id=878, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-134-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-134-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-134-1.pdf  used on input line 3955.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[112 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-133-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-135-1.pdf, id=888, 469
+.755pt x 325.215pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-135-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-135-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-135-1.pdf  used on input line 3967.
+(pdftex.def)             Requested size: 344.997pt x 238.84406pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[113 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-134-1.pdf>] [11
+4 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-135-1.pdf>] [115] 
+[116]
+Underfull \vbox (badness 10000) detected at line 4101
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4125
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4144
+ []
+
+[117]
+Underfull \vbox (badness 10000) detected at line 4171
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4201
+ []
+
+[118]
+Underfull \vbox (badness 10000) detected at line 4223
+ []
+
+
+Overfull \hbox (30.88922pt too wide) in alignment at lines 4241--4253
+ [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4253
+ []
+
+[119]
+Overfull \hbox (68.2225pt too wide) in alignment at lines 4276--4287
+ [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4287
+ []
+
+[120]
+Overfull \hbox (170.27802pt too wide) in alignment at lines 4314--4325
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4325
+ []
+
+[121]
+Underfull \vbox (badness 10000) detected at line 4359
+ []
+
+
+Overfull \hbox (138.3338pt too wide) in alignment at lines 4385--4397
+ [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 4397
+ []
+
+[122]
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 4449--4449
+[]\T1/lmtt/m/n/10 ##  [1] 1026 1062 1079 1166 1201 1302 1375 1378 1385 1387 145
+5 1493 1503 1504 1510[] 
+ []
+
+[123] [124]
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 4537--4537
+[]\T1/lmtt/m/n/10 ##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+ FALSE FALSE FALSE[] 
+ []
+
+[125]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+4595.
+(/Users/jon/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [126] [127] [128] [129]
+Overfull \hbox (85.49875pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ##   je_num amount gl_date    vendor_id account invoice_date 
+description paid_date[] 
+ []
+
+
+Overfull \hbox (69.7488pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ##    <int>  <dbl> <date>         <int> <chr>   <date>       
+<chr>       <date>[] 
+ []
+
+
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ## 1    743   166. 2019-04-02        77 exp_me~ NA           
+Quebec Cit~ NA[] 
+ []
+
+
+Overfull \hbox (48.74886pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ## 2    743  -166. 2019-04-02        NA liab_c~ NA           
+Quebec Cit~ NA[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ## 3    755  9715. 2019-03-25      2211 exp_co~ 2019-03-10   
+Facilitati~ 2019-03-25[] 
+ []
+
+
+Overfull \hbox (90.74873pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ## 4    755 -9715. 2019-03-25        NA liab_a~ 2019-03-10   
+Facilitati~ 2019-03-25[] 
+ []
+
+
+Overfull \hbox (6.74898pt too wide) in paragraph at lines 4833--4833
+[]\T1/lmtt/m/n/10 ## # ... with 3 more variables: day_of_week <ord>, t_weekend 
+<lgl>,[] 
+ []
+
+[130] [131] [132
+
+]
+Chapter 10.
+[133] [134] [135] [136] [137
+
+] [138]
+Chapter 11.
+[139
+
+] [140
+
+]
+Chapter 12.
+[141]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1.pdf, id=1098, 10
+03.75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-183-1.pdf  used on input line 5105.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-184-1.pdf, id=1099, 10
+03.75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-184-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-184-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-184-1.pdf  used on input line 5109.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+[142 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-183-1.pdf>]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-185-1.pdf, id=1115, 10
+03.75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-185-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-185-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-185-1.pdf  used on input line 5113.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+[143 <./Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-184-1.pdf> <./A
+udit_Analytics_with-R_files/figure-latex/unnamed-chunk-185-1.pdf>] [144]
+Underfull \hbox (badness 1082) in paragraph at lines 5199--5200
+[]\T1/lmr/m/n/10 Within the []Re-port-ing Sec-tion[], we high-light what items 
+are key within
+ []
+
+
+Underfull \hbox (badness 2653) in paragraph at lines 5199--5200
+\T1/lmr/m/n/10 an Au-dit Data An-a-lyt-ics (ADA) note-book. R Mark-down tem-pla
+tes
+ []
+
+
+Underfull \hbox (badness 2221) in paragraph at lines 5199--5200
+\T1/lmr/m/n/10 can be re-tained within the \T1/lmtt/m/n/10 inst/rmarkdown/templ
+ates \T1/lmr/m/n/10 folder of your
+ []
+
+
+Underfull \hbox (badness 1028) in paragraph at lines 5199--5200
+\T1/lmr/m/n/10 pack-age. Specif-i-cally, an ADA R Mark-down tem-plate can be ke
+pt at
+ []
+
+[145] [146]
+Chapter 13.
+[147
+
+] [148]
+<Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-190-1.pdf, id=1176, 10
+03.75pt x 582.175pt>
+File: Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-190-1.pdf Graphic
+ file (type pdf)
+<use Audit_Analytics_with-R_files/figure-latex/unnamed-chunk-190-1.pdf>
+Package pdftex.def Info: Audit_Analytics_with-R_files/figure-latex/unnamed-chun
+k-190-1.pdf  used on input line 5306.
+(pdftex.def)             Requested size: 345.00758pt x 200.1044pt.
+
+! LaTeX Error: Environment alert undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.5317 \begin{alert}
+                     
+Here is how much of TeX's memory you used:
+ 12872 strings out of 481466
+ 196677 string characters out of 5921172
+ 476063 words of memory out of 5000000
+ 28974 multiletter control sequences out of 15000+600000
+ 610391 words of font info for 82 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 66i,8n,72p,1249b,486s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+!  ==> Fatal error occurred, no output PDF file produced!

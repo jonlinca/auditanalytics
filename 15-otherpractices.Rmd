@@ -10,4 +10,9 @@ Whether you are using R or RMarkdown files, its convenient to have these files a
 
 ## Passwords
 
-TODO Storing secrets - .Renviron, config, keyring
+As an Auditor, you should ensure you are securing the passwords you use to access databases or Highbond. There are several methods for securing passwords:
+
+- You can ask the user to specify the password every single time an analytic is ran, 
+- Use the .Renviron file, which allows you to specify environment variables that you call with Sys.getenv(),
+- Use the [keyring](https://github.com/r-lib/keyring) package, leveraging the operating system's method for securing credentials,
+- Use a password manager, like [1Password](https://www.1password.com/), that is integrated into R via the [onepass](https://github.com/jonlinca/onepass) package.

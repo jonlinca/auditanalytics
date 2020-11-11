@@ -82,6 +82,8 @@ gl <- tbl(con, 'gl') %>%
   collect()
 
 write.csv(gl, 'gl.csv')
+
+dbDisconnect(con)
 ```
 
 Sometimes you may want to retain whole datasets, which can be unwieldy. The **arrow** package, which is designed for advanced data processing, contains an open source data format called Parquet. The main advantage of Parquet is its ability to write and shrink even the most basic of data structures into a barebone size, making fields portable and quick to read.

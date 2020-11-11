@@ -214,7 +214,7 @@ all_in_one <- function(username_1, password_1, username_2, password_2){
 }
 ```
 
-However, now we're presented with a function that has low cohesion (its doing multiple things) - it is creating the database connecting, downloading and then joining the tables. Not to mention the two sets of credentials that aren't obviously related to the output:
+However, now we're presented with a function that has low cohesion (its doing multiple things) - it is creating the database connection, then downloading and also joining the tables. Not to mention the two sets of credentials that aren't obviously related to the output:
 
 - The username and password to the ERP database.
 - The username and password to the HR database.
