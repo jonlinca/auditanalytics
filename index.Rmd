@@ -15,6 +15,7 @@ link-citations: yes
 description: "A toolkit for Internal Audit and Financial auditors"
 url: 'https\://auditanalytics.jonlin.ca/'
 github-repo: 'jonlinca/auditanalytics'
+download: ['epub']
 ---
 
 # Welcome {-}
