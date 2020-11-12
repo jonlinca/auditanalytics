@@ -2,7 +2,7 @@
 
 Communicating the results of your testing, from data retireval to conclusions, is essential in having others depend and interpret your results. While traditional methods of documentation include Word memos-to-file, and even Excel documents that are filled to the brim with essays, the audit practice can easily take advantage of a more modern and integrated approach to documentation.
 
-**Notebooks** are a great medium to communicate your results in. Specifically, [RMarkdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book if you so desire (like this one)! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
+**Notebooks** are a great medium to communicate your results in. Specifically, [R Markdown](https://rmarkdown.rstudio.com) helps you integrate R code alongside auditor commentary, letting you integrate clear explanations and compelling graphics, and publish into multiple mediums - HTML documents, PDFs, presentations like Powerpoint, or even a book if you so desire (like this one)! You can export & attach files that capture your data at a point in time, so others can review your work and data too.
 
 ## Report Structure {#report-structure}
 
@@ -21,7 +21,7 @@ From an Audit Data Analytics (ADA) perspective, you should also consider having 
 - Test results - Any items of note, including deviations from expectations.
 - Session info - The packages and version of R used for the analysis, with `sessionInfo()`.
 
-Within an RMarkdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.
+Within an R Markdown document, you can create sections in your documentation, following the above structure to help you repeat best practices.
 
 ````markdown
 # Objective
@@ -63,7 +63,7 @@ glimpse(gl) # Preview of column contents
 
 ````
 
-When you're ready to preview your report, all you need to do is 'knit' and you're ready to go. [Learn the basics](https://rmarkdown.rstudio.com/lesson-1.html) on how to use RMarkdown. It is a good idea to start developing RMarkdown templates for your team to reuse We will cover where to retain these templates when you are create your own [Audit R Package](#auditpackage).
+When you're ready to preview your report, all you need to do is 'knit' and you're ready to go. [Learn the basics](https://rmarkdown.rstudio.com/lesson-1.html) on how to use R Markdown. It is a good idea to start developing R Markdown templates for your team to reuse; we will cover where to R Markdown templates when you are create your own [Audit R Package](#auditpackage).
 
 ## Export files
 

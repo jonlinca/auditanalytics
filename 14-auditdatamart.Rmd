@@ -1,1 +1,125 @@
-# Audit Data Mart {#applied-adw}
+# Audit Data Mart {#applied-datamart}
+
+As auditors, you will likely pull from the general pool of data at your company to perform analysis. This information is likely organized in a **data warehouse**, where data quality is controlled and is oriented towards reporting. Sometimes, this information is simply too large and onerous for rapid reporting. A side effect of a well designed data warehouse is that the data is highly structured (normalized), and performing any trivial analysis requires joining multiple tables together. 
+
+**Data marts** have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called extraction, transformation and load (ETL). Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database. 
+
+A data mart is generally considered to be relatively inexpensive, as you are only retaining specific information needed to answer most questions. It won't replace the data warehouse, especially for historical transactions, but it is good for smaller snapshots of information.
+
+## What to ETL
+
+Good candidates for content in a data mart is generally information that takes a long time to generate for any individual's computer, and would be useful to multiple individuals. Specifically:
+
+- Where multiple databases (or tables) need to be combined before they offer any meaningful value.
+    - For example, connecting the expense report system to the company's travel agency to match flights and hotels may help validate that travel policies are adhered to. 
+- Information that needs to be rapidly presented and consumed for an ongoing report. 
+    - For example, an audit KPI monitoring new risks within a Continuous Monitoring program may be prepared in advance, due to the complexity of calculations needed over a period of time.
+- Data that is considered 'master' or 'reference'. 
+    - A listing of account names and numbers may be useful to have on hand as it is relevant to any audit. 
+    - In contrast, a list of transactions may only be needed for a single audit inquiry.
+
+You can use any database that your company provides. It will be important that you have the ability to create tables within this database, delete them, and ensure you can work with someone who can administer the security to prevent non-audit users from querying the database.
+
+## ETL Essentials 
+
+In the [Architecture chapter](#architecture-rsc), we referenced using RStudio Connect to facilitate the process to extract, transform and load (ETL). RStudio Connect relies on R Markdown notebooks to execute analytic processes, which we can design and prepare locally before scheduling.
+
+The audit team will likely be maintaining this audit data mart - therefore, some additional considerations need to be thought about:
+
+1. While R Markdown notebooks are self documenting, having well outlined documentation that explains where the data came from, how it was transformed and where it ends up being will be useful to your teammates and future self.
+2. [Secure your credentials](#passwords). Do not place them directly in the notebook as plain text. If using RStudio Connect, call passwords via an environment variable.
+3. Ensure proper checks are in place. Actively scan for data structure anomalies and catch them before they get uploaded, and ensuring that data that was downloaded is fresh by examining dates.
+4. Where possible, avoid overwriting a table completely each time by replacing it with the fresh information that was just extracted. While in some situations this is reasonable, the trade-off between simpler design and the speed of the ETL will become more glaring as the dataset grows.
+
+## ETL Example
+
+Below is an example of what may be contained in an ETL notebook.
+
+````markdown
+---
+title: "Audit Data Mart - ETL 111 HR"
+author: "Your name"
+date: "`r Sys.time()`"
+output:
+  html_document
+---
+
+# Credentials
+
+`r ''````{r}
+passwords <- Sys.getenv("dbpassword")
+```
+
+# Extract
+
+`r ''````{r}
+con <- connect_hr(passwords)
+employee_list <- get_hr_employees(con)
+reporting_structure <- get_hr_reporting(con)
+```
+
+# Extract check
+
+Check on the latest termination date. Usually we have a termination every week.
+
+`r ''````{r}
+days_since_last_term <- Sys.date - max(employee_list$term_date) 
+if (days_since_last_term > 14) {stop("Danger!")}
+```
+
+# Extract summary
+
+`r ''````{r}
+nrow(employee_list)
+nrow(reporting_structure)
+```
+
+# Transform
+
+`r ''````{r}
+cleaned_staff <- employee_list %>%
+  left_join(reporting_structure, by = 'employee_id') %>% # Gets the ID number of the supervisor of the employee
+  left_join(employee_list, by = 'supervisor_id') # Gets the name of the supervisor
+```
+
+# Transform check
+
+Check that every employee has a boss
+
+`r ''````{r}
+no_boss <- cleaned_staff %>%
+  filter(is.na(supervisor_id))
+  
+if (nrow(no_boss) > 0) {stop("Danger!")}
+```
+
+# Transform summary
+
+`r ''````{r}
+nrow(cleaned_staff)
+```
+
+# Load 
+
+`r ''````{r}
+con <- connect_audit_data_mart(passwords)
+
+dbWriteTable(con, 'staff_table', cleaned_staff, overwrite = TRUE)
+```
+
+# Load check
+
+Check that our new table matches the ETL table we just created
+
+`r ''````{r}
+new_count <- dbReadTable(con, 'cleaned_staff')
+nrow(new_count)
+
+if (nrow(new_count) != nrow(cleaned_staff)) {stop("Danger!")}
+```
+
+# Session Info
+`r ''````{r}
+sessionInfo()
+```
+````

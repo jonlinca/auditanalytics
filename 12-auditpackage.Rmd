@@ -105,7 +105,7 @@ digraph G {
   }
   
   subgraph cluster_analyze {
-    'SSS Test 1' 'SSS Test 2' 'SSSD Test 3' 'SSSD Test 4'
+    'SSS Test 1' 'SSS Test 2' 'SSD Test 3' 'SSD Test 4'
     color = black;
     label = 'Analyze';
   }
@@ -179,7 +179,7 @@ There are some functions that are worth considering to make. The code you can co
 - Downloading and creating of the vendor master, invoices and payments.
 - Perform everything - Connecting, downloading and joining the information at the same time.
 
-Which ones do you end up choosing to implement? This is a design choice, and is known in programming as cohesion and coupling. **Cohesion** is where a function does one thing, does it incredibly well, and the inputs and outputs of this are passed between functions. **Coupling** is how dependent the function is on the input data. Ideally you would choose to retain implement functions that are highly cohesive, and have low coupling.
+Which ones do you end up choosing to implement? This is a design choice, and is known in programming as cohesion and coupling. **Cohesion** is where a function does one thing, does it incredibly well, and the inputs and outputs of this are passed between functions. **Coupling** is how dependent the function is on the input data. Ideally you would choose to retain implement functions that are highly cohesive, and have low coupling. This enables you to create independent functions which can act as puzzle pieces towards any problem.
 
 Database connections, `connect_erp()` and `connect_hr()`, serve as connectivity mechanisms to their respective databases. These would be reasonably dependent on its input data (a username and password), and would be useful functions to implement. They would quite short and sweet too:
 
@@ -189,7 +189,7 @@ connect_erp <- function(username, password){
 }
 ```
 
-The `tbl()` functions serve well for their purpose, which is to point to a specific table. You can further lock in that knowledge by implementing a `tbl_erp_invoices()`, `tbl_erp_payments()` and `tbl_hr_emplist()`. This is still highly cohesive (does one thing: connects to a data table), but also starts to increase coupling (where it is highly dependent on the database connection provided). The increase in coupling may be reasonable - you may choose accept this design and implement these functions, as it is hard to remember exactly the table names that house the data you are looking for.
+The `tbl()` functions serve well for their purpose, which is to point to a specific table. You can further lock in that knowledge by implementing a `tbl_erp_invoices()`, `tbl_erp_payments()` and `tbl_hr_emplist()`. This is still highly cohesive (does one thing: connects to a data table), but also starts to increase coupling (where it is  dependent on the correct database connection provided). The increase in coupling may be reasonable - you may choose accept this design and implement these functions, as it is hard to remember exactly the table names that house the data you are looking for.
 
 ```{r, eval = FALSE}
 tbl_erp_invoices <- function(erp){
@@ -226,13 +226,13 @@ From a function maintenance perspective, it is difficult to maintain:
 - What happens when the ERP is upgraded and the table names change?
 - What if you wanted to keep invoices that were both paid and unpaid?
 
-While this function technically achieves one highly specific objective, its highly dependent on making sure the company and systems stays constant. With experience, we know this never happens. Given the frailness of the design, a function like this should be used sparingly, and ideally should be kept in a notebook.
+While this function technically achieves one highly specific objective, its highly dependent on making sure the company and systems stays constant. With experience, we know the world never stands still. Given the frailness of the design, a function like this should be used sparingly. Ideally, as this is more like a process, the code should be kept in a notebook or as part of an Extract, Transformation and Load process.
 
 ## Templates
 
 Pre-developed layouts help standardize thought processes and deliverables that your team members should go through when assembling a report. Read more about [templates within R Markdown](https://bookdown.org/yihui/rmarkdown-cookbook/package-template.html).
 
-Within the [Reporting Section](#report-structure), we highlight what items are key within an  Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the `inst/rmarkdown/templates` folder of your package. Specifically, an ADA R Markdown template can be kept at `inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd`.
+Within the [Reporting Section](#report-structure), we highlight what items are key within an Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the `inst/rmarkdown/templates` folder of your package. Specifically, an ADA R Markdown template can be kept at `inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd`.
 
 ````markdown
 ---

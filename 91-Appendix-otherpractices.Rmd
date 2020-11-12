@@ -4,11 +4,11 @@
 
 As you start, you should promote basic habits instilled into you. Documenting your basic thought process in .R files is generally expected, and the 'why' a certain process outlined with comments (lines starting with a `#`). The why is important as it explains to code reviewers (external auditors and your peers) the rationale for your approach, or unusual quirks about the data you are transforming.
 
-RMarkdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily 'knit' a document for sharing increases the people you can share your work with.
+R Markdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily 'knit' a document for sharing increases the people you can share your work with.
 
-Whether you are using R or RMarkdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.
+Whether you are using R or R Markdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.
 
-## Passwords
+## Passwords {#passwords}
 
 As an Auditor, you should ensure you are securing the passwords you use to access databases or Highbond. There are several methods for securing passwords:
 

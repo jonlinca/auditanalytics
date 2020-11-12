@@ -132,11 +132,11 @@ While Galvanize and its products (most notably, Projects and Results) are distin
 
 Galvanize cloud-based tools are fully hosted, meaning audit teams pay for high availability and security maintained by a professional team. Galvanize supports the [security](https://www.wegalvanize.com/trust/), design and coding for hosting a tool online, allowing you to focus on designing workflows for your internal customers.
 
-### RStudio Connect
+### RStudio Connect {#architecture-rsc}
 
 RStudio offers commercially supported server software, including the [RStudio Connect](https://rstudio.com/products/connect/) solution that allows R deliverable to be hosted and accessible via a web browser. Features include:
 
-* [RMarkdown](https://rmarkdown.rstudio.com) notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization, and can be scheduled on a regular basis.
+* [R Markdown](https://rmarkdown.rstudio.com) notebooks, which are fully self-contained analytics. These notebooks perform full analyses from start to finish, including downloading data, wrangling, analysis and data visualization, and can be scheduled on a regular basis.
 * These notebooks can also act as Extract, Transform, and Load (ETL) processes. These notebooks have the advantage of being automatically scheduled, with rules that can notify stakeholders if need be. The loading component can be any destination - most popular is the audit data mart, or into other web applications via API connectivity (example: Galvanize Highbond Results).
 * The hosting of [Shiny](https://shiny.rstudio.com) apps, which are interactive web applications, offer a way to analyze and present information in an intelligent, slick manner. The analysis performed in R can be factored into a Shiny app, which can be hooked directly into your data.
 

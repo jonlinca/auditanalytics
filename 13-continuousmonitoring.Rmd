@@ -9,7 +9,7 @@ Continuous Monitoring (CM) and Continuous Auditing (CA, or automated controls te
 
 Continuous Monitoring is a no brainer - who would say 'no thanks' to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is almost exclusively pointed towards sampling. See the [appendix](#appendixct) on how to help get started on establishing an agreeable methodology.
 
-For this section we will use the company GL database.
+For this section we will use the company GL database, as well as your Highbond account. If you don't have one, you can still follow along and abstract where you would incorporate your technology options.
 
 ```{r, message = FALSE, warning = FALSE}
 library(dplyr) 
@@ -72,7 +72,7 @@ sequenceDiagram
 
 ## Create a Collection, Analytic and Table
 
-We will create a test to detect high risk journal entries, routing them to the appropriate personnel for response. Detecting and ensuring these journal entries have extra awareness can help give comfort to external parties that journal entries are being reviewed appropriately.
+We will create a test to detect high risk journal entries, routing them to the appropriate personnel for response. Detecting and ensuring these journal entries have extra awareness can help give comfort to external parties that journal entries are being reviewed appropriately and in a timely manner.
 
 We will need a table upload the data into Highbond Results. You can create a table via following the help instructions on [Results app and add a new collection](https://help.highbond.com/helpdocs/highbond/en-us/Content/global_topics/get_started/quick_starts/organizing_data.htm), or you can use the galvanizer package to create the necessary items for you. 
 
@@ -124,7 +124,7 @@ new_collection <- create_results_collections(highbond_auth, "Audit Analytics Dem
 new_collection
 ```
 
-The `id` number is important to retain, as its needed to create the Analysis, as the sub-folder within the Collection.
+The `id` number is important to retain, as its needed to create the Analysis, the sub-folder within the Collection.
 
 ```{r}
 new_analysis <- create_results_analyses(highbond_auth, 
@@ -134,7 +134,7 @@ new_analysis <- create_results_analyses(highbond_auth,
 new_analysis
 ```
 
-Lastly, we will want to make a spot to house our results, which will be stored in the Table within the Analysis. The table ID is important as it represents the number that we will reference in all our uploads
+Lastly, we will want to make a spot to house our results, which will be stored in the Table within the Analysis. When we create the table, we will get a table ID, which will be important as it represents the number that we will reference in all our uploads.
 
 ```{r}
 new_table <- create_results_tables(highbond_auth, 
@@ -154,7 +154,7 @@ knitr::include_graphics('images/hb-r-table-created.png')
 
 ## Define the High Risk test
 
-In the Testing chapters, we ran a fairly simple test to detect items [over a certain threshold](#above-threshold). We're going to use the GL database again to create our test. 
+In the Testing chapters, we ran a test to detect items [over a certain threshold](#above-threshold). We're going to use the GL database again to create our test. 
 
 ```{r te_cm}
 all_hits <- gl %>%
@@ -175,7 +175,7 @@ upload_rows <- all_hits %>%
 upload_rows
 ```
 
-Lets use galvanizer and upload these records into the Highbond Results Table. Using the `post_results_records()` function, we need to specify the Highbond authentication token, the `table_id` we want to upload the information into, and the data frame itself via the `upload` argument. Since it is the inaugural upload, we also need to specify the `purge = TRUE` argument so we have a clean slate:
+Lets use galvanizer and upload this record into the Highbond Results Table. Using the `post_results_records()` function, we need to specify the Highbond authentication token, the `table_id` we want to upload the information into, and the data frame itself via the `upload` argument. Since it is the inaugural upload, we also need to specify the `purge = TRUE` argument so we have a clean slate:
 
 ```{r}
 post_results_records(highbond_auth, 
@@ -186,14 +186,14 @@ post_results_records(highbond_auth,
 
 ```{r, include = FALSE}
 # Wait for Highbond to process results
-Sys.sleep(5)
+Sys.sleep(10)
 ```
 
 Upon checking the Results Table on the website, we see that the record was added.
 
 Once we uploaded the information, we should specify the primary key in the Table's settings. The primary key's purpose in Highbond Results is to ensure that this record stays persistent. When you upload another batch of records, if a 'primary key' is defined, then Highbond will merge the information in the new upload, but not automatically repeat any triggers that have been already acted on (example: if you already sent out a request for a response via a questionnaire, it will not occur again).
 
-For our example, we will want to let the control owner know which journal entry is high risk, so its probably useful to also make this the primary key. To assign this field as the primary key, within the list of Tables in Highbond, select the ellipses (three dots) corresponding to the Table, and select Settings. 
+In our scenario, we will want to ask the control owner about a specific journal entry that is high risk. The unique identifier for every journal entry is the `je_num`, so its probably useful to also make this the primary key. To assign this field as the primary key, within the list of Tables in Highbond, select the ellipses (three dots) corresponding to the Table, and select Settings. 
 
 ```{r, out.width = 500, echo = FALSE}
 knitr::include_graphics('images/hb-r-analysis-settings.png')
@@ -207,7 +207,7 @@ knitr::include_graphics('images/hb-r-table-settings.png')
 
 ## Uploading additional results
 
-As we intend for this to be a continiously monitored control, we should make sure we can upload additional rows, simulating new results over time. First, lets get some of these new records:
+As we intend for this to be a continiously monitored control, we should make sure we can upload additional rows, simulating new results over time. First, lets get the next batch of records:
 
 ```{r}
 upload_rows <- all_hits %>%
@@ -216,7 +216,7 @@ upload_rows <- all_hits %>%
 upload_rows
 ```
 
-Uploading new records is quite straight forward. Simply remove the `purge` argument (by default, `post_results_records()` will not erase the contents of the existing table):
+We can use the same `post_results_records()` function to upload new records, but we'll make one change: remove the `purge` argument:
 
 ```{r}
 post_results_records(highbond_auth, table_id = table_id, upload = upload_rows)
@@ -224,7 +224,7 @@ post_results_records(highbond_auth, table_id = table_id, upload = upload_rows)
 
 ```{r, include = FALSE}
 # Wait for Highbond to process results
-Sys.sleep(5)
+Sys.sleep(10)
 ```
 
 ## Downloading records and responses
@@ -242,7 +242,7 @@ cm_control$content$data %>%
   select(je_num, amount, gl_date, vendor_id, account, invoice_date, description, paid_date, t_over_te)
 ```
 
-As the Result tables are enriched with questionnaire responses from control owners, the information can be downloaded in the same manner - these questionnaires are created as new columns, prefixed with `q_`.
+As the Result tables are enriched with questionnaire responses from control owners, the information can be downloaded in the same manner - these questionnaires will automatically be created as new columns, prefixed with `q_`.
 
 ## Triggers and Questionnaires
 

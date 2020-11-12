@@ -1,2 +1,9 @@
 # About the author {-}
 
+Jonathan Lin (Jon) is a Certified Information Systems Auditor, that specializes in audit data analytics. Jonathan firmly believes that anything can be measured, and data should drive decision making. Jonathan promotes the deep integration of an audit analytics in the audit practice, and believes a well structured program can multiply the effectiveness of any audit team.
+
+Read more on his [LinkedIn](https://www.linkedin.com/in/jonlin/) profile.
+
+## Acknowledgements
+
+Thanks to those who have collaborated and contributed their time by reviewing and suggesting fixes: Kamille Espanol, Alex Hebbert, Ryan Liu. 

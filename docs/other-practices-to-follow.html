@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Other practices to follow | Audit Analytics with R</title>
+  <title>Chapter 16 Other practices to follow | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Other practices to follow | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 16 Other practices to follow | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://auditanalytics.jonlin.ca/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="jonlinca/auditanalytics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Other practices to follow | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 16 Other practices to follow | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="applied-adw.html"/>
-<link rel="next" href="appendixct.html"/>
+<link rel="prev" href="appendixct.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -152,7 +152,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome</a></li>
-<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
+<li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a><ul>
+<li class="chapter" data-level="0.1" data-path="about-the-author.html"><a href="about-the-author.html#acknowledgements"><i class="fa fa-check"></i><b>0.1</b> Acknowledgements</a></li>
+</ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="part"><span><b>I Structure</b></span></li>
 <li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
@@ -171,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
-<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#rstudio-connect"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
+<li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#architecture-rsc"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
 <li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
 <li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
@@ -282,16 +284,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#downloading-records-and-responses"><i class="fa fa-check"></i><b>13.5</b> Downloading records and responses</a></li>
 <li class="chapter" data-level="13.6" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#triggers-and-questionnaires"><i class="fa fa-check"></i><b>13.6</b> Triggers and Questionnaires</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="applied-adw.html"><a href="applied-adw.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a></li>
-<li class="chapter" data-level="15" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>15</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="15.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>15.1</b> Documentation</a></li>
-<li class="chapter" data-level="15.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>15.2</b> Passwords</a></li>
+<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a><ul>
+<li class="chapter" data-level="14.1" data-path="applied-datamart.html"><a href="applied-datamart.html#what-to-etl"><i class="fa fa-check"></i><b>14.1</b> What to ETL</a></li>
+<li class="chapter" data-level="14.2" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-essentials"><i class="fa fa-check"></i><b>14.2</b> ETL Essentials</a></li>
+<li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
-<li class="chapter" data-level="16.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
-<li class="chapter" data-level="16.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
-<li class="chapter" data-level="16.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
+<li class="chapter" data-level="15" data-path="appendixct.html"><a href="appendixct.html"><i class="fa fa-check"></i><b>15</b> Continuous Auditing methodology</a><ul>
+<li class="chapter" data-level="15.1" data-path="appendixct.html"><a href="appendixct.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>15.1</b> Support for Continuous Auditing</a></li>
+<li class="chapter" data-level="15.2" data-path="appendixct.html"><a href="appendixct.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>15.2</b> The requirements for evaluting ICFR</a></li>
+<li class="chapter" data-level="15.3" data-path="appendixct.html"><a href="appendixct.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>15.3</b> Determining population tolerable error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>16</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="16.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>16.1</b> Documentation</a></li>
+<li class="chapter" data-level="16.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>16.2</b> Passwords</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -315,15 +321,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="other-practices-to-follow" class="section level1">
-<h1><span class="header-section-number">Chapter 15</span> Other practices to follow</h1>
+<h1><span class="header-section-number">Chapter 16</span> Other practices to follow</h1>
 <div id="documentation" class="section level2">
-<h2><span class="header-section-number">15.1</span> Documentation</h2>
+<h2><span class="header-section-number">16.1</span> Documentation</h2>
 <p>As you start, you should promote basic habits instilled into you. Documenting your basic thought process in .R files is generally expected, and the ‘why’ a certain process outlined with comments (lines starting with a <code>#</code>). The why is important as it explains to code reviewers (external auditors and your peers) the rationale for your approach, or unusual quirks about the data you are transforming.</p>
-<p>RMarkdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily ‘knit’ a document for sharing increases the people you can share your work with.</p>
-<p>Whether you are using R or RMarkdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.</p>
+<p>R Markdown files become valuable as communication mediums for reports, allowing you to embed a mix of code, graphics, and interactive tables. While most of the exploratory work can be done within a basic .R file, having the ability to readily ‘knit’ a document for sharing increases the people you can share your work with.</p>
+<p>Whether you are using R or R Markdown files, its convenient to have these files as your primary sources of editing as you can use the keyboard shortcuts command-return or control-enter to send a command from the script file to the console.</p>
 </div>
 <div id="passwords" class="section level2">
-<h2><span class="header-section-number">15.2</span> Passwords</h2>
+<h2><span class="header-section-number">16.2</span> Passwords</h2>
 <p>As an Auditor, you should ensure you are securing the passwords you use to access databases or Highbond. There are several methods for securing passwords:</p>
 <ul>
 <li>You can ask the user to specify the password every single time an analytic is ran,</li>
@@ -334,16 +340,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-
-
-
             </section>
 
           </div>
         </div>
       </div>
-<a href="applied-adw.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendixct.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="appendixct.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -385,7 +388,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Audit_Analytics_with-R.pdf", "Audit_Analytics_with-R.epub"],
+"download": ["Audit_Analytics_with-R.epub"],
 "toc": {
 "collapse": "subsection"
 }
