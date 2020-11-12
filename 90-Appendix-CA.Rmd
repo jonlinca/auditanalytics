@@ -1,6 +1,6 @@
 # (PART) Appendix {-}
 
-# Continuous Auditing methodology {#appendixct}
+# Continuous Auditing methodology {#appendix-ca}
 
 ## Support for Continuous Auditing
 
