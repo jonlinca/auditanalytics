@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
 <li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
-<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package."><i class="fa fa-check"></i><b>4.3</b> Highbond R package.</a></li>
+<li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package"><i class="fa fa-check"></i><b>4.3</b> Highbond R package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
 <li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
@@ -331,8 +331,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will use several common packages; if you haven’t installed them yet, feel free to install them into R:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;tidyverse&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>, <span class="st">&#39;DBI&#39;</span>, <span class="st">&#39;devtools&#39;</span>))</span></code></pre></div>
 </div>
-<div id="highbond-r-package." class="section level2">
-<h2><span class="header-section-number">4.3</span> Highbond R package.</h2>
+<div id="highbond-r-package" class="section level2">
+<h2><span class="header-section-number">4.3</span> Highbond R package</h2>
 <p>For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package <a href="https://github.com/jonlinca/galvanizer">galvanizer</a> to use Results information in the Applied Analytics chapter. This package is maintained by Jonathan Lin during his spare time, and any issues or suggestions on its improvement would be appreciated.</p>
 <p>As these packages are in active development, they are not currently available on CRAN. You are able to install this package directly from GitHub - first, install <a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a> on your computer, which allows you to bundle your own packages. Then, run the following command.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setup.html#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;jonlinca/galvanizer&#39;</span>)</span></code></pre></div>

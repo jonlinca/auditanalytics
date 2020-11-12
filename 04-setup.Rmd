@@ -18,7 +18,7 @@ We will use several common packages; if you haven't installed them yet, feel fre
 install.packages(c('tidyverse', 'lubridate', 'httr', 'jsonlite', 'DBI', 'devtools'))
 ```
 
-## Highbond R package.
+## Highbond R package
 
 For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package [galvanizer](https://github.com/jonlinca/galvanizer) to use Results information in the Applied Analytics chapter. This package is maintained by Jonathan Lin during his spare time, and any issues or suggestions on its improvement would be appreciated.
 
