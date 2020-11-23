@@ -6,6 +6,6 @@ Trained as an IT Auditor, Jon had also led a geographically dispersed data analy
 
 Jon also volunteers with the [CalgaryR](https://imstatsbee.github.io/calgaryr/) R User Group, helping promote R literacy through education and speakers in a diverse set of industries.
 
-**Acknowledgements**
+**Acknowledgments**
 
 Thanks to those who have collaborated and contributed their time by reviewing and suggesting fixes: Kamille Espanol, Alex Hebbert, Ryan Liu. Your contributions have been greatly appreciated, and I can not thank you enough.
