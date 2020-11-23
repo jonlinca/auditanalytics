@@ -289,7 +289,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
 <li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Predict an account class</a></li>
-<li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.2</b> What to explore next</a></li>
+<li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
+<li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
+<li class="chapter" data-level="15.4" data-path="machine-learning.html"><a href="machine-learning.html#making-predictions-from-the-model"><i class="fa fa-check"></i><b>15.4</b> Making predictions from the model</a></li>
+<li class="chapter" data-level="15.5" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.5</b> What to explore next</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
 <li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
@@ -339,7 +342,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb434-8"><a href="machine-learning.html#cb434-8"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span></code></pre></div>
 <div id="predict-an-account-class" class="section level2">
 <h2><span class="header-section-number">15.1</span> Predict an account class</h2>
-<p>Lets say we were working on an audit to help determine if a transaction will be eventually charged against the correct account class. Specifically, lets see if we can predict if an a transaction is a fixed asset, based on the description field itself.</p>
+<p>Lets say we were working on an audit to help determine if a transaction will be eventually charged against the correct account class. Specifically, lets see if we can predict if a transaction is a fixed asset, based on the description field itself.</p>
+<p>First, we’ll get some information from our dataset, which will act as our training data. We collect a bit of information, which includes the description of a GL account, as well as whether or a specific journal entry was booked to a fixed asset account.</p>
 <div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="machine-learning.html#cb435-1"></a>description &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;New computer&#39;</span>, <span class="st">&#39;New computer to replace old unit&#39;</span>, <span class="st">&#39;New computer user training class&#39;</span>, <span class="st">&#39;Computer repair&#39;</span>)</span>
 <span id="cb435-2"><a href="machine-learning.html#cb435-2"></a>is_fixed_asset &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>))</span>
 <span id="cb435-3"><a href="machine-learning.html#cb435-3"></a>je_num &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(description)</span>
@@ -357,7 +361,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We’re going to explore the use of a tree-based basic decision tree, predicting a classification outcome. Different approaches exist to predict outcomes, including decision trees and neural networks. Predictions can either take the form of predicting a class or label via classification, or a number via regression.</p>
 <p>A decision tree is one of the easiest to interpret, as it logically follows a flow - start a the top and answer a series of ‘yes-no’ questions to determine what the final result should be. You can see there are multiple words that describe each transaction. Computer is the running theme here, but they all seem to have different words that describe the transaction itself. We plan on using these words as our ‘yes-no’ branches to help us predict our outcomes. This is a classification problem.</p>
 <p>Any algorithm requires the generation of features - that is, indicators within the data that the algorithm can use to leverage and predict the outcome.</p>
-<p>In our example, we have several sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one giant feature, which isn’t terribly useful, as the words themselves are more important. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.</p>
+</div>
+<div id="generating-features" class="section level2">
+<h2><span class="header-section-number">15.2</span> Generating features</h2>
+<p>In our example, we have several sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one whole feature, which isn’t terribly useful, as the words themselves are more important. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.</p>
 <p>First, lets create a lost of tokens - i.e. what was the unique word within each description, and how often did each word occur.</p>
 <div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="machine-learning.html#cb437-1"></a>words &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
 <span id="cb437-2"><a href="machine-learning.html#cb437-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
@@ -407,6 +414,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   repair
 ## 1     NA
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 3 rows ]</code></pre>
+</div>
+<div id="training-the-model" class="section level2">
+<h2><span class="header-section-number">15.3</span> Training the model</h2>
 <p>To create a prediction, we need to consider what we data we want to use to predict. Lets go through a few of these columns to determine what to retain and remove:</p>
 <ul>
 <li>Our <code>je_num</code> is not useful because it is simply a reference, and it would not make sense that a number in a journal entry could dictate the outcome.</li>
@@ -456,6 +466,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
 <p>Reading a decision tree takes some orienting. The way to read the root (the top level decision) is to say “is the value of <code>replace</code> less than 0.5?” - yes to go left, and no to go right. Another way to interpret the node is “did the word replace occur less than 0.5 times?”. If it did happen less than 0.5 times (which is 0 in our dataset), then go left. However, if the word ‘replace’ had a value of more than 0.5, which also means the word occurred at least once, then go right - in this case the predicted outcome for <code>is_fixed_asset</code> will be TRUE.</p>
 <p>The branches, aka the items below the root, are decided via a gini impurity metric, where the goal is to pose a question that evenly splits the outcomes into 50/50 buckets. The more evenly split the information, the more ‘information gain’ was acquired from the split.</p>
+</div>
+<div id="making-predictions-from-the-model" class="section level2">
+<h2><span class="header-section-number">15.4</span> Making predictions from the model</h2>
 <p>Now that we have a trained model, lets try to make some predictions. Lets say we had three more sentences that were tokenized into: ‘class repair’, ‘replace repair’, ‘replace class’, ‘computer computer computer’, and simply nothing.</p>
 <p>If we went through the process again to tokenize, our new dataset (holdout, since it was not used in training) would look like this:</p>
 <div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="machine-learning.html#cb451-1"></a>holdout_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="kw">ncol</span>(training_data) <span class="dv">-1</span>))</span>
@@ -482,13 +495,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some of the predictions could be conferred as such, but whats up with the zero-words example that predicted it was a fixed asset?</p>
 </div>
 <div id="what-to-explore-next" class="section level2">
-<h2><span class="header-section-number">15.2</span> What to explore next</h2>
+<h2><span class="header-section-number">15.5</span> What to explore next</h2>
 <p>In our extremely simplistic example, we overlooked several things that would not be done on a real data set.</p>
 <ul>
 <li><p>Training sets matter. An extremely small training set means the model hasn’t seen enough nuances in the data to understand it. Since these seven words never mapped to anything in the decision tree, it always evaluated as TRUE.</p></li>
 <li><p>The quality of a training set also matters greatly, as the training dataset is considered truth, and its very difficult to tell a computer to ignore any mislabelled data as it won’t know its mislabelled.</p></li>
-<li><p>To create a prediction, the need the fields used in training must also be the same words for the prediction. In our case, since we’re using individual words, some additional work needs to be done to renormalize the words in the same format as our training dataset. For example, if we start seeing the word “Mac” instead of “Computer”, we either need to drop the word “Mac” before running our prediction, or retrain our model with these new keywords.</p></li>
 <li><p>A larger main dataset needs to be split into a training dataset and a test dataset. The creation of the model should be done on the training data, and its performance should be evaluated against the test dataset. The performance will allow you to evaluate just how good the model is. If this is not done, then your model is simply ‘overfitting’, which is the same as memorizing a dataset, and has no ability to generalize against a normal population.</p></li>
+<li><p>The features used in training the model must also be the features for the prediction. For example, if we start seeing the word “Mac” instead of “Computer”, we either need to drop the word “Mac” before running our prediction, or retrain our model with these new keywords. In our case, since we’re using individual words, additional work needs to be done to align the words in the same format as our training dataset.</p></li>
 <li><p>From an algorithm perspective, a decision tree makes only one tree as its final outcome. However, there could have been a tree design that put another feature as the root and other trees below it. One way to address this weakness is to use random forest or xgboost, which are other tree-based algorithms that make many trees and make a final model based on a combination of the best tree made (ensemble).</p></li>
 <li><p>There are several other <a href="https://cran.r-project.org/web/views/MachineLearning.html">machine learning algorithms</a> out there, as well as regression-based predictions. There is “no free lunch”, and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.</p></li>
 <li><p>If you wanted to fully explore text mining, read up <a href="https://www.tidytextmining.com">Text Mining with R by Julia Silge &amp; David Robinson</a>.</p></li>

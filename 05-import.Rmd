@@ -231,7 +231,7 @@ head(response$content)
 This raw data is generally uninterpretable, and it is because the structure of the data is in a different format - in this case, the Content-Type above indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr `content()` and jsonlite `fromJSON()` and `toJSON()` functions:
 
 ```{r import api 4}
-content <- content(response)
+content <- httr::content(response)
 
 cleancontent <- jsonlite::fromJSON(jsonlite::toJSON(content), flatten = TRUE)
 
