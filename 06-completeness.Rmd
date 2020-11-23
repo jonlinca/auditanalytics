@@ -6,7 +6,7 @@ Ideally, completeness on a data set should be performed by comparing to another 
 
 For this section we will use the accounting database and validate our Journal Entry file prior to doing further work. We covered the importing of data in the prior chapter, so we'll do that again along with some packages:
 
-```{r, message = FALSE, warning = FALSE}
+```{r completeness, message = FALSE, warning = FALSE}
 library(dplyr) # For manipulating data
 library(tidyr) # For making data long and wide
 

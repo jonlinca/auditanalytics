@@ -2,11 +2,11 @@
 
 In this chapter, we will download some datasets and import them. You will need the following packages to follow along.
 
-```{r, echo = FALSE}
+```{r import setup, echo = FALSE}
 options(max.print=15)
 ```
 
-```{r, message = FALSE, warning = FALSE}
+```{r import setup 2, message = FALSE, warning = FALSE}
 library(dplyr) # For manipulating data
 
 library(readr) # For reading flat files
@@ -26,7 +26,7 @@ The base package, installed with all instances of R, and `read.table()` is a con
 
 Before importing the file, lets download the file from the repository that contains the Vendor Master. This dataset contains the vendor system ID number, the date it was added, and other traits.
 
-```{r}
+```{r import download}
 dir.create("data", showWarnings = FALSE) # Creates a directory in your project
 download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/vendor_master.csv",
               destfile = "data/vendor_master.csv", mode = "wb") # Downloads this csv file into the data folder
@@ -36,7 +36,7 @@ When importing delimited files, there will always be a few aspects to consider. 
 
 In this case, if you view the file (on the Files panel on the right, go to the data folder, click on vendor_master.csv, and select View File), you will see the data is separated by commas.
 
-```{r}
+```{r import raw}
 raw_vendors <- read_delim('data/vendor_master.csv', delim = ",")
 ```
 
@@ -44,7 +44,7 @@ The message indicates that default column types were assigned to each field impo
 
 However, ID numbers, while presented as a number, don't have a real value in any calculations. As a result, you can specify a column specification via the `col_types` argument, copy and pasting the framework in the message and changing the fields as need be:
 
-```{r}
+```{r import cols}
 cols <- cols(
   id = col_character(), # Changed from col_double()
   name = col_character(),
@@ -66,7 +66,7 @@ You may have noticed that while our normal columns are specified as-is, we had t
 
 While well exported delimited files can be useful, they often contain hidden surprises. Consider this rather innocuous CSV file from active directory (the controller for Windows authentication), with a username and manager fields:
 
-```{r}
+```{r import ad}
 # Active directory file, with just a username and manager field.
 
 download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/active_directory.csv",
@@ -77,7 +77,7 @@ raw_ad <- read_delim('data/active_directory.csv', delim = ";")
 
 These warnings indicate that there were columns expected (as dictated by the first line of column headers), but missing in one or more lines. You can inspect the CSV file in the RStudio interface by clicking on the file on the navigation pane to the right, and select 'View File'. You will notice that the location for both accounts is on a new line, but it belongs to the prior record. The raw characters can be confirmed within R, by reading the file directly as is (i.e. raw):
 
-```{r}
+```{r import char}
 ad_char <- readChar('data/active_directory.csv', file.info('data/active_directory.csv')$size)
 
 print(ad_char)
@@ -89,13 +89,13 @@ In this common yet inconvenient case, these can be substituted out with regular 
 
 In this case, the below regular expression only replaces `\n` when there is no `\r` preceding it. The `gsub()` function will try to match the regular expression criteria in the in the first field, with its replacement value in the second field.
 
-```{r}
+```{r import clean ad}
 gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE)
 ```
 
 The gsub output shows that the manager's name and location no longer has a `\n` in between them. As a result, it can now be imported cleanly.
 
-```{r}
+```{r import clean ad 2}
 ad_raw <- read_delim(gsub("(?<!\\r)\\n"," ", ad_char, perl = TRUE), delim = ";")
 
 print(ad_raw)
@@ -115,7 +115,7 @@ For this example, we will use an SQLite database. Unlike commercial databases yo
 
 Again, lets start by downloading the file, or in this case, a database:
 
-```{r}
+```{r import-db}
 dir.create("data", showWarnings = FALSE)
 
 download.file(url = "https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite",
@@ -126,25 +126,25 @@ One thing that is different about connecting to databases is that you need to se
 
 We're going to establish a connection with the database, creating the `con` connection object:
 
-```{r}
+```{r import-db sqllite}
 con <- dbConnect(RSQLite::SQLite(), "data/rauditanalytics.sqlite")
 ```
 
 You can confirm the connection works correctly by listing the tables in the database. One important thing to remember is that you'll be passing this connection object each time as you perform your commands. For example, if you want to see what tables exist in the database and schema, you will still need to tell the command which database you want to connect to.
 
-```{r}
+```{r import-db listtables}
 dbListTables(con)
 ```
 
 To get data out of a database, you'll need to communicate to it with SQL (Structured Query Language). Here is an example of how to select all the records in a table:
 
-```{r}
+```{r import-db gl}
 dbGetQuery(con, 'select * from gl')
 ```
 
 While knowing SQL is advantageous (and eventually critical), sometimes switching between languages is a hassle, especially when performing basic tasks within a database. Using the **dplyr** package, you can generate several of the same SQL queries using R syntax. All you need to do is create a reference to the table in the connection object - in this case, the `con` connection object contains the `gl` table:
 
-```{r}
+```{r import-db gl2}
 db_gl <- tbl(con, 'gl')
 
 db_gl
@@ -152,7 +152,7 @@ db_gl
 
 Not only is it pointing to the same table, but its also performing the same query, even though it was made up using R and dplyr:
 
-```{r}
+```{r import-db 3}
 db_gl %>% 
   show_query()
 ```
@@ -207,7 +207,7 @@ Here is an example. Lets say you want to see what repositories I have available 
 - You formulate your request, and the request URL becomes `https://api.github.com/users/jonlinca/repos`
 - Then you send the above URL using the httr package and the `GET` command. 
 
-```{r}
+```{r import api 1}
 library(httr)
 library(jsonlite)
 
@@ -218,19 +218,19 @@ response
 
 The structure of the data in an API looks different than a data frame. Typically there is an overall response (indicating success or the nature of the failure), the type of content (in this case, 'application/json'), and the data itself. The entire download is usually stored as a list with multiple references:
 
-```{r}
+```{r import api 2}
 names(response)
 ```
 
 And the data you want will be in the response's `$content`:
 
-```{r}
+```{r import api 3}
 head(response$content)
 ```
 
 This raw data is generally uninterpretable, and it is because the structure of the data is in a different format - in this case, the Content-Type above indicates it is a json file. Its quite easy to convert the data in this format to something more understandable with the httr `content()` and jsonlite `fromJSON()` and `toJSON()` functions:
 
-```{r}
+```{r import api 4}
 content <- content(response)
 
 cleancontent <- jsonlite::fromJSON(jsonlite::toJSON(content), flatten = TRUE)

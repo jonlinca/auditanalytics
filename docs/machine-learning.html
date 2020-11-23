@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 Audit Data Mart | Audit Analytics with R</title>
+  <title>Chapter 15 Machine Learning | Audit Analytics with R</title>
   <meta name="description" content="A toolkit for Internal Audit and Financial auditors" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 Audit Data Mart | Audit Analytics with R" />
+  <meta property="og:title" content="Chapter 15 Machine Learning | Audit Analytics with R" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://auditanalytics.jonlin.ca/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="jonlinca/auditanalytics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 Audit Data Mart | Audit Analytics with R" />
+  <meta name="twitter:title" content="Chapter 15 Machine Learning | Audit Analytics with R" />
   
   <meta name="twitter:description" content="A toolkit for Internal Audit and Financial auditors" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="continuous-monitoring.html"/>
-<link rel="next" href="machine-learning.html"/>
+<link rel="prev" href="applied-datamart.html"/>
+<link rel="next" href="appendix-ca.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -322,141 +322,190 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="applied-datamart" class="section level1">
-<h1><span class="header-section-number">Chapter 14</span> Audit Data Mart</h1>
-<p>As auditors, you will likely pull from the general pool of data at your company to perform analysis. This information is likely organized in a <strong>data warehouse</strong>, where data quality is controlled and is oriented towards reporting. Sometimes, this information is simply too large and onerous for rapid reporting. A side effect of a well designed data warehouse is that the data is highly structured (normalized), and performing any trivial analysis requires joining multiple tables together.</p>
-<p><strong>Data marts</strong> have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called extraction, transformation and load (ETL). Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database.</p>
-<p>A data mart is generally considered to be relatively inexpensive, as you are only retaining specific information needed to answer most questions. It won’t replace the data warehouse, especially for historical transactions, but it is good for smaller snapshots of information.</p>
-<div id="what-to-etl" class="section level2">
-<h2><span class="header-section-number">14.1</span> What to ETL</h2>
-<p>Good candidates for content in a data mart is generally information that takes a long time to generate for any individual’s computer, and would be useful to multiple individuals. Specifically:</p>
+<div id="machine-learning" class="section level1">
+<h1><span class="header-section-number">Chapter 15</span> Machine Learning</h1>
+<p>One of the utopian visions of an advanced audit analytics shop is the application of predictive modeling to help drive audit effectiveness. Machine learning (and data science generally) is an advanced and complex topic, and while it is rooted in statistical methods, can be summarized as “using a computer to discover patterns in a dataset”.</p>
+<p>Machine learning (and artificial intelligence generally) employs the use of algorithms, which are statistical methods to optimize one specific goal: error. Specifically, an algorithm will try to minimize error on a training dataset - that is, each and every time the algorithm makes a prediction, it compares its estimated result against the truth. As it performs the comparison and iterates continuously to reduce the error for each individual sample, the algorithm is also ensuring it is generally applicable for an entire training population.</p>
+<p>Similar to how you don’t need to understand the thermodynamics of a combustion engine to drive a car, you don’t need to necessarily understand how to make an algorithm to use machine learning. However, as an auditor, you still need to understand the tools and algorithm intentions - you will be a lot more fruitful using a screwdriver to insert a screw instead of a hammer.</p>
+<p>To successfully apply machine learning, an audit practitioner needs to clearly state what needs to be predicted, with what data, and how to evaluate it. The real work is understanding the problem and the data, wrangling it into a proper format, choosing the right algorithm to apply against the data, and interpreting the results. It doesn’t take a lot to train a model (really!).</p>
+<p>Lets use an example to help illustrate how you could use machine learning in an audit situation. We will use the following packages:</p>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="machine-learning.html#cb434-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb434-2"><a href="machine-learning.html#cb434-2"></a><span class="kw">library</span>(tidymodels)</span>
+<span id="cb434-3"><a href="machine-learning.html#cb434-3"></a><span class="kw">library</span>(tidytext)</span>
+<span id="cb434-4"><a href="machine-learning.html#cb434-4"></a><span class="kw">library</span>(tm)</span>
+<span id="cb434-5"><a href="machine-learning.html#cb434-5"></a><span class="kw">library</span>(rpart)</span>
+<span id="cb434-6"><a href="machine-learning.html#cb434-6"></a><span class="kw">library</span>(rpart.plot)</span>
+<span id="cb434-7"><a href="machine-learning.html#cb434-7"></a></span>
+<span id="cb434-8"><a href="machine-learning.html#cb434-8"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span></code></pre></div>
+<div id="predict-an-account-class" class="section level2">
+<h2><span class="header-section-number">15.1</span> Predict an account class</h2>
+<p>Lets say we were working on an audit to help determine if a transaction will be eventually charged against the correct account class. Specifically, lets see if we can predict if an a transaction is a fixed asset, based on the description field itself.</p>
+<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="machine-learning.html#cb435-1"></a>description &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;New computer&#39;</span>, <span class="st">&#39;New computer to replace old unit&#39;</span>, <span class="st">&#39;New computer user training class&#39;</span>, <span class="st">&#39;Computer repair&#39;</span>)</span>
+<span id="cb435-2"><a href="machine-learning.html#cb435-2"></a>is_fixed_asset &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>))</span>
+<span id="cb435-3"><a href="machine-learning.html#cb435-3"></a>je_num &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(description)</span>
+<span id="cb435-4"><a href="machine-learning.html#cb435-4"></a></span>
+<span id="cb435-5"><a href="machine-learning.html#cb435-5"></a>transactions &lt;-<span class="st"> </span><span class="kw">data.frame</span>(je_num,</span>
+<span id="cb435-6"><a href="machine-learning.html#cb435-6"></a>                 description,</span>
+<span id="cb435-7"><a href="machine-learning.html#cb435-7"></a>                 is_fixed_asset)</span>
+<span id="cb435-8"><a href="machine-learning.html#cb435-8"></a></span>
+<span id="cb435-9"><a href="machine-learning.html#cb435-9"></a>transactions</span></code></pre></div>
+<pre><code>##   je_num                      description is_fixed_asset
+## 1      1                     New computer           TRUE
+## 2      2 New computer to replace old unit           TRUE
+## 3      3 New computer user training class          FALSE
+## 4      4                  Computer repair          FALSE</code></pre>
+<p>We’re going to explore the use of a tree-based basic decision tree, predicting a classification outcome. Different approaches exist to predict outcomes, including decision trees and neural networks. Predictions can either take the form of predicting a class or label via classification, or a number via regression.</p>
+<p>A decision tree is one of the easiest to interpret, as it logically follows a flow - start a the top and answer a series of ‘yes-no’ questions to determine what the final result should be. You can see there are multiple words that describe each transaction. Computer is the running theme here, but they all seem to have different words that describe the transaction itself. We plan on using these words as our ‘yes-no’ branches to help us predict our outcomes. This is a classification problem.</p>
+<p>Any algorithm requires the generation of features - that is, indicators within the data that the algorithm can use to leverage and predict the outcome.</p>
+<p>In our example, we have several sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one giant feature, which isn’t terribly useful, as the words themselves are more important. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.</p>
+<p>First, lets create a lost of tokens - i.e. what was the unique word within each description, and how often did each word occur.</p>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="machine-learning.html#cb437-1"></a>words &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
+<span id="cb437-2"><a href="machine-learning.html#cb437-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
+<span id="cb437-3"><a href="machine-learning.html#cb437-3"></a><span class="st">  </span><span class="kw">count</span>(je_num, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </span>
+<span id="cb437-4"><a href="machine-learning.html#cb437-4"></a></span>
+<span id="cb437-5"><a href="machine-learning.html#cb437-5"></a>words</span></code></pre></div>
+<pre><code>##   je_num     word n
+## 1      1 computer 1
+## 2      1      new 1
+## 3      2 computer 1
+## 4      2      new 1
+## 5      2      old 1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 10 rows ]</code></pre>
+<p>We can see that each journal entry line is now repeated for each and every unique word. However, we notice some filler words, which don’t add a lot of value in our predictions. There are called ‘stop words’ which are common words in the English language - great for communicating verbally, but computers don’t need such formalities. Lets drop these stop words.</p>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="machine-learning.html#cb439-1"></a>words &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
+<span id="cb439-2"><a href="machine-learning.html#cb439-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
+<span id="cb439-3"><a href="machine-learning.html#cb439-3"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>word <span class="op">%in%</span><span class="st"> </span>stop_words<span class="op">$</span>word) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove stop words.</span></span>
+<span id="cb439-4"><a href="machine-learning.html#cb439-4"></a><span class="st">  </span><span class="kw">count</span>(je_num, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </span>
+<span id="cb439-5"><a href="machine-learning.html#cb439-5"></a></span>
+<span id="cb439-6"><a href="machine-learning.html#cb439-6"></a>words</span></code></pre></div>
+<pre><code>##   je_num     word n
+## 1      1 computer 1
+## 2      2 computer 1
+## 3      2  replace 1
+## 4      2     unit 1
+## 5      3    class 1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
+<p>We can see that each journal entry line is now repeated for each and every unique word. However, its a bit difficult to see what words were shared between each journal entry, so lets lay it out wide and aggregate it so each word is in its own column, aligned with the journal entry.</p>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="machine-learning.html#cb441-1"></a>wide_words &lt;-<span class="st"> </span>words <span class="op">%&gt;%</span></span>
+<span id="cb441-2"><a href="machine-learning.html#cb441-2"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols =</span> je_num, <span class="dt">names_from =</span> word, <span class="dt">values_from =</span> n)</span>
+<span id="cb441-3"><a href="machine-learning.html#cb441-3"></a></span>
+<span id="cb441-4"><a href="machine-learning.html#cb441-4"></a>wide_words</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 8
+##   je_num computer replace  unit class training  user repair
+##    &lt;int&gt;    &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;int&gt;  &lt;int&gt;
+## 1      1        1      NA    NA    NA       NA    NA     NA
+## 2      2        1       1     1    NA       NA    NA     NA
+## 3      3        1      NA    NA     1        1     1     NA
+## 4      4        1      NA    NA    NA       NA    NA      1</code></pre>
+<p>Excellent, lets join this back to our dataset and do the final cleanup to start making predictions.</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="machine-learning.html#cb443-1"></a>trans_listing &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
+<span id="cb443-2"><a href="machine-learning.html#cb443-2"></a><span class="st">  </span><span class="kw">inner_join</span>(wide_words, <span class="dt">by =</span> <span class="st">&#39;je_num&#39;</span>) </span>
+<span id="cb443-3"><a href="machine-learning.html#cb443-3"></a></span>
+<span id="cb443-4"><a href="machine-learning.html#cb443-4"></a>trans_listing</span></code></pre></div>
+<pre><code>##   je_num  description is_fixed_asset computer replace unit class training user
+## 1      1 New computer           TRUE        1      NA   NA    NA       NA   NA
+##   repair
+## 1     NA
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 3 rows ]</code></pre>
+<p>To create a prediction, we need to consider what we data we want to use to predict. Lets go through a few of these columns to determine what to retain and remove:</p>
 <ul>
-<li>Where multiple databases (or tables) need to be combined before they offer any meaningful value.
-<ul>
-<li>For example, connecting the expense report system to the company’s travel agency to match flights and hotels may help validate that travel policies are adhered to.</li>
-</ul></li>
-<li>Information that needs to be rapidly presented and consumed for an ongoing report.
-<ul>
-<li>For example, an audit KPI monitoring new risks within a Continuous Monitoring program may be prepared in advance, due to the complexity of calculations needed over a period of time.</li>
-</ul></li>
-<li>Data that is considered ‘master’ or ‘reference’.
-<ul>
-<li>A listing of account names and numbers may be useful to have on hand as it is relevant to any audit.</li>
-<li>In contrast, a list of transactions may only be needed for a single audit inquiry.</li>
-</ul></li>
+<li>Our <code>je_num</code> is not useful because it is simply a reference, and it would not make sense that a number in a journal entry could dictate the outcome.</li>
+<li>The original <code>description</code>, in its original form, would not be useful. We do not expect to see some of these whole sentences verbatim repeated again.</li>
+<li>The individual words that were generated from the <code>description</code>, make sense to keep, as they will be part of our predictive model.</li>
 </ul>
-<p>You can use any database that your company provides. It will be important that you have the ability to create tables within this database, delete them, and ensure you can work with someone who can administer the security to prevent non-audit users from querying the database.</p>
+<p>We also need to do some final cleanup:</p>
+<ul>
+<li>The <code>is_fixed_asset</code> will be what we want to predict. In this case, it should be a factor, as we are guessing a state outcome as part of the classification exercise.</li>
+<li>Many algorithms tend to break when they see NAs. In our dataset, we understand that NA means that the word was not seen, so a zero as a replacement will suffice.</li>
+</ul>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="machine-learning.html#cb445-1"></a>training_data &lt;-<span class="st"> </span>trans_listing <span class="op">%&gt;%</span></span>
+<span id="cb445-2"><a href="machine-learning.html#cb445-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(je_num, description)) <span class="op">%&gt;%</span></span>
+<span id="cb445-3"><a href="machine-learning.html#cb445-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_fixed_asset =</span> <span class="kw">as.factor</span>(is_fixed_asset)) <span class="op">%&gt;%</span></span>
+<span id="cb445-4"><a href="machine-learning.html#cb445-4"></a><span class="st">  </span><span class="kw">replace</span>(<span class="kw">is.na</span>(.), <span class="dv">0</span>)</span>
+<span id="cb445-5"><a href="machine-learning.html#cb445-5"></a></span>
+<span id="cb445-6"><a href="machine-learning.html#cb445-6"></a>training_data</span></code></pre></div>
+<pre><code>##   is_fixed_asset computer replace unit class training user repair
+## 1           TRUE        1       0    0     0        0    0      0
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 3 rows ]</code></pre>
+<p>There are several different ways to call a model. We will use the tidymodels package, which helps us declare which model we plan on using, the algorithm within the model, and the outcome.</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="machine-learning.html#cb447-1"></a>dt_model &lt;-<span class="st"> </span><span class="kw">decision_tree</span>(<span class="dt">min_n =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb447-2"><a href="machine-learning.html#cb447-2"></a><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb447-3"><a href="machine-learning.html#cb447-3"></a><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
+<p>To train a model, we simply take the model we want to use (as determined above using the <code>decision_tree()</code> specification), the outcome <code>is_fixed_asset</code>, and the data source we want to train on.</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="machine-learning.html#cb448-1"></a>dt_fit &lt;-<span class="st"> </span>dt_model <span class="op">%&gt;%</span></span>
+<span id="cb448-2"><a href="machine-learning.html#cb448-2"></a><span class="st">  </span><span class="kw">fit</span>(is_fixed_asset <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> training_data)</span>
+<span id="cb448-3"><a href="machine-learning.html#cb448-3"></a></span>
+<span id="cb448-4"><a href="machine-learning.html#cb448-4"></a>dt_fit</span></code></pre></div>
+<pre><code>## parsnip model object
+## 
+## Fit time:  7ms 
+## n= 4 
+## 
+## node), split, n, loss, yval, (yprob)
+##       * denotes terminal node
+## 
+##  1) root 4 2 FALSE (0.5000000 0.5000000)  
+##    2) replace&lt; 0.5 3 1 FALSE (0.6666667 0.3333333)  
+##      4) class&gt;=0.5 1 0 FALSE (1.0000000 0.0000000) *
+##      5) class&lt; 0.5 2 1 FALSE (0.5000000 0.5000000)  
+##       10) repair&gt;=0.5 1 0 FALSE (1.0000000 0.0000000) *
+##       11) repair&lt; 0.5 1 0 TRUE (0.0000000 1.0000000) *
+##    3) replace&gt;=0.5 1 0 TRUE (0.0000000 1.0000000) *</code></pre>
+<p>Without much fanfare, we get a model we can now use. Lets look into a bit more detail as to how the splits take place in our trained model:</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="machine-learning.html#cb450-1"></a><span class="kw">rpart.plot</span>(dt_fit<span class="op">$</span>fit)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<p>Reading a decision tree takes some orienting. The way to read the root (the top level decision) is to say “is the value of <code>replace</code> less than 0.5?” - yes to go left, and no to go right. Another way to interpret the node is “did the word replace occur less than 0.5 times?”. If it did happen less than 0.5 times (which is 0 in our dataset), then go left. However, if the word ‘replace’ had a value of more than 0.5, which also means the word occurred at least once, then go right - in this case the predicted outcome for <code>is_fixed_asset</code> will be TRUE.</p>
+<p>The branches, aka the items below the root, are decided via a gini impurity metric, where the goal is to pose a question that evenly splits the outcomes into 50/50 buckets. The more evenly split the information, the more ‘information gain’ was acquired from the split.</p>
+<p>Now that we have a trained model, lets try to make some predictions. Lets say we had three more sentences that were tokenized into: ‘class repair’, ‘replace repair’, ‘replace class’, ‘computer computer computer’, and simply nothing.</p>
+<p>If we went through the process again to tokenize, our new dataset (holdout, since it was not used in training) would look like this:</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="machine-learning.html#cb451-1"></a>holdout_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="kw">ncol</span>(training_data) <span class="dv">-1</span>))</span>
+<span id="cb451-2"><a href="machine-learning.html#cb451-2"></a><span class="kw">colnames</span>(holdout_data) &lt;-<span class="st"> </span><span class="kw">names</span>(training_data)[<span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(training_data)]</span>
+<span id="cb451-3"><a href="machine-learning.html#cb451-3"></a></span>
+<span id="cb451-4"><a href="machine-learning.html#cb451-4"></a>holdout_data[<span class="dv">1</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb451-5"><a href="machine-learning.html#cb451-5"></a>holdout_data[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb451-6"><a href="machine-learning.html#cb451-6"></a>holdout_data[<span class="dv">3</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb451-7"><a href="machine-learning.html#cb451-7"></a>holdout_data[<span class="dv">4</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb451-8"><a href="machine-learning.html#cb451-8"></a>holdout_data[<span class="dv">5</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb451-9"><a href="machine-learning.html#cb451-9"></a></span>
+<span id="cb451-10"><a href="machine-learning.html#cb451-10"></a>holdout_data</span></code></pre></div>
+<pre><code>##   computer replace unit class training user repair
+## 1        0       0    0     1        0    0      1
+## 2        0       1    0     0        0    0      1
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 3 rows ]</code></pre>
+<p>And the fun part - lets run our predictions through the model we created:</p>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="machine-learning.html#cb453-1"></a>dt_predict &lt;-<span class="st"> </span><span class="kw">predict</span>(dt_fit, holdout_data)</span>
+<span id="cb453-2"><a href="machine-learning.html#cb453-2"></a></span>
+<span id="cb453-3"><a href="machine-learning.html#cb453-3"></a><span class="kw">bind_cols</span>(holdout_data, dt_predict)</span></code></pre></div>
+<pre><code>##   computer replace unit class training user repair .pred_class
+## 1        0       0    0     1        0    0      1       FALSE
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 4 rows ]</code></pre>
+<p>Some of the predictions could be conferred as such, but whats up with the zero-words example that predicted it was a fixed asset?</p>
 </div>
-<div id="etl-essentials" class="section level2">
-<h2><span class="header-section-number">14.2</span> ETL Essentials</h2>
-<p>In the <a href="architecture.html#architecture-rsc">Architecture chapter</a>, we referenced using RStudio Connect to facilitate the process to extract, transform and load (ETL). RStudio Connect relies on R Markdown notebooks to execute analytic processes, which we can design and prepare locally before scheduling.</p>
-<p>The audit team will likely be maintaining this audit data mart - therefore, some additional considerations need to be thought about:</p>
-<ol style="list-style-type: decimal">
-<li>While R Markdown notebooks are self documenting, having well outlined documentation that explains where the data came from, how it was transformed and where it ends up being will be useful to your teammates and future self.</li>
-<li><a href="other-practices-to-follow.html#passwords">Secure your credentials</a>. Do not place them directly in the notebook as plain text. If using RStudio Connect, call passwords via an environment variable.</li>
-<li>Ensure proper checks are in place. Actively scan for data structure anomalies and catch them before they get uploaded, and ensuring that data that was downloaded is fresh by examining dates.</li>
-<li>Where possible, avoid overwriting a table completely each time by replacing it with the fresh information that was just extracted. While in some situations this is reasonable, the trade-off between simpler design and the speed of the ETL will become more glaring as the dataset grows.</li>
-</ol>
-</div>
-<div id="etl-example" class="section level2">
-<h2><span class="header-section-number">14.3</span> ETL Example</h2>
-<p>Below is an example of what may be contained in an ETL notebook.</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb433-1"><a href="applied-datamart.html#cb433-1"></a>---</span>
-<span id="cb433-2"><a href="applied-datamart.html#cb433-2"></a>title: &quot;Audit Data Mart - ETL 111 HR&quot;</span>
-<span id="cb433-3"><a href="applied-datamart.html#cb433-3"></a>author: &quot;Your name&quot;</span>
-<span id="cb433-4"><a href="applied-datamart.html#cb433-4"></a>date: &quot;2020-11-22 21:28:16&quot;</span>
-<span id="cb433-5"><a href="applied-datamart.html#cb433-5"></a>output:</span>
-<span id="cb433-6"><a href="applied-datamart.html#cb433-6"></a>  html_document</span>
-<span id="cb433-7"><a href="applied-datamart.html#cb433-7"></a>---</span>
-<span id="cb433-8"><a href="applied-datamart.html#cb433-8"></a></span>
-<span id="cb433-9"><a href="applied-datamart.html#cb433-9"></a><span class="fu"># Credentials</span></span>
-<span id="cb433-10"><a href="applied-datamart.html#cb433-10"></a></span>
-<span id="cb433-11"><a href="applied-datamart.html#cb433-11"></a><span class="bn">```{r}</span></span>
-<span id="cb433-12"><a href="applied-datamart.html#cb433-12"></a><span class="bn">passwords &lt;- Sys.getenv(&quot;dbpassword&quot;)</span></span>
-<span id="cb433-13"><a href="applied-datamart.html#cb433-13"></a><span class="bn">```</span></span>
-<span id="cb433-14"><a href="applied-datamart.html#cb433-14"></a></span>
-<span id="cb433-15"><a href="applied-datamart.html#cb433-15"></a><span class="fu"># Extract</span></span>
-<span id="cb433-16"><a href="applied-datamart.html#cb433-16"></a></span>
-<span id="cb433-17"><a href="applied-datamart.html#cb433-17"></a><span class="bn">```{r}</span></span>
-<span id="cb433-18"><a href="applied-datamart.html#cb433-18"></a><span class="bn">con &lt;- connect_hr(passwords)</span></span>
-<span id="cb433-19"><a href="applied-datamart.html#cb433-19"></a><span class="bn">employee_list &lt;- get_hr_employees(con)</span></span>
-<span id="cb433-20"><a href="applied-datamart.html#cb433-20"></a><span class="bn">reporting_structure &lt;- get_hr_reporting(con)</span></span>
-<span id="cb433-21"><a href="applied-datamart.html#cb433-21"></a><span class="bn">```</span></span>
-<span id="cb433-22"><a href="applied-datamart.html#cb433-22"></a></span>
-<span id="cb433-23"><a href="applied-datamart.html#cb433-23"></a><span class="fu"># Extract check</span></span>
-<span id="cb433-24"><a href="applied-datamart.html#cb433-24"></a></span>
-<span id="cb433-25"><a href="applied-datamart.html#cb433-25"></a>Check on the latest termination date. Usually we have a termination every week.</span>
-<span id="cb433-26"><a href="applied-datamart.html#cb433-26"></a></span>
-<span id="cb433-27"><a href="applied-datamart.html#cb433-27"></a><span class="bn">```{r}</span></span>
-<span id="cb433-28"><a href="applied-datamart.html#cb433-28"></a><span class="bn">days_since_last_term &lt;- Sys.date - max(employee_list$term_date) </span></span>
-<span id="cb433-29"><a href="applied-datamart.html#cb433-29"></a><span class="bn">if (days_since_last_term &gt; 14) {stop(&quot;Danger!&quot;)}</span></span>
-<span id="cb433-30"><a href="applied-datamart.html#cb433-30"></a><span class="bn">```</span></span>
-<span id="cb433-31"><a href="applied-datamart.html#cb433-31"></a></span>
-<span id="cb433-32"><a href="applied-datamart.html#cb433-32"></a><span class="fu"># Extract summary</span></span>
-<span id="cb433-33"><a href="applied-datamart.html#cb433-33"></a></span>
-<span id="cb433-34"><a href="applied-datamart.html#cb433-34"></a><span class="bn">```{r}</span></span>
-<span id="cb433-35"><a href="applied-datamart.html#cb433-35"></a><span class="bn">nrow(employee_list)</span></span>
-<span id="cb433-36"><a href="applied-datamart.html#cb433-36"></a><span class="bn">nrow(reporting_structure)</span></span>
-<span id="cb433-37"><a href="applied-datamart.html#cb433-37"></a><span class="bn">```</span></span>
-<span id="cb433-38"><a href="applied-datamart.html#cb433-38"></a></span>
-<span id="cb433-39"><a href="applied-datamart.html#cb433-39"></a><span class="fu"># Transform</span></span>
-<span id="cb433-40"><a href="applied-datamart.html#cb433-40"></a></span>
-<span id="cb433-41"><a href="applied-datamart.html#cb433-41"></a><span class="bn">```{r}</span></span>
-<span id="cb433-42"><a href="applied-datamart.html#cb433-42"></a><span class="bn">cleaned_staff &lt;- employee_list %&gt;%</span></span>
-<span id="cb433-43"><a href="applied-datamart.html#cb433-43"></a><span class="bn">  left_join(reporting_structure, by = &#39;employee_id&#39;) %&gt;% # Gets the ID number of the supervisor of the employee</span></span>
-<span id="cb433-44"><a href="applied-datamart.html#cb433-44"></a><span class="bn">  left_join(employee_list, by = &#39;supervisor_id&#39;) # Gets the name of the supervisor</span></span>
-<span id="cb433-45"><a href="applied-datamart.html#cb433-45"></a><span class="bn">```</span></span>
-<span id="cb433-46"><a href="applied-datamart.html#cb433-46"></a></span>
-<span id="cb433-47"><a href="applied-datamart.html#cb433-47"></a><span class="fu"># Transform check</span></span>
-<span id="cb433-48"><a href="applied-datamart.html#cb433-48"></a></span>
-<span id="cb433-49"><a href="applied-datamart.html#cb433-49"></a>Check that every employee has a boss</span>
-<span id="cb433-50"><a href="applied-datamart.html#cb433-50"></a></span>
-<span id="cb433-51"><a href="applied-datamart.html#cb433-51"></a><span class="bn">```{r}</span></span>
-<span id="cb433-52"><a href="applied-datamart.html#cb433-52"></a><span class="bn">no_boss &lt;- cleaned_staff %&gt;%</span></span>
-<span id="cb433-53"><a href="applied-datamart.html#cb433-53"></a><span class="bn">  filter(is.na(supervisor_id))</span></span>
-<span id="cb433-54"><a href="applied-datamart.html#cb433-54"></a><span class="bn">  </span></span>
-<span id="cb433-55"><a href="applied-datamart.html#cb433-55"></a><span class="bn">if (nrow(no_boss) &gt; 0) {stop(&quot;Danger!&quot;)}</span></span>
-<span id="cb433-56"><a href="applied-datamart.html#cb433-56"></a><span class="bn">```</span></span>
-<span id="cb433-57"><a href="applied-datamart.html#cb433-57"></a></span>
-<span id="cb433-58"><a href="applied-datamart.html#cb433-58"></a><span class="fu"># Transform summary</span></span>
-<span id="cb433-59"><a href="applied-datamart.html#cb433-59"></a></span>
-<span id="cb433-60"><a href="applied-datamart.html#cb433-60"></a><span class="bn">```{r}</span></span>
-<span id="cb433-61"><a href="applied-datamart.html#cb433-61"></a><span class="bn">nrow(cleaned_staff)</span></span>
-<span id="cb433-62"><a href="applied-datamart.html#cb433-62"></a><span class="bn">```</span></span>
-<span id="cb433-63"><a href="applied-datamart.html#cb433-63"></a></span>
-<span id="cb433-64"><a href="applied-datamart.html#cb433-64"></a><span class="fu"># Load </span></span>
-<span id="cb433-65"><a href="applied-datamart.html#cb433-65"></a></span>
-<span id="cb433-66"><a href="applied-datamart.html#cb433-66"></a><span class="bn">```{r}</span></span>
-<span id="cb433-67"><a href="applied-datamart.html#cb433-67"></a><span class="bn">con &lt;- connect_audit_data_mart(passwords)</span></span>
-<span id="cb433-68"><a href="applied-datamart.html#cb433-68"></a></span>
-<span id="cb433-69"><a href="applied-datamart.html#cb433-69"></a><span class="bn">dbWriteTable(con, &#39;staff_table&#39;, cleaned_staff, overwrite = TRUE)</span></span>
-<span id="cb433-70"><a href="applied-datamart.html#cb433-70"></a><span class="bn">```</span></span>
-<span id="cb433-71"><a href="applied-datamart.html#cb433-71"></a></span>
-<span id="cb433-72"><a href="applied-datamart.html#cb433-72"></a><span class="fu"># Load check</span></span>
-<span id="cb433-73"><a href="applied-datamart.html#cb433-73"></a></span>
-<span id="cb433-74"><a href="applied-datamart.html#cb433-74"></a>Check that our new table matches the ETL table we just created</span>
-<span id="cb433-75"><a href="applied-datamart.html#cb433-75"></a></span>
-<span id="cb433-76"><a href="applied-datamart.html#cb433-76"></a><span class="bn">```{r}</span></span>
-<span id="cb433-77"><a href="applied-datamart.html#cb433-77"></a><span class="bn">new_count &lt;- dbReadTable(con, &#39;cleaned_staff&#39;)</span></span>
-<span id="cb433-78"><a href="applied-datamart.html#cb433-78"></a><span class="bn">nrow(new_count)</span></span>
-<span id="cb433-79"><a href="applied-datamart.html#cb433-79"></a></span>
-<span id="cb433-80"><a href="applied-datamart.html#cb433-80"></a><span class="bn">if (nrow(new_count) != nrow(cleaned_staff)) {stop(&quot;Danger!&quot;)}</span></span>
-<span id="cb433-81"><a href="applied-datamart.html#cb433-81"></a><span class="bn">```</span></span>
-<span id="cb433-82"><a href="applied-datamart.html#cb433-82"></a></span>
-<span id="cb433-83"><a href="applied-datamart.html#cb433-83"></a><span class="fu"># Session Info</span></span>
-<span id="cb433-84"><a href="applied-datamart.html#cb433-84"></a><span class="bn">```{r}</span></span>
-<span id="cb433-85"><a href="applied-datamart.html#cb433-85"></a><span class="bn">sessionInfo()</span></span>
-<span id="cb433-86"><a href="applied-datamart.html#cb433-86"></a><span class="bn">```</span></span></code></pre></div>
+<div id="what-to-explore-next" class="section level2">
+<h2><span class="header-section-number">15.2</span> What to explore next</h2>
+<p>In our extremely simplistic example, we overlooked several things that would not be done on a real data set.</p>
+<ul>
+<li><p>Training sets matter. An extremely small training set means the model hasn’t seen enough nuances in the data to understand it. Since these seven words never mapped to anything in the decision tree, it always evaluated as TRUE.</p></li>
+<li><p>The quality of a training set also matters greatly, as the training dataset is considered truth, and its very difficult to tell a computer to ignore any mislabelled data as it won’t know its mislabelled.</p></li>
+<li><p>To create a prediction, the need the fields used in training must also be the same words for the prediction. In our case, since we’re using individual words, some additional work needs to be done to renormalize the words in the same format as our training dataset. For example, if we start seeing the word “Mac” instead of “Computer”, we either need to drop the word “Mac” before running our prediction, or retrain our model with these new keywords.</p></li>
+<li><p>A larger main dataset needs to be split into a training dataset and a test dataset. The creation of the model should be done on the training data, and its performance should be evaluated against the test dataset. The performance will allow you to evaluate just how good the model is. If this is not done, then your model is simply ‘overfitting’, which is the same as memorizing a dataset, and has no ability to generalize against a normal population.</p></li>
+<li><p>From an algorithm perspective, a decision tree makes only one tree as its final outcome. However, there could have been a tree design that put another feature as the root and other trees below it. One way to address this weakness is to use random forest or xgboost, which are other tree-based algorithms that make many trees and make a final model based on a combination of the best tree made (ensemble).</p></li>
+<li><p>There are several other <a href="https://cran.r-project.org/web/views/MachineLearning.html">machine learning algorithms</a> out there, as well as regression-based predictions. There is “no free lunch”, and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.</p></li>
+<li><p>If you wanted to fully explore text mining, read up <a href="https://www.tidytextmining.com">Text Mining with R by Julia Silge &amp; David Robinson</a>.</p></li>
+</ul>
 
 </div>
 </div>
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="continuous-monitoring.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="machine-learning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="applied-datamart.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-ca.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

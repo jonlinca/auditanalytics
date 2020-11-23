@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-11-12" />
+<meta name="date" content="2020-11-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -287,15 +287,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.2" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-essentials"><i class="fa fa-check"></i><b>14.2</b> ETL Essentials</a></li>
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
-<li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="15" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>15</b> Continuous Auditing methodology</a><ul>
-<li class="chapter" data-level="15.1" data-path="appendix-ca.html"><a href="appendix-ca.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>15.1</b> Support for Continuous Auditing</a></li>
-<li class="chapter" data-level="15.2" data-path="appendix-ca.html"><a href="appendix-ca.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>15.2</b> The requirements for evaluting ICFR</a></li>
-<li class="chapter" data-level="15.3" data-path="appendix-ca.html"><a href="appendix-ca.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>15.3</b> Determining population tolerable error rate</a></li>
+<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
+<li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Predict an account class</a></li>
+<li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.2</b> What to explore next</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>16</b> Other practices to follow</a><ul>
-<li class="chapter" data-level="16.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>16.1</b> Documentation</a></li>
-<li class="chapter" data-level="16.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>16.2</b> Passwords</a></li>
+<li class="part"><span><b>IV Appendix</b></span></li>
+<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
+<li class="chapter" data-level="16.1" data-path="appendix-ca.html"><a href="appendix-ca.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
+<li class="chapter" data-level="16.2" data-path="appendix-ca.html"><a href="appendix-ca.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
+<li class="chapter" data-level="16.3" data-path="appendix-ca.html"><a href="appendix-ca.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="17.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>17.1</b> Documentation</a></li>
+<li class="chapter" data-level="17.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>17.2</b> Passwords</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -500,7 +504,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb247-17"><a href="exploring-data.html#cb247-17"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></span>
 <span id="cb247-18"><a href="exploring-data.html#cb247-18"></a><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se =</span> <span class="ot">FALSE</span>) <span class="op">+</span></span>
 <span id="cb247-19"><a href="exploring-data.html#cb247-19"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Pair 4: Y4 over Y4&quot;</span>)</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-97-1.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-97-2.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-97-3.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-97-4.png" width="50%" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-75-1.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-75-2.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-75-3.png" width="50%" /><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-75-4.png" width="50%" /></p>
 <p>These four charts and scatterplots themselves are quite different! While the blue correlation line and the prior summary statistics are similar, the points all follow a different general path. Independently looking at the graphics for each one will give you different insight, and may influence your audit approach. Graphics matter a lot!</p>
 </div>
 <div id="data-visualization---how" class="section level2">
@@ -523,7 +527,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Generally we will want our time to be the x variable (the dependent variable), and the amount spent to be the y variable (the independent variable). We can insert the x and y into a ggplot function and generate the visualization we think may reveal useful infromation.</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="exploring-data.html#cb250-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> gl_date, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
 <span id="cb250-2"><a href="exploring-data.html#cb250-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 <p>The foundations of any ggplot are essentially:</p>
 <ul>
 <li><code>data</code> - The data frame you want to visualize,</li>
@@ -535,17 +539,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, histograms are useful to understand the shape of a dataset:</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="exploring-data.html#cb251-1"></a><span class="kw">ggplot</span>(materials, <span class="kw">aes</span>(<span class="dt">x =</span> amount)) <span class="op">+</span><span class="st"> </span><span class="co"># data is the first default argument, and mapping is the second</span></span>
 <span id="cb251-2"><a href="exploring-data.html#cb251-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>And boxplots are useful to understand the distribution of the data:</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="exploring-data.html#cb252-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(vendor_id), <span class="dt">y =</span> amount)) <span class="op">+</span></span>
 <span id="cb252-2"><a href="exploring-data.html#cb252-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 <div id="time-series" class="section level3">
 <h3><span class="header-section-number">8.4.1</span> Time-series</h3>
 <p>As the gl table (and materials subset) is a time-series data, containing both the transaction date and amount, we may want to try plotting a line chart to see the movement of data over time.</p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="exploring-data.html#cb253-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> materials, <span class="kw">aes</span>(<span class="dt">x =</span> gl_date, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
 <span id="cb253-2"><a href="exploring-data.html#cb253-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>Since our time-series data has a relatively high resolution with detailed data, we may sometimes gain insight by aggregating data (by week, month, or even year). As of now, the data needs to be aggregated into a higher level time period.</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="exploring-data.html#cb254-1"></a>monthly_mats &lt;-<span class="st"> </span>materials <span class="op">%&gt;%</span></span>
 <span id="cb254-2"><a href="exploring-data.html#cb254-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_month =</span> <span class="kw">floor_date</span>(gl_date, <span class="st">&#39;month&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Rounds the date down to the first of the month</span></span>
@@ -565,7 +569,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Aggregating this same information by month may be more illustrative:</p>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="exploring-data.html#cb258-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> monthly_mats, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount)) <span class="op">+</span></span>
 <span id="cb258-2"><a href="exploring-data.html#cb258-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 </div>
 <div id="facets" class="section level3">
 <h3><span class="header-section-number">8.4.2</span> Facets</h3>
@@ -584,12 +588,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## `summarise()` regrouping output by &#39;account&#39; (override with `.groups` argument)</code></pre>
 <div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="exploring-data.html#cb263-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> expense, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount, <span class="dt">colour =</span> account)) <span class="op">+</span><span class="st"> </span><span class="co"># We can specify the colour now too, depending on the geom_*</span></span>
 <span id="cb263-2"><a href="exploring-data.html#cb263-2"></a><span class="st">  </span><span class="kw">geom_line</span>()</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
 <p>Instead of plotting them onto the same chart, we can <code>facet_*</code> them:</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="exploring-data.html#cb264-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> expense, <span class="kw">aes</span>(<span class="dt">x =</span> gl_month, <span class="dt">y =</span> amount, <span class="dt">colour =</span> account)) <span class="op">+</span></span>
 <span id="cb264-2"><a href="exploring-data.html#cb264-2"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
 <span id="cb264-3"><a href="exploring-data.html#cb264-3"></a><span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>account) <span class="co"># Syntax for variable, either in the (row ~ column)... or both!</span></span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 
 </div>
 </div>
