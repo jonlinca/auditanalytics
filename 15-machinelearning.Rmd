@@ -136,7 +136,7 @@ Reading a decision tree takes some orienting. The way to read the root (the top 
 
 The branches, aka the items below the root, are decided via a gini impurity metric, where the goal is to pose a question that evenly splits the outcomes into 50/50 buckets. The more evenly split the information, the more 'information gain' was acquired from the split.
 
-## Making predictions from the model
+## Making predictions
 
 Now that we have a trained model, lets try to make some predictions. Lets say we had three more sentences that were tokenized into: 'class repair', 'replace repair', 'replace class', 'computer computer computer', and simply nothing.
 
@@ -179,6 +179,6 @@ In our extremely simplistic example, we overlooked several things that would not
 
 - From an algorithm perspective, a decision tree makes only one tree as its final outcome. However, there could have been a tree design that put another feature as the root and other trees below it. One way to address this weakness is to use random forest or xgboost, which are other tree-based algorithms that make many trees and make a final model based on a combination of the best tree made (ensemble).
 
-- There are several other [machine learning algorithms](https://cran.r-project.org/web/views/MachineLearning.html) out there, as well as regression-based predictions. There is "no free lunch", and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.
+There are several other [machine learning algorithms](https://cran.r-project.org/web/views/MachineLearning.html) out there, as well as regression-based predictions. There is "no free lunch", and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.
 
-- If you wanted to fully explore text mining, read up [Text Mining with R by Julia Silge & David Robinson](https://www.tidytextmining.com).
+If you wanted to fully explore text mining, read up [Text Mining with R by Julia Silge & David Robinson](https://www.tidytextmining.com).

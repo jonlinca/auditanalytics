@@ -291,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
-<li class="chapter" data-level="15.4" data-path="machine-learning.html"><a href="machine-learning.html#making-predictions-from-the-model"><i class="fa fa-check"></i><b>15.4</b> Making predictions from the model</a></li>
+<li class="chapter" data-level="15.4" data-path="machine-learning.html"><a href="machine-learning.html#making-predictions"><i class="fa fa-check"></i><b>15.4</b> Making predictions</a></li>
 <li class="chapter" data-level="15.5" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.5</b> What to explore next</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
@@ -370,8 +370,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A product license to Results.</li>
 </ul>
 <p>For an individual control, the flow of information may look something like this:</p>
-<div id="htmlwidget-d0e0819c5226c42be27d" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-d0e0819c5226c42be27d">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-872400eca5344ac902e3" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-872400eca5344ac902e3">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="create-a-collection-analytic-and-table" class="section level2">
 <h2><span class="header-section-number">13.2</span> Create a Collection, Analytic and Table</h2>
@@ -430,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 7
 ##   id     type   name        description created_at    updated_at   relationships
 ##   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;list&gt;       
-## 1 167885 analy… Journal en… NA          2020-11-23T0… 2020-11-23T… &lt;tibble [1 ×…</code></pre>
+## 1 167889 analy… Journal en… NA          2020-11-23T0… 2020-11-23T… &lt;tibble [1 ×…</code></pre>
 <p>Lastly, we will want to make a spot to house our results, which will be stored in the Table within the Analysis. When we create the table, we will get a table ID, which will be important as it represents the number that we will reference in all our uploads.</p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="continuous-monitoring.html#cb414-1"></a>new_table &lt;-<span class="st"> </span><span class="kw">create_results_tables</span>(highbond_auth, </span>
 <span id="cb414-2"><a href="continuous-monitoring.html#cb414-2"></a>                                   new_analysis<span class="op">$</span>id[[<span class="dv">1</span>]], </span>
@@ -442,7 +442,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 x 10
 ##   id    type  name  description data_table_id script_name table_type created_at
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;               &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;      &lt;chr&gt;     
-## 1 5669… tabl… High… NA                1208527 NA          data_anal… 2020-11-2…
+## 1 5669… tabl… High… NA                1208531 NA          data_anal… 2020-11-2…
 ## # … with 2 more variables: updated_at &lt;chr&gt;, relationships &lt;list&gt;</code></pre>
 <p>By now, you should see this within your Highbond Results instance.</p>
 </div>
@@ -487,7 +487,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb420-3"><a href="continuous-monitoring.html#cb420-3"></a>                     <span class="dt">upload =</span> upload_rows, </span>
 <span id="cb420-4"><a href="continuous-monitoring.html#cb420-4"></a>                     <span class="dt">purge =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/566934/upload</code></pre>
+<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/566938/upload</code></pre>
 <p>Upon checking the Results Table on the website, we see that the record was added.</p>
 <p>Once we uploaded the information, we should specify the primary key in the Table’s settings. The primary key’s purpose in Highbond Results is to ensure that this record stays persistent. When you upload another batch of records, if a ‘primary key’ is defined, then Highbond will merge the information in the new upload, but not automatically repeat any triggers that have been already acted on (example: if you already sent out a request for a response via a questionnaire, it will not occur again).</p>
 <p>In our scenario, we will want to ask the control owner about a specific journal entry that is high risk. The unique identifier for every journal entry is the <code>je_num</code>, so its probably useful to also make this the primary key. To assign this field as the primary key, within the list of Tables in Highbond, select the ellipses (three dots) corresponding to the Table, and select Settings.</p>
@@ -511,7 +511,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can use the same <code>post_results_records()</code> function to upload new records, but we’ll make one change: remove the <code>purge</code> argument:</p>
 <div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="continuous-monitoring.html#cb425-1"></a><span class="kw">post_results_records</span>(highbond_auth, <span class="dt">table_id =</span> table_id, <span class="dt">upload =</span> upload_rows)</span></code></pre></div>
 <pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/566934/upload</code></pre>
+<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/566938/upload</code></pre>
 </div>
 <div id="downloading-records-and-responses" class="section level2">
 <h2><span class="header-section-number">13.5</span> Downloading records and responses</h2>
