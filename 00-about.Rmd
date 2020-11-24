@@ -2,9 +2,11 @@
 
 [Jonathan Lin](https://www.linkedin.com/in/jonlin/)  (Jon) is a Certified Information Systems Auditor, that specializes in audit data analytics. Jonathan firmly believes that anything can be measured, and data should drive decision making. Jonathan promotes the deep integration of an audit analytics in the audit practice, and believes a well structured program can multiply the effectiveness of any audit team.
 
-Trained as an IT Auditor, Jon had also led a geographically dispersed data analytics team at a Canadian Big 4 firm, before moving to industry to operationalize a continuous monitoring program to detect fraud and control issues. He was also a co-speaker with Sergiu Cernautan at the 2019 IIA International Conference, presenting on the "The Digitally Disruptive Internal Auditor: Future Proofing Your Internal Audit Function".
+Trained as an IT Auditor, Jon had also led a geographically dispersed data analytics team at a Canadian Big 4 firm, before moving to industry to implement and operationalize a continuous monitoring program, designed to detect fraud and control issues. 
 
-Jon also volunteers with the [CalgaryR](https://imstatsbee.github.io/calgaryr/) R User Group, helping promote R literacy through education and speakers in a diverse set of industries.
+He was also a co-speaker with Sergiu Cernautan at the 2019 IIA International Conference, presenting on the "The Digitally Disruptive Internal Auditor: Future Proofing Your Internal Audit Function".
+
+Jon volunteers with the [CalgaryR](https://imstatsbee.github.io/calgaryr/) R User Group, helping promote R literacy through education and speakers in a diverse set of industries.
 
 **Acknowledgments**
 

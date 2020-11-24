@@ -2,7 +2,7 @@
 
 One of the utopian visions of an advanced audit analytics shop is the application of predictive modeling to help drive audit effectiveness. Machine learning (and data science generally) is an advanced and complex topic, and while it is rooted in statistical methods, can be summarized as "using a computer to discover patterns in a dataset". 
 
-Machine learning (and artificial intelligence generally) employs the use of algorithms, which are statistical methods to optimize one specific goal: error. Specifically, an algorithm will try to minimize error on a training dataset - that is, each and every time the algorithm makes a prediction, it compares its estimated result against the truth. As it performs the comparison and iterates continuously to reduce the error for each individual sample, the algorithm is also ensuring it is generally applicable for an entire training population.
+Machine learning employs the use of algorithms, which are statistical methods to optimize one specific goal: error. Specifically, an algorithm will try to minimize error on a training dataset - that is, each and every time the algorithm makes a prediction, it compares its estimated result against the truth. As it performs the comparison and iterates continuously to reduce the error for each individual sample, the algorithm is also ensuring it is generally applicable for an entire training population.
 
 Similar to how you don't need to understand the thermodynamics of a combustion engine to drive a car, you don't need to necessarily understand how to make an algorithm to use machine learning. However, as an auditor, you still need to understand the tools and algorithm intentions - you will be a lot more fruitful using a screwdriver to insert a screw instead of a hammer.
 
@@ -17,6 +17,7 @@ library(tidytext)
 library(tm)
 library(rpart)
 library(rpart.plot)
+library(gt) # Used for formatting table outputs
 
 set.seed(12345)
 ```
@@ -39,15 +40,17 @@ transactions <- data.frame(je_num,
 transactions
 ```
 
-We're going to explore the use of a tree-based basic decision tree, predicting a classification outcome. Different approaches exist to predict outcomes, including decision trees and neural networks. Predictions can either take the form of predicting a class or label via classification, or a number via regression. 
+We will explore the use of a tree-based basic decision tree, predicting a classification outcome. Different approaches exist to predict outcomes, including decision trees and neural networks. Predictions can either take the form of predicting a class or label via classification, or a number via regression. 
 
-A decision tree is one of the easiest to interpret, as it logically follows a flow - start a the top and answer a series of 'yes-no' questions to determine what the final result should be. You can see there are multiple words that describe each transaction. Computer is the running theme here, but they all seem to have different words that describe the transaction itself. We plan on using these words as our 'yes-no' branches to help us predict our outcomes. This is a classification problem.
+A decision tree is one of the easiest to interpret, as it logically follows a flow - start a the top and answer a series of 'yes-no' questions to determine what the final result should be. You can see there are multiple words that describe each transaction. 
 
-Any algorithm requires the generation of features - that is, indicators within the data that the algorithm can use to leverage and predict the outcome.
+In our example, "computer" is the running theme here, but they all seem to have different words that describe the transaction itself. We plan on using these words as our 'yes-no' branches to help us predict our outcomes. This is a classification problem.
 
 ## Generating features
 
-In our example, we have several sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one whole feature, which isn't terribly useful, as the words themselves are more important. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.
+Any algorithm requires the generation of features - that is, indicators within the data that the algorithm can use to leverage and predict the outcome. Features typically need to be generated and be made into its own column, before they can leveraged in a prediction. 
+
+In our example, we have several full sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one whole feature, which isn't terribly useful; the individual words themselves are more important for prediction. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.
 
 First, lets create a lost of tokens - i.e. what was the unique word within each description, and how often did each word occur.
 
@@ -58,7 +61,17 @@ words <- transactions %>%
 
 words
 ```
-We can see that each journal entry line is now repeated for each and every unique word. However, we notice some filler words, which don't add a lot of value in our predictions. There are called 'stop words' which are common words in the English language - great for communicating verbally, but computers don't need such formalities. Lets drop these stop words.
+We can see that each journal entry line is now repeated for each and every unique word. However, we notice some filler words, which don't add a lot of value in our predictions. There are called 'stop words' which are common words in the English language - great for communicating verbally, but computers don't need such formalities. 
+
+Here were the stop words detected:
+
+```{r}
+transactions %>%
+  unnest_tokens(word, description) %>%
+  filter(word %in% stop_words$word)
+```
+
+We could make our own list of stop words - for now, lets drop the default suggestions. 
 
 ```{r}
 words <- transactions %>%
@@ -69,7 +82,7 @@ words <- transactions %>%
 words
 ```
 
-We can see that each journal entry line is now repeated for each and every unique word. However, its a bit difficult to see what words were shared between each journal entry, so lets lay it out wide and aggregate it so each word is in its own column, aligned with the journal entry.
+With a cleaned layout, we can now better see the valuable words per journal entry. However, its a bit difficult to see what words were shared between each journal entry, so lets lay it out wide and aggregate it so each word is in its own column, aligned with the journal entry.
 
 ```{r}
 wide_words <- words %>%
@@ -84,12 +97,13 @@ Excellent, lets join this back to our dataset and do the final cleanup to start 
 trans_listing <- transactions %>%
   inner_join(wide_words, by = 'je_num') 
 
-trans_listing
+trans_listing %>% 
+  gt() # For making our output prettier
 ```
 
 ## Training the model
 
-To create a prediction, we need to consider what we data we want to use to predict. Lets go through a few of these columns to determine what to retain and remove:
+To create a prediction, we need to consider what we features we want to use. Lets go through a few of these columns to determine what to retain and remove:
 
 - Our `je_num` is not useful because it is simply a reference, and it would not make sense that a number in a journal entry could dictate the outcome.
 - The original `description`, in its original form, would not be useful. We do not expect to see some of these whole sentences verbatim repeated again. 
@@ -106,7 +120,8 @@ training_data <- trans_listing %>%
   mutate(is_fixed_asset = as.factor(is_fixed_asset)) %>%
   replace(is.na(.), 0)
 
-training_data
+training_data %>% 
+  gt()
 ```
 
 There are several different ways to call a model. We will use the tidymodels package, which helps us declare which model we plan on using, the algorithm within the model, and the outcome.
@@ -152,7 +167,8 @@ holdout_data[3,] <- c(0, 1, 0, 1, 0, 0, 0)
 holdout_data[4,] <- c(3, 0, 0, 0, 0, 0, 0)
 holdout_data[5,] <- c(0, 0, 0, 0, 0, 0, 0)
 
-holdout_data
+holdout_data %>% 
+  gt()
 ```
 
 And the fun part - lets run our predictions through the model we created:
@@ -160,7 +176,10 @@ And the fun part - lets run our predictions through the model we created:
 ```{r}
 dt_predict <- predict(dt_fit, holdout_data)
 
-bind_cols(holdout_data, dt_predict)
+dt_predict <- bind_cols(holdout_data, dt_predict)
+
+dt_predict %>% 
+  gt() 
 ```
 
 Some of the predictions could be conferred as such, but whats up with the zero-words example that predicted it was a fixed asset?
@@ -171,14 +190,16 @@ In our extremely simplistic example, we overlooked several things that would not
 
 - Training sets matter. An extremely small training set means the model hasn't seen enough nuances in the data to understand it. Since these seven words never mapped to anything in the decision tree, it always evaluated as TRUE.
 
-- The quality of a training set also matters greatly, as the training dataset is considered truth, and its very difficult to tell a computer to ignore any mislabelled data as it won't know its mislabelled. 
+- The quality of a training set also matters greatly, as the training dataset is considered truth. Its very difficult to tell a computer to ignore any mislabelled data, as it has no capacity to know what is mislabelled.
 
 - A larger main dataset needs to be split into a training dataset and a test dataset. The creation of the model should be done on the training data, and its performance should be evaluated against the test dataset. The performance will allow you to evaluate just how good the model is. If this is not done, then your model is simply 'overfitting', which is the same as memorizing a dataset, and has no ability to generalize against a normal population.
 
-- The features used in training the model must also be the features for the prediction. For example, if we start seeing the word "Mac" instead of "Computer", we either need to drop the word "Mac" before running our prediction, or retrain our model with these new keywords. In our case, since we're using individual words, additional work needs to be done to align the words in the same format as our training dataset. 
+- The features used in training the model must also be the features for the prediction. For example, if we start seeing the word "Mac" instead of "Computer", we either need to drop the word "Mac" before running our prediction, or retrain our model with these new keywords. In our case, since we're using individual words, additional work needs to be done to align the words in the same format as our training dataset. This could be solved by retraining the model as new features develop.
 
 - From an algorithm perspective, a decision tree makes only one tree as its final outcome. However, there could have been a tree design that put another feature as the root and other trees below it. One way to address this weakness is to use random forest or xgboost, which are other tree-based algorithms that make many trees and make a final model based on a combination of the best tree made (ensemble).
 
+- Some algorithms offer the ability to tune hyperparameters - that is, how to customize the algorithms ability to optimize itself. Tuning hyperparameters is so powerful, that even using a single model can yield significantly better results.
+
 There are several other [machine learning algorithms](https://cran.r-project.org/web/views/MachineLearning.html) out there, as well as regression-based predictions. There is "no free lunch", and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.
 
-If you wanted to fully explore text mining, read up [Text Mining with R by Julia Silge & David Robinson](https://www.tidytextmining.com).
+If you wanted to fully explore text mining, read up [Text Mining with R by Julia Silge & David Robinson](https://www.tidytextmining.com). In our example, we only explored the words themselves - there are additional branches of text mining that explore topic modelling, stemming, sentiment, among others approaches.
