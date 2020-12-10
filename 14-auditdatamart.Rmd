@@ -2,7 +2,7 @@
 
 As auditors, you will likely pull from the general pool of data at your company to perform analysis. This information is likely organized in a **data warehouse**, where data quality is controlled and is oriented towards reporting. Sometimes, this information is simply too large and onerous for rapid reporting. A side effect of a well designed data warehouse is that the data is highly structured (normalized), and performing any trivial analysis requires joining multiple tables together. 
 
-**Data marts** have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called extraction, transformation and load (ETL). Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database. 
+**Data marts** have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called **extraction, transformation and load (ETL)**. Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database. 
 
 A data mart is generally considered to be relatively inexpensive, as you are only retaining specific information needed to answer most questions. It won't replace the data warehouse, especially for historical transactions, but it is good for smaller snapshots of information.
 
@@ -31,9 +31,15 @@ The audit team will likely be maintaining this audit data mart - therefore, some
 3. Ensure proper checks are in place. Actively scan for data structure anomalies and catch them before they get uploaded, and ensuring that data that was downloaded is fresh by examining dates.
 4. Where possible, avoid overwriting a table completely each time by replacing it with the fresh information that was just extracted. While in some situations this is reasonable, the trade-off between simpler design and the speed of the ETL will become more glaring as the dataset grows.
 
+A well designed ETL has three separate and explicitly delineated components:
+
+- Extraction - Code in this section should be restricted to the query and download of the data from the source system. Ideally, this code should be limited to performing operations on the database or application related to querying, and not creating or cleaning new fields.
+- Transformation - Once the data has been downloaded, the enrichment of the fields can then occur. This includes joining tables, filtering on fields, and creation of new fields. 
+- Load - Once the data is clean, it can then be uploaded into the Audit Data Mart. As part of the Load process, a before and after control count should be performed, to ensure the data was uploaded into the database correctly.
+
 ## ETL Example
 
-Below is an example of what may be contained in an ETL notebook.
+Below is a framework of what may be contained in an ETL RMarkdown notebook. Having an example will help you ensure consistency between ETLs, and allow others to create ETLs for their own processes.
 
 ````markdown
 ---
@@ -64,7 +70,7 @@ Check on the latest termination date. Usually we have a termination every week.
 
 `r ''````{r}
 days_since_last_term <- Sys.date - max(employee_list$term_date) 
-if (days_since_last_term > 14) {stop("Danger!")}
+if (days_since_last_term > 14) {warning("Danger!")}
 ```
 
 # Extract summary
@@ -90,7 +96,7 @@ Check that every employee has a boss
 no_boss <- cleaned_staff %>%
   filter(is.na(supervisor_id))
   
-if (nrow(no_boss) > 0) {stop("Danger!")}
+if (nrow(no_boss) > 0) {warning("Danger!")}
 ```
 
 # Transform summary
@@ -115,7 +121,7 @@ Check that our new table matches the ETL table we just created
 new_count <- dbReadTable(con, 'cleaned_staff')
 nrow(new_count)
 
-if (nrow(new_count) != nrow(cleaned_staff)) {stop("Danger!")}
+if (nrow(new_count) != nrow(cleaned_staff)) {warning("Danger!")}
 ```
 
 # Session Info

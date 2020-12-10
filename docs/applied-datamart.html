@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-11-24" />
+<meta name="date" content="2020-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
-<li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Predict an account class</a></li>
+<li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#goal-predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Goal: Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
 <li class="chapter" data-level="15.4" data-path="machine-learning.html"><a href="machine-learning.html#making-predictions"><i class="fa fa-check"></i><b>15.4</b> Making predictions</a></li>
@@ -328,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="applied-datamart" class="section level1">
 <h1><span class="header-section-number">Chapter 14</span> Audit Data Mart</h1>
 <p>As auditors, you will likely pull from the general pool of data at your company to perform analysis. This information is likely organized in a <strong>data warehouse</strong>, where data quality is controlled and is oriented towards reporting. Sometimes, this information is simply too large and onerous for rapid reporting. A side effect of a well designed data warehouse is that the data is highly structured (normalized), and performing any trivial analysis requires joining multiple tables together.</p>
-<p><strong>Data marts</strong> have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called extraction, transformation and load (ETL). Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database.</p>
+<p><strong>Data marts</strong> have existed to provide a smaller, more defined subset of information, that is developed with a specific need in mind. Generally a data mart is connected to the data warehouse, preparing the data via a process called <strong>extraction, transformation and load (ETL)</strong>. Extraction is the retrieval of information from a flat file or database, transformation is the act of cleaning, joining and summarizing the information so it can be useful, and load is uploading the information into a database.</p>
 <p>A data mart is generally considered to be relatively inexpensive, as you are only retaining specific information needed to answer most questions. It won’t replace the data warehouse, especially for historical transactions, but it is good for smaller snapshots of information.</p>
 <div id="what-to-etl" class="section level2">
 <h2><span class="header-section-number">14.1</span> What to ETL</h2>
@@ -360,14 +360,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Ensure proper checks are in place. Actively scan for data structure anomalies and catch them before they get uploaded, and ensuring that data that was downloaded is fresh by examining dates.</li>
 <li>Where possible, avoid overwriting a table completely each time by replacing it with the fresh information that was just extracted. While in some situations this is reasonable, the trade-off between simpler design and the speed of the ETL will become more glaring as the dataset grows.</li>
 </ol>
+<p>A well designed ETL has three separate and explicitly delineated components:</p>
+<ul>
+<li>Extraction - Code in this section should be restricted to the query and download of the data from the source system. Ideally, this code should be limited to performing operations on the database or application related to querying, and not creating or cleaning new fields.</li>
+<li>Transformation - Once the data has been downloaded, the enrichment of the fields can then occur. This includes joining tables, filtering on fields, and creation of new fields.</li>
+<li>Load - Once the data is clean, it can then be uploaded into the Audit Data Mart. As part of the Load process, a before and after control count should be performed, to ensure the data was uploaded into the database correctly.</li>
+</ul>
 </div>
 <div id="etl-example" class="section level2">
 <h2><span class="header-section-number">14.3</span> ETL Example</h2>
-<p>Below is an example of what may be contained in an ETL notebook.</p>
+<p>Below is a framework of what may be contained in an ETL RMarkdown notebook. Having an example will help you ensure consistency between ETLs, and allow others to create ETLs for their own processes.</p>
 <div class="sourceCode" id="cb433"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb433-1"><a href="applied-datamart.html#cb433-1"></a>---</span>
 <span id="cb433-2"><a href="applied-datamart.html#cb433-2"></a>title: &quot;Audit Data Mart - ETL 111 HR&quot;</span>
 <span id="cb433-3"><a href="applied-datamart.html#cb433-3"></a>author: &quot;Your name&quot;</span>
-<span id="cb433-4"><a href="applied-datamart.html#cb433-4"></a>date: &quot;2020-11-24 10:53:08&quot;</span>
+<span id="cb433-4"><a href="applied-datamart.html#cb433-4"></a>date: &quot;2020-12-10 15:12:15&quot;</span>
 <span id="cb433-5"><a href="applied-datamart.html#cb433-5"></a>output:</span>
 <span id="cb433-6"><a href="applied-datamart.html#cb433-6"></a>  html_document</span>
 <span id="cb433-7"><a href="applied-datamart.html#cb433-7"></a>---</span>
@@ -392,7 +398,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb433-26"><a href="applied-datamart.html#cb433-26"></a></span>
 <span id="cb433-27"><a href="applied-datamart.html#cb433-27"></a><span class="bn">```{r}</span></span>
 <span id="cb433-28"><a href="applied-datamart.html#cb433-28"></a><span class="bn">days_since_last_term &lt;- Sys.date - max(employee_list$term_date) </span></span>
-<span id="cb433-29"><a href="applied-datamart.html#cb433-29"></a><span class="bn">if (days_since_last_term &gt; 14) {stop(&quot;Danger!&quot;)}</span></span>
+<span id="cb433-29"><a href="applied-datamart.html#cb433-29"></a><span class="bn">if (days_since_last_term &gt; 14) {warning(&quot;Danger!&quot;)}</span></span>
 <span id="cb433-30"><a href="applied-datamart.html#cb433-30"></a><span class="bn">```</span></span>
 <span id="cb433-31"><a href="applied-datamart.html#cb433-31"></a></span>
 <span id="cb433-32"><a href="applied-datamart.html#cb433-32"></a><span class="fu"># Extract summary</span></span>
@@ -418,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb433-52"><a href="applied-datamart.html#cb433-52"></a><span class="bn">no_boss &lt;- cleaned_staff %&gt;%</span></span>
 <span id="cb433-53"><a href="applied-datamart.html#cb433-53"></a><span class="bn">  filter(is.na(supervisor_id))</span></span>
 <span id="cb433-54"><a href="applied-datamart.html#cb433-54"></a><span class="bn">  </span></span>
-<span id="cb433-55"><a href="applied-datamart.html#cb433-55"></a><span class="bn">if (nrow(no_boss) &gt; 0) {stop(&quot;Danger!&quot;)}</span></span>
+<span id="cb433-55"><a href="applied-datamart.html#cb433-55"></a><span class="bn">if (nrow(no_boss) &gt; 0) {warning(&quot;Danger!&quot;)}</span></span>
 <span id="cb433-56"><a href="applied-datamart.html#cb433-56"></a><span class="bn">```</span></span>
 <span id="cb433-57"><a href="applied-datamart.html#cb433-57"></a></span>
 <span id="cb433-58"><a href="applied-datamart.html#cb433-58"></a><span class="fu"># Transform summary</span></span>
@@ -443,7 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb433-77"><a href="applied-datamart.html#cb433-77"></a><span class="bn">new_count &lt;- dbReadTable(con, &#39;cleaned_staff&#39;)</span></span>
 <span id="cb433-78"><a href="applied-datamart.html#cb433-78"></a><span class="bn">nrow(new_count)</span></span>
 <span id="cb433-79"><a href="applied-datamart.html#cb433-79"></a></span>
-<span id="cb433-80"><a href="applied-datamart.html#cb433-80"></a><span class="bn">if (nrow(new_count) != nrow(cleaned_staff)) {stop(&quot;Danger!&quot;)}</span></span>
+<span id="cb433-80"><a href="applied-datamart.html#cb433-80"></a><span class="bn">if (nrow(new_count) != nrow(cleaned_staff)) {warning(&quot;Danger!&quot;)}</span></span>
 <span id="cb433-81"><a href="applied-datamart.html#cb433-81"></a><span class="bn">```</span></span>
 <span id="cb433-82"><a href="applied-datamart.html#cb433-82"></a></span>
 <span id="cb433-83"><a href="applied-datamart.html#cb433-83"></a><span class="fu"># Session Info</span></span>

@@ -7,9 +7,9 @@ After a team has gotten their hands on performing analytics, there will be consi
 There comes a point where an internal audit data analytics team will hit a limit on the team's effectiveness to deliver work. Some symptoms to watch out for are:
 
 - Team members using different versions of code, or having their own specialized procedures that aren't actively shared, resulting in redundancy and best practices not shared.
-- Manually executing the same report, on a daily schedule, just to ensure the data is locally fresh before it is used.
-- Manually compiling a report weekly, then creating an email and attaching said generated report to team members and stakeholders.
+- Manually executing the same script, daily, just to ensure the data is locally fresh before it is used.
 - Ad-hoc requests taking a long time to fulfill, due to the special uniqueness and customization needed of each request.
 - Incorporating business actions to findings is always a drawn out affair. The need to send out potential exceptions, wait for response, and integrating responses, hinders any attempt at rapid risk identification.
+- Rules-based testing is reaching a practical limit, with hundreds of if statements that seem to increase response time while being unsure if its contributing to better test results.
 
-To effectively scale both capability and responsiveness, it is your job as an innovation leader to balance your teams ability to deliver audit findings, and also build the foundation that the team stands on. This requires deliberately thinking about how an individual can break down their work into reusable and functional components, which is a shift from simply getting the job done. With careful consideration of the [architecture](#architecture) and tools chosen, the transition to an adept and mature data analytics team is within reach.
+To effectively scale both capability and responsiveness, it is your job as an innovation leader to balance your teams ability to deliver audit findings, while building the foundation that the team stands on. This requires deliberately thinking about how an individual can break down their work into reusable and functional components, which is a shift from simply getting the job done. With careful consideration of the [architecture](#architecture) and tools chosen, the transition to an adept and mature data analytics team is within reach.

@@ -3,9 +3,9 @@
 
 > In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests, and is easy to share with others. [@r-pkgs]
 
-Every time you asked your team to assemble furniture, would you rather have your team learn and makeshift their own flathead screwdriver every single time they solve a problem, or give them a pre-made screwdriver so they can get to assembly? An audit R package is the toolkit of your data analytics team. With it, instead of members learning how to make the tool, they can instead use the Package and all its pre-developed tools to solve problems.
+Every time you asked your team to assemble furniture, would you rather have your team learn and makeshift their own flathead screwdriver every single time they solve a problem, or give them a pre-made screwdriver so they can get to assembly? A **package** is the toolkit of your data analytics team. With it, instead of members learning how to make the tool, they can instead use the customized R package and all its pre-developed audit tools to solve problems.
 
-What can be in an R Package? Whatever day-to-day challenges that need to be solved! An effective R package that is customized to your team can address many of the following.
+What can be in an R package? Whatever day-to-day challenges that need to be solved! An effective R package that is customized to your team can address many of the following.
 
 - Data connectivity, including databases and cloud providers
 - Script and R Markdown templates, to help standardize reporting structure
@@ -230,9 +230,9 @@ While this function technically achieves one highly specific objective, its high
 
 ## Templates
 
-Pre-developed layouts help standardize thought processes and deliverables that your team members should go through when assembling a report. Read more about [templates within R Markdown](https://bookdown.org/yihui/rmarkdown-cookbook/package-template.html).
+Pre-developed **RMarkdown templates** help lay out the routine thought processes and deliverables that your team members should go through when performing fieldwork or preparing a report. By having these standardized structures in place, auditors can focus on data exploration and risk related to the specific audit instead of reinvesting the wheel.
 
-Within the [Reporting Section](#report-structure), we highlight what items are key within an Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the `inst/rmarkdown/templates` folder of your package. Specifically, an ADA R Markdown template can be kept at `inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd`.
+Within the [Reporting Section](#report-structure), we highlight what items are key within an Audit Data Analytics (ADA) notebook. R Markdown templates can be retained within the `inst/rmarkdown/templates` folder of your package. Specifically, an ADA R Markdown template can be kept at `inst/rmarkdown/templates/ada/skeletion/skeleton.Rmd`. To create a RMarkdown template, consider how to create [templates within R Markdown](https://bookdown.org/yihui/rmarkdown-cookbook/package-template.html).
 
 ````markdown
 ---

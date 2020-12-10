@@ -32,7 +32,7 @@ digraph boxes_and_circles {
 
 The architecture and tools you select should support and amplify your team, and not be a burden to maintain. Maintenance of databases and applications can also be delegated to application support teams, so you can focus on implementing analytics and delivering data products.
 
-Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password expiry every 90 days will make updating passwords feel like quarterly financial reporting.
+Other things to consider: You should have, at a bare minimum, direct access to read-only internal databases or data warehouses. A generic service user account has its merits here when it comes to automation - tying an eventual automation to a user with password expiry every 90 days will make updating passwords feel like quarterly financial reporting, and also increases the risk that the entire analytics program is dependent on a single person to manage credentials.
 
 Any software you consider should be able to talk to your company's internal and external applications. Be wary of software that locks you in or makes access to data cumbersome, as it limits your ability to integrate with your company's tools as you gain sophistication.
 
@@ -82,7 +82,7 @@ sequenceDiagram
 ")
 ```
 
-While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If using git sometimes results in infinite frustration, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
+While this is a superficial example of how to use git, it is enough to get the most basic of audit teams started. Trying to master git may take you many months of hands-on experience and collaboration. If a git technical issue results in infinite frustration, just remember that you can always [make a new folder and start fresh](https://xkcd.com/1597/).
 
 Several different server technologies support git - [GitHub](https://github.com), [Azure Repos](https://azure.microsoft.com/en-us/services/devops/repos/) within Azure DevOps, [gitlab](https://gitlab.com) are all willing to host your code. If you're using these to hold proprietary or sensitive code, it would be wise to get your company's support and pay for the ability to have a private repository that only your team can see.
 
@@ -182,7 +182,7 @@ As more applications move to the cloud, using SQL to access data becomes more di
 
 Certain online cloud software providers will make an [Application Programming Interface (API)](#APIs) available for customers These APIs open a window to the cloud application, where subsets of data can be downloaded from the system. Each vendor may provide API documentation, and then can be accessed via packages like [httr](https://cran.r-project.org/web/packages/httr/index.html) and digested with [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html).
 
-While APIs enable audit teams to retrieve data, it adds a layer of difficulty in obtaining data:
+By having the knowledge to access APIs from cloud software, audit teams gain significant autonomy in being able to download the data they need directly from a vendor. It does, however, add a layer of difficulty in obtaining data:
 
 - Each API behaves differently - authentication, calls, and the data return all may vary between systems.
 - APIs endpoints, the part that allows a tool to query it, tend to be highly specific-use cases, and may provide a limited scope of data at one time.

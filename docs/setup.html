@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-11-24" />
+<meta name="date" content="2020-12-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -288,7 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
-<li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Predict an account class</a></li>
+<li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#goal-predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Goal: Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
 <li class="chapter" data-level="15.4" data-path="machine-learning.html"><a href="machine-learning.html#making-predictions"><i class="fa fa-check"></i><b>15.4</b> Making predictions</a></li>
@@ -336,12 +336,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="common-packages" class="section level2">
 <h2><span class="header-section-number">4.2</span> Common packages</h2>
 <p>We will use several common packages; if you haven’t installed them yet, feel free to install them into R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;tidyverse&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;httr&#39;</span>, <span class="st">&#39;jsonlite&#39;</span>, <span class="st">&#39;DBI&#39;</span>, <span class="st">&#39;devtools&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="setup.html#cb1-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;tidyverse&#39;</span>, <span class="st">&#39;lubridate&#39;</span>, <span class="st">&#39;readr&#39;</span>,</span>
+<span id="cb1-2"><a href="setup.html#cb1-2"></a>                   <span class="st">&#39;DBI&#39;</span>, <span class="st">&#39;devtools&#39;</span>,</span>
+<span id="cb1-3"><a href="setup.html#cb1-3"></a>                   <span class="st">&#39;gt&#39;</span>, <span class="st">&#39;pryr&#39;</span>, <span class="st">&#39;stringi&#39;</span>,</span>
+<span id="cb1-4"><a href="setup.html#cb1-4"></a>                   <span class="st">&#39;rmarkdown&#39;</span>,</span>
+<span id="cb1-5"><a href="setup.html#cb1-5"></a>                   <span class="st">&#39;tidymodels&#39;</span>, <span class="st">&#39;tidytext&#39;</span>, <span class="st">&#39;tm&#39;</span>, <span class="st">&#39;rpart&#39;</span>, <span class="st">&#39;rpart.plot&#39;</span>,</span>
+<span id="cb1-6"><a href="setup.html#cb1-6"></a>                   <span class="st">&#39;jsonlite&#39;</span>, <span class="st">&#39;httr&#39;</span>))</span></code></pre></div>
 </div>
 <div id="highbond-r-package" class="section level2">
 <h2><span class="header-section-number">4.3</span> Highbond R package</h2>
 <p>For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package <a href="https://github.com/jonlinca/galvanizer">galvanizer</a> to use Results information in the Applied Analytics chapter. This package is maintained by Jonathan Lin during his spare time, and any issues or suggestions on its improvement would be appreciated.</p>
-<p>As these packages are in active development, they are not currently available on CRAN. You are able to install this package directly from GitHub - first, install <a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a> on your computer, which allows you to bundle your own packages. Then, run the following command.</p>
+<p>As these packages are in active development, they are not currently available on CRAN. You are able to install this package directly from GitHub - first, install <a href="https://cran.r-project.org/bin/windows/Rtools/">RTools</a> on your computer, which allows you to build and compile your own packages. Then, run the following command.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="setup.html#cb2-1"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&#39;jonlinca/galvanizer&#39;</span>)</span></code></pre></div>
 
 </div>

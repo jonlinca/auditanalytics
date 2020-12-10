@@ -2,11 +2,15 @@
 
 # Approach
 
-For many audit teams, having data analytics employed in your audit team is generally a given. The advantages are well articulated - 100% population coverage, timely response, and targeted high risk identification and results are true and real.
+For many audit teams, having data analytics employed in your audit team is fundamental requirement. The advantages are well articulated - 100% population coverage, timely response, and targeted high risk identification and results are real and achievable.
 
-Unfortunately, any short-burst of investment in data analytics training tends to not last more than a few months. This is due to lack of applied skills, sustained management interest, and consistency of values. While regulations for adherence to SEC and Sox requirements exist and are necessary, the means to approaching and achieving compliance has been largely static in nature since the introduction of Sox.
+Unfortunately, any short-burst of investment in data analytics training tends to not last more than a few months. This is due to lack of applied skills, sustained management interest and consistency of values. While regulations for adherence to SEC and Sox requirements exist and are necessary, the means to approaching and achieving compliance has been largely static in nature since the introduction of Sox.
 
-The root cause is that audit teams culturally view analytics as a skill, and not as a cultural shift.  On a micro level, while not every individual on your audit team needs to be a 'coder', everyone needs to share the same values and philosophy for any audit analytics program to have success. Your core analytics team will set the foundation for the rest of the team to play on - if the non-data members don't show up, the analytics program is limited at best.
+The root cause of this systemic failure is that audit teams culturally view analytics as a skill, and not as a cultural shift.  
+
+On a micro level, while not every individual on your audit team needs to be a 'coder', everyone needs to share the same values and philosophy for any audit analytics program to have success. Your core analytics team will set the foundation for the rest of the team to play on - if the non-data members don't show up, the analytics program is limited at best.
+
+On a macro level, audit teams can no longer live in a bubble. Audit teams need to not only develop tools for their own usage, but also products that can be adopted by the business. By providing this valuable service, the audit team becomes a business adviser, not only offering quantitative advice, but real artifacts that can be used repeatably by the business.
 
 Having a combination of the right values and technologies will enable your team to propel forward, and should amplify your teams efforts. By thoughtfully choosing your tools and encouraging sustainable processes, your team will create a positive cycle of development, learning and deployment.
 
