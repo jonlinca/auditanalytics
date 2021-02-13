@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-12-10" />
+<meta name="date" content="2021-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="auditpackage.html"/>
 <link rel="next" href="applied-datamart.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -71,18 +71,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -102,7 +101,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -155,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="part"><span><b>I Structure</b></span></li>
-<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
 <li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
 <li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
@@ -163,56 +163,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
 <li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#architecture-r"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
 <li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#architecture-rsc"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
 <li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#internal-databases"><i class="fa fa-check"></i><b>3.4.1</b> Internal databases</a></li>
 <li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
 <li class="part"><span><b>II Technical</b></span></li>
-<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
 <li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package"><i class="fa fa-check"></i><b>4.3</b> Highbond R package</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
-<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
+<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
-<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
 <li class="chapter" data-level="6.3.2" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
 <li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
 <li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
 <li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
@@ -226,36 +239,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
 <li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
 <li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
 <li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
-<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-te"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
 <li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="test.html"><a href="test.html#weekend-testing"><i class="fa fa-check"></i><b>9.2.1</b> Weekend testing</a></li>
 <li class="chapter" data-level="9.2.2" data-path="test.html"><a href="test.html#cutoff-testing"><i class="fa fa-check"></i><b>9.2.2</b> Cutoff testing</a></li>
 <li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
 <li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
 <li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
 <li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
 <li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-sequences"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a><ul>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a>
+<ul>
 <li class="chapter" data-level="9.5.1" data-path="test.html"><a href="test.html#regex-basics"><i class="fa fa-check"></i><b>9.5.1</b> Regex basics</a></li>
 <li class="chapter" data-level="9.5.2" data-path="test.html"><a href="test.html#starts-or-ends-with-anchors"><i class="fa fa-check"></i><b>9.5.2</b> Starts or Ends with (Anchors)</a></li>
 <li class="chapter" data-level="9.5.3" data-path="test.html"><a href="test.html#crash-course-in-encoding"><i class="fa fa-check"></i><b>9.5.3</b> Crash course in Encoding</a></li>
@@ -264,17 +285,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.6" data-path="test.html"><a href="test.html#regex-further"><i class="fa fa-check"></i><b>9.5.6</b> Further reading</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#report-structure"><i class="fa fa-check"></i><b>10.1</b> Report Structure</a></li>
 <li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export-files"><i class="fa fa-check"></i><b>10.2</b> Export files</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced teams</b></span></li>
 <li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a></li>
-<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a><ul>
+<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
+<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#considerations"><i class="fa fa-check"></i><b>13.1</b> Considerations</a></li>
 <li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#create-a-collection-analytic-and-table"><i class="fa fa-check"></i><b>13.2</b> Create a Collection, Analytic and Table</a></li>
 <li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#define-the-high-risk-test"><i class="fa fa-check"></i><b>13.3</b> Define the High Risk test</a></li>
@@ -282,12 +306,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#downloading-records-and-responses"><i class="fa fa-check"></i><b>13.5</b> Downloading records and responses</a></li>
 <li class="chapter" data-level="13.6" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#triggers-and-questionnaires"><i class="fa fa-check"></i><b>13.6</b> Triggers and Questionnaires</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a><ul>
+<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="applied-datamart.html"><a href="applied-datamart.html#what-to-etl"><i class="fa fa-check"></i><b>14.1</b> What to ETL</a></li>
 <li class="chapter" data-level="14.2" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-essentials"><i class="fa fa-check"></i><b>14.2</b> ETL Essentials</a></li>
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
+<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#goal-predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Goal: Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
@@ -295,12 +321,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.5" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.5</b> What to explore next</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
+<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="appendix-ca.html"><a href="appendix-ca.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendix-ca.html"><a href="appendix-ca.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendix-ca.html"><a href="appendix-ca.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a>
+<ul>
 <li class="chapter" data-level="17.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>17.1</b> Documentation</a></li>
 <li class="chapter" data-level="17.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>17.2</b> Passwords</a></li>
 </ul></li>
@@ -325,33 +353,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="continuous-monitoring" class="section level1">
+<div id="continuous-monitoring" class="section level1" number="13">
 <h1><span class="header-section-number">Chapter 13</span> Continuous monitoring</h1>
 <p><strong>Continuous Monitoring</strong> (CM) and <strong>Continuous Auditing</strong> (CA, or automated controls testing) relies on the same premise - that a specific entity of interest is being evaluated on a high frequency and regular basis. Both definitions are used inconsistently in the audit industry - I tend to rely on CM for general risk measurement, and CA for controls.</p>
 <p>Continuous Monitoring is a no brainer - who would say ‘no thanks’ to higher coverage and more tests? Ironically, asking this same question to external auditors can really put them in a bind. Several audit firms do not have explicit guidance on the handling of reliance on internal controls being continuously tested, as current guidance is almost exclusively pointed towards sampling. See the <a href="#appendixct">appendix</a> on how to help get started on establishing an agreeable methodology.</p>
 <p>For this section we will use the company GL database, as well as your Highbond account. If you don’t have one, you can still follow along and abstract where you would incorporate your technology options.</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="continuous-monitoring.html#cb406-1"></a><span class="kw">library</span>(dplyr) </span>
-<span id="cb406-2"><a href="continuous-monitoring.html#cb406-2"></a><span class="kw">library</span>(tidyr) </span>
-<span id="cb406-3"><a href="continuous-monitoring.html#cb406-3"></a><span class="kw">library</span>(lubridate) </span>
-<span id="cb406-4"><a href="continuous-monitoring.html#cb406-4"></a><span class="kw">library</span>(DBI)</span>
-<span id="cb406-5"><a href="continuous-monitoring.html#cb406-5"></a><span class="kw">library</span>(galvanizer) <span class="co"># See the Setup chapter to learn how to install this package</span></span>
-<span id="cb406-6"><a href="continuous-monitoring.html#cb406-6"></a></span>
-<span id="cb406-7"><a href="continuous-monitoring.html#cb406-7"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb406-8"><a href="continuous-monitoring.html#cb406-8"></a></span>
-<span id="cb406-9"><a href="continuous-monitoring.html#cb406-9"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb406-10"><a href="continuous-monitoring.html#cb406-10"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb406-11"><a href="continuous-monitoring.html#cb406-11"></a></span>
-<span id="cb406-12"><a href="continuous-monitoring.html#cb406-12"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb406-13"><a href="continuous-monitoring.html#cb406-13"></a></span>
-<span id="cb406-14"><a href="continuous-monitoring.html#cb406-14"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb406-15"><a href="continuous-monitoring.html#cb406-15"></a><span class="st">  </span><span class="kw">collect</span>() <span class="op">%&gt;%</span></span>
-<span id="cb406-16"><a href="continuous-monitoring.html#cb406-16"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">gl_date =</span> <span class="kw">as_date</span>(gl_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb406-17"><a href="continuous-monitoring.html#cb406-17"></a>         <span class="dt">paid_date =</span> <span class="kw">as_date</span>(paid_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb406-18"><a href="continuous-monitoring.html#cb406-18"></a>         <span class="dt">invoice_date =</span> <span class="kw">as_date</span>(invoice_date, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb406-19"><a href="continuous-monitoring.html#cb406-19"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>gl_date_char)</span>
-<span id="cb406-20"><a href="continuous-monitoring.html#cb406-20"></a></span>
-<span id="cb406-21"><a href="continuous-monitoring.html#cb406-21"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
-<div id="considerations" class="section level2">
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="continuous-monitoring.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) </span>
+<span id="cb398-2"><a href="continuous-monitoring.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) </span>
+<span id="cb398-3"><a href="continuous-monitoring.html#cb398-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) </span>
+<span id="cb398-4"><a href="continuous-monitoring.html#cb398-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb398-5"><a href="continuous-monitoring.html#cb398-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(galvanizer) </span>
+<span id="cb398-6"><a href="continuous-monitoring.html#cb398-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-7"><a href="continuous-monitoring.html#cb398-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb398-8"><a href="continuous-monitoring.html#cb398-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-9"><a href="continuous-monitoring.html#cb398-9" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb398-10"><a href="continuous-monitoring.html#cb398-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb398-11"><a href="continuous-monitoring.html#cb398-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-12"><a href="continuous-monitoring.html#cb398-12" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb398-13"><a href="continuous-monitoring.html#cb398-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-14"><a href="continuous-monitoring.html#cb398-14" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb398-15"><a href="continuous-monitoring.html#cb398-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb398-16"><a href="continuous-monitoring.html#cb398-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gl_date =</span> <span class="fu">as_date</span>(gl_date, <span class="at">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb398-17"><a href="continuous-monitoring.html#cb398-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">paid_date =</span> <span class="fu">as_date</span>(paid_date, <span class="at">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb398-18"><a href="continuous-monitoring.html#cb398-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">invoice_date =</span> <span class="fu">as_date</span>(invoice_date, <span class="at">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb398-19"><a href="continuous-monitoring.html#cb398-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>gl_date_char)</span>
+<span id="cb398-20"><a href="continuous-monitoring.html#cb398-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-21"><a href="continuous-monitoring.html#cb398-21" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<div id="considerations" class="section level2" number="13.1">
 <h2><span class="header-section-number">13.1</span> Considerations</h2>
 <p>To effectively implement a CM task, you need to consider the following:</p>
 <ul>
@@ -370,10 +398,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>A product license to Results.</li>
 </ul>
 <p>For an individual control, the flow of information may look something like this:</p>
-<div id="htmlwidget-91e3e623257804fda0f9" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-91e3e623257804fda0f9">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bd9b5aae3956021e36d0" style="width:100%;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bd9b5aae3956021e36d0">{"x":{"diagram":"\nsequenceDiagram\n  data source->>data analytic: get data\n  data analytic->>highbond results: API upload exceptions\n  highbond results->>control executor: notify of potential issues\n  control executor->>highbond results: record response & remediation\n  highbond results->>data analytic: API download responses\n  data analytic-->>auditor: review results\n  data analytic-->>auditor: monitor health\n"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="create-a-collection-analytic-and-table" class="section level2">
+<div id="create-a-collection-analytic-and-table" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> Create a Collection, Analytic and Table</h2>
 <p>We will create a test to detect high risk journal entries, routing them to the appropriate personnel for response. Detecting and ensuring these journal entries have extra awareness can help give comfort to external parties that journal entries are being reviewed appropriately and in a timely manner.</p>
 <p>We will need a table upload the data into Highbond Results. You can create a table via following the help instructions on <a href="https://help.highbond.com/helpdocs/highbond/en-us/Content/global_topics/get_started/quick_starts/organizing_data.htm">Results app and add a new collection</a>, or you can use the galvanizer package to create the necessary items for you.</p>
@@ -392,70 +420,75 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Treat your API token like a password!</strong> You will require administrative privileges to interact with the API, and thus can perform any action in the system as if you were an administrator.</p>
 </div>
 <p>The above information can be used to create a Highbond authentication connection:</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="continuous-monitoring.html#cb407-1"></a><span class="kw">library</span>(galvanizer)</span>
-<span id="cb407-2"><a href="continuous-monitoring.html#cb407-2"></a></span>
-<span id="cb407-3"><a href="continuous-monitoring.html#cb407-3"></a>highbond_openapi &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&#39;highbond_openapi&#39;</span>) <span class="co"># Replace with your Highbond API token</span></span>
-<span id="cb407-4"><a href="continuous-monitoring.html#cb407-4"></a>highbond_org &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&#39;highbond_org&#39;</span>) <span class="co"># Replace with your organization number</span></span>
-<span id="cb407-5"><a href="continuous-monitoring.html#cb407-5"></a>highbond_datacenter &lt;-<span class="st"> </span><span class="kw">Sys.getenv</span>(<span class="st">&#39;highbond_datacenter&#39;</span>) <span class="co"># Replace with the data center</span></span>
-<span id="cb407-6"><a href="continuous-monitoring.html#cb407-6"></a></span>
-<span id="cb407-7"><a href="continuous-monitoring.html#cb407-7"></a>highbond_auth &lt;-<span class="st"> </span><span class="kw">setup_highbond</span>(highbond_openapi, highbond_org, highbond_datacenter)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="continuous-monitoring.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(galvanizer)</span>
+<span id="cb399-2"><a href="continuous-monitoring.html#cb399-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-3"><a href="continuous-monitoring.html#cb399-3" aria-hidden="true" tabindex="-1"></a>highbond_openapi <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">&#39;highbond_openapi&#39;</span>) <span class="co"># Replace with your Highbond API token</span></span>
+<span id="cb399-4"><a href="continuous-monitoring.html#cb399-4" aria-hidden="true" tabindex="-1"></a>highbond_org <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">&#39;highbond_org&#39;</span>) <span class="co"># Replace with your organization number</span></span>
+<span id="cb399-5"><a href="continuous-monitoring.html#cb399-5" aria-hidden="true" tabindex="-1"></a>highbond_datacenter <span class="ot">&lt;-</span> <span class="fu">Sys.getenv</span>(<span class="st">&#39;highbond_datacenter&#39;</span>) <span class="co"># Replace with the data center</span></span>
+<span id="cb399-6"><a href="continuous-monitoring.html#cb399-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb399-7"><a href="continuous-monitoring.html#cb399-7" aria-hidden="true" tabindex="-1"></a>highbond_auth <span class="ot">&lt;-</span> <span class="fu">setup_highbond</span>(highbond_openapi, highbond_org, highbond_datacenter)</span></code></pre></div>
 <p>You can see if it works by asking the API to pull your currently existing Collections (the folders at the top level of Results):</p>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="continuous-monitoring.html#cb408-1"></a>collections &lt;-<span class="st"> </span><span class="kw">get_results_collections</span>(highbond_auth)</span>
-<span id="cb408-2"><a href="continuous-monitoring.html#cb408-2"></a></span>
-<span id="cb408-3"><a href="continuous-monitoring.html#cb408-3"></a>collections </span></code></pre></div>
-<pre><code>## # A tibble: 4 x 9
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="continuous-monitoring.html#cb400-1" aria-hidden="true" tabindex="-1"></a>collections <span class="ot">&lt;-</span> <span class="fu">get_results_collections</span>(highbond_auth)</span>
+<span id="cb400-2"><a href="continuous-monitoring.html#cb400-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb400-3"><a href="continuous-monitoring.html#cb400-3" aria-hidden="true" tabindex="-1"></a>collections </span></code></pre></div>
+<pre><code>## # A tibble: 9 x 9
 ##   id    type  name  description default archived collection_type created_at
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;lgl&gt;   &lt;lgl&gt;    &lt;chr&gt;           &lt;chr&gt;     
-## 1 1236… coll… galv… &quot;testthat … FALSE   FALSE    RegularProject  2020-07-0…
-## 2 1234… coll… High…  &lt;NA&gt;       FALSE   FALSE    ReportingProje… 2020-07-0…
-## 3 1234… coll… Refe…  &lt;NA&gt;       FALSE   FALSE    ReferenceProje… 2020-07-0…
-## 4 1234… coll… Temp… &quot;&lt;i&gt;\nThis… TRUE    FALSE    RegularProject  2020-07-0…
+## 1 1342… coll… galv…  &lt;NA&gt;       FALSE   FALSE    RegularProject  2021-01-2…
+## 2 1334… coll… galv…  &lt;NA&gt;       FALSE   FALSE    RegularProject  2021-01-1…
+## 3 1334… coll… galv…  &lt;NA&gt;       FALSE   FALSE    RegularProject  2021-01-1…
+## 4 1334… coll… galv…  &lt;NA&gt;       FALSE   FALSE    RegularProject  2021-01-1…
+## 5 1334… coll… galv…  &lt;NA&gt;       FALSE   FALSE    RegularProject  2021-01-1…
+## 6 1236… coll… galv… &quot;testthat … FALSE   FALSE    RegularProject  2020-07-0…
+## 7 1234… coll… High…  &lt;NA&gt;       FALSE   FALSE    ReportingProje… 2020-07-0…
+## 8 1234… coll… Refe…  &lt;NA&gt;       FALSE   FALSE    ReferenceProje… 2020-07-0…
+## 9 1234… coll… Temp… &quot;&lt;i&gt;\nThis… TRUE    FALSE    RegularProject  2020-07-0…
 ## # … with 1 more variable: updated_at &lt;chr&gt;</code></pre>
 <p>Its important to get a bearing on the <code>id</code> number provided - the number will correspond to the Results collections, analysis or table, depending on the endpoint you use. This is especially important as we will start creating a Collection, an Analysis and also a Table to house our results.</p>
 <p>First, lets create our top-level folder, the Collection we want to house our analytic in:</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="continuous-monitoring.html#cb410-1"></a>new_collection &lt;-<span class="st"> </span><span class="kw">create_results_collections</span>(highbond_auth, <span class="st">&quot;Audit Analytics Demo&quot;</span>)</span>
-<span id="cb410-2"><a href="continuous-monitoring.html#cb410-2"></a></span>
-<span id="cb410-3"><a href="continuous-monitoring.html#cb410-3"></a>new_collection</span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="continuous-monitoring.html#cb402-1" aria-hidden="true" tabindex="-1"></a>new_collection <span class="ot">&lt;-</span> <span class="fu">create_results_collections</span>(highbond_auth, <span class="st">&quot;Audit Analytics Demo&quot;</span>)</span>
+<span id="cb402-2"><a href="continuous-monitoring.html#cb402-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb402-3"><a href="continuous-monitoring.html#cb402-3" aria-hidden="true" tabindex="-1"></a>new_collection</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 9
 ##   id    type  name  description default archived collection_type created_at
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;lgl&gt;   &lt;lgl&gt;    &lt;chr&gt;           &lt;chr&gt;     
-## 1 1315… coll… Audi… NA          FALSE   FALSE    RegularProject  2020-12-1…
+## 1 1352… coll… Audi… NA          FALSE   FALSE    RegularProject  2021-02-1…
 ## # … with 1 more variable: updated_at &lt;chr&gt;</code></pre>
 <p>The <code>id</code> number is important to retain, as its needed to create the Analysis, the sub-folder within the Collection.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="continuous-monitoring.html#cb412-1"></a>new_analysis &lt;-<span class="st"> </span><span class="kw">create_results_analyses</span>(highbond_auth, </span>
-<span id="cb412-2"><a href="continuous-monitoring.html#cb412-2"></a>                                        new_collection<span class="op">$</span>id[[<span class="dv">1</span>]], </span>
-<span id="cb412-3"><a href="continuous-monitoring.html#cb412-3"></a>                                        <span class="st">&quot;Journal entry monitoring&quot;</span>)</span>
-<span id="cb412-4"><a href="continuous-monitoring.html#cb412-4"></a></span>
-<span id="cb412-5"><a href="continuous-monitoring.html#cb412-5"></a>new_analysis</span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="continuous-monitoring.html#cb404-1" aria-hidden="true" tabindex="-1"></a>new_analysis <span class="ot">&lt;-</span> <span class="fu">create_results_analyses</span>(highbond_auth, </span>
+<span id="cb404-2"><a href="continuous-monitoring.html#cb404-2" aria-hidden="true" tabindex="-1"></a>                                        new_collection<span class="sc">$</span>id[[<span class="dv">1</span>]], </span>
+<span id="cb404-3"><a href="continuous-monitoring.html#cb404-3" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">&quot;Journal entry monitoring&quot;</span>)</span>
+<span id="cb404-4"><a href="continuous-monitoring.html#cb404-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb404-5"><a href="continuous-monitoring.html#cb404-5" aria-hidden="true" tabindex="-1"></a>new_analysis</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 7
 ##   id     type   name        description created_at    updated_at   relationships
 ##   &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;lgl&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;list&gt;       
-## 1 169054 analy… Journal en… NA          2020-12-10T2… 2020-12-10T… &lt;tibble [1 ×…</code></pre>
+## 1 174053 analy… Journal en… NA          2021-02-13T0… 2021-02-13T… &lt;tibble [1 ×…</code></pre>
 <p>Lastly, we will want to make a spot to house our results, which will be stored in the Table within the Analysis. When we create the table, we will get a table ID, which will be important as it represents the number that we will reference in all our uploads.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="continuous-monitoring.html#cb414-1"></a>new_table &lt;-<span class="st"> </span><span class="kw">create_results_tables</span>(highbond_auth, </span>
-<span id="cb414-2"><a href="continuous-monitoring.html#cb414-2"></a>                                   new_analysis<span class="op">$</span>id[[<span class="dv">1</span>]], </span>
-<span id="cb414-3"><a href="continuous-monitoring.html#cb414-3"></a>                                   <span class="st">&quot;High value journal entries&quot;</span>)</span>
-<span id="cb414-4"><a href="continuous-monitoring.html#cb414-4"></a></span>
-<span id="cb414-5"><a href="continuous-monitoring.html#cb414-5"></a>table_id &lt;-<span class="st"> </span>new_table<span class="op">$</span>id[[<span class="dv">1</span>]]</span>
-<span id="cb414-6"><a href="continuous-monitoring.html#cb414-6"></a></span>
-<span id="cb414-7"><a href="continuous-monitoring.html#cb414-7"></a>new_table</span></code></pre></div>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="continuous-monitoring.html#cb406-1" aria-hidden="true" tabindex="-1"></a>new_table <span class="ot">&lt;-</span> <span class="fu">create_results_tables</span>(highbond_auth, </span>
+<span id="cb406-2"><a href="continuous-monitoring.html#cb406-2" aria-hidden="true" tabindex="-1"></a>                                   new_analysis<span class="sc">$</span>id[[<span class="dv">1</span>]], </span>
+<span id="cb406-3"><a href="continuous-monitoring.html#cb406-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">&quot;High value journal entries&quot;</span>)</span>
+<span id="cb406-4"><a href="continuous-monitoring.html#cb406-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb406-5"><a href="continuous-monitoring.html#cb406-5" aria-hidden="true" tabindex="-1"></a>table_id <span class="ot">&lt;-</span> new_table<span class="sc">$</span>id[[<span class="dv">1</span>]]</span>
+<span id="cb406-6"><a href="continuous-monitoring.html#cb406-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb406-7"><a href="continuous-monitoring.html#cb406-7" aria-hidden="true" tabindex="-1"></a>new_table</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 10
 ##   id    type  name  description data_table_id script_name table_type created_at
 ##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;               &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;      &lt;chr&gt;     
-## 1 5712… tabl… High… NA                1213224 NA          data_anal… 2020-12-1…
+## 1 5903… tabl… High… NA                1234514 NA          data_anal… 2021-02-1…
 ## # … with 2 more variables: updated_at &lt;chr&gt;, relationships &lt;list&gt;</code></pre>
 <p>By now, you should see this within your Highbond Results instance.</p>
 </div>
-<div id="define-the-high-risk-test" class="section level2">
+<div id="define-the-high-risk-test" class="section level2" number="13.3">
 <h2><span class="header-section-number">13.3</span> Define the High Risk test</h2>
 <p>In the Testing chapters, we ran a test to detect items <a href="#above-threshold">over a certain threshold</a>. We’re going to use the GL database again to create our test.</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="continuous-monitoring.html#cb416-1"></a>all_hits &lt;-<span class="st"> </span>gl <span class="op">%&gt;%</span></span>
-<span id="cb416-2"><a href="continuous-monitoring.html#cb416-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">t_over_te =</span> amount <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50000</span>) <span class="op">%&gt;%</span></span>
-<span id="cb416-3"><a href="continuous-monitoring.html#cb416-3"></a><span class="st">  </span><span class="kw">filter</span>(t_over_te) <span class="op">%&gt;%</span></span>
-<span id="cb416-4"><a href="continuous-monitoring.html#cb416-4"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, <span class="kw">everything</span>()) <span class="op">%&gt;%</span></span>
-<span id="cb416-5"><a href="continuous-monitoring.html#cb416-5"></a><span class="st">  </span><span class="kw">arrange</span>(gl_date)</span>
-<span id="cb416-6"><a href="continuous-monitoring.html#cb416-6"></a></span>
-<span id="cb416-7"><a href="continuous-monitoring.html#cb416-7"></a>all_hits</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="continuous-monitoring.html#cb408-1" aria-hidden="true" tabindex="-1"></a>all_hits <span class="ot">&lt;-</span> gl <span class="sc">%&gt;%</span></span>
+<span id="cb408-2"><a href="continuous-monitoring.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">t_over_te =</span> amount <span class="sc">&gt;=</span> <span class="dv">50000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb408-3"><a href="continuous-monitoring.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(t_over_te) <span class="sc">%&gt;%</span></span>
+<span id="cb408-4"><a href="continuous-monitoring.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(je_num, amount, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb408-5"><a href="continuous-monitoring.html#cb408-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(gl_date)</span>
+<span id="cb408-6"><a href="continuous-monitoring.html#cb408-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-7"><a href="continuous-monitoring.html#cb408-7" aria-hidden="true" tabindex="-1"></a>all_hits</span></code></pre></div>
 <pre><code>## # A tibble: 11 x 9
 ##    je_num amount gl_date    vendor_id account invoice_date description
 ##     &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;      
@@ -472,22 +505,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 11    756 57567. 2019-12-30      2726 exp_ma… 2019-12-23   Medical gr…
 ## # … with 2 more variables: paid_date &lt;date&gt;, t_over_te &lt;lgl&gt;</code></pre>
 <p>One key difference is that we are going to assume that, in “production” (when the analytic is live and working daily), that we will constantly be uploading records whenever they arise. To help simulate this, we’re only going to upload one row into the Table to start.</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="continuous-monitoring.html#cb418-1"></a>upload_rows &lt;-<span class="st"> </span>all_hits <span class="op">%&gt;%</span></span>
-<span id="cb418-2"><a href="continuous-monitoring.html#cb418-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>)</span>
-<span id="cb418-3"><a href="continuous-monitoring.html#cb418-3"></a></span>
-<span id="cb418-4"><a href="continuous-monitoring.html#cb418-4"></a>upload_rows</span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="continuous-monitoring.html#cb410-1" aria-hidden="true" tabindex="-1"></a>upload_rows <span class="ot">&lt;-</span> all_hits <span class="sc">%&gt;%</span></span>
+<span id="cb410-2"><a href="continuous-monitoring.html#cb410-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span>)</span>
+<span id="cb410-3"><a href="continuous-monitoring.html#cb410-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb410-4"><a href="continuous-monitoring.html#cb410-4" aria-hidden="true" tabindex="-1"></a>upload_rows</span></code></pre></div>
 <pre><code>## # A tibble: 1 x 9
 ##   je_num amount gl_date    vendor_id account invoice_date description paid_date 
 ##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;       &lt;date&gt;    
 ## 1    102 50135. 2019-01-12      2726 exp_ma… 2019-01-05   Medical gr… 2019-01-15
 ## # … with 1 more variable: t_over_te &lt;lgl&gt;</code></pre>
 <p>Lets use galvanizer and upload this record into the Highbond Results Table. Using the <code>post_results_records()</code> function, we need to specify the Highbond authentication token, the <code>table_id</code> we want to upload the information into, and the data frame itself via the <code>upload</code> argument. Since it is the inaugural upload, we also need to specify the <code>purge = TRUE</code> argument so we have a clean slate:</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="continuous-monitoring.html#cb420-1"></a><span class="kw">post_results_records</span>(highbond_auth, </span>
-<span id="cb420-2"><a href="continuous-monitoring.html#cb420-2"></a>                     <span class="dt">table_id =</span> table_id, </span>
-<span id="cb420-3"><a href="continuous-monitoring.html#cb420-3"></a>                     <span class="dt">upload =</span> upload_rows, </span>
-<span id="cb420-4"><a href="continuous-monitoring.html#cb420-4"></a>                     <span class="dt">purge =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/571211/upload</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="continuous-monitoring.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">post_results_records</span>(highbond_auth, </span>
+<span id="cb412-2"><a href="continuous-monitoring.html#cb412-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">table_id =</span> table_id, </span>
+<span id="cb412-3"><a href="continuous-monitoring.html#cb412-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">upload =</span> upload_rows, </span>
+<span id="cb412-4"><a href="continuous-monitoring.html#cb412-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">purge =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p>Upon checking the Results Table on the website, we see that the record was added.</p>
 <p>Once we uploaded the information, we should specify the primary key in the Table’s settings. The primary key’s purpose in Highbond Results is to ensure that this record stays persistent. When you upload another batch of records, if a ‘primary key’ is defined, then Highbond will merge the information in the new upload, but not automatically repeat any triggers that have been already acted on (example: if you already sent out a request for a response via a questionnaire, it will not occur again).</p>
 <p>In our scenario, we will want to ask the control owner about a specific journal entry that is high risk. The unique identifier for every journal entry is the <code>je_num</code>, so its probably useful to also make this the primary key. To assign this field as the primary key, within the list of Tables in Highbond, select the ellipses (three dots) corresponding to the Table, and select Settings.</p>
@@ -495,13 +526,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Within there, specify the <code>je_num</code> as the primary key.</p>
 <p><img src="images/hb-r-table-settings.png" width="500" /></p>
 </div>
-<div id="uploading-additional-results" class="section level2">
+<div id="uploading-additional-results" class="section level2" number="13.4">
 <h2><span class="header-section-number">13.4</span> Uploading additional results</h2>
 <p>As we intend for this to be a continiously monitored control, we should make sure we can upload additional rows, simulating new results over time. First, lets get the next batch of records:</p>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="continuous-monitoring.html#cb423-1"></a>upload_rows &lt;-<span class="st"> </span>all_hits <span class="op">%&gt;%</span></span>
-<span id="cb423-2"><a href="continuous-monitoring.html#cb423-2"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</span>
-<span id="cb423-3"><a href="continuous-monitoring.html#cb423-3"></a></span>
-<span id="cb423-4"><a href="continuous-monitoring.html#cb423-4"></a>upload_rows</span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="continuous-monitoring.html#cb413-1" aria-hidden="true" tabindex="-1"></a>upload_rows <span class="ot">&lt;-</span> all_hits <span class="sc">%&gt;%</span></span>
+<span id="cb413-2"><a href="continuous-monitoring.html#cb413-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb413-3"><a href="continuous-monitoring.html#cb413-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb413-4"><a href="continuous-monitoring.html#cb413-4" aria-hidden="true" tabindex="-1"></a>upload_rows</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 9
 ##   je_num amount gl_date    vendor_id account invoice_date description paid_date 
 ##    &lt;int&gt;  &lt;dbl&gt; &lt;date&gt;         &lt;int&gt; &lt;chr&gt;   &lt;date&gt;       &lt;chr&gt;       &lt;date&gt;    
@@ -509,20 +540,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2    379 54127. 2019-05-10      2211 exp_ma… 2019-05-03   Packaging … 2019-06-09
 ## # … with 1 more variable: t_over_te &lt;lgl&gt;</code></pre>
 <p>We can use the same <code>post_results_records()</code> function to upload new records, but we’ll make one change: remove the <code>purge</code> argument:</p>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="continuous-monitoring.html#cb425-1"></a><span class="kw">post_results_records</span>(highbond_auth, <span class="dt">table_id =</span> table_id, <span class="dt">upload =</span> upload_rows)</span></code></pre></div>
-<pre><code>## Uploading to High value journal entries</code></pre>
-<pre><code>## Uploading 1 of 1 to https://apis.highbond.com/v1/orgs/28474/tables/571211/upload</code></pre>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="continuous-monitoring.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">post_results_records</span>(highbond_auth, <span class="at">table_id =</span> table_id, <span class="at">upload =</span> upload_rows)</span></code></pre></div>
 </div>
-<div id="downloading-records-and-responses" class="section level2">
+<div id="downloading-records-and-responses" class="section level2" number="13.5">
 <h2><span class="header-section-number">13.5</span> Downloading records and responses</h2>
 <p>Once information has been uploaded, you can also retrieve the information locally for further analysis, using the `get_results_records():</p>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="continuous-monitoring.html#cb428-1"></a>cm_control &lt;-<span class="st"> </span><span class="kw">get_results_records</span>(highbond_auth, <span class="dt">table_id =</span> table_id)</span></code></pre></div>
-<pre><code>## Retrieving High value journal entries</code></pre>
-<pre><code>## Date in ISO8601 format; converting timezone from UTC to &quot;America/Edmonton&quot;.
-## Date in ISO8601 format; converting timezone from UTC to &quot;America/Edmonton&quot;.</code></pre>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="continuous-monitoring.html#cb416-1" aria-hidden="true" tabindex="-1"></a>cm_control <span class="ot">&lt;-</span> <span class="fu">get_results_records</span>(highbond_auth, <span class="at">table_id =</span> table_id)</span></code></pre></div>
 <p>This data is returned in a nested list, with technical information about the data downloaded and the table columns. You may poke around to see what was returned, or just get the Table records:</p>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="continuous-monitoring.html#cb431-1"></a>cm_control<span class="op">$</span>content<span class="op">$</span>data <span class="op">%&gt;%</span></span>
-<span id="cb431-2"><a href="continuous-monitoring.html#cb431-2"></a><span class="st">  </span><span class="kw">select</span>(je_num, amount, gl_date, vendor_id, account, invoice_date, description, paid_date, t_over_te)</span></code></pre></div>
+<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="continuous-monitoring.html#cb417-1" aria-hidden="true" tabindex="-1"></a>cm_control<span class="sc">$</span>content<span class="sc">$</span>data <span class="sc">%&gt;%</span></span>
+<span id="cb417-2"><a href="continuous-monitoring.html#cb417-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(je_num, amount, gl_date, vendor_id, account, invoice_date, description, paid_date, t_over_te)</span></code></pre></div>
 <pre><code>##   je_num   amount    gl_date vendor_id            account invoice_date
 ## 1    102 50134.79 2019-01-12      2726 exp_materials_6000   2019-01-05
 ##             description  paid_date t_over_te
@@ -530,7 +556,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 2 rows ]</code></pre>
 <p>As the Result tables are enriched with questionnaire responses from control owners, the information can be downloaded in the same manner - these questionnaires will automatically be created as new columns, prefixed with <code>q_</code>.</p>
 </div>
-<div id="triggers-and-questionnaires" class="section level2">
+<div id="triggers-and-questionnaires" class="section level2" number="13.6">
 <h2><span class="header-section-number">13.6</span> Triggers and Questionnaires</h2>
 <p>Within Results, the Triggers and Questionnaires features are useful in the continuous monitoring framework. You may wish to define the following to complete your architecture:</p>
 <ol style="list-style-type: decimal">

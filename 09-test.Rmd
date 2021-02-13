@@ -576,7 +576,7 @@ The beauty of this method is that, after you've run all the scenarios you prefer
 
 #### Aggregating results
 
-To derive the final list, becai effective to filter the results based on the `dupes` columns. 
+To derive the final list, we can filter the results based on the `t_dupes` columns. 
 
 Starting with the invoices we've identified, we'll first group by unique `system_id` we've created, allowing us to perform calculations on unique rows. To determine if any test did return something, we will take a `sum` of any number of columns that return a TRUE (with a value of 1 when coerced from logical to numeric). Then, we want to calculate this on multiple columns, specifically with the name starting with `dupes`, so we will use `across()` with `starts_with()`.
 

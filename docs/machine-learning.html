@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-12-10" />
+<meta name="date" content="2021-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="applied-datamart.html"/>
 <link rel="next" href="appendix-ca.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -71,18 +71,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -102,7 +101,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -155,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="part"><span><b>I Structure</b></span></li>
-<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
 <li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
 <li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
@@ -163,56 +163,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
 <li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#architecture-r"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
 <li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#architecture-rsc"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
 <li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#internal-databases"><i class="fa fa-check"></i><b>3.4.1</b> Internal databases</a></li>
 <li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
 <li class="part"><span><b>II Technical</b></span></li>
-<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
 <li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package"><i class="fa fa-check"></i><b>4.3</b> Highbond R package</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
-<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
+<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
-<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
 <li class="chapter" data-level="6.3.2" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
 <li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
 <li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
 <li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
@@ -226,36 +239,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
 <li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
 <li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
 <li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
-<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-te"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
 <li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="test.html"><a href="test.html#weekend-testing"><i class="fa fa-check"></i><b>9.2.1</b> Weekend testing</a></li>
 <li class="chapter" data-level="9.2.2" data-path="test.html"><a href="test.html#cutoff-testing"><i class="fa fa-check"></i><b>9.2.2</b> Cutoff testing</a></li>
 <li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
 <li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
 <li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
 <li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
 <li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-sequences"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a><ul>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a>
+<ul>
 <li class="chapter" data-level="9.5.1" data-path="test.html"><a href="test.html#regex-basics"><i class="fa fa-check"></i><b>9.5.1</b> Regex basics</a></li>
 <li class="chapter" data-level="9.5.2" data-path="test.html"><a href="test.html#starts-or-ends-with-anchors"><i class="fa fa-check"></i><b>9.5.2</b> Starts or Ends with (Anchors)</a></li>
 <li class="chapter" data-level="9.5.3" data-path="test.html"><a href="test.html#crash-course-in-encoding"><i class="fa fa-check"></i><b>9.5.3</b> Crash course in Encoding</a></li>
@@ -264,17 +285,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.6" data-path="test.html"><a href="test.html#regex-further"><i class="fa fa-check"></i><b>9.5.6</b> Further reading</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#report-structure"><i class="fa fa-check"></i><b>10.1</b> Report Structure</a></li>
 <li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export-files"><i class="fa fa-check"></i><b>10.2</b> Export files</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced teams</b></span></li>
 <li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a></li>
-<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a><ul>
+<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
+<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#considerations"><i class="fa fa-check"></i><b>13.1</b> Considerations</a></li>
 <li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#create-a-collection-analytic-and-table"><i class="fa fa-check"></i><b>13.2</b> Create a Collection, Analytic and Table</a></li>
 <li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#define-the-high-risk-test"><i class="fa fa-check"></i><b>13.3</b> Define the High Risk test</a></li>
@@ -282,12 +306,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#downloading-records-and-responses"><i class="fa fa-check"></i><b>13.5</b> Downloading records and responses</a></li>
 <li class="chapter" data-level="13.6" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#triggers-and-questionnaires"><i class="fa fa-check"></i><b>13.6</b> Triggers and Questionnaires</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a><ul>
+<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="applied-datamart.html"><a href="applied-datamart.html#what-to-etl"><i class="fa fa-check"></i><b>14.1</b> What to ETL</a></li>
 <li class="chapter" data-level="14.2" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-essentials"><i class="fa fa-check"></i><b>14.2</b> ETL Essentials</a></li>
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
+<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#goal-predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Goal: Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
@@ -295,12 +321,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.5" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.5</b> What to explore next</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
+<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="appendix-ca.html"><a href="appendix-ca.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendix-ca.html"><a href="appendix-ca.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendix-ca.html"><a href="appendix-ca.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a>
+<ul>
 <li class="chapter" data-level="17.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>17.1</b> Documentation</a></li>
 <li class="chapter" data-level="17.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>17.2</b> Passwords</a></li>
 </ul></li>
@@ -325,35 +353,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="machine-learning" class="section level1">
+<div id="machine-learning" class="section level1" number="15">
 <h1><span class="header-section-number">Chapter 15</span> Machine Learning</h1>
-<p>One of the utopian visions of an advanced audit analytics shop is the application of predictive modeling to help drive audit effectiveness. <strong>Machine learning</strong> (and data science generally) is an advanced and complex topic, and while it is rooted in statistical methods, can be summarized as “using a computer to discover patterns in a dataset”.</p>
+<p>One of the utopian visions of an advanced audit analytics shop is the application of predictive modeling to help drive audit effectiveness. <strong>Machine learning</strong> (and data science generally) is an advanced and complex topic, and while it is rooted in statistical methods, can be summarized as “using a computer to discover patterns in a dataset.”</p>
 <p>Machine learning employs the use of algorithms, which are statistical methods to optimize one specific goal: <strong>error.</strong> Specifically, an algorithm will try to minimize error on a training dataset - that is, each and every time the algorithm makes a prediction, it compares its estimated result against the truth. As it performs the comparison and iterates continuously to reduce the error for each individual sample, the algorithm is also ensuring it is generally applicable for an entire training population.</p>
 <p>Similar to how you don’t need to understand the thermodynamics of a combustion engine to drive a car, you don’t need to necessarily understand how to make an algorithm to use machine learning. However, as an auditor, you still need to understand the tools and algorithm intentions - you will be a lot more fruitful using a screwdriver to insert a screw instead of a hammer.</p>
 <p>To successfully apply machine learning, an audit practitioner needs to clearly state what needs to be predicted, with what data, and how to evaluate it. The real work is understanding the problem and the data, wrangling it into a proper format, choosing the right algorithm to apply against the data, and interpreting the results. It doesn’t take a lot to train a model (really!).</p>
 <p>Lets use an example to help illustrate how you could use machine learning in an audit situation. We will use the following packages:</p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="machine-learning.html#cb434-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb434-2"><a href="machine-learning.html#cb434-2"></a><span class="kw">library</span>(tidymodels)</span>
-<span id="cb434-3"><a href="machine-learning.html#cb434-3"></a><span class="kw">library</span>(tidytext)</span>
-<span id="cb434-4"><a href="machine-learning.html#cb434-4"></a><span class="kw">library</span>(tm)</span>
-<span id="cb434-5"><a href="machine-learning.html#cb434-5"></a><span class="kw">library</span>(rpart)</span>
-<span id="cb434-6"><a href="machine-learning.html#cb434-6"></a><span class="kw">library</span>(rpart.plot)</span>
-<span id="cb434-7"><a href="machine-learning.html#cb434-7"></a><span class="kw">library</span>(gt) <span class="co"># Used for formatting table outputs</span></span>
-<span id="cb434-8"><a href="machine-learning.html#cb434-8"></a></span>
-<span id="cb434-9"><a href="machine-learning.html#cb434-9"></a><span class="kw">set.seed</span>(<span class="dv">12345</span>)</span></code></pre></div>
-<div id="goal-predict-an-account-class" class="section level2">
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="machine-learning.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb420-2"><a href="machine-learning.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb420-3"><a href="machine-learning.html#cb420-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb420-4"><a href="machine-learning.html#cb420-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb420-5"><a href="machine-learning.html#cb420-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
+<span id="cb420-6"><a href="machine-learning.html#cb420-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
+<span id="cb420-7"><a href="machine-learning.html#cb420-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt) <span class="co"># Used for formatting table outputs</span></span>
+<span id="cb420-8"><a href="machine-learning.html#cb420-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb420-9"><a href="machine-learning.html#cb420-9" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span></code></pre></div>
+<div id="goal-predict-an-account-class" class="section level2" number="15.1">
 <h2><span class="header-section-number">15.1</span> Goal: Predict an account class</h2>
 <p>Lets say we were working on an audit to help determine if a transaction will be eventually charged against the correct account class. Specifically, lets see if we can predict if a transaction is a fixed asset, based on the description field itself.</p>
 <p>First, we’ll get some information from our dataset, which will act as our training data. We collect a bit of information, which includes the description of a GL account, as well as whether or a specific journal entry was booked to a fixed asset account.</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="machine-learning.html#cb435-1"></a>description &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;New computer&#39;</span>, <span class="st">&#39;New computer to replace old unit&#39;</span>, <span class="st">&#39;New computer user training class&#39;</span>, <span class="st">&#39;Computer repair&#39;</span>)</span>
-<span id="cb435-2"><a href="machine-learning.html#cb435-2"></a>is_fixed_asset &lt;-<span class="st"> </span><span class="kw">as.factor</span>(<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>))</span>
-<span id="cb435-3"><a href="machine-learning.html#cb435-3"></a>je_num &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(description)</span>
-<span id="cb435-4"><a href="machine-learning.html#cb435-4"></a></span>
-<span id="cb435-5"><a href="machine-learning.html#cb435-5"></a>transactions &lt;-<span class="st"> </span><span class="kw">data.frame</span>(je_num,</span>
-<span id="cb435-6"><a href="machine-learning.html#cb435-6"></a>                 description,</span>
-<span id="cb435-7"><a href="machine-learning.html#cb435-7"></a>                 is_fixed_asset)</span>
-<span id="cb435-8"><a href="machine-learning.html#cb435-8"></a></span>
-<span id="cb435-9"><a href="machine-learning.html#cb435-9"></a>transactions</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="machine-learning.html#cb421-1" aria-hidden="true" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;New computer&#39;</span>, <span class="st">&#39;New computer to replace old unit&#39;</span>, <span class="st">&#39;New computer user training class&#39;</span>, <span class="st">&#39;Computer repair&#39;</span>)</span>
+<span id="cb421-2"><a href="machine-learning.html#cb421-2" aria-hidden="true" tabindex="-1"></a>is_fixed_asset <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span>
+<span id="cb421-3"><a href="machine-learning.html#cb421-3" aria-hidden="true" tabindex="-1"></a>je_num <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(description)</span>
+<span id="cb421-4"><a href="machine-learning.html#cb421-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-5"><a href="machine-learning.html#cb421-5" aria-hidden="true" tabindex="-1"></a>transactions <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(je_num,</span>
+<span id="cb421-6"><a href="machine-learning.html#cb421-6" aria-hidden="true" tabindex="-1"></a>                 description,</span>
+<span id="cb421-7"><a href="machine-learning.html#cb421-7" aria-hidden="true" tabindex="-1"></a>                 is_fixed_asset)</span>
+<span id="cb421-8"><a href="machine-learning.html#cb421-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-9"><a href="machine-learning.html#cb421-9" aria-hidden="true" tabindex="-1"></a>transactions</span></code></pre></div>
 <pre><code>##   je_num                      description is_fixed_asset
 ## 1      1                     New computer           TRUE
 ## 2      2 New computer to replace old unit           TRUE
@@ -363,16 +391,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A decision tree is one of the easiest to interpret, as it logically follows a flow - start a the top and answer a series of ‘yes-no’ questions to determine what the final result should be. You can see there are multiple words that describe each transaction.</p>
 <p>In our example, “computer” is the running theme here, but they all seem to have different words that describe the transaction itself. We plan on using these words as our ‘yes-no’ branches to help us predict our outcomes. This is a classification problem.</p>
 </div>
-<div id="generating-features" class="section level2">
+<div id="generating-features" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Generating features</h2>
 <p>Any algorithm requires the generation of <strong>features</strong> - that is, indicators within the data that the algorithm can use to leverage and predict the outcome. Features typically need to be generated and be made into its own column, before they can leveraged in a prediction.</p>
 <p>In our example, we have several full sentences. Unfortunately, if we feed this into the model, the whole sentence is actually interpreted as one whole feature, which isn’t terribly useful; the individual words themselves are more important for prediction. To use the individual words, we need to tokenize the sentence - that is, break each sentence into individual words, so they can be used as part of our predictions. The tidytext package is great for this, as it helps us break down each word into its own sentence.</p>
 <p>First, lets create a lost of tokens - i.e. what was the unique word within each description, and how often did each word occur.</p>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="machine-learning.html#cb437-1"></a>words &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
-<span id="cb437-2"><a href="machine-learning.html#cb437-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
-<span id="cb437-3"><a href="machine-learning.html#cb437-3"></a><span class="st">  </span><span class="kw">count</span>(je_num, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </span>
-<span id="cb437-4"><a href="machine-learning.html#cb437-4"></a></span>
-<span id="cb437-5"><a href="machine-learning.html#cb437-5"></a>words</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="machine-learning.html#cb423-1" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> transactions <span class="sc">%&gt;%</span></span>
+<span id="cb423-2"><a href="machine-learning.html#cb423-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, description) <span class="sc">%&gt;%</span></span>
+<span id="cb423-3"><a href="machine-learning.html#cb423-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(je_num, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb423-4"><a href="machine-learning.html#cb423-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb423-5"><a href="machine-learning.html#cb423-5" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
 <pre><code>##   je_num     word n
 ## 1      1 computer 1
 ## 2      1      new 1
@@ -382,9 +410,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 10 rows ]</code></pre>
 <p>We can see that each journal entry line is now repeated for each and every unique word. However, we notice some filler words, which don’t add a lot of value in our predictions. There are called ‘stop words’ which are common words in the English language - great for communicating verbally, but computers don’t need such formalities.</p>
 <p>Here were the stop words detected:</p>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="machine-learning.html#cb439-1"></a>transactions <span class="op">%&gt;%</span></span>
-<span id="cb439-2"><a href="machine-learning.html#cb439-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
-<span id="cb439-3"><a href="machine-learning.html#cb439-3"></a><span class="st">  </span><span class="kw">filter</span>(word <span class="op">%in%</span><span class="st"> </span>stop_words<span class="op">$</span>word)</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="machine-learning.html#cb425-1" aria-hidden="true" tabindex="-1"></a>transactions <span class="sc">%&gt;%</span></span>
+<span id="cb425-2"><a href="machine-learning.html#cb425-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, description) <span class="sc">%&gt;%</span></span>
+<span id="cb425-3"><a href="machine-learning.html#cb425-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word)</span></code></pre></div>
 <pre><code>##     je_num is_fixed_asset word
 ## 1        1           TRUE  new
 ## 2        2           TRUE  new
@@ -392,12 +420,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2.4      2           TRUE  old
 ## 3        3          FALSE  new</code></pre>
 <p>We could make our own list of stop words - for now, lets drop the default suggestions.</p>
-<div class="sourceCode" id="cb441"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb441-1"><a href="machine-learning.html#cb441-1"></a>words &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
-<span id="cb441-2"><a href="machine-learning.html#cb441-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, description) <span class="op">%&gt;%</span></span>
-<span id="cb441-3"><a href="machine-learning.html#cb441-3"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>word <span class="op">%in%</span><span class="st"> </span>stop_words<span class="op">$</span>word) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove stop words.</span></span>
-<span id="cb441-4"><a href="machine-learning.html#cb441-4"></a><span class="st">  </span><span class="kw">count</span>(je_num, word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </span>
-<span id="cb441-5"><a href="machine-learning.html#cb441-5"></a></span>
-<span id="cb441-6"><a href="machine-learning.html#cb441-6"></a>words</span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="machine-learning.html#cb427-1" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> transactions <span class="sc">%&gt;%</span></span>
+<span id="cb427-2"><a href="machine-learning.html#cb427-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, description) <span class="sc">%&gt;%</span></span>
+<span id="cb427-3"><a href="machine-learning.html#cb427-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>word <span class="sc">%in%</span> stop_words<span class="sc">$</span>word) <span class="sc">%&gt;%</span> <span class="co"># Remove stop words.</span></span>
+<span id="cb427-4"><a href="machine-learning.html#cb427-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(je_num, word, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb427-5"><a href="machine-learning.html#cb427-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-6"><a href="machine-learning.html#cb427-6" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
 <pre><code>##   je_num     word n
 ## 1      1 computer 1
 ## 2      2 computer 1
@@ -406,10 +434,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5      3    class 1
 ##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 5 rows ]</code></pre>
 <p>With a cleaned layout, we can now better see the valuable words per journal entry. However, its a bit difficult to see what words were shared between each journal entry, so lets lay it out wide and aggregate it so each word is in its own column, aligned with the journal entry.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="machine-learning.html#cb443-1"></a>wide_words &lt;-<span class="st"> </span>words <span class="op">%&gt;%</span></span>
-<span id="cb443-2"><a href="machine-learning.html#cb443-2"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">id_cols =</span> je_num, <span class="dt">names_from =</span> word, <span class="dt">values_from =</span> n)</span>
-<span id="cb443-3"><a href="machine-learning.html#cb443-3"></a></span>
-<span id="cb443-4"><a href="machine-learning.html#cb443-4"></a>wide_words</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="machine-learning.html#cb429-1" aria-hidden="true" tabindex="-1"></a>wide_words <span class="ot">&lt;-</span> words <span class="sc">%&gt;%</span></span>
+<span id="cb429-2"><a href="machine-learning.html#cb429-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> je_num, <span class="at">names_from =</span> word, <span class="at">values_from =</span> n)</span>
+<span id="cb429-3"><a href="machine-learning.html#cb429-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb429-4"><a href="machine-learning.html#cb429-4" aria-hidden="true" tabindex="-1"></a>wide_words</span></code></pre></div>
 <pre><code>## # A tibble: 4 x 8
 ##   je_num computer replace  unit class training  user repair
 ##    &lt;int&gt;    &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;int&gt;  &lt;int&gt;
@@ -418,11 +446,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3      3        1      NA    NA     1        1     1     NA
 ## 4      4        1      NA    NA    NA       NA    NA      1</code></pre>
 <p>Excellent, lets join this back to our dataset and do the final cleanup to start making predictions.</p>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="machine-learning.html#cb445-1"></a>trans_listing &lt;-<span class="st"> </span>transactions <span class="op">%&gt;%</span></span>
-<span id="cb445-2"><a href="machine-learning.html#cb445-2"></a><span class="st">  </span><span class="kw">inner_join</span>(wide_words, <span class="dt">by =</span> <span class="st">&#39;je_num&#39;</span>) </span>
-<span id="cb445-3"><a href="machine-learning.html#cb445-3"></a></span>
-<span id="cb445-4"><a href="machine-learning.html#cb445-4"></a>trans_listing <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb445-5"><a href="machine-learning.html#cb445-5"></a><span class="st">  </span><span class="kw">gt</span>() <span class="co"># For making our output prettier</span></span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="machine-learning.html#cb431-1" aria-hidden="true" tabindex="-1"></a>trans_listing <span class="ot">&lt;-</span> transactions <span class="sc">%&gt;%</span></span>
+<span id="cb431-2"><a href="machine-learning.html#cb431-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(wide_words, <span class="at">by =</span> <span class="st">&#39;je_num&#39;</span>) </span>
+<span id="cb431-3"><a href="machine-learning.html#cb431-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb431-4"><a href="machine-learning.html#cb431-4" aria-hidden="true" tabindex="-1"></a>trans_listing <span class="sc">%&gt;%</span> </span>
+<span id="cb431-5"><a href="machine-learning.html#cb431-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="co"># For making our output prettier</span></span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -829,7 +857,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 </table></div>
 </div>
-<div id="training-the-model" class="section level2">
+<div id="training-the-model" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Training the model</h2>
 <p>Before we can make predictions, we need to consider what we features we want to use as part of training. Training a model uses the features we’ve generated to discover a pattern and create a model that best fits the training data. Lets go through a few of these columns to determine what to retain and remove:</p>
 <ul>
@@ -842,13 +870,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The <code>is_fixed_asset</code> will be what we want to predict. In this case, it should be a factor, as we are guessing a state outcome as part of the classification exercise.</li>
 <li>Many algorithms tend to break when they see NAs. In our dataset, we understand that NA means that the word was not seen, so a zero as a replacement will suffice.</li>
 </ul>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="machine-learning.html#cb446-1"></a>training_data &lt;-<span class="st"> </span>trans_listing <span class="op">%&gt;%</span></span>
-<span id="cb446-2"><a href="machine-learning.html#cb446-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(je_num, description)) <span class="op">%&gt;%</span></span>
-<span id="cb446-3"><a href="machine-learning.html#cb446-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">is_fixed_asset =</span> <span class="kw">as.factor</span>(is_fixed_asset)) <span class="op">%&gt;%</span></span>
-<span id="cb446-4"><a href="machine-learning.html#cb446-4"></a><span class="st">  </span><span class="kw">replace</span>(<span class="kw">is.na</span>(.), <span class="dv">0</span>)</span>
-<span id="cb446-5"><a href="machine-learning.html#cb446-5"></a></span>
-<span id="cb446-6"><a href="machine-learning.html#cb446-6"></a>training_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb446-7"><a href="machine-learning.html#cb446-7"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="machine-learning.html#cb432-1" aria-hidden="true" tabindex="-1"></a>training_data <span class="ot">&lt;-</span> trans_listing <span class="sc">%&gt;%</span></span>
+<span id="cb432-2"><a href="machine-learning.html#cb432-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(je_num, description)) <span class="sc">%&gt;%</span></span>
+<span id="cb432-3"><a href="machine-learning.html#cb432-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_fixed_asset =</span> <span class="fu">as.factor</span>(is_fixed_asset)) <span class="sc">%&gt;%</span></span>
+<span id="cb432-4"><a href="machine-learning.html#cb432-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace</span>(<span class="fu">is.na</span>(.), <span class="dv">0</span>)</span>
+<span id="cb432-5"><a href="machine-learning.html#cb432-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb432-6"><a href="machine-learning.html#cb432-6" aria-hidden="true" tabindex="-1"></a>training_data <span class="sc">%&gt;%</span> </span>
+<span id="cb432-7"><a href="machine-learning.html#cb432-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -1245,14 +1273,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 </table></div>
 <p>There are several different ways to call a model. We will use the tidymodels package, which helps us declare which model we plan on using, the algorithm within the model, and the outcome.</p>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="machine-learning.html#cb447-1"></a>dt_model &lt;-<span class="st"> </span><span class="kw">decision_tree</span>(<span class="dt">min_n =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span></span>
-<span id="cb447-2"><a href="machine-learning.html#cb447-2"></a><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb447-3"><a href="machine-learning.html#cb447-3"></a><span class="st">  </span><span class="kw">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="machine-learning.html#cb433-1" aria-hidden="true" tabindex="-1"></a>dt_model <span class="ot">&lt;-</span> <span class="fu">decision_tree</span>(<span class="at">min_n =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb433-2"><a href="machine-learning.html#cb433-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">&quot;rpart&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb433-3"><a href="machine-learning.html#cb433-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
 <p>To train a model, we simply take the model we want to use (as determined above using the <code>decision_tree()</code> specification), the outcome <code>is_fixed_asset</code>, and the data source we want to train on.</p>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="machine-learning.html#cb448-1"></a>dt_fit &lt;-<span class="st"> </span>dt_model <span class="op">%&gt;%</span></span>
-<span id="cb448-2"><a href="machine-learning.html#cb448-2"></a><span class="st">  </span><span class="kw">fit</span>(is_fixed_asset <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> training_data)</span>
-<span id="cb448-3"><a href="machine-learning.html#cb448-3"></a></span>
-<span id="cb448-4"><a href="machine-learning.html#cb448-4"></a>dt_fit</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="machine-learning.html#cb434-1" aria-hidden="true" tabindex="-1"></a>dt_fit <span class="ot">&lt;-</span> dt_model <span class="sc">%&gt;%</span></span>
+<span id="cb434-2"><a href="machine-learning.html#cb434-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(is_fixed_asset <span class="sc">~</span> ., <span class="at">data =</span> training_data)</span>
+<span id="cb434-3"><a href="machine-learning.html#cb434-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb434-4"><a href="machine-learning.html#cb434-4" aria-hidden="true" tabindex="-1"></a>dt_fit</span></code></pre></div>
 <pre><code>## parsnip model object
 ## 
 ## Fit time:  7ms 
@@ -1269,26 +1297,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##       11) repair&lt; 0.5 1 0 TRUE (0.0000000 1.0000000) *
 ##    3) replace&gt;=0.5 1 0 TRUE (0.0000000 1.0000000) *</code></pre>
 <p>Without much fanfare, we get a model we can now use. Lets look into a bit more detail as to how the splits take place in our trained model:</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="machine-learning.html#cb450-1"></a><span class="kw">rpart.plot</span>(dt_fit<span class="op">$</span>fit)</span></code></pre></div>
-<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
-<p>Reading a decision tree takes some orienting. The way to read the root (the top level decision) is to say “is the value of <code>replace</code> less than 0.5?” - yes to go left, and no to go right. Another way to interpret the node is “did the word replace occur less than 0.5 times?”. If it did happen less than 0.5 times (which is 0 in our dataset), then go left. However, if the word ‘replace’ had a value of more than 0.5, which also means the word occurred at least once, then go right - in this case the predicted outcome for <code>is_fixed_asset</code> will be TRUE.</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="machine-learning.html#cb436-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(dt_fit<span class="sc">$</span>fit)</span></code></pre></div>
+<p><img src="Audit_Analytics_with-R_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
+<p>Reading a decision tree takes some orienting. The way to read the root (the top level decision) is to say “is the value of <code>replace</code> less than 0.5?” - yes to go left, and no to go right. Another way to interpret the node is “did the word replace occur less than 0.5 times?” If it did happen less than 0.5 times (which is 0 in our dataset), then go left. However, if the word ‘replace’ had a value of more than 0.5, which also means the word occurred at least once, then go right - in this case the predicted outcome for <code>is_fixed_asset</code> will be TRUE.</p>
 <p>The branches, aka the items below the root, are decided via a gini impurity metric, where the goal is to pose a question that evenly splits the outcomes into 50/50 buckets. The more evenly split the information, the more ‘information gain’ was acquired from the split.</p>
 </div>
-<div id="making-predictions" class="section level2">
+<div id="making-predictions" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> Making predictions</h2>
-<p>Now that we have a trained model, lets try to make some predictions. Lets say we had three more sentences that were tokenized into: ‘class repair’, ‘replace repair’, ‘replace class’, ‘computer computer computer’, and simply nothing.</p>
+<p>Now that we have a trained model, lets try to make some predictions. Lets say we had three more sentences that were tokenized into: ‘class repair,’ ‘replace repair,’ ‘replace class,’ ‘computer computer computer,’ and simply nothing.</p>
 <p>If we went through the process again to tokenize, our new dataset (holdout, since it was not used in training) would look like this:</p>
-<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="machine-learning.html#cb451-1"></a>holdout_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(<span class="dt">nrow =</span> <span class="dv">1</span>, <span class="dt">ncol =</span> <span class="kw">ncol</span>(training_data) <span class="dv">-1</span>))</span>
-<span id="cb451-2"><a href="machine-learning.html#cb451-2"></a><span class="kw">colnames</span>(holdout_data) &lt;-<span class="st"> </span><span class="kw">names</span>(training_data)[<span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(training_data)]</span>
-<span id="cb451-3"><a href="machine-learning.html#cb451-3"></a></span>
-<span id="cb451-4"><a href="machine-learning.html#cb451-4"></a>holdout_data[<span class="dv">1</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb451-5"><a href="machine-learning.html#cb451-5"></a>holdout_data[<span class="dv">2</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb451-6"><a href="machine-learning.html#cb451-6"></a>holdout_data[<span class="dv">3</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb451-7"><a href="machine-learning.html#cb451-7"></a>holdout_data[<span class="dv">4</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb451-8"><a href="machine-learning.html#cb451-8"></a>holdout_data[<span class="dv">5</span>,] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
-<span id="cb451-9"><a href="machine-learning.html#cb451-9"></a></span>
-<span id="cb451-10"><a href="machine-learning.html#cb451-10"></a>holdout_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb451-11"><a href="machine-learning.html#cb451-11"></a><span class="st">  </span><span class="kw">gt</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="machine-learning.html#cb437-1" aria-hidden="true" tabindex="-1"></a>holdout_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="fu">ncol</span>(training_data) <span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb437-2"><a href="machine-learning.html#cb437-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(holdout_data) <span class="ot">&lt;-</span> <span class="fu">names</span>(training_data)[<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(training_data)]</span>
+<span id="cb437-3"><a href="machine-learning.html#cb437-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb437-4"><a href="machine-learning.html#cb437-4" aria-hidden="true" tabindex="-1"></a>holdout_data[<span class="dv">1</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb437-5"><a href="machine-learning.html#cb437-5" aria-hidden="true" tabindex="-1"></a>holdout_data[<span class="dv">2</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb437-6"><a href="machine-learning.html#cb437-6" aria-hidden="true" tabindex="-1"></a>holdout_data[<span class="dv">3</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb437-7"><a href="machine-learning.html#cb437-7" aria-hidden="true" tabindex="-1"></a>holdout_data[<span class="dv">4</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb437-8"><a href="machine-learning.html#cb437-8" aria-hidden="true" tabindex="-1"></a>holdout_data[<span class="dv">5</span>,] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb437-9"><a href="machine-learning.html#cb437-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb437-10"><a href="machine-learning.html#cb437-10" aria-hidden="true" tabindex="-1"></a>holdout_data <span class="sc">%&gt;%</span> </span>
+<span id="cb437-11"><a href="machine-learning.html#cb437-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>()</span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -1689,12 +1717,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 </table></div>
 <p>And the fun part - lets run our predictions through the model we created:</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="machine-learning.html#cb452-1"></a>dt_predict &lt;-<span class="st"> </span><span class="kw">predict</span>(dt_fit, holdout_data)</span>
-<span id="cb452-2"><a href="machine-learning.html#cb452-2"></a></span>
-<span id="cb452-3"><a href="machine-learning.html#cb452-3"></a>dt_predict &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(holdout_data, dt_predict)</span>
-<span id="cb452-4"><a href="machine-learning.html#cb452-4"></a></span>
-<span id="cb452-5"><a href="machine-learning.html#cb452-5"></a>dt_predict <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb452-6"><a href="machine-learning.html#cb452-6"></a><span class="st">  </span><span class="kw">gt</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="machine-learning.html#cb438-1" aria-hidden="true" tabindex="-1"></a>dt_predict <span class="ot">&lt;-</span> <span class="fu">predict</span>(dt_fit, holdout_data)</span>
+<span id="cb438-2"><a href="machine-learning.html#cb438-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-3"><a href="machine-learning.html#cb438-3" aria-hidden="true" tabindex="-1"></a>dt_predict <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(holdout_data, dt_predict)</span>
+<span id="cb438-4"><a href="machine-learning.html#cb438-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb438-5"><a href="machine-learning.html#cb438-5" aria-hidden="true" tabindex="-1"></a>dt_predict <span class="sc">%&gt;%</span> </span>
+<span id="cb438-6"><a href="machine-learning.html#cb438-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() </span></code></pre></div>
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -2102,18 +2130,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table></div>
 <p>Some of the predictions could be conferred as such, but whats up with the zero-words example that predicted it was a fixed asset?</p>
 </div>
-<div id="what-to-explore-next" class="section level2">
+<div id="what-to-explore-next" class="section level2" number="15.5">
 <h2><span class="header-section-number">15.5</span> What to explore next</h2>
 <p>In our extremely simplistic example, we overlooked several things that would not be done on a real data set.</p>
 <ul>
 <li><p>A larger main dataset needs to be split into a training dataset and a test dataset. The creation of the model should be done on the training data, and its performance should be evaluated against the test dataset. The performance will allow you to evaluate just how good the model is. If this is not done, then your model is simply <strong>overfitting</strong>, which is the same as memorizing a dataset, and has no ability to generalize against a normal population.</p></li>
 <li><p>For <strong>training datasets</strong> - sizes matter! An extremely small training set means the model hasn’t seen enough nuances in the data to understand it. Since these seven words never mapped to anything in the decision tree, it always evaluated as TRUE.</p></li>
 <li><p>The quality of a training set also matters greatly, as the training dataset is considered truth. Its very difficult to tell a computer to ignore any mislabelled data, as it has no capacity to know what is mislabelled.</p></li>
-<li><p>The features used in training the model must also be the features for the prediction. For example, if we start seeing the word “Mac” instead of “Computer”, we either need to drop the word “Mac” before running our prediction, or retrain our model with these new keywords. In our case, since we’re using individual words, additional work needs to be done to align the words in the same format as our training dataset. This could be solved by retraining the model as new features develop.</p></li>
+<li><p>The features used in training the model must also be the features for the prediction. For example, if we start seeing the word “Mac” instead of “Computer,” we either need to drop the word “Mac” before running our prediction, or retrain our model with these new keywords. In our case, since we’re using individual words, additional work needs to be done to align the words in the same format as our training dataset. This could be solved by retraining the model as new features develop.</p></li>
 <li><p>From an algorithm perspective, a decision tree makes only one tree as its final outcome. However, there could have been a tree design that put another feature as the root and other trees below it. One way to address this weakness is to use random forest or xgboost, which are other tree-based algorithms that make many trees and make a final model based on a combination of the best tree made (ensemble).</p></li>
 <li><p>Some algorithms offer the ability to tune <strong>hyperparameters</strong> - that is, the ability to customize an algorithm to help tune and optimize itself. Various algorithms offer different options. For tree-base algorithms, it could be the condition of making each branch. For regression algorithms, it could be the size of a ‘step’ taken when testing a new formula to minimize error; larger steps may avoid local minimums, but may not find optimal minimums due to their lack of sensitivity. Tuning hyperparameters is so powerful, that using just a single algorithm but a well-tuned model can yield significantly better results.</p></li>
 </ul>
-<p>There are several other <a href="https://cran.r-project.org/web/views/MachineLearning.html">machine learning algorithms</a> out there, as well as regression-based predictions. There is “no free lunch”, and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.</p>
+<p>There are several other <a href="https://cran.r-project.org/web/views/MachineLearning.html">machine learning algorithms</a> out there, as well as regression-based predictions. There is “no free lunch,” and no singular model will work in every situation. The beauty of a code-based approach is that you can try them all in a relatively effective manner.</p>
 <p>In our example, we used text miniming as part of our feature generation. If you wanted to fully explore text mining, read <a href="https://www.tidytextmining.com">Text Mining with R by Julia Silge &amp; David Robinson</a>. We only explored the words themselves - there are additional branches of text mining that explore topic modelling, stemming, sentiment, among others approaches.</p>
 
 </div>

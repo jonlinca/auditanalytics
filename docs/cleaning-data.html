@@ -24,7 +24,7 @@
 <meta name="author" content="Jonathan Lin" />
 
 
-<meta name="date" content="2020-12-10" />
+<meta name="date" content="2021-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="data-completeness.html"/>
 <link rel="next" href="exploring-data.html"/>
+<script src="libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
@@ -71,18 +71,17 @@
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -102,7 +101,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -155,7 +154,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="about-the-author.html"><a href="about-the-author.html"><i class="fa fa-check"></i>About the author</a></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="part"><span><b>I Structure</b></span></li>
-<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a><ul>
+<li class="chapter" data-level="2" data-path="approach.html"><a href="approach.html"><i class="fa fa-check"></i><b>2</b> Approach</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="approach.html"><a href="approach.html#code-based-development"><i class="fa fa-check"></i><b>2.1</b> Code-based development</a></li>
 <li class="chapter" data-level="2.2" data-path="approach.html"><a href="approach.html#automate-relentlessly"><i class="fa fa-check"></i><b>2.2</b> Automate relentlessly</a></li>
 <li class="chapter" data-level="2.3" data-path="approach.html"><a href="approach.html#share-everything"><i class="fa fa-check"></i><b>2.3</b> Share everything</a></li>
@@ -163,56 +163,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.5" data-path="approach.html"><a href="approach.html#dont-be-a-hero"><i class="fa fa-check"></i><b>2.5</b> Don’t be a hero</a></li>
 <li class="chapter" data-level="2.6" data-path="approach.html"><a href="approach.html#the-opportunity-cost"><i class="fa fa-check"></i><b>2.6</b> “The opportunity cost”</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a><ul>
+<li class="chapter" data-level="3" data-path="architecture.html"><a href="architecture.html"><i class="fa fa-check"></i><b>3</b> Architecture</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="architecture.html"><a href="architecture.html#architecture-r"><i class="fa fa-check"></i><b>3.1</b> R and RStudio</a></li>
-<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a><ul>
+<li class="chapter" data-level="3.2" data-path="architecture.html"><a href="architecture.html#code-repositories"><i class="fa fa-check"></i><b>3.2</b> Code repositories</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="architecture.html"><a href="architecture.html#git"><i class="fa fa-check"></i><b>3.2.1</b> git</a></li>
 <li class="chapter" data-level="3.2.2" data-path="architecture.html"><a href="architecture.html#packages"><i class="fa fa-check"></i><b>3.2.2</b> Packages</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a><ul>
+<li class="chapter" data-level="3.3" data-path="architecture.html"><a href="architecture.html#data-products"><i class="fa fa-check"></i><b>3.3</b> Data products</a>
+<ul>
 <li class="chapter" data-level="3.3.1" data-path="architecture.html"><a href="architecture.html#galvanize-highbond"><i class="fa fa-check"></i><b>3.3.1</b> Galvanize Highbond</a></li>
 <li class="chapter" data-level="3.3.2" data-path="architecture.html"><a href="architecture.html#architecture-rsc"><i class="fa fa-check"></i><b>3.3.2</b> RStudio Connect</a></li>
 <li class="chapter" data-level="3.3.3" data-path="architecture.html"><a href="architecture.html#rstudio-package-manager"><i class="fa fa-check"></i><b>3.3.3</b> RStudio Package Manager</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a><ul>
+<li class="chapter" data-level="3.4" data-path="architecture.html"><a href="architecture.html#data-sources"><i class="fa fa-check"></i><b>3.4</b> Data sources</a>
+<ul>
 <li class="chapter" data-level="3.4.1" data-path="architecture.html"><a href="architecture.html#internal-databases"><i class="fa fa-check"></i><b>3.4.1</b> Internal databases</a></li>
 <li class="chapter" data-level="3.4.2" data-path="architecture.html"><a href="architecture.html#external-sources"><i class="fa fa-check"></i><b>3.4.2</b> External sources</a></li>
 </ul></li>
 <li class="chapter" data-level="3.5" data-path="architecture.html"><a href="architecture.html#audit-data-mart"><i class="fa fa-check"></i><b>3.5</b> Audit data mart</a></li>
 </ul></li>
 <li class="part"><span><b>II Technical</b></span></li>
-<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a><ul>
+<li class="chapter" data-level="4" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>4</b> Setup</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="setup.html"><a href="setup.html#setup-r"><i class="fa fa-check"></i><b>4.1</b> R with RStudio</a></li>
 <li class="chapter" data-level="4.2" data-path="setup.html"><a href="setup.html#common-packages"><i class="fa fa-check"></i><b>4.2</b> Common packages</a></li>
 <li class="chapter" data-level="4.3" data-path="setup.html"><a href="setup.html#highbond-r-package"><i class="fa fa-check"></i><b>4.3</b> Highbond R package</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a><ul>
-<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a><ul>
+<li class="chapter" data-level="5" data-path="import-data.html"><a href="import-data.html"><i class="fa fa-check"></i><b>5</b> Import data</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="import-data.html"><a href="import-data.html#delimited-files"><i class="fa fa-check"></i><b>5.1</b> Delimited files</a>
+<ul>
 <li class="chapter" data-level="5.1.1" data-path="import-data.html"><a href="import-data.html#handling-problematic-delimited-files"><i class="fa fa-check"></i><b>5.1.1</b> Handling problematic delimited files</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="import-data.html"><a href="import-data.html#import-db"><i class="fa fa-check"></i><b>5.2</b> Databases</a></li>
 <li class="chapter" data-level="5.3" data-path="import-data.html"><a href="import-data.html#apis"><i class="fa fa-check"></i><b>5.3</b> APIs</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a><ul>
+<li class="chapter" data-level="6" data-path="data-completeness.html"><a href="data-completeness.html"><i class="fa fa-check"></i><b>6</b> Data Completeness</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="data-completeness.html"><a href="data-completeness.html#exploration-of-general-ledger-data"><i class="fa fa-check"></i><b>6.1</b> Exploration of General Ledger data</a></li>
-<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a><ul>
+<li class="chapter" data-level="6.2" data-path="data-completeness.html"><a href="data-completeness.html#examination-of-potential-errors"><i class="fa fa-check"></i><b>6.2</b> Examination of potential errors</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-na"><i class="fa fa-check"></i><b>6.2.1</b> NA values</a></li>
 <li class="chapter" data-level="6.2.2" data-path="data-completeness.html"><a href="data-completeness.html#journal-entries-balance-to-zero"><i class="fa fa-check"></i><b>6.2.2</b> Journal Entries balance to zero</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a><ul>
+<li class="chapter" data-level="6.3" data-path="data-completeness.html"><a href="data-completeness.html#transforming-of-trial-balance-data"><i class="fa fa-check"></i><b>6.3</b> Transforming of Trial Balance data</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-absolute-references"><i class="fa fa-check"></i><b>6.3.1</b> Sum by absolute references</a></li>
 <li class="chapter" data-level="6.3.2" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-numeric-position"><i class="fa fa-check"></i><b>6.3.2</b> Sum by numeric position</a></li>
 <li class="chapter" data-level="6.3.3" data-path="data-completeness.html"><a href="data-completeness.html#sum-by-named-references"><i class="fa fa-check"></i><b>6.3.3</b> Sum by named references</a></li>
 <li class="chapter" data-level="6.3.4" data-path="data-completeness.html"><a href="data-completeness.html#pivot-then-summarize"><i class="fa fa-check"></i><b>6.3.4</b> Pivot then summarize</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a><ul>
+<li class="chapter" data-level="6.4" data-path="data-completeness.html"><a href="data-completeness.html#asserting-completeness"><i class="fa fa-check"></i><b>6.4</b> Asserting Completeness</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="data-completeness.html"><a href="data-completeness.html#completeness-join"><i class="fa fa-check"></i><b>6.4.1</b> Joining the GL to the TB</a></li>
 </ul></li>
 <li class="chapter" data-level="6.5" data-path="data-completeness.html"><a href="data-completeness.html#cautionary-notes-for-completeness"><i class="fa fa-check"></i><b>6.5</b> Cautionary notes for Completeness</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a><ul>
+<li class="chapter" data-level="7" data-path="cleaning-data.html"><a href="cleaning-data.html"><i class="fa fa-check"></i><b>7</b> Cleaning data</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="cleaning-data.html"><a href="cleaning-data.html#basic-math"><i class="fa fa-check"></i><b>7.1</b> Basic math</a></li>
-<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a><ul>
+<li class="chapter" data-level="7.2" data-path="cleaning-data.html"><a href="cleaning-data.html#dates-and-times"><i class="fa fa-check"></i><b>7.2</b> Dates and Times</a>
+<ul>
 <li class="chapter" data-level="7.2.1" data-path="cleaning-data.html"><a href="cleaning-data.html#understanding-default-time-zones"><i class="fa fa-check"></i><b>7.2.1</b> Understanding Default Time Zones</a></li>
 <li class="chapter" data-level="7.2.2" data-path="cleaning-data.html"><a href="cleaning-data.html#override-or-display-timezones"><i class="fa fa-check"></i><b>7.2.2</b> Override or display timezones</a></li>
 <li class="chapter" data-level="7.2.3" data-path="cleaning-data.html"><a href="cleaning-data.html#daylight-saving-implications"><i class="fa fa-check"></i><b>7.2.3</b> Daylight Saving Implications</a></li>
@@ -226,36 +239,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.6" data-path="cleaning-data.html"><a href="cleaning-data.html#clean-pivot"><i class="fa fa-check"></i><b>7.6</b> Pivots, wide and longer</a></li>
 <li class="chapter" data-level="7.7" data-path="cleaning-data.html"><a href="cleaning-data.html#joining-data"><i class="fa fa-check"></i><b>7.7</b> Joining data</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a><ul>
+<li class="chapter" data-level="8" data-path="exploring-data.html"><a href="exploring-data.html"><i class="fa fa-check"></i><b>8</b> Exploring data</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="exploring-data.html"><a href="exploring-data.html#explore-stats"><i class="fa fa-check"></i><b>8.1</b> Basic Statistics</a></li>
 <li class="chapter" data-level="8.2" data-path="exploring-data.html"><a href="exploring-data.html#summarizations"><i class="fa fa-check"></i><b>8.2</b> Summarizations</a></li>
 <li class="chapter" data-level="8.3" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---why"><i class="fa fa-check"></i><b>8.3</b> Data Visualization - Why</a></li>
-<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a><ul>
+<li class="chapter" data-level="8.4" data-path="exploring-data.html"><a href="exploring-data.html#data-visualization---how"><i class="fa fa-check"></i><b>8.4</b> Data Visualization - How</a>
+<ul>
 <li class="chapter" data-level="8.4.1" data-path="exploring-data.html"><a href="exploring-data.html#time-series"><i class="fa fa-check"></i><b>8.4.1</b> Time-series</a></li>
 <li class="chapter" data-level="8.4.2" data-path="exploring-data.html"><a href="exploring-data.html#facets"><i class="fa fa-check"></i><b>8.4.2</b> Facets</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a><ul>
-<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a><ul>
+<li class="chapter" data-level="9" data-path="test.html"><a href="test.html"><i class="fa fa-check"></i><b>9</b> Test</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="test.html"><a href="test.html#amount-based-tests"><i class="fa fa-check"></i><b>9.1</b> Amount-based tests</a>
+<ul>
 <li class="chapter" data-level="9.1.1" data-path="test.html"><a href="test.html#above-te"><i class="fa fa-check"></i><b>9.1.1</b> Above threshold</a></li>
 <li class="chapter" data-level="9.1.2" data-path="test.html"><a href="test.html#round-numbers"><i class="fa fa-check"></i><b>9.1.2</b> Round numbers</a></li>
 </ul></li>
-<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a><ul>
+<li class="chapter" data-level="9.2" data-path="test.html"><a href="test.html#date-based-tests"><i class="fa fa-check"></i><b>9.2</b> Date-based tests</a>
+<ul>
 <li class="chapter" data-level="9.2.1" data-path="test.html"><a href="test.html#weekend-testing"><i class="fa fa-check"></i><b>9.2.1</b> Weekend testing</a></li>
 <li class="chapter" data-level="9.2.2" data-path="test.html"><a href="test.html#cutoff-testing"><i class="fa fa-check"></i><b>9.2.2</b> Cutoff testing</a></li>
 <li class="chapter" data-level="9.2.3" data-path="test.html"><a href="test.html#age"><i class="fa fa-check"></i><b>9.2.3</b> Age</a></li>
 </ul></li>
-<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a><ul>
+<li class="chapter" data-level="9.3" data-path="test.html"><a href="test.html#basic-statistical-tests"><i class="fa fa-check"></i><b>9.3</b> Basic Statistical tests</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="test.html"><a href="test.html#outliers-based-on-amount"><i class="fa fa-check"></i><b>9.3.1</b> Outliers based on amount</a></li>
 <li class="chapter" data-level="9.3.2" data-path="test.html"><a href="test.html#outliers-based-on-amounts-and-other-factors"><i class="fa fa-check"></i><b>9.3.2</b> Outliers based on amounts and other factors</a></li>
 </ul></li>
-<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a><ul>
+<li class="chapter" data-level="9.4" data-path="test.html"><a href="test.html#unusual-pattern-and-behaviours"><i class="fa fa-check"></i><b>9.4</b> Unusual pattern and behaviours</a>
+<ul>
 <li class="chapter" data-level="9.4.1" data-path="test.html"><a href="test.html#benfords-law-analysis"><i class="fa fa-check"></i><b>9.4.1</b> Benford’s Law analysis</a></li>
 <li class="chapter" data-level="9.4.2" data-path="test.html"><a href="test.html#relative-size-factor-rsf"><i class="fa fa-check"></i><b>9.4.2</b> Relative size factor (RSF)</a></li>
 <li class="chapter" data-level="9.4.3" data-path="test.html"><a href="test.html#duplicate-invoices"><i class="fa fa-check"></i><b>9.4.3</b> Duplicate Invoices</a></li>
 <li class="chapter" data-level="9.4.4" data-path="test.html"><a href="test.html#detecting-gaps-in-sequences"><i class="fa fa-check"></i><b>9.4.4</b> Detecting gaps in sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a><ul>
+<li class="chapter" data-level="9.5" data-path="test.html"><a href="test.html#test-searchtext"><i class="fa fa-check"></i><b>9.5</b> Search text</a>
+<ul>
 <li class="chapter" data-level="9.5.1" data-path="test.html"><a href="test.html#regex-basics"><i class="fa fa-check"></i><b>9.5.1</b> Regex basics</a></li>
 <li class="chapter" data-level="9.5.2" data-path="test.html"><a href="test.html#starts-or-ends-with-anchors"><i class="fa fa-check"></i><b>9.5.2</b> Starts or Ends with (Anchors)</a></li>
 <li class="chapter" data-level="9.5.3" data-path="test.html"><a href="test.html#crash-course-in-encoding"><i class="fa fa-check"></i><b>9.5.3</b> Crash course in Encoding</a></li>
@@ -264,17 +285,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.6" data-path="test.html"><a href="test.html#regex-further"><i class="fa fa-check"></i><b>9.5.6</b> Further reading</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a><ul>
+<li class="chapter" data-level="10" data-path="report.html"><a href="report.html"><i class="fa fa-check"></i><b>10</b> Report</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="report.html"><a href="report.html#report-structure"><i class="fa fa-check"></i><b>10.1</b> Report Structure</a></li>
 <li class="chapter" data-level="10.2" data-path="report.html"><a href="report.html#export-files"><i class="fa fa-check"></i><b>10.2</b> Export files</a></li>
 </ul></li>
 <li class="part"><span><b>III Advanced teams</b></span></li>
 <li class="chapter" data-level="11" data-path="applied-audit-analytics.html"><a href="applied-audit-analytics.html"><i class="fa fa-check"></i><b>11</b> Applied Audit Analytics</a></li>
-<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a><ul>
+<li class="chapter" data-level="12" data-path="auditpackage.html"><a href="auditpackage.html"><i class="fa fa-check"></i><b>12</b> Audit R Package</a>
+<ul>
 <li class="chapter" data-level="12.1" data-path="auditpackage.html"><a href="auditpackage.html#package-functions"><i class="fa fa-check"></i><b>12.1</b> Package functions</a></li>
 <li class="chapter" data-level="12.2" data-path="auditpackage.html"><a href="auditpackage.html#templates"><i class="fa fa-check"></i><b>12.2</b> Templates</a></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a><ul>
+<li class="chapter" data-level="13" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html"><i class="fa fa-check"></i><b>13</b> Continuous monitoring</a>
+<ul>
 <li class="chapter" data-level="13.1" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#considerations"><i class="fa fa-check"></i><b>13.1</b> Considerations</a></li>
 <li class="chapter" data-level="13.2" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#create-a-collection-analytic-and-table"><i class="fa fa-check"></i><b>13.2</b> Create a Collection, Analytic and Table</a></li>
 <li class="chapter" data-level="13.3" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#define-the-high-risk-test"><i class="fa fa-check"></i><b>13.3</b> Define the High Risk test</a></li>
@@ -282,12 +306,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.5" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#downloading-records-and-responses"><i class="fa fa-check"></i><b>13.5</b> Downloading records and responses</a></li>
 <li class="chapter" data-level="13.6" data-path="continuous-monitoring.html"><a href="continuous-monitoring.html#triggers-and-questionnaires"><i class="fa fa-check"></i><b>13.6</b> Triggers and Questionnaires</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a><ul>
+<li class="chapter" data-level="14" data-path="applied-datamart.html"><a href="applied-datamart.html"><i class="fa fa-check"></i><b>14</b> Audit Data Mart</a>
+<ul>
 <li class="chapter" data-level="14.1" data-path="applied-datamart.html"><a href="applied-datamart.html#what-to-etl"><i class="fa fa-check"></i><b>14.1</b> What to ETL</a></li>
 <li class="chapter" data-level="14.2" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-essentials"><i class="fa fa-check"></i><b>14.2</b> ETL Essentials</a></li>
 <li class="chapter" data-level="14.3" data-path="applied-datamart.html"><a href="applied-datamart.html#etl-example"><i class="fa fa-check"></i><b>14.3</b> ETL Example</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a><ul>
+<li class="chapter" data-level="15" data-path="machine-learning.html"><a href="machine-learning.html"><i class="fa fa-check"></i><b>15</b> Machine Learning</a>
+<ul>
 <li class="chapter" data-level="15.1" data-path="machine-learning.html"><a href="machine-learning.html#goal-predict-an-account-class"><i class="fa fa-check"></i><b>15.1</b> Goal: Predict an account class</a></li>
 <li class="chapter" data-level="15.2" data-path="machine-learning.html"><a href="machine-learning.html#generating-features"><i class="fa fa-check"></i><b>15.2</b> Generating features</a></li>
 <li class="chapter" data-level="15.3" data-path="machine-learning.html"><a href="machine-learning.html#training-the-model"><i class="fa fa-check"></i><b>15.3</b> Training the model</a></li>
@@ -295,12 +321,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.5" data-path="machine-learning.html"><a href="machine-learning.html#what-to-explore-next"><i class="fa fa-check"></i><b>15.5</b> What to explore next</a></li>
 </ul></li>
 <li class="part"><span><b>IV Appendix</b></span></li>
-<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a><ul>
+<li class="chapter" data-level="16" data-path="appendix-ca.html"><a href="appendix-ca.html"><i class="fa fa-check"></i><b>16</b> Continuous Auditing methodology</a>
+<ul>
 <li class="chapter" data-level="16.1" data-path="appendix-ca.html"><a href="appendix-ca.html#support-for-continuous-auditing"><i class="fa fa-check"></i><b>16.1</b> Support for Continuous Auditing</a></li>
 <li class="chapter" data-level="16.2" data-path="appendix-ca.html"><a href="appendix-ca.html#the-requirements-for-evaluting-icfr"><i class="fa fa-check"></i><b>16.2</b> The requirements for evaluting ICFR</a></li>
 <li class="chapter" data-level="16.3" data-path="appendix-ca.html"><a href="appendix-ca.html#determining-population-tolerable-error-rate"><i class="fa fa-check"></i><b>16.3</b> Determining population tolerable error rate</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a><ul>
+<li class="chapter" data-level="17" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html"><i class="fa fa-check"></i><b>17</b> Other practices to follow</a>
+<ul>
 <li class="chapter" data-level="17.1" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#documentation"><i class="fa fa-check"></i><b>17.1</b> Documentation</a></li>
 <li class="chapter" data-level="17.2" data-path="other-practices-to-follow.html"><a href="other-practices-to-follow.html#passwords"><i class="fa fa-check"></i><b>17.2</b> Passwords</a></li>
 </ul></li>
@@ -325,65 +353,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="cleaning-data" class="section level1">
+<div id="cleaning-data" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Cleaning data</h1>
 <p>Cleaning a data set, including fields and reshaping of the data, is a fundamental skill in order to get the data into an analyzable format. Real world data is messy, and will not typically be immediately analyzable immediately after downloading.</p>
 <p>For this section we will still use the company database, along with some more packages. New packages in this chapter include lubridate and tidyr.</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="cleaning-data.html#cb93-1"></a><span class="kw">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
-<span id="cb93-2"><a href="cleaning-data.html#cb93-2"></a><span class="kw">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
-<span id="cb93-3"><a href="cleaning-data.html#cb93-3"></a></span>
-<span id="cb93-4"><a href="cleaning-data.html#cb93-4"></a><span class="kw">library</span>(lubridate) <span class="co"># For date handling</span></span>
-<span id="cb93-5"><a href="cleaning-data.html#cb93-5"></a></span>
-<span id="cb93-6"><a href="cleaning-data.html#cb93-6"></a><span class="kw">library</span>(DBI) <span class="co"># For database connections</span></span>
-<span id="cb93-7"><a href="cleaning-data.html#cb93-7"></a></span>
-<span id="cb93-8"><a href="cleaning-data.html#cb93-8"></a><span class="kw">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="dt">showWarnings =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb93-9"><a href="cleaning-data.html#cb93-9"></a></span>
-<span id="cb93-10"><a href="cleaning-data.html#cb93-10"></a><span class="kw">download.file</span>(<span class="dt">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
-<span id="cb93-11"><a href="cleaning-data.html#cb93-11"></a>             <span class="dt">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
-<span id="cb93-12"><a href="cleaning-data.html#cb93-12"></a></span>
-<span id="cb93-13"><a href="cleaning-data.html#cb93-13"></a>con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
-<span id="cb93-14"><a href="cleaning-data.html#cb93-14"></a></span>
-<span id="cb93-15"><a href="cleaning-data.html#cb93-15"></a>gl &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb93-16"><a href="cleaning-data.html#cb93-16"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb93-17"><a href="cleaning-data.html#cb93-17"></a></span>
-<span id="cb93-18"><a href="cleaning-data.html#cb93-18"></a>vendors &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&#39;vendors&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb93-19"><a href="cleaning-data.html#cb93-19"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb93-20"><a href="cleaning-data.html#cb93-20"></a></span>
-<span id="cb93-21"><a href="cleaning-data.html#cb93-21"></a>industry &lt;-<span class="st"> </span><span class="kw">dbReadTable</span>(con, <span class="st">&#39;industry&#39;</span>) <span class="op">%&gt;%</span></span>
-<span id="cb93-22"><a href="cleaning-data.html#cb93-22"></a><span class="st">  </span><span class="kw">collect</span>()</span>
-<span id="cb93-23"><a href="cleaning-data.html#cb93-23"></a></span>
-<span id="cb93-24"><a href="cleaning-data.html#cb93-24"></a><span class="kw">dbDisconnect</span>(con)</span></code></pre></div>
-<div id="basic-math" class="section level2">
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="cleaning-data.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># For manipulating data</span></span>
+<span id="cb92-2"><a href="cleaning-data.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co"># For making data long and wide</span></span>
+<span id="cb92-3"><a href="cleaning-data.html#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="cleaning-data.html#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate) <span class="co"># For date handling</span></span>
+<span id="cb92-5"><a href="cleaning-data.html#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="cleaning-data.html#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI) <span class="co"># For database connections</span></span>
+<span id="cb92-7"><a href="cleaning-data.html#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-8"><a href="cleaning-data.html#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&quot;data&quot;</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb92-9"><a href="cleaning-data.html#cb92-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-10"><a href="cleaning-data.html#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="at">url =</span> <span class="st">&quot;https://github.com/jonlinca/auditanalytics/raw/master/data/rauditanalytics.sqlite&quot;</span>,</span>
+<span id="cb92-11"><a href="cleaning-data.html#cb92-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">destfile =</span> <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb92-12"><a href="cleaning-data.html#cb92-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-13"><a href="cleaning-data.html#cb92-13" aria-hidden="true" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(RSQLite<span class="sc">::</span><span class="fu">SQLite</span>(), <span class="st">&quot;data/rauditanalytics.sqlite&quot;</span>)</span>
+<span id="cb92-14"><a href="cleaning-data.html#cb92-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-15"><a href="cleaning-data.html#cb92-15" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">&#39;gl&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-16"><a href="cleaning-data.html#cb92-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb92-17"><a href="cleaning-data.html#cb92-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-18"><a href="cleaning-data.html#cb92-18" aria-hidden="true" tabindex="-1"></a>vendors <span class="ot">&lt;-</span> <span class="fu">tbl</span>(con, <span class="st">&#39;vendors&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-19"><a href="cleaning-data.html#cb92-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb92-20"><a href="cleaning-data.html#cb92-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-21"><a href="cleaning-data.html#cb92-21" aria-hidden="true" tabindex="-1"></a>industry <span class="ot">&lt;-</span> <span class="fu">dbReadTable</span>(con, <span class="st">&#39;industry&#39;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-22"><a href="cleaning-data.html#cb92-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb92-23"><a href="cleaning-data.html#cb92-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-24"><a href="cleaning-data.html#cb92-24" aria-hidden="true" tabindex="-1"></a><span class="fu">dbDisconnect</span>(con)</span></code></pre></div>
+<div id="basic-math" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Basic math</h2>
 <p>We covered some of the basic operators in R in the Completeness chapter, so we’ll cover some more calculations and transformations.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="cleaning-data.html#cb94-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb94-2"><a href="cleaning-data.html#cb94-2"></a>y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="cleaning-data.html#cb93-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb93-2"><a href="cleaning-data.html#cb93-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span></code></pre></div>
 <p>The basic mathematical symbols will calculate a vector with a position element against a different vector with the same position. In this case, the first number in <code>x</code> is added to the first number in <code>y</code> resulting in the first calculation, the second number in <code>x</code> is added to the second number in <code>y</code> resulting in the second calculation, and so on.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="cleaning-data.html#cb95-1"></a>y <span class="op">+</span><span class="st"> </span>x</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="cleaning-data.html#cb94-1" aria-hidden="true" tabindex="-1"></a>y <span class="sc">+</span> x</span></code></pre></div>
 <pre><code>## [1] 5 7 9</code></pre>
 <p>This distinction is important - vectorization allows R to be fast, but it changes how the user needs to understand objects.</p>
 <p><code>sum()</code> is fairly straight forward - it will add all the elements given, together:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="cleaning-data.html#cb97-1"></a><span class="kw">sum</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="cleaning-data.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>If you specify multiple vectors - it will merely combine them all together, equivalent to <code>sum(c(1, 2, 3), c(4, 5, 6))</code>:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="cleaning-data.html#cb99-1"></a><span class="kw">sum</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="cleaning-data.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x, y)</span></code></pre></div>
 <pre><code>## [1] 21</code></pre>
 <p>We mentioned in the prior chapter about NA values, which were ‘Not Available’ or Missing Values. It becomes important to understand the implication of them in your calculations. For example, when a NA value exists in a vector, you will get an NA by default:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="cleaning-data.html#cb101-1"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)</span>
-<span id="cb101-2"><a href="cleaning-data.html#cb101-2"></a><span class="kw">sum</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="cleaning-data.html#cb100-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
+<span id="cb100-2"><a href="cleaning-data.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z)</span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <p>While <code>sum()</code>, and several other functions like <code>mean()</code>, <code>min()</code> and <code>max()</code> all generally behave in predictable manners, they all have an argument of <code>na.rm = FALSE</code> by default (enter <code>?sum</code> to see this argument in the help file. The reason why <code>FALSE</code> is by default is that it brings attention to the vector missing values. If you want to perform the calculation on this, you either need to substitute the <code>NA</code> out for a value (imputation), or simply ignore them. Both these decisions require professional judgment before substitution or ignoring. To substitute <code>NA</code> for a value (for example, 10):</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="cleaning-data.html#cb103-1"></a><span class="kw">is.na</span>(z) <span class="co"># Shows which positions in the vector have an NA value</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="cleaning-data.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(z) <span class="co"># Shows which positions in the vector have an NA value</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="cleaning-data.html#cb105-1"></a>z[<span class="kw">is.na</span>(z)] &lt;-<span class="st"> </span><span class="dv">10</span> <span class="co"># Where the z value is is.na, assign 10</span></span>
-<span id="cb105-2"><a href="cleaning-data.html#cb105-2"></a><span class="kw">sum</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="cleaning-data.html#cb104-1" aria-hidden="true" tabindex="-1"></a>z[<span class="fu">is.na</span>(z)] <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># Where the z value is is.na, assign 10</span></span>
+<span id="cb104-2"><a href="cleaning-data.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z)</span></code></pre></div>
 <pre><code>## [1] 13</code></pre>
 <p>Or alternatively, set the argument <code>na.rm = TRUE</code> to throw away these values completely:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="cleaning-data.html#cb107-1"></a>z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>)</span>
-<span id="cb107-2"><a href="cleaning-data.html#cb107-2"></a><span class="kw">sum</span>(z, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="cleaning-data.html#cb106-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>)</span>
+<span id="cb106-2"><a href="cleaning-data.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(z, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="dates-and-times" class="section level2">
+<div id="dates-and-times" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> Dates and Times</h2>
 <p>Unlike numbers, date and times are inherently more complex. They require many additional considerations to properly wrangle:</p>
 <ul>
@@ -393,120 +421,120 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Do you care about daylight savings time?</li>
 </ul>
 <p>Starting with a basic example, lets understand the basic characteristics of dates. When you define a new date, the <code>lubridate::as_date()</code> function (or base <code>as.Date()</code>) works to convert character strings to dates.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="cleaning-data.html#cb109-1"></a>startString &lt;-<span class="st"> &#39;2020-07-30&#39;</span> <span class="co"># ISO 8601 standards, follow them</span></span>
-<span id="cb109-2"><a href="cleaning-data.html#cb109-2"></a></span>
-<span id="cb109-3"><a href="cleaning-data.html#cb109-3"></a><span class="co"># base::as.Date(startString) # Same thing as as_date, for now...</span></span>
-<span id="cb109-4"><a href="cleaning-data.html#cb109-4"></a>start &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">as_date</span>(startString)</span>
-<span id="cb109-5"><a href="cleaning-data.html#cb109-5"></a></span>
-<span id="cb109-6"><a href="cleaning-data.html#cb109-6"></a><span class="kw">class</span>(start)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="cleaning-data.html#cb108-1" aria-hidden="true" tabindex="-1"></a>startString <span class="ot">&lt;-</span> <span class="st">&#39;2020-07-30&#39;</span> <span class="co"># ISO 8601 standards, follow them</span></span>
+<span id="cb108-2"><a href="cleaning-data.html#cb108-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-3"><a href="cleaning-data.html#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="co"># base::as.Date(startString) # Same thing as as_date, for now...</span></span>
+<span id="cb108-4"><a href="cleaning-data.html#cb108-4" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(startString)</span>
+<span id="cb108-5"><a href="cleaning-data.html#cb108-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-6"><a href="cleaning-data.html#cb108-6" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(start)</span></code></pre></div>
 <pre><code>## [1] &quot;Date&quot;</code></pre>
 <p>You can convert any date to a date, as long as you specify the mask or format. A mask specifies where the date, month, year exist (as well as for time, hours, minutes, seconds). If you check the help file for <code>?strptime</code>, you will see several different formats for both specifying dates and times. For example, <code>%Y</code> is a four digit year while <code>%y%</code> is a two digit year. Here are a few examples with the same date (some are more unreasonable than others, but all can be captured):</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="cleaning-data.html#cb111-1"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;2020-07-30&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%Y-%m-%d&quot;</span>)</span>
-<span id="cb111-2"><a href="cleaning-data.html#cb111-2"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;30/07/2020&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>) <span class="co"># Not ISO 8601</span></span>
-<span id="cb111-3"><a href="cleaning-data.html#cb111-3"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;July 30, 20&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%B %d, %y&quot;</span>) <span class="co"># Really not ISO 8601</span></span>
-<span id="cb111-4"><a href="cleaning-data.html#cb111-4"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;Jul3020&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%b%d%y&quot;</span>) <span class="co"># Definitely not ISO 8601</span></span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="cleaning-data.html#cb110-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;2020-07-30&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%Y-%m-%d&quot;</span>)</span>
+<span id="cb110-2"><a href="cleaning-data.html#cb110-2" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;30/07/2020&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>) <span class="co"># Not ISO 8601</span></span>
+<span id="cb110-3"><a href="cleaning-data.html#cb110-3" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;July 30, 20&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%B %d, %y&quot;</span>) <span class="co"># Really not ISO 8601</span></span>
+<span id="cb110-4"><a href="cleaning-data.html#cb110-4" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;Jul3020&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%b%d%y&quot;</span>) <span class="co"># Definitely not ISO 8601</span></span></code></pre></div>
 <p>The same concept also applies to datetimes, where you can convert a given time to a ‘POSIXct’ or ‘POSIXlt’ format (the differences between ‘POSIXct’ and ‘POSIXlt’ are found in <code>?DateTimeClasses</code>, under details):</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="cleaning-data.html#cb112-1"></a>starttime_base &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&#39;2020-07-30 12:00:00&#39;</span>)</span>
-<span id="cb112-2"><a href="cleaning-data.html#cb112-2"></a>starttime_lub &lt;-<span class="st"> </span>lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-07-30 12:00:00&#39;</span>)</span>
-<span id="cb112-3"><a href="cleaning-data.html#cb112-3"></a></span>
-<span id="cb112-4"><a href="cleaning-data.html#cb112-4"></a><span class="kw">class</span>(starttime_base); <span class="kw">class</span>(starttime_lub)</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="cleaning-data.html#cb111-1" aria-hidden="true" tabindex="-1"></a>starttime_base <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="st">&#39;2020-07-30 12:00:00&#39;</span>)</span>
+<span id="cb111-2"><a href="cleaning-data.html#cb111-2" aria-hidden="true" tabindex="-1"></a>starttime_lub <span class="ot">&lt;-</span> lubridate<span class="sc">::</span><span class="fu">as_datetime</span>(<span class="st">&#39;2020-07-30 12:00:00&#39;</span>)</span>
+<span id="cb111-3"><a href="cleaning-data.html#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-4"><a href="cleaning-data.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(starttime_base); <span class="fu">class</span>(starttime_lub)</span></code></pre></div>
 <pre><code>## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
 <pre><code>## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
 <p>And format masks apply as well to date time, just in case you get something unconventional:</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="cleaning-data.html#cb115-1"></a>lubridate<span class="op">::</span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-07-30 12:00:00 PM -0600&#39;</span>, </span>
-<span id="cb115-2"><a href="cleaning-data.html#cb115-2"></a>                       <span class="dt">format =</span> <span class="st">&quot;%Y-%m-%d %I:%M:%S %p %z&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="cleaning-data.html#cb114-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_datetime</span>(<span class="st">&#39;2020-07-30 12:00:00 PM -0600&#39;</span>, </span>
+<span id="cb114-2"><a href="cleaning-data.html#cb114-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">format =</span> <span class="st">&quot;%Y-%m-%d %I:%M:%S %p %z&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 18:00:00 UTC&quot;</code></pre>
-<div id="understanding-default-time-zones" class="section level3">
+<div id="understanding-default-time-zones" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Understanding Default Time Zones</h3>
 <p>Did you consider the time zone that the times were created in? This is system-specific and base <code>POSIXct</code> and lubridate <code>as_datetime</code> behave differently, so you have to be careful!</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="cleaning-data.html#cb117-1"></a><span class="kw">print</span>(starttime_base); <span class="kw">attr</span>(starttime_base,<span class="st">&quot;tzone&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="cleaning-data.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(starttime_base); <span class="fu">attr</span>(starttime_base,<span class="st">&quot;tzone&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 12:00:00 MDT&quot;</code></pre>
 <pre><code>## [1] &quot;&quot;</code></pre>
 <p>Notice that base treats the creation of the current timezone based off your local R machine, although its not extractable (and you will eventually find, hard to change).</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="cleaning-data.html#cb120-1"></a><span class="kw">print</span>(starttime_lub); <span class="kw">tz</span>(starttime_lub)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="cleaning-data.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(starttime_lub); <span class="fu">tz</span>(starttime_lub)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 12:00:00 UTC&quot;</code></pre>
 <pre><code>## [1] &quot;UTC&quot;</code></pre>
 <p>The lubridate version will assign the date-time automatically to UTC, unless you specify it. It is for this reason you will generally want to avoid using base R to convert to date times, and stick with lubridate for better predictability.</p>
 <p>Having an automatic conversion to UTC isn’t bad per se - having a universal ground truth to UTC is good, as it removes Daylight Saving component, and is an easy way to standardize multiple data sets together. Unfortunately, many systems will not tell you what time zone their data is in, so you will have to figure it out and ensure R is aligned accordingly.</p>
 </div>
-<div id="override-or-display-timezones" class="section level3">
+<div id="override-or-display-timezones" class="section level3" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Override or display timezones</h3>
 <p>Hopefully you have been convinced to stick with lubridate for your date transformations. Now, lets get some confidence on these timezone transformations.</p>
 <p>The first method is <code>force_tz()</code>, which forces the current time to become that same hour in a new timezone. When we assigned July 30th to the date, we would have assumed this date would have been in the current timezone we exist in (generally, the system time-zone you are in). To do this, specify the date, but also the time zone you want the date or time to be harmonized in:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="cleaning-data.html#cb123-1"></a>starttime_lub <span class="co"># Starts as UTC</span></span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="cleaning-data.html#cb122-1" aria-hidden="true" tabindex="-1"></a>starttime_lub <span class="co"># Starts as UTC</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 12:00:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="cleaning-data.html#cb125-1"></a><span class="kw">force_tz</span>(starttime_lub, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># Force the saved time to be Mountain</span></span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="cleaning-data.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">force_tz</span>(starttime_lub, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># Force the saved time to be Mountain</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 12:00:00 MDT&quot;</code></pre>
 <p>Alternatively, you may wish to only convert the time so its displayed in the correct timezone, but leave the base truth as is. <code>with_tz()</code> will allow you to change the timezone that is displayed, while honoring the original time in the data.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="cleaning-data.html#cb127-1"></a>starttime_lub</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="cleaning-data.html#cb126-1" aria-hidden="true" tabindex="-1"></a>starttime_lub</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 12:00:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="cleaning-data.html#cb129-1"></a><span class="kw">with_tz</span>(starttime_lub, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># Display the current time as Mountain</span></span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="cleaning-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with_tz</span>(starttime_lub, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># Display the current time as Mountain</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30 06:00:00 MDT&quot;</code></pre>
 </div>
-<div id="daylight-saving-implications" class="section level3">
+<div id="daylight-saving-implications" class="section level3" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Daylight Saving Implications</h3>
 <p>There are also timezone implications when it comes to daylight saving time. This is especially important when making audit decisions based on duration, or expected local norms for time-of-day.</p>
 <p>In several locales across the world, daylight saving time will alter the clock for half a year locally, but has no impact on UTC. For example, your staff may start their day at 8:00 AM locally. When daylight saving kicks in, the local time stays at 8:00 AM and the UTC time shifts from 15:00 to 14:00.</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="cleaning-data.html#cb131-1"></a>pre &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-03-07 8:00:00&#39;</span>, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day before DST starts</span></span>
-<span id="cb131-2"><a href="cleaning-data.html#cb131-2"></a>post &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-03-08 8:00:00&#39;</span>, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day DST started</span></span>
-<span id="cb131-3"><a href="cleaning-data.html#cb131-3"></a></span>
-<span id="cb131-4"><a href="cleaning-data.html#cb131-4"></a><span class="kw">dst</span>(pre); <span class="kw">with_tz</span>(pre, <span class="dt">tz =</span> <span class="st">&#39;UTC&#39;</span>) <span class="co"># Was DST active before? ; What is the UTC time before? </span></span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="cleaning-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="st">&#39;2020-03-07 8:00:00&#39;</span>, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day before DST starts</span></span>
+<span id="cb130-2"><a href="cleaning-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="st">&#39;2020-03-08 8:00:00&#39;</span>, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day DST started</span></span>
+<span id="cb130-3"><a href="cleaning-data.html#cb130-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-4"><a href="cleaning-data.html#cb130-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dst</span>(pre); <span class="fu">with_tz</span>(pre, <span class="at">tz =</span> <span class="st">&#39;UTC&#39;</span>) <span class="co"># Was DST active before? ; What is the UTC time before? </span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <pre><code>## [1] &quot;2020-03-07 15:00:00 UTC&quot;</code></pre>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="cleaning-data.html#cb134-1"></a><span class="kw">dst</span>(post); <span class="kw">with_tz</span>(post, <span class="dt">tz =</span> <span class="st">&#39;UTC&#39;</span>) <span class="co"># Was DST active after? ; What is the UTC time after?</span></span></code></pre></div>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="cleaning-data.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dst</span>(post); <span class="fu">with_tz</span>(post, <span class="at">tz =</span> <span class="st">&#39;UTC&#39;</span>) <span class="co"># Was DST active after? ; What is the UTC time after?</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <pre><code>## [1] &quot;2020-03-08 14:00:00 UTC&quot;</code></pre>
 </div>
-<div id="differences-between-time" class="section level3">
+<div id="differences-between-time" class="section level3" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Differences between time</h3>
 <p>Another common calculation is to calculate the time differences between two points of time. This seemingly simple action has several interpretations behind it. Do you want relative dates? Do you want exact elapsed time?</p>
 <blockquote>
-<p>People are not always consistent in how they expect time to behave. Sometimes the passage of time is a monotone progression of instants that should be as mathematically reliable as the number line. On other occasions time must follow complex conventions and rules so that the clock times we see reflect what we expect to observe in terms of daylight, season, and congruence with the atomic clock. <span class="citation">(Vitalie Spinu <a href="#ref-lubridate-help" role="doc-biblioref">2016</a>)</span></p>
+<p>People are not always consistent in how they expect time to behave. Sometimes the passage of time is a monotone progression of instants that should be as mathematically reliable as the number line. On other occasions time must follow complex conventions and rules so that the clock times we see reflect what we expect to observe in terms of daylight, season, and congruence with the atomic clock. <span class="citation">(<a href="references.html#ref-lubridate-help" role="doc-biblioref">Vitalie Spinu 2016</a>)</span></p>
 </blockquote>
 <p>Adding time is easy - you simply need to decide if you’re adding a period (i.e. human construct of days) or if you are following physical time (i.e. seconds). The main difference is choosing lubridate’s functions that honor periods or durations</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="cleaning-data.html#cb137-1"></a>pre &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-03-07 8:00:00&#39;</span>, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day before DST starts</span></span>
-<span id="cb137-2"><a href="cleaning-data.html#cb137-2"></a>post &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-03-08 8:00:00&#39;</span>, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day DST started, skipped ahead 1 hour</span></span>
-<span id="cb137-3"><a href="cleaning-data.html#cb137-3"></a></span>
-<span id="cb137-4"><a href="cleaning-data.html#cb137-4"></a><span class="co"># Periods: Human construct of days</span></span>
-<span id="cb137-5"><a href="cleaning-data.html#cb137-5"></a>pre <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>) ; pre <span class="op">+</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">24</span>) <span class="co"># Equal to post, the human construct</span></span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="cleaning-data.html#cb136-1" aria-hidden="true" tabindex="-1"></a>pre <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="st">&#39;2020-03-07 8:00:00&#39;</span>, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day before DST starts</span></span>
+<span id="cb136-2"><a href="cleaning-data.html#cb136-2" aria-hidden="true" tabindex="-1"></a>post <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="st">&#39;2020-03-08 8:00:00&#39;</span>, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) <span class="co"># The day DST started, skipped ahead 1 hour</span></span>
+<span id="cb136-3"><a href="cleaning-data.html#cb136-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-4"><a href="cleaning-data.html#cb136-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Periods: Human construct of days</span></span>
+<span id="cb136-5"><a href="cleaning-data.html#cb136-5" aria-hidden="true" tabindex="-1"></a>pre <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">1</span>) ; pre <span class="sc">+</span> <span class="fu">hours</span>(<span class="dv">24</span>) <span class="co"># Equal to post, the human construct</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-03-08 08:00:00 MDT&quot;</code></pre>
 <pre><code>## [1] &quot;2020-03-08 08:00:00 MDT&quot;</code></pre>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="cleaning-data.html#cb140-1"></a><span class="co"># Duration: Physical construct of time</span></span>
-<span id="cb140-2"><a href="cleaning-data.html#cb140-2"></a>pre <span class="op">+</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>) ; pre <span class="op">+</span><span class="st"> </span><span class="kw">dhours</span>(<span class="dv">24</span>) <span class="co"># NOT to post, but actually 1 hour after</span></span></code></pre></div>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="cleaning-data.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Duration: Physical construct of time</span></span>
+<span id="cb139-2"><a href="cleaning-data.html#cb139-2" aria-hidden="true" tabindex="-1"></a>pre <span class="sc">+</span> <span class="fu">ddays</span>(<span class="dv">1</span>) ; pre <span class="sc">+</span> <span class="fu">dhours</span>(<span class="dv">24</span>) <span class="co"># NOT to post, but actually 1 hour after</span></span></code></pre></div>
 <pre><code>## [1] &quot;2020-03-08 09:00:00 MDT&quot;</code></pre>
 <pre><code>## [1] &quot;2020-03-08 09:00:00 MDT&quot;</code></pre>
 <p>Calculating intervals and periods is a bit different. If we go back up to our example of pre-and-post daylight saving time, we can either expect this answer to be 1 day or 23 hours. Again, depending on your use case, it is up to you.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="cleaning-data.html#cb143-1"></a>span &lt;-<span class="st"> </span><span class="kw">interval</span>(pre, post)</span>
-<span id="cb143-2"><a href="cleaning-data.html#cb143-2"></a></span>
-<span id="cb143-3"><a href="cleaning-data.html#cb143-3"></a><span class="co"># Period: To find the number of days, in human constructs</span></span>
-<span id="cb143-4"><a href="cleaning-data.html#cb143-4"></a>span <span class="op">/</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>) <span class="co"># Period calculation by days. </span></span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="cleaning-data.html#cb142-1" aria-hidden="true" tabindex="-1"></a>span <span class="ot">&lt;-</span> <span class="fu">interval</span>(pre, post)</span>
+<span id="cb142-2"><a href="cleaning-data.html#cb142-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb142-3"><a href="cleaning-data.html#cb142-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Period: To find the number of days, in human constructs</span></span>
+<span id="cb142-4"><a href="cleaning-data.html#cb142-4" aria-hidden="true" tabindex="-1"></a>span <span class="sc">/</span> <span class="fu">days</span>(<span class="dv">1</span>) <span class="co"># Period calculation by days. </span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="cleaning-data.html#cb145-1"></a><span class="co"># Duration - To find the hours between, in physical constructs</span></span>
-<span id="cb145-2"><a href="cleaning-data.html#cb145-2"></a><span class="kw">as.duration</span>(span)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="cleaning-data.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Duration - To find the hours between, in physical constructs</span></span>
+<span id="cb144-2"><a href="cleaning-data.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.duration</span>(span)</span></code></pre></div>
 <pre><code>## [1] &quot;82800s (~23 hours)&quot;</code></pre>
 </div>
-<div id="derived-date-information" class="section level3">
+<div id="derived-date-information" class="section level3" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> Derived date information</h3>
 <p>A common task for auditors is to find out the month a transaction took place in. With lubridate, its quite straight forward - for example, to extract the month, you don’t need to have any messy substrings (or to extract other useful times, for that matter):</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="cleaning-data.html#cb147-1"></a>thedate &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(<span class="st">&#39;2020-07-01 12:00:00&#39;</span>, <span class="dt">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) </span>
-<span id="cb147-2"><a href="cleaning-data.html#cb147-2"></a></span>
-<span id="cb147-3"><a href="cleaning-data.html#cb147-3"></a><span class="kw">month</span>(thedate)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="cleaning-data.html#cb146-1" aria-hidden="true" tabindex="-1"></a>thedate <span class="ot">&lt;-</span> <span class="fu">as_datetime</span>(<span class="st">&#39;2020-07-01 12:00:00&#39;</span>, <span class="at">tz =</span> <span class="st">&#39;Canada/Mountain&#39;</span>) </span>
+<span id="cb146-2"><a href="cleaning-data.html#cb146-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb146-3"><a href="cleaning-data.html#cb146-3" aria-hidden="true" tabindex="-1"></a><span class="fu">month</span>(thedate)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="cleaning-data.html#cb149-1"></a><span class="kw">year</span>(thedate)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="cleaning-data.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="fu">year</span>(thedate)</span></code></pre></div>
 <pre><code>## [1] 2020</code></pre>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="cleaning-data.html#cb151-1"></a><span class="kw">quarter</span>(thedate) <span class="co"># Canada Day starts on the first day of the third quarter. Does your company Financial Year not start on January 1? Just change the fiscal_start argument.</span></span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="cleaning-data.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quarter</span>(thedate) <span class="co"># Canada Day starts on the first day of the third quarter. Does your company Financial Year not start on January 1? Just change the fiscal_start argument.</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="cleaning-data.html#cb153-1"></a><span class="kw">wday</span>(thedate, <span class="dt">label =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="cleaning-data.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wday</span>(thedate, <span class="at">label =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] Wed
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
 </div>
-<div id="cleaning-numerical-dates" class="section level3">
+<div id="cleaning-numerical-dates" class="section level3" number="7.2.6">
 <h3><span class="header-section-number">7.2.6</span> Cleaning numerical dates</h3>
 <p>With dates, sometimes they may represented as a number - it is important to understand your source system date before you convert it.</p>
 <p>Some systems may calculate a date from an ‘origin’ using the number. While our concept of time may start with 0 AD (as the origin), several computer systems and applications do not behave in that manner. Excel, for example, starts from 1900-01-01, whereas Unix operating systems have their origin as 1970-01-01. If converting a date from a number, you need to research and then specify an origin, otherwise you will have challenges in specifying dates.</p>
 <p>In our vendors table, we have a numeric date but also a date in a character form for reference</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="cleaning-data.html#cb155-1"></a>vendors <span class="op">%&gt;%</span></span>
-<span id="cb155-2"><a href="cleaning-data.html#cb155-2"></a><span class="st">  </span><span class="kw">select</span>(date_added, date_added_char)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="cleaning-data.html#cb154-1" aria-hidden="true" tabindex="-1"></a>vendors <span class="sc">%&gt;%</span></span>
+<span id="cb154-2"><a href="cleaning-data.html#cb154-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date_added, date_added_char)</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   date_added date_added_char
 ##        &lt;dbl&gt; &lt;chr&gt;          
@@ -520,10 +548,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8      16620 2015-07-04     
 ## 9      16652 2015-08-05</code></pre>
 <p>By specifying the origin a few different origins, we can see what the origin should have been in this case:</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="cleaning-data.html#cb157-1"></a>vendors <span class="op">%&gt;%</span></span>
-<span id="cb157-2"><a href="cleaning-data.html#cb157-2"></a><span class="st">  </span><span class="kw">select</span>(date_added, date_added_char) <span class="op">%&gt;%</span></span>
-<span id="cb157-3"><a href="cleaning-data.html#cb157-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_added_unix =</span> <span class="kw">as_date</span>(date_added, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
-<span id="cb157-4"><a href="cleaning-data.html#cb157-4"></a>         <span class="dt">date_added_excel =</span> <span class="kw">as_date</span>(date_added, <span class="dt">origin =</span> <span class="st">&#39;1900-01-01&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="cleaning-data.html#cb156-1" aria-hidden="true" tabindex="-1"></a>vendors <span class="sc">%&gt;%</span></span>
+<span id="cb156-2"><a href="cleaning-data.html#cb156-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date_added, date_added_char) <span class="sc">%&gt;%</span></span>
+<span id="cb156-3"><a href="cleaning-data.html#cb156-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_added_unix =</span> <span class="fu">as_date</span>(date_added, <span class="at">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>),</span>
+<span id="cb156-4"><a href="cleaning-data.html#cb156-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">date_added_excel =</span> <span class="fu">as_date</span>(date_added, <span class="at">origin =</span> <span class="st">&#39;1900-01-01&#39;</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 4
 ##   date_added date_added_char date_added_unix date_added_excel
 ##        &lt;dbl&gt; &lt;chr&gt;           &lt;date&gt;          &lt;date&gt;          
@@ -537,23 +565,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8      16620 2015-07-04      2015-07-04      1945-07-04      
 ## 9      16652 2015-08-05      2015-08-05      1945-08-05</code></pre>
 <p>Dates can also appear in a completely different format. Julian (also known as mainframe or ordinal) dates are an example, where the year is specified but the date is relative to January 1. So 212 days is either July 30 or 31, depending if it is a leap year or not.</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="cleaning-data.html#cb159-1"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;19212&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%y%j&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="cleaning-data.html#cb158-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;19212&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%y%j&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2019-07-31&quot;</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="cleaning-data.html#cb161-1"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;20212&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;%y%j&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="cleaning-data.html#cb160-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;20212&#39;</span>, <span class="at">format =</span> <span class="st">&quot;%y%j&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30&quot;</code></pre>
 <p>JDE E1’s dates also add an extra digit in front of it, to symbolize the century. While there is no R way to translate 0 to 19xx and 1 to 20xx, practically speaking we are safe with assuming the century as we are at least 20 years past that point (as of this writing). Amending the mask to ignore the 1 can be done in the format:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="cleaning-data.html#cb163-1"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;119212&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;1%y%j&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="cleaning-data.html#cb162-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;119212&#39;</span>, <span class="at">format =</span> <span class="st">&quot;1%y%j&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2019-07-31&quot;</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="cleaning-data.html#cb165-1"></a>lubridate<span class="op">::</span><span class="kw">as_date</span>(<span class="st">&#39;120212&#39;</span>, <span class="dt">format =</span> <span class="st">&quot;1%y%j&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="cleaning-data.html#cb164-1" aria-hidden="true" tabindex="-1"></a>lubridate<span class="sc">::</span><span class="fu">as_date</span>(<span class="st">&#39;120212&#39;</span>, <span class="at">format =</span> <span class="st">&quot;1%y%j&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;2020-07-30&quot;</code></pre>
 </div>
 </div>
-<div id="separate" class="section level2">
+<div id="separate" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Separate</h2>
 <p>Occasionally, distinct data will be combined in the same cell. This can be due to data entry or an unusual method of storing information. There will generally a separator within the field (similar to a delimiter), but the data is still contained within one field.</p>
 <p>For example, if we look at our vendor table and <code>name</code> column, we can see the company names appear to also have a Contact person.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="cleaning-data.html#cb167-1"></a>vendors <span class="op">%&gt;%</span></span>
-<span id="cb167-2"><a href="cleaning-data.html#cb167-2"></a><span class="st">  </span><span class="kw">select</span>(type, name)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="cleaning-data.html#cb166-1" aria-hidden="true" tabindex="-1"></a>vendors <span class="sc">%&gt;%</span></span>
+<span id="cb166-2"><a href="cleaning-data.html#cb166-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(type, name)</span></code></pre></div>
 <pre><code>## # A tibble: 9 x 2
 ##   type  name                                          
 ##   &lt;chr&gt; &lt;chr&gt;                                         
@@ -567,9 +595,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 V     Bray Company Ltd - Contact: el-Jaffer, Shaheer
 ## 9 V     Chrisman Company Ltd - Contact: Burch, Kryslyn</code></pre>
 <p>While the name is accurate, the contact name shouldn’t be in there. We can isolate the contact name by using <code>separate()</code>, allowing us to split a column by defining a separator and also new column names. In this case, the ‘-’ (dash) character could work:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="cleaning-data.html#cb169-1"></a>vendors <span class="op">%&gt;%</span></span>
-<span id="cb169-2"><a href="cleaning-data.html#cb169-2"></a><span class="st">  </span><span class="kw">select</span>(type, name) <span class="op">%&gt;%</span></span>
-<span id="cb169-3"><a href="cleaning-data.html#cb169-3"></a><span class="st">  </span><span class="kw">separate</span>(name, <span class="kw">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="dt">sep =</span> <span class="st">&#39;-&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="cleaning-data.html#cb168-1" aria-hidden="true" tabindex="-1"></a>vendors <span class="sc">%&gt;%</span></span>
+<span id="cb168-2"><a href="cleaning-data.html#cb168-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(type, name) <span class="sc">%&gt;%</span></span>
+<span id="cb168-3"><a href="cleaning-data.html#cb168-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="at">sep =</span> <span class="st">&#39;-&#39;</span>)</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 4 rows [4, 5, 7, 8].</code></pre>
 <pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 1 rows [2].</code></pre>
 <pre><code>## # A tibble: 9 x 3
@@ -585,9 +613,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8 V     &quot;Bray Company Ltd &quot;     &quot; Contact: el&quot;            
 ## 9 V     &quot;Chrisman Company Ltd &quot; &quot; Contact: Burch, Kryslyn&quot;</code></pre>
 <p>Sometimes a character isn’t specific enough. We can actually customize the separator even further by changing its argument to be more specific. In this case, perhaps we want both the dash and the word “Contact:”:</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="cleaning-data.html#cb173-1"></a>vendors <span class="op">%&gt;%</span></span>
-<span id="cb173-2"><a href="cleaning-data.html#cb173-2"></a><span class="st">  </span><span class="kw">select</span>(id, type, name) <span class="op">%&gt;%</span></span>
-<span id="cb173-3"><a href="cleaning-data.html#cb173-3"></a><span class="st">  </span><span class="kw">separate</span>(name, <span class="kw">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="dt">sep =</span> <span class="st">&#39;- Contact:&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="cleaning-data.html#cb172-1" aria-hidden="true" tabindex="-1"></a>vendors <span class="sc">%&gt;%</span></span>
+<span id="cb172-2"><a href="cleaning-data.html#cb172-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, type, name) <span class="sc">%&gt;%</span></span>
+<span id="cb172-3"><a href="cleaning-data.html#cb172-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="at">sep =</span> <span class="st">&#39;- Contact:&#39;</span>)</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 3 rows [1, 2, 3].</code></pre>
 <pre><code>## # A tibble: 9 x 4
 ##      id type  name                    company_contact      
@@ -603,19 +631,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 9  2211 V     &quot;Chrisman Company Ltd &quot; &quot; Burch, Kryslyn&quot;</code></pre>
 <p>What is nice about this functionality is that if the separator isn’t found, the missing values are NA. The warning is good to see (as the employees don’t have a company contact), and can be safely ignored in this case.</p>
 </div>
-<div id="separate_rows" class="section level2">
+<div id="separate_rows" class="section level2" number="7.4">
 <h2><span class="header-section-number">7.4</span> Separate_rows</h2>
 <p>Similarly grouped data can also be combined in the same cell. This is typically representing a one-to-many (or many-to-one) relationship. This can be due to data entry or unusual output formats. Consider our industry table, which is an industry-to-company mapping table, telling us which companies and the respective industry they work in:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="cleaning-data.html#cb176-1"></a>industry</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="cleaning-data.html#cb175-1" aria-hidden="true" tabindex="-1"></a>industry</span></code></pre></div>
 <pre><code>##          id            industry
 ## 1      2726         Health Care
 ## 2 2612,2211 Commerical Supplies</code></pre>
 <p>As of now, there would be no way to join the industry, and specifically the value Commercial Supplies, into our vendor table. The unique key is id number of the company, which gets joined to the vendor table.</p>
 <p>When we run into a situation where a value may belong to the same key multiple times (multiple IDs are associated with one industry), we can use <code>separate_rows()</code> to break up that row into several rows. For this function, we need to specify the columns that need to be separated - in this case, <code>id</code> needs to be broken apart.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="cleaning-data.html#cb178-1"></a>clean_industry &lt;-<span class="st"> </span>industry <span class="op">%&gt;%</span></span>
-<span id="cb178-2"><a href="cleaning-data.html#cb178-2"></a><span class="st">  </span><span class="kw">separate_rows</span>(id, <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="co"># Convert will try to guess the data type for each field, based on the content that was separated</span></span>
-<span id="cb178-3"><a href="cleaning-data.html#cb178-3"></a></span>
-<span id="cb178-4"><a href="cleaning-data.html#cb178-4"></a><span class="kw">print</span>(clean_industry)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="cleaning-data.html#cb177-1" aria-hidden="true" tabindex="-1"></a>clean_industry <span class="ot">&lt;-</span> industry <span class="sc">%&gt;%</span></span>
+<span id="cb177-2"><a href="cleaning-data.html#cb177-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(id, <span class="at">convert =</span> <span class="cn">TRUE</span>) <span class="co"># Convert will try to guess the data type for each field, based on the content that was separated</span></span>
+<span id="cb177-3"><a href="cleaning-data.html#cb177-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb177-4"><a href="cleaning-data.html#cb177-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(clean_industry)</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##      id industry           
 ##   &lt;int&gt; &lt;chr&gt;              
@@ -624,9 +652,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3  2211 Commerical Supplies</code></pre>
 <p><code>separate_rows()</code> will automatically expand the column that needs to be separated, while replicating the content for that same value into subsequent rows.</p>
 </div>
-<div id="tidy-data" class="section level2">
+<div id="tidy-data" class="section level2" number="7.5">
 <h2><span class="header-section-number">7.5</span> Tidy data</h2>
-<p>The three key concepts in ‘tidy data’ <span class="citation">(Hadley Wickham <a href="#ref-rfordatasci" role="doc-biblioref">2017</a>)</span> is that:</p>
+<p>The three key concepts in ‘tidy data’ <span class="citation">(<a href="references.html#ref-rfordatasci" role="doc-biblioref">G. G. Hadley Wickham 2017</a>)</span> is that:</p>
 <ul>
 <li>Each variable must have its own column.</li>
 <li>Each observation must have its own row.</li>
@@ -634,13 +662,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>While you can get away with performing basic analysis and checks, having the ability to move data between formats increases competency for cleaning, flexibility for plotting, and legibility for outputting tables in a readable format.</p>
 <p>Lets start by cleaning the vendor table</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="cleaning-data.html#cb180-1"></a>clean_vendors &lt;-<span class="st"> </span>vendors <span class="op">%&gt;%</span></span>
-<span id="cb180-2"><a href="cleaning-data.html#cb180-2"></a><span class="st">  </span><span class="kw">separate</span>(name, <span class="kw">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="dt">sep =</span> <span class="st">&#39;- Contact: &#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># From the separate() section</span></span>
-<span id="cb180-3"><a href="cleaning-data.html#cb180-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>date_added_char) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Remove one of the date fields </span></span>
-<span id="cb180-4"><a href="cleaning-data.html#cb180-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_added =</span> <span class="kw">as_date</span>(date_added, <span class="dt">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># From the cleaning dates section</span></span>
-<span id="cb180-5"><a href="cleaning-data.html#cb180-5"></a><span class="st">  </span><span class="kw">filter</span>(type <span class="op">==</span><span class="st"> &#39;V&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="cleaning-data.html#cb179-1" aria-hidden="true" tabindex="-1"></a>clean_vendors <span class="ot">&lt;-</span> vendors <span class="sc">%&gt;%</span></span>
+<span id="cb179-2"><a href="cleaning-data.html#cb179-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">&#39;name&#39;</span>, <span class="st">&#39;company_contact&#39;</span>), <span class="at">sep =</span> <span class="st">&#39;- Contact: &#39;</span>) <span class="sc">%&gt;%</span> <span class="co"># From the separate() section</span></span>
+<span id="cb179-3"><a href="cleaning-data.html#cb179-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>date_added_char) <span class="sc">%&gt;%</span> <span class="co"># Remove one of the date fields </span></span>
+<span id="cb179-4"><a href="cleaning-data.html#cb179-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_added =</span> <span class="fu">as_date</span>(date_added, <span class="at">origin =</span> <span class="st">&#39;1970-01-01&#39;</span>)) <span class="sc">%&gt;%</span> <span class="co"># From the cleaning dates section</span></span>
+<span id="cb179-5"><a href="cleaning-data.html#cb179-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&#39;V&#39;</span>)</span></code></pre></div>
 <pre><code>## Warning: Expected 2 pieces. Missing pieces filled with `NA` in 3 rows [1, 2, 3].</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="cleaning-data.html#cb182-1"></a><span class="kw">print</span>(clean_vendors)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="cleaning-data.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(clean_vendors)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##      id type  name  company_contact date_added summary `2015` `2016` `2017`
 ##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -659,7 +687,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Why would you want to subscribe to this tidy data philosophy? When you have a tidy data set, you are more empowered to explore your data (especially with tidyverse related commands), but you can also have the power to reshape data as necessary to fit the visualizing output you are imagining.</p>
 </div>
-<div id="clean-pivot" class="section level2">
+<div id="clean-pivot" class="section level2" number="7.6">
 <h2><span class="header-section-number">7.6</span> Pivots, wide and longer</h2>
 <p>Effectively pivoting your data into more suitable columns and rows requires you to consider the following:</p>
 <ul>
@@ -667,7 +695,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>What do you want the new name of these columns to be? Consider both the name and aggregated value.</li>
 </ul>
 <p>In the <code>clean_vendors</code> data, we see each year represented as columns, and those columns represent dollar amounts.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="cleaning-data.html#cb184-1"></a>clean_vendors</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="cleaning-data.html#cb183-1" aria-hidden="true" tabindex="-1"></a>clean_vendors</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 10
 ##      id type  name  company_contact date_added summary `2015` `2016` `2017`
 ##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;           &lt;date&gt;     &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -679,10 +707,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 6  2211 V     &quot;Chr… Burch, Kryslyn  2015-08-05 credits   221. 3.69e2 6.57e2
 ## # … with 1 more variable: `2018` &lt;dbl&gt;</code></pre>
 <p>We can pivot this data by specifying the years, and then aggregating the amount. In this case, we want to take the columns and assign them to rows, and making the data longer. <code>pivot_longer()</code> will allow us to make this transformation:</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="cleaning-data.html#cb186-1"></a>clean_vendors <span class="op">%&gt;%</span></span>
-<span id="cb186-2"><a href="cleaning-data.html#cb186-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">2015</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2016</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2017</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
-<span id="cb186-3"><a href="cleaning-data.html#cb186-3"></a>               <span class="dt">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
-<span id="cb186-4"><a href="cleaning-data.html#cb186-4"></a>               <span class="dt">values_to =</span> <span class="st">&#39;amount&#39;</span>) <span class="co"># the values of the aggregation</span></span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="cleaning-data.html#cb185-1" aria-hidden="true" tabindex="-1"></a>clean_vendors <span class="sc">%&gt;%</span></span>
+<span id="cb185-2"><a href="cleaning-data.html#cb185-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2016</span><span class="st">`</span>, <span class="st">`</span><span class="at">2017</span><span class="st">`</span>, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
+<span id="cb185-3"><a href="cleaning-data.html#cb185-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
+<span id="cb185-4"><a href="cleaning-data.html#cb185-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&#39;amount&#39;</span>) <span class="co"># the values of the aggregation</span></span></code></pre></div>
 <pre><code>## # A tibble: 24 x 8
 ##       id type  name            company_contact   date_added summary year  amount
 ##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;             &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt;
@@ -698,12 +726,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10  2211 V     &quot;Chrisman Comp… Burch, Kryslyn    2015-08-05 spend   2016  8.93e4
 ## # … with 14 more rows</code></pre>
 <p>This data is more readable - each year is on its own row. However, we still have the issue where the same company will have two rows for each year - for the <code>summary</code> field, both a spend and credits exist for a vendor:</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="cleaning-data.html#cb188-1"></a>clean_vendors <span class="op">%&gt;%</span></span>
-<span id="cb188-2"><a href="cleaning-data.html#cb188-2"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">2015</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2016</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2017</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
-<span id="cb188-3"><a href="cleaning-data.html#cb188-3"></a>               <span class="dt">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
-<span id="cb188-4"><a href="cleaning-data.html#cb188-4"></a>               <span class="dt">values_to =</span> <span class="st">&#39;amount&#39;</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># the values of the aggregation </span></span>
-<span id="cb188-5"><a href="cleaning-data.html#cb188-5"></a><span class="st">  </span><span class="kw">arrange</span>(id) <span class="op">%&gt;%</span></span>
-<span id="cb188-6"><a href="cleaning-data.html#cb188-6"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="cleaning-data.html#cb187-1" aria-hidden="true" tabindex="-1"></a>clean_vendors <span class="sc">%&gt;%</span></span>
+<span id="cb187-2"><a href="cleaning-data.html#cb187-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2016</span><span class="st">`</span>, <span class="st">`</span><span class="at">2017</span><span class="st">`</span>, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
+<span id="cb187-3"><a href="cleaning-data.html#cb187-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
+<span id="cb187-4"><a href="cleaning-data.html#cb187-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&#39;amount&#39;</span>)  <span class="sc">%&gt;%</span> <span class="co"># the values of the aggregation </span></span>
+<span id="cb187-5"><a href="cleaning-data.html#cb187-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb187-6"><a href="cleaning-data.html#cb187-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 x 8
 ##       id type  name            company_contact   date_added summary year  amount
 ##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;             &lt;date&gt;     &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt;
@@ -723,12 +751,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Where is the value located? These will get moved under the new column.</li>
 </ul>
 <p>Building from our last example, lets make this data bit wider</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="cleaning-data.html#cb190-1"></a>clean_vendors <span class="op">%&gt;%</span></span>
-<span id="cb190-2"><a href="cleaning-data.html#cb190-2"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">`</span><span class="dt">2015</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2016</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2017</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
-<span id="cb190-3"><a href="cleaning-data.html#cb190-3"></a>               <span class="dt">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
-<span id="cb190-4"><a href="cleaning-data.html#cb190-4"></a>               <span class="dt">values_to =</span> <span class="st">&#39;amount&#39;</span>)  <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># the values of the aggregation </span></span>
-<span id="cb190-5"><a href="cleaning-data.html#cb190-5"></a><span class="st">  </span><span class="kw">pivot_wider</span>(<span class="dt">names_from =</span> <span class="st">&#39;summary&#39;</span>,</span>
-<span id="cb190-6"><a href="cleaning-data.html#cb190-6"></a>              <span class="dt">values_from =</span> <span class="st">&#39;amount&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="cleaning-data.html#cb189-1" aria-hidden="true" tabindex="-1"></a>clean_vendors <span class="sc">%&gt;%</span></span>
+<span id="cb189-2"><a href="cleaning-data.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2016</span><span class="st">`</span>, <span class="st">`</span><span class="at">2017</span><span class="st">`</span>, <span class="st">`</span><span class="at">2018</span><span class="st">`</span>), <span class="co"># The columns we want to pivot, in this case, the years. </span></span>
+<span id="cb189-3"><a href="cleaning-data.html#cb189-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&#39;year&#39;</span>, <span class="co"># We want this collected column to be called the year</span></span>
+<span id="cb189-4"><a href="cleaning-data.html#cb189-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&#39;amount&#39;</span>)  <span class="sc">%&gt;%</span> <span class="co"># the values of the aggregation </span></span>
+<span id="cb189-5"><a href="cleaning-data.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&#39;summary&#39;</span>,</span>
+<span id="cb189-6"><a href="cleaning-data.html#cb189-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">&#39;amount&#39;</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 12 x 8
 ##       id type  name            company_contact   date_added year   spend credits
 ##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;             &lt;date&gt;     &lt;chr&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -746,20 +774,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 12  2211 V     &quot;Chrisman Comp… Burch, Kryslyn    2015-08-05 2018  7.68e4    458.</code></pre>
 <p>Each company now has its spend and credits in separate columns, but is now digestible by year.</p>
 </div>
-<div id="joining-data" class="section level2">
+<div id="joining-data" class="section level2" number="7.7">
 <h2><span class="header-section-number">7.7</span> Joining data</h2>
 <p>Often our data will come from different data sets or different tables. Having the ability to combine data from different systems is a powerful way to add more analyzable information from your dataset. In the <a href="data-completeness.html#completeness-join">Completeness chapter</a>, we joined accounts from both the GL and TB to calculate whether there were any differences.</p>
 <p>The <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data chapter in R for Data Science</a> goes into depth how the different join operations work.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-rfordatasci">
-<p>Hadley Wickham, Garrett Grolemund. 2017. <em>R for Data Science</em>. <a href="https://r4ds.had.co.nz/index.html">https://r4ds.had.co.nz/index.html</a>.</p>
-</div>
-<div id="ref-lubridate-help">
-<p>Vitalie Spinu, Hadley Wickham, Garrett Grolemund. 2016. <em>Dates and Times Made Easy with Lubridate</em>. RStudio. <a href="https://lubridate.tidyverse.org/reference/lubridate-package.html">https://lubridate.tidyverse.org/reference/lubridate-package.html</a>.</p>
 </div>
 </div>
 <div class="footnotes">

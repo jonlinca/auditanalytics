@@ -27,10 +27,8 @@ install.packages(c('tidyverse', 'lubridate', 'readr',
 
 For those customers who use the cloud-based Galvanize Highbond (and specifically the Results Module), we will use the R package [galvanizer](https://github.com/jonlinca/galvanizer) to use Results information in the Applied Analytics chapter. This package is maintained by Jonathan Lin during his spare time, and any issues or suggestions on its improvement would be appreciated.
 
-As these packages are in active development, they are not currently available on CRAN. You are able to install this package directly from GitHub - first, install [RTools](https://cran.r-project.org/bin/windows/Rtools/) on your computer, which allows you to build and compile your own packages. Then, run the following command.
-
 ```{r install github, eval = FALSE}
-remotes::install_github('jonlinca/galvanizer')
+install.packages('galvanizer')
 ```
 
 
